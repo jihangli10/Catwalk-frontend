@@ -1,0 +1,30 @@
+{
+  "name": "frontendcapstone",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nypeach/frontEndCapstone.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nypeach/frontEndCapstone/issues"
+  },
+  "homepage": "https://github.com/nypeach/frontEndCapstone#readme",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "babel": "^6.23.0",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.7",
+    "react": "^17.0.1",
+    "react-dev": "0.0.1",
+    "react-dom": "^17.0.1",
+    "webpack": "^5.24.1"
+  }
+}

@@ -2,8 +2,7 @@
 
 ## Description
 
-
-This project is a complete redesign of a retail portal, and is designed to modernize an existing site. It is a front end design, focused mainly on client experience. Features implemented enable customers to search, browse, add to cart, and checkout.
+This project is a complete redesign of a retail portal, and is designed to modernize an existing site. It is a front end design created using the React library, and is focused mainly on client experience. Features implemented enable customers to search, browse, add to cart, and checkout.
 
 ## Bagdes
 
@@ -19,11 +18,11 @@ To be added.
 
 To demo this repo, fork it to your github account and clone it to your local machine. In your terminal, navigate to the root folder of this repository, and run **npm install** to install all dependecies needed to run the project.
 
-***Depending at deployment, this may change.***
+***Depending on deployment, this may change.***
 
 ## Usage
 
-N/A
+This may serve as a guide for a developer who is curious about how to get started building out the front-end of a retail application.
 
 ## Support
 
@@ -31,11 +30,11 @@ For support, please email this address: user@projectcatwalk.com
 
 ## Roadmap
 
-Maintenance of the catalog and internal systems, and improvements to areas outside of the client user interface are will be addressed at a future date.
+Maintenance of the catalog and internal systems, and improvements to areas outside of the client user interface will be addressed at a future date.
 
 ## Contributing
 
-Not open to contributors at this time.
+Not open to contributions at this time.
 
 ## Authors and acknowledgement
 
@@ -43,7 +42,8 @@ A big thanks to Jodi Silverman, Jihang Li, Sung Kim, and Joseph Haller for contr
 
 ## License
 
+N/A
 
 ## Project Status
 
-In progress.
+In progress. Expect major developments to be completed by March 1, 2021.

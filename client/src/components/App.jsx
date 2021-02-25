@@ -44,19 +44,21 @@ class App extends React.Component {
 
     return (
       <div>
-      <h1>Main Page</h1>
-      </div>
-      <div>
-      <h1>Product - Overview</h1>
-      </div>
-      <div>
-      <h1>Related Products and Your Outfits</h1>
-      </div>
-      <div>
-      <h1>Questions and Answers</h1>
-      </div>
-      <div>
-      <h1>Ratings and Reviews</h1>
+        <div>
+          <h1>Main Page</h1>
+        </div>
+        <div>
+          <h1>Product - Overview</h1>
+        </div>
+        <div>
+          <h1>Related Products and Your Outfits</h1>
+        </div>
+        <div>
+          <h1>Questions and Answers</h1>
+        </div>
+        <div>
+          <h1>Ratings and Reviews</h1>
+        </div>
       </div>
     );
   }

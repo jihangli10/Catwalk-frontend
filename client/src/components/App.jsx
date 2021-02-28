@@ -1,5 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import RateReview from './RateReview/RateReview.jsx'
+import StarRatings from './StarRatings.jsx'
+import StarRatingsOther from './StarRatings.jsx'
 
 // States
   // Products
@@ -48,16 +51,30 @@ class App extends React.Component {
           <h1>Main Page</h1>
         </div>
         <div>
-          <h1>Product - Overview</h1>
+          <br></br>
+          <div className="section">CATEGORY</div>
+          <br></br>
         </div>
         <div>
-          <h1>Related Products and Your Outfits</h1>
+          <br></br>
+          <div className="section">RELATED PRODUCTS</div>
+          <br></br>
         </div>
         <div>
-          <h1>Questions and Answers</h1>
+          <br></br>
+          <div className="section">YOUR OUTFITS</div>
+          <br></br>
         </div>
         <div>
-          <h1>Ratings and Reviews</h1>
+          <br></br>
+          <div className="section">QUESTION AND ANSWERS</div>
+          <br></br>
+        </div>
+        <div>
+          <br></br>
+          <div className="section">RATINGS &amp; REVIEWS</div>
+          <br></br>
+          <RateReview />
         </div>
       </div>
     );

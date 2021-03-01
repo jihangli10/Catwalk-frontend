@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import RelatedPO from './RelatedPO/RelatedPO.jsx';
 
 // States
   // Products
@@ -36,7 +37,17 @@ class App extends React.Component {
     super(props);
     this.state = {
       products:[],
-      currentProduct: {}
+      currentProduct: {
+        "id": 19378,
+        "campus": "hr-rfe",
+        "name": "Alberto Romper",
+        "slogan": "Voluptatibus sunt neque repellendus.",
+        "description": "Dolor deleniti blanditiis fugit et aut quisquam eius provident. Quasi labore vel ipsum numquam mollitia et. Accusamus asperiores a nisi.",
+        "category": "Romper",
+        "default_price": "826.00",
+        "created_at": "2021-02-23T19:24:34.674Z",
+        "updated_at": "2021-02-23T19:24:34.674Z"
+    }
     };
   }
 
@@ -51,7 +62,7 @@ class App extends React.Component {
           <h1>Product - Overview</h1>
         </div>
         <div>
-          <h1>Related Products and Your Outfits</h1>
+          <RelatedPO currProd={this.state.currentProduct} />
         </div>
         <div>
           <h1>Questions and Answers</h1>

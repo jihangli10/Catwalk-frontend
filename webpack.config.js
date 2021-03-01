@@ -4,7 +4,6 @@ const SRC_DIR = path.join(__dirname, 'client', 'src');
 const OUT_DIR = path.join(__dirname, 'client', 'dist');
 
 module.exports = {
-  watch: true,
   entry: path.join(SRC_DIR, 'index.js'),
   watch: true,
   output: {

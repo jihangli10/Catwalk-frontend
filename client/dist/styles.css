@@ -22,6 +22,7 @@ body {
 
 /* // RATING AND REVIEW STYLES //============================================ */
 
+
 #ratingreviewcontainer {
   box-sizing: border-box;
 }
@@ -40,6 +41,7 @@ body {
 .rrstats {
   flex: 5;
   box-sizing: border-box;
+  margin-bottom: 20px;
 }
 .average {
 font-size: 42px;
@@ -48,12 +50,15 @@ float: left;
 padding-bottom: 5%;
 }
 .avgstars {
-margin-top: 3%;
+margin-top: 5%;
 float: left;
 }
 
 /* BAR CHART */
-
+#bar-section {
+  margin-top: 60px;
+  margin-bottom: 48px;
+}
 /* The bar container */
 .bar-container {
   width: 90%;
@@ -79,6 +84,9 @@ float: left;
 .bar-1 {width: 15%; height: 15px; background-color: steelblue; font-size: 12px; white-space: nowrap; }
 
 /* SLIDERS */
+#slide-section {
+  margin-top: 48px;
+}
 .slidecontainer {
   width: 100%; /* Width of the outside container */
   padding-bottom: 15px;

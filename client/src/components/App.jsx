@@ -1,48 +1,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import RateReview from './RateReview/RateReview.jsx'
-import StarRatings from './RateReview/RateReview.jsx'
-
-
-// States
-  // Products
-  // Current Product
-
-
-
-// Product - Overview
-  // Image Gallery
-  // Product Informationn
-  // Style selector
-  // add to Cart
-
-// Related Products and Your Outfit
-  // Related Products
-  // Your Outfit
-
-// Questions & Answers
-  // Search Bar
-  // View Questions
-  // Asking Question
-  // Answering a Question
-
-// Ratings & Reviews
-  // Write a new Review
-  // Review List
-  // Sorting
-  // Rating Breakdown
-  // Product Breakdown
+import Star000 from './RateReview/Star000.jsx'
+import Star025 from './RateReview/Star025.jsx'
+import Star050 from './RateReview/Star050.jsx'
+import Star075 from './RateReview/Star075.jsx'
+import Star100 from './RateReview/Star100.jsx'
+import StarRatings from './RateReview/StarRatings'
+import products from '../data/products'
+import reviews from '../data/reviews'
 
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      products:[],
-      currentProduct: {}
-    };
+      products: products,
+      currentProduct: products[0]
+    }
   }
-
   render() {
 
     return (

@@ -3,7 +3,7 @@
 //================================================================================================================
 const path = require("path")
 const express = require("express"); // npm installed
-
+const getInfoFromAPI = require('./apihelper.js');
 const app = express();
 
 app.use(express.static(path.join(__dirname, "../client/dist")));

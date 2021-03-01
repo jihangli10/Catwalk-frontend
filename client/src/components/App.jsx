@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import RateReview from './RateReview/RateReview.jsx'
-import StarRatings from './StarRatings.jsx'
-import StarRatingsOther from './StarRatings.jsx'
+import StarRatings from './RateReview/RateReview.jsx'
+
 
 // States
   // Products

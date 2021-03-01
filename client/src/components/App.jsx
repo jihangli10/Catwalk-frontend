@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import QandA from './QandA/QandA.jsx';
 
 // States
   // Products
@@ -53,9 +54,9 @@ class App extends React.Component {
         <div>
           <h1>Related Products and Your Outfits</h1>
         </div>
-        <div>
-          <h1>Questions and Answers</h1>
-        </div>
+
+        <QandA />
+
         <div>
           <h1>Ratings and Reviews</h1>
         </div>

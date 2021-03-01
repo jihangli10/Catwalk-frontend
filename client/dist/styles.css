@@ -7,6 +7,8 @@ h1, h2, h3, h4, body {
 
 body {
   font-size: 14px;
+  margin-left: 10%;
+  margin-right: 10%;
 }
 
 .section {
@@ -22,7 +24,6 @@ body {
 
 #ratingreviewcontainer {
   box-sizing: border-box;
-  margin-left: 5px;
 }
 .row {
   display: flex;
@@ -39,7 +40,6 @@ body {
 .rrstats {
   flex: 5;
   box-sizing: border-box;
-  margin-left: 10px;
 }
 .average {
 font-size: 42px;

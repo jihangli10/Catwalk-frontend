@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 import RateReview from './RateReview/RateReview.jsx'
 import StarRatings from './RateReview/RateReview.jsx'
 
+import ProductOverview from './ProductOverview/ProductOverview'
+
 
 // States
   // Products
@@ -49,6 +51,7 @@ class App extends React.Component {
       <div>
         <div>
           <h1>Main Page</h1>
+          <ProductOverview />
         </div>
         <div>
           <br></br>

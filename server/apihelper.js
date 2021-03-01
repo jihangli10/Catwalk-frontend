@@ -7,7 +7,7 @@
 const axios = require('axios');
 const config = require('../config.js');
 
-let getInfoFromAPI = (endpoint) => {
+let getInfoFromAPI = (endpoint, id, extras) => {
 
   let options = {
     method: 'GET',
@@ -16,6 +16,12 @@ let getInfoFromAPI = (endpoint) => {
       'Authorization':  config.TOKEN //this is what will be imported from config file
     }
   };
+  if (id) {
+    options.url += `/${id}`;
+  }
+  if (extras) {
+    options.url += `/${extras}`;
+  }
 
   return axios(options);
 

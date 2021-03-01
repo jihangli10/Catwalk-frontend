@@ -38,17 +38,17 @@ body {
   filter: drop-shadow(0px 2px 3px rgb(180, 180, 180));
 }
 
-#relActionBtn {
-  position: absolute;
-  top: 1;
-  right: 0;
-}
 
 .relImageCont {
   position: relative;
   width: 100%;
 }
 
+#relActionBtn {
+  position: absolute;
+  top: 1;
+  right: 0;
+}
 
 .relProdImage {
   width: 100%;
@@ -66,15 +66,14 @@ body {
 }
 
 .relProdPrice {
-  margin-top: 10px;
+  margin-top: 20px;
   margin-left: 6px;
-
   font-weight: 200;
   font-size: .9em;
 }
 
 .relProdReviews {
-  margin-top: 30px;
+  margin-top: 20px;
   margin-left: 6px;
 
 }

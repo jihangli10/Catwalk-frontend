@@ -13,7 +13,7 @@ class RateReviews extends React.Component {
     var slider = document.getElementById("size");
     var output = document.getElementById("demo");
     output.innerHTML = slider.value; // Display the default slider value
-
+    // test for change
     // Update the current slider value (each time you drag the slider handle)
     slider.oninput = function () {
       output.innerHTML = this.value;

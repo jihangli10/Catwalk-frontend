@@ -19,7 +19,7 @@ class RelatedPO extends React.Component {
       <h3>Related Products</h3>
       <div className="relatedCont">
         <div className="relatedCarousel">
-          <RelatedProdCard current={props.currProd}/>
+          <RelatedProdCard />
         </div>
       </div>
       <h3>Your Outfit</h3>

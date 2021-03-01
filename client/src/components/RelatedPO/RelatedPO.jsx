@@ -16,13 +16,11 @@ class RelatedPO extends React.Component {
   render() {
     return(
     <div>
-      <h3>Related Products</h3>
       <div className="relatedCont">
         <div className="relatedCarousel">
-          <RelatedProdCard />
+          <RelatedProdCard current={this.props.currProd}/>
         </div>
       </div>
-      <h3>Your Outfit</h3>
       <div className="outfitCont">
         <div className="outfitCarousel">
           <YourOutfitCard />

@@ -74,7 +74,7 @@ class App extends React.Component {
         <div>
           <RelatedPO currProd={this.state.currentProduct} />
           <br></br>
-          <div className="section">YOUR OUTFITS</div>
+          <div className="section">YOUR OUTFIT</div>
           <br></br>
         </div>
         <div>

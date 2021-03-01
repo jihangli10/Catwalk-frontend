@@ -29,10 +29,8 @@ body {
   height: 300px;
   width: 225px;
   padding: 0px;
-  background-color: #FFF;
+  background-color: rgb(255, 255, 255);
   border: .25px solid black;
-  /* -webkit-filter: drop-shadow(0px 0px 2px #666);
-  filter: drop-shadow(0px 0px 2px #666); */
 }
 
 .relatedCard:hover {
@@ -40,12 +38,54 @@ body {
   filter: drop-shadow(0px 2px 3px rgb(180, 180, 180));
 }
 
-.relActionBtn {
-  display: flex;
-  justify-content: end;
-  float: right;
-  padding: 8px;
+#relActionBtn {
+  position: absolute;
+  top: 1;
+  right: 0;
 }
+
+.relImageCont {
+  position: relative;
+  width: 100%;
+}
+
+
+.relProdImage {
+  width: 100%;
+  height: 100%;
+}
+
+.relProdCategory {
+  margin: 5px;
+  font-weight: 200;
+}
+
+.relProdName {
+  margin: 5px;
+  font-weight: 600;
+}
+
+.relProdPrice {
+  margin-top: 10px;
+  margin-left: 6px;
+
+  font-weight: 200;
+  font-size: .9em;
+}
+
+.relProdReviews {
+  margin-top: 30px;
+  margin-left: 6px;
+
+}
+
+
+
+
+
+
+
+/*================================================================================*/
 
 #ratingreviewcontainer {
   box-sizing: border-box;

@@ -54,6 +54,10 @@ class App extends React.Component {
     };
   }
 
+  updateCurrentProduct(target) {
+
+  }
+
   render() {
 
     return (

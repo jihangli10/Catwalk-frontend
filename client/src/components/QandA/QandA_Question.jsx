@@ -1,11 +1,15 @@
 import React from 'react';
 import Answer from './QandA_Answer.jsx';
+import axios from 'axios';
 
 class Question extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
-      expand: false
+      expand: false,
+      reported: false,
+      helpfulness: this.props.question.question_helpfulness,
+      helpClicked: false
     }
   }
 
@@ -26,9 +30,18 @@ class Question extends React.Component{
     })
   }
 
-  handleAnswerHelpfulClick(e) {
+  handleQuestionHelpfulClick(e) {
     e.preventDefault();
-
+    return axios.put(`/qa/questions/${this.props.question.question_id}/helpful`, {params: { question_id: this.props.question.question_id }})
+      .then(() => {
+        this.setState({
+          helpfulness: this.state.helpfulness + 1,
+          helpClicked: true
+        });
+      })
+      .catch(err => {
+        console.log('failed to update helpfulness');
+      })
   }
 
   render() {
@@ -37,8 +50,13 @@ class Question extends React.Component{
     return (
       <div className='section-question'>
         <div><strong>Q: {question.question_body}</strong></div>
-        <span> Helpful? <a href="#">Yes</a> ({question.question_helpfulness})</span> |
-      <span><a href="#"> Add Answer</a></span>
+        <span> Helpful?
+          {this.state.helpClicked?
+            <span className="yes-help-clicked">Yes</span> :
+            <a onClick={this.handleQuestionHelpfulClick.bind(this)} href="#">Yes</a>}
+          ({this.state.helpfulness})
+        </span> |
+      <span> <a href="#">Add Answer</a></span>
         {Object.values(question.answers)
           .sort(this._compareHelpfulness)
           .map((answer, index) => {

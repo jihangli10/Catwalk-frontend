@@ -5,6 +5,7 @@ import QuestionList from './QandA_QuestionList.jsx';
 import Search from './QandA_Search.jsx';
 import myData from '../../sampleData.json';
 import httpHandler from './httpHandler.js';
+import axios from 'axios';
 
 class QandA extends React.Component {
   constructor(props) {
@@ -12,12 +13,13 @@ class QandA extends React.Component {
     this.state = {
       questions: [],
       searchQuery: '',
-      displayQuestions: []
+      displayQuestions: [],
+      showQuestionNumber: 2
     }
   }
 
   componentDidMount() {
-    httpHandler.getQuestions(19378)
+    return axios.get('/qa/questions', {params: { product_id: 19378 }})
       .then(data => {
         this.setState({
           questions: data.data.results,
@@ -25,8 +27,8 @@ class QandA extends React.Component {
         })
       })
       .catch(err => {
-        console.log(err)
-      })
+      console.log(err);
+      });
   }
 
   handleQueryChange(e) {
@@ -34,7 +36,7 @@ class QandA extends React.Component {
       let queries = e.target.value.toLowerCase().split(' ');
       let displayQuestions = this.state.questions.filter(question => {
         return queries.every(query => {
-          return question.question_body.toLowerCase().includes(query);
+          return question.question_body.toLowerCase().includes(query)
         });
       });
       this.setState({
@@ -49,7 +51,15 @@ class QandA extends React.Component {
     }
   }
 
+  handleSeeMoreClick(e) {
+    e.preventDefault();
+    this.setState({
+      showQuestionNumber: this.state.showQuestionNumber + 2
+    })
+  }
+
   render() {
+    let showButton = this.state.questions.length > this.state.showQuestionNumber;
     return (
       <div id='qanda' >
         <br></br>
@@ -58,7 +68,11 @@ class QandA extends React.Component {
           handleQueryChange={this.handleQueryChange.bind(this)}
           searchQuery={this.state.searchQuery}
         />
-        <QuestionList questions={this.state.displayQuestions}/>
+        <QuestionList questions={this.state.displayQuestions} showQuestionNumber={this.state.showQuestionNumber}/>
+        <div id="question-button-row">
+        {showButton ? <button onClick={this.handleSeeMoreClick.bind(this)}>MORE ANSWERED QUESTIONS</button> : null}
+        <button>ADD A QUESTION +</button>
+        </div>
         <br></br>
       </div>
     )

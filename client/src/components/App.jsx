@@ -83,12 +83,12 @@ class App extends React.Component {
           <div className="section">RELATED PRODUCTS</div>
           <br></br>
         </div>
-        <div>
+        {/* <div>
           <RelatedPO updateProd={this.updateCurrentProduct} currProd={this.state.currentProduct} />
           <br></br>
           <div className="section">YOUR OUTFIT</div>
           <br></br>
-        </div>
+        </div> */}
 
         <QandA />
 

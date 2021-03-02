@@ -1,15 +1,11 @@
 import axios from 'axios';
 const TOKEN = require('../../../../config.js').TOKEN;
-const url = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe';
 const httpHandler = {
   getQuestions: function(product_id, page, count) {
-    return axios.get(`${url}/qa/questions`, {
+    return axios.get('/qa/questions', {
       params: {
         product_id: product_id
       },
-      headers: {
-        'Authorization':  TOKEN //this is what will be imported from config file
-      }
     })
     .catch(err => {
     console.log(err);

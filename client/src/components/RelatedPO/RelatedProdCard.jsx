@@ -27,7 +27,13 @@ class RelatedProductCard extends React.Component {
   getCurrentStyles() {
     let id = this.props.current.data.id;
     let extras = 'styles';
-    axios.get('/products', {params: {id, extras}})
+    // axios.get('/products', {params: {id, extras}})
+    //   .then(newStyles => {
+    //     this.setState({
+    //       currentStyle: newStyles.data
+    //     });
+    //   })
+      axios.get(`/products/${id}/styles`)
       .then(newStyles => {
         this.setState({
           currentStyle: newStyles.data

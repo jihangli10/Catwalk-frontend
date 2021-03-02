@@ -71,6 +71,7 @@ body {
 }
 
 .relatedCard:hover {
+  cursor: pointer;
   -webkit-filter: drop-shadow(0px 0px 5px rgb(180, 179, 179));
   filter: drop-shadow(0px 0px 5px rgb(180, 180, 180));
 }
@@ -134,7 +135,7 @@ body {
 .relModal {
   width: 500px;
   background-color: rgb(255, 255, 255);
-  border: 1px solid rgb(206, 206, 206);
+  border: 1px solid rgb(172, 172, 172);
   border-radius: 2px;
   box-shadow:
     -2rem 2rem 10rem rgba(black, 0.8);
@@ -143,7 +144,7 @@ body {
   opacity: 1;
   visibility: visible;
   position: fixed;
-  top: 40%;
+  top: 30%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 10;
@@ -168,7 +169,7 @@ body {
   justify-self: end;
 }
 #modalHeader {
-  margin: 2%;
+  margin: 4%;
   grid-column: 1;
   grid-row: 1;
   justify-self: start;
@@ -176,10 +177,22 @@ body {
   align-content: flex-start;
 }
 
+.tableCont {
+  padding: 8px;
+}
+
 .modalTable {
   width: 100%;
 }
 
+.left-col {
+  text-align: left;
+  padding: 2px;
+}
+
+.right-col {
+  text-align: right;
+}
 
 
 

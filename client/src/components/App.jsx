@@ -57,7 +57,7 @@ class App extends React.Component {
   }
 
   updateCurrentProduct(target) {
-    return axios.get('/products', {params: {id: target}})
+    return axios.get(`/products/${target}`)
       .then(product => {
         this.setState({
           currentProduct: product.data

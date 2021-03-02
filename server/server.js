@@ -3,38 +3,37 @@
 //================================================================================================================
 const path = require("path")
 const express = require("express"); // npm installed
-const apiHelper = require('./apihelper.js');
-
+const axios = require('axios');
+const config = require('../config.js');
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
-
 app.use(express.static(path.join(__dirname, "../client/dist")));
-
 //================================================================================================================
 // SERVER ROUTES
 //================================================================================================================
-
 // APP ROUTES //==========================================================
-
-// PRODUCT OVERVIEW ROUTES //=============================================
-
-app.get('/products', (req, res) => {
-  let id = req.query.id;
-  let extras = req.query.extras
-  apiHelper.getInfoFromAPI('products', id, extras)
-    .then(styles => {
-      res.send(styles.data);
-    })
-    .catch(error => console.log('ERROR: ============>', error));
+app.use(async (req, res) => {
+  try {
+    let response = await axios({
+      baseURL: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/',
+      method: req.method,
+      url: req.url,
+      data: req.body,
+      headers: {
+        'Authorization':  config.TOKEN //this is what will be imported from config file
+      }
+    });
+    res.send(response.data);
+  } catch(err) {
+    console.log(err.response.data)
+    res.sendStatus(500);
+  }
 });
-
+// PRODUCT OVERVIEW ROUTES //=============================================
 // Q AND A ROUTES //======================================================
-
 // RATING AND REVIEW ROUTES //============================================
-
 // RELATED PRODUCTS AND OUTFITS ROUTES //=================================
-
 //================================================================================================================
 // SERVER LISTENING
 //================================================================================================================

@@ -1,18 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
+import axios from 'axios';
 
 class RelatedModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      parentProdStyles: this.props.parentStyle,
+      selectedProdStyles: this.props.selectedStyle,
     }
   }
 
 
   render() {
-
     if (!this.props.show) {
       return null;
     } else {
@@ -24,12 +24,18 @@ class RelatedModal extends React.Component {
               COMPARING
             </div>
           </div>
-          <div>
+          <div className="tableCont">
             <table className="modalTable">
               <tbody id="content">
                   <tr>
-                      <th>{this.props.parentProd.name}</th>
-                      <th>{this.props.selected.name}</th>
+                      <th className="left-col">{this.props.parentProd.name}</th>
+                      <th className="center-col"></th>
+                      <th className="right-col">{this.props.selected.name}</th>
+                  </tr>
+                  <tr>
+                      <th className="left-col">{this.props.parentProd.id}</th>
+                      <th className="center-col"></th>
+                      <th className="right-col">{this.props.selected.id}</th>
                   </tr>
               </tbody>
             </table>

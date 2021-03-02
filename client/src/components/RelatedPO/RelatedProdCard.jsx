@@ -8,31 +8,35 @@ class RelatedProductCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentStyle: styles
+      currentStyle: styles,
+      reviews: null
     }
     this.getCurrentStyles = this.getCurrentStyles.bind(this);
     this.updateParentProduct = this.updateParentProduct.bind(this);
+    this.getReviewMeta = this.getReviewMeta.bind(this);
   }
 
   componentDidMount() {
-    this.getCurrentStyles();
+    this.getCurrentStyles(this.props.current.data.id);
+    this.getReviewMeta(this.props.current.data.id);
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps.current.data.id !== this.props.current.data.id) {
-      this.getCurrentStyles();
+      this.getCurrentStyles(this.props.current.data.id);
+      this.getReviewMeta(this.props.current.data.id);
     }
   }
 
-  getCurrentStyles() {
-    let id = this.props.current.data.id;
+  getCurrentStyles(id) {
     let extras = 'styles';
-    axios.get('/products', {params: {id, extras}})
+    axios.get(`/products/${id}/${extras}`)
       .then(newStyles => {
         this.setState({
           currentStyle: newStyles.data
         });
       })
+      .catch((error) => console.log('ERROR getting styles: ', error));
   }
 
   updateParentProduct(e) {
@@ -40,9 +44,20 @@ class RelatedProductCard extends React.Component {
       this.props.update(this.props.current.data.id)
       .then(() => {
         this.props.getRelated()
-          .then(() => console.log('cool'));
-      });
+          .then(() => console.log('cool'))
+          .catch(err => console.log(err));
+      })
+      .catch(err => console.log(err));
     }
+  }
+
+  getReviewMeta(id) {
+    axios.get('/reviews/meta', {params: {product_id: id}})
+      .then((results) => {
+        this.setState({
+          reviews: results.data
+        })
+      })
   }
 
   render() {
@@ -50,15 +65,13 @@ class RelatedProductCard extends React.Component {
     let styleImage = defaultStyle.photos[0].url;
     let stylePrice = defaultStyle.sale_price ? defaultStyle.sale_price : defaultStyle.original_price;
     let id = this.props.current.data.id;
-    console.log(defaultStyle.sale_price, stylePrice);
-    console.log(id);
 
     return(
 
       <div onClick={this.updateParentProduct} className="relatedCard">
         <div className="relImageCont">
             <div id="relActionBtn" >
-              <img name="star" height="18" onClick={() => this.props.handleActionClick(this.props.current.data)} src="https://img.icons8.com/fluent-systems-regular/24/ffffff/star--v1.png"/>
+              <img name="star" height="18" onClick={() => this.props.handleActionClick(this.props.current.data, this.state.currentStyle, this.state.reviews)} src="https://img.icons8.com/fluent-systems-regular/24/ffffff/star--v1.png"/>
             </div>
             <img className="relProdImage" src={styleImage} />
         </div>

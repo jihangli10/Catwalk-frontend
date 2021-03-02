@@ -105,7 +105,7 @@ class RelatedPO extends React.Component {
       <div>
         <div className="relatedCont">
           <div className="modalCont">
-            <RelatedModal selected={this.state.productCard} parentProd={this.props.currProd} handleClose={this.handleModalClose} parentStyle={this.state.parentProductStyle} selectedStyle={this.state.productCardStyle} show={this.state.showModal} />
+            <RelatedModal selected={this.state.productCard} parentProd={this.props.currProd} handleClose={this.handleModalClose} parentStyle={this.state.parentProductStyle} selectedStyle={this.state.productCardStyle} show={this.state.showModal} parentReview={this.state.parentReviews} selectReview={this.state.selectedReviews} />
           </div>
           <div className="relatedCarousel">
             {this.state.relatedProducts.map((product, i) => {

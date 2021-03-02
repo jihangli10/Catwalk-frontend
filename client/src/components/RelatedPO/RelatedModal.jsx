@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import ModalTableRows from './ModalTableRows.jsx';
 import axios from 'axios';
 
 class RelatedModal extends React.Component {
@@ -8,9 +9,9 @@ class RelatedModal extends React.Component {
     this.state = {
       parentProdStyles: this.props.parentStyle,
       selectedProdStyles: this.props.selectedStyle,
+      commonCharacteristics: []
     }
   }
-
 
   render() {
     if (!this.props.show) {
@@ -25,20 +26,7 @@ class RelatedModal extends React.Component {
             </div>
           </div>
           <div className="tableCont">
-            <table className="modalTable">
-              <tbody id="content">
-                  <tr>
-                      <th className="left-col">{this.props.parentProd.name}</th>
-                      <th className="center-col"></th>
-                      <th className="right-col">{this.props.selected.name}</th>
-                  </tr>
-                  <tr>
-                      <th className="left-col">{this.props.parentProd.id}</th>
-                      <th className="center-col"></th>
-                      <th className="right-col">{this.props.selected.id}</th>
-                  </tr>
-              </tbody>
-            </table>
+            <ModalTableRows pStyles={this.props.parentStyle} sStyles={this.props.selectedStyle} pReviews={this.props.parentReview} sReviews={this.props.selectReview} selectProd={this.props.selected} parentProd={this.props.parentProd}/>
           </div>
         </div>
       );

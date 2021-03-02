@@ -25,17 +25,47 @@ body {
 
 /* // RELATED PRODUCTS AND OUTFITS STYLES //================================= */
 
+.relatedCont {
+  position : relative;
+  display : block;
+  overflow : hidden;
+  width : 100%;
+  max-width : 100vw;
+  /* height : 100vh; */
+  max-height : 100%;
+  margin : 0 auto;
+}
+
+.relatedCarousel {
+  display: flex;
+  flex-direction: row;
+  /* flex-wrap: wrap; */
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  /* position: absolute; */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  z-index: 0;
+  transition: transform 1600ms;
+  transform: scale(1);
+}
+
 .relatedCard {
   height: 375px;
   width: 281.25px;
   padding: 0px;
+  margin-right: 5px;
   background-color: rgb(255, 255, 255);
   border: .25px solid black;
 }
 
 .relatedCard:hover {
-  -webkit-filter: drop-shadow(0px 1px 3px rgb(180, 179, 179));
-  filter: drop-shadow(0px 2px 3px rgb(180, 180, 180));
+  -webkit-filter: drop-shadow(0px 0px 5px rgb(180, 179, 179));
+  filter: drop-shadow(0px 0px 5px rgb(180, 180, 180));
 }
 
 
@@ -58,24 +88,26 @@ body {
 }
 
 .relProdCategory {
-  margin: 5px;
+  margin-left: 6px;
+  margin-top: 6px;
+  margin-bottom: 10px;
   font-weight: 200;
 }
 
 .relProdName {
-  margin: 5px;
+  margin-left: 6px;
+  margin-bottom: 10px;
   font-weight: 600;
 }
 
 .relProdPrice {
-  margin-top: 20px;
   margin-left: 6px;
   font-weight: 200;
   font-size: .9em;
 }
 
 .relProdReviews {
-  margin-top: 20px;
+  margin-top: 15px;
   margin-left: 6px;
 
 }

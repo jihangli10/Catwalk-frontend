@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import axios from 'axios';
 import RelatedPO from './RelatedPO/RelatedPO.jsx';
 import RateReview from './RateReview/RateReview.jsx'
 import StarRatings from './RateReview/StarRatings.jsx'
@@ -51,14 +52,21 @@ class App extends React.Component {
         "created_at": "2021-02-23T19:24:34.674Z",
         "updated_at": "2021-02-23T19:24:34.674Z"
     }
-    };
+  };
+  this.updateCurrentProduct = this.updateCurrentProduct.bind(this);
   }
 
   updateCurrentProduct(target) {
-
+    axios.get('/products', {params: {id: target}})
+      .then(product => {
+        this.setState({
+          currentProduct: product.data
+        })
+      })
   }
 
   render() {
+    console.log(this.state.currentProduct);
 
     return (
       <div>
@@ -76,7 +84,7 @@ class App extends React.Component {
           <br></br>
         </div>
         <div>
-          <RelatedPO currProd={this.state.currentProduct} />
+          <RelatedPO updateProd={this.updateCurrentProduct} currProd={this.state.currentProduct} />
           <br></br>
           <div className="section">YOUR OUTFIT</div>
           <br></br>

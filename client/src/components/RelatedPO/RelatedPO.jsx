@@ -43,18 +43,7 @@ class RelatedPO extends React.Component {
 
     if (!this.state.relatedProducts) {
       return(
-        <div>
-          <div className="relatedCont">
-            <div className="relatedCarousel">
-              <RelatedProdCard current={this.props.currProd}/>
-            </div>
-          </div>
-          <div className="outfitCont">
-            <div className="outfitCarousel">
-              <YourOutfitCard />
-            </div>
-          </div>
-        </div>
+        <div></div>
       );
     } else {
       console.log(this.state.relatedProducts);
@@ -62,8 +51,8 @@ class RelatedPO extends React.Component {
       <div>
         <div className="relatedCont">
           <div className="relatedCarousel">
-            {this.state.relatedProducts.map(product => {
-              return <RelatedProdCard current={product}/>
+            {this.state.relatedProducts.map((product, i) => {
+              return <RelatedProdCard getRelated={this.getRelatedProducts} update={this.props.updateProd} key={i} current={product}/>
             })}
           </div>
         </div>

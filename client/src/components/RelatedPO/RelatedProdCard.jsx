@@ -14,6 +14,7 @@ class RelatedProductCard extends React.Component {
       currentStyle: styles
     }
     this.getCurrentStyles = this.getCurrentStyles.bind(this);
+    this.updateParentProduct = this.updateParentProduct.bind(this);
   }
 
   componentDidMount() {
@@ -26,24 +27,24 @@ class RelatedProductCard extends React.Component {
     axios.get('/products', {params: {id, extras}})
       .then(newStyles => {
         this.setState({
-          currentStyle: newStyles.data,
-          hasLoaded: true
+          currentStyle: newStyles.data
         });
       });
   }
 
   updateParentProduct() {
-
+    this.props.update(this.props.current.id);
+    this.props.getRelated();
   }
 
   render() {
     let styleImage = this.state.currentStyle.results[0].photos[0].thumbnail_url;
     let stylePrice =  this.state.currentStyle.results[0].original_price;
-    console.log('Hello', this.props.current);
+    let id = this.props.current.id;
 
 
     return(
-      <div onClick={(e) => console.log(e.target)}className="relatedCard">
+      <div  onClick={this.updateParentProduct}className="relatedCard">
         <div className="relImageCont">
         <img id="relActionBtn" height="18" src="https://img.icons8.com/fluent-systems-regular/24/ffffff/star--v1.png"/>
             <img className="relProdImage" src={styleImage} />

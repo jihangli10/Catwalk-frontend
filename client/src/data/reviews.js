@@ -47,7 +47,7 @@ var reviews = [
     "summary": "Sunt et ullam molestias et recusandae est assumenda accusamus.",
     "recommend": true,
     "response": null,
-    "body": "Distinctio aperiam ut iure et quibusdam suscipit officiis. Quis et et. Sint porro quasi dolore sapiente aspernatur. Blanditiis quo sed. Velit quis et harum consequatur.",
+    "body": "Distinctio aperiam ut iure et quibusdam suscipit officiis. Quis et et. Sint porro quasi dolore sapiente aspernatur. Blanditiis quo sed. Velit quis et harum consequatur. Distinctio aperiam ut iure et quibusdam suscipit officiis. Quis et et. Sint porro quasi dolore sapiente aspernatur. Blanditiis quo sed. Velit quis et harum consequatur. Distinctio aperiam ut iure et quibusdam suscipit officiis. Quis et et. Sint porro quasi dolore sapiente aspernatur. Blanditiis quo sed. Velit quis et harum consequatur. ",
     "date": "2020-05-29T00:00:00.000Z",
     "reviewer_name": "Robyn64",
     "helpfulness": 1,

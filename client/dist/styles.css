@@ -197,5 +197,77 @@ input:checked + label:hover, input:checked ~ label:hover, /* highlight current a
 input:checked ~ label:hover ~ label, /* highlight previous selected stars for new rating */
 label:hover ~ input:checked ~ label /* highlight previous selected stars */ { color: #A6E72D;  }
 
+/* REVIEW LIST SECTION */
+ul.no-bullets {
+  list-style-type: none; /* Remove bullets */
+  padding: 0; /* Remove padding */
+  margin: 0; /* Remove margins */
+}
+.listrow {
+  display: inline-block;
+  width: 100%;
+  border: 1px solid red;
+}
+.floatRight {
+  float: right;
+}
+.floatLeft {
+  float: left;
+}
+.listStars {
+  margin-top: 5px;
+}
+.list-body-trunc {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 250ch;
+}
+
+/* // READ MORE AND READ LESS//================================= */
+.container {
+  border: 1px solid #000;
+  min-width: 150px;
+  position: relative;
+  width: 50%;
+}
+.container .content {
+  max-height: 3.5em;
+  overflow: hidden;
+  transition: max-height 0.5s ease;
+}
+.container .label-container {
+  bottom: 1px;
+  position: absolute;
+  right: 0;
+}
+.container .label-container #read-more-label {
+  background-color: white;
+  color: red;
+  cursor: pointer;
+  float: right;
+}
+.container .label-container #read-more-label:before {
+  content: "[Read More]";
+}
+.container .label-container .shadow {
+  background: webkit-linear-gradient(to right, rgba(255, 255, 255, 0) 0%, white 80%);
+  background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, white 80%);
+  padding: 0 30px;
+  transition: padding 0.5s linear;
+}
+.container #read-more-trigger {
+  display: none;
+}
+.container #read-more-trigger:checked ~ .label-container #read-more-label:before {
+  content: "[Read Less]";
+}
+.container #read-more-trigger:checked ~ .label-container .shadow {
+  padding: 0;
+}
+.container #read-more-trigger:checked ~ .content {
+  max-height: 100em;
+}
+
 /* // RELATED PRODUCTS AND OUTFITS STYLES //================================= */
 

@@ -12,29 +12,29 @@ class StarRatings extends React.Component {
     this.state = {
       starRatings: {
 
-        0.00: <div><Star000 /><Star000 /><Star000 /><Star000 /><Star000 /></div>,
-        0.25: <div><Star025 /><Star000 /><Star000 /><Star000 /><Star000 /></div>,
-        0.50: <div><Star050 /><Star000 /><Star000 /><Star000 /><Star000 /></div>,
-        0.75: <div><Star075 /><Star000 /><Star000 /><Star000 /><Star000 /></div>,
-        1.00: <div><Star100 /><Star000 /><Star000 /><Star000 /><Star000 /></div>,
-        1.25: <div><Star100 /><Star025 /><Star000 /><Star000 /><Star000 /></div>,
-        1.50: <div><Star100 /><Star050 /><Star000 /><Star000 /><Star000 /></div>,
-        1.75: <div><Star100 /><Star075 /><Star000 /><Star000 /><Star000 /></div>,
-        2.00: <div><Star100 /><Star100 /><Star000 /><Star000 /><Star000 /></div>,
-        2.25: <div><Star100 /><Star100 /><Star025 /><Star000 /><Star000 /></div>,
-        2.50: <div><Star100 /><Star100 /><Star050 /><Star000 /><Star000 /></div>,
-        2.75: <div><Star100 /><Star100 /><Star075 /><Star000 /><Star000 /></div>,
-        3.00: <div><Star100 /><Star100 /><Star100 /><Star000 /><Star000 /></div>,
-        3.25: <div><Star100 /><Star100 /><Star100 /><Star025 /><Star000 /></div>,
-        3.50: <div><Star100 /><Star100 /><Star100 /><Star050 /><Star000 /></div>,
-        3.75: <div><Star100 /><Star100 /><Star100 /><Star075 /><Star000 /></div>,
-        4.00: <div><Star100 /><Star100 /><Star100 /><Star100 /><Star000 /></div>,
-        4.25: <div><Star100 /><Star100 /><Star100 /><Star100 /><Star025 /></div>,
-        4.50: <div><Star100 /><Star100 /><Star100 /><Star100 /><Star050 /></div>,
-        4.75: <div><Star100 /><Star100 /><Star100 /><Star100 /><Star075 /></div>,
-        5.00: <div><Star100 /><Star100 /><Star100 /><Star100 /><Star100 /></div>
+        '0.00': <div><Star000 /><Star000 /><Star000 /><Star000 /><Star000 /></div>,
+        '0.25': <div><Star025 /><Star000 /><Star000 /><Star000 /><Star000 /></div>,
+        '0.50': <div><Star050 /><Star000 /><Star000 /><Star000 /><Star000 /></div>,
+        '0.75': <div><Star075 /><Star000 /><Star000 /><Star000 /><Star000 /></div>,
+        '1.00': <div><Star100 /><Star000 /><Star000 /><Star000 /><Star000 /></div>,
+        '1.25': <div><Star100 /><Star025 /><Star000 /><Star000 /><Star000 /></div>,
+        '1.50': <div><Star100 /><Star050 /><Star000 /><Star000 /><Star000 /></div>,
+        '1.75': <div><Star100 /><Star075 /><Star000 /><Star000 /><Star000 /></div>,
+        '2.00': <div><Star100 /><Star100 /><Star000 /><Star000 /><Star000 /></div>,
+        '2.25': <div><Star100 /><Star100 /><Star025 /><Star000 /><Star000 /></div>,
+        '2.50': <div><Star100 /><Star100 /><Star050 /><Star000 /><Star000 /></div>,
+        '2.75': <div><Star100 /><Star100 /><Star075 /><Star000 /><Star000 /></div>,
+        '3.00': <div><Star100 /><Star100 /><Star100 /><Star000 /><Star000 /></div>,
+        '3.25': <div><Star100 /><Star100 /><Star100 /><Star025 /><Star000 /></div>,
+        '3.50': <div><Star100 /><Star100 /><Star100 /><Star050 /><Star000 /></div>,
+        '3.75': <div><Star100 /><Star100 /><Star100 /><Star075 /><Star000 /></div>,
+        '4.00': <div><Star100 /><Star100 /><Star100 /><Star100 /><Star000 /></div>,
+        '4.25': <div><Star100 /><Star100 /><Star100 /><Star100 /><Star025 /></div>,
+        '4.50': <div><Star100 /><Star100 /><Star100 /><Star100 /><Star050 /></div>,
+        '4.75': <div><Star100 /><Star100 /><Star100 /><Star100 /><Star075 /></div>,
+        '5.00': <div><Star100 /><Star100 /><Star100 /><Star100 /><Star100 /></div>
       },
-      currentRating: 3.25
+      currentRating: (Math.round(props.rating * 4) / 4).toFixed(2)
     }
   }
 
@@ -43,16 +43,6 @@ class StarRatings extends React.Component {
     return (Math.round(number * 4) / 4).toFixed(2);
   }
 
-  getCurrentRating() {
-
-
-
-  }
-
-  // function to get number of each type of star
-  // get whole number before decimal
-  // get quarter number after decimal
-  // if whole = 0, push Star000
 
   render() {
 

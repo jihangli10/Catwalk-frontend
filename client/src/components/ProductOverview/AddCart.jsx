@@ -1,8 +1,8 @@
 import React from 'react'
 
-var AddCart = () => (
+var AddCart = ({ handleAddCart, inStock }) => (
   <div>
-    <button className='someButton'>Add to Cart</button>
+    {inStock ? <button className='someButton' onClick={handleAddCart}>Add to Cart</button> : <div>Out of Stock</div>}
   </div>
 )
 

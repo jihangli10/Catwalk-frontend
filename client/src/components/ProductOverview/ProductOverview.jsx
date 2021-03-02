@@ -13,8 +13,10 @@ class ProductOverview extends React.Component {
       selectedSize: '',
       selectedQuantity: '',
       data: dummyData,
-      isDisabled: true
-
+      isDisabled: true,
+      selectedStyle: '',
+      isError: false,
+      inStock: true
     }
   }
 
@@ -23,6 +25,10 @@ class ProductOverview extends React.Component {
     //send to the Ratings and Review Module
     // var value = this.state;
     // console.log(value);
+  }
+
+  componentDidMount() {
+
   }
 
   handleSizeChange(query) {
@@ -38,6 +44,16 @@ class ProductOverview extends React.Component {
 
       this.setState({ selectedQuantity: query.target.value })
 
+  }
+
+  handleAddCart() {
+    if(selectedSize = 'Select Size') {
+      this.setState({ isError: true })
+      //create some sort of error message
+    } else {
+      this.setState({ isError: false })
+      //setState to a storage unit that shows the list of the item.
+    }
   }
 
   render() {
@@ -74,7 +90,11 @@ class ProductOverview extends React.Component {
         />
         </div>
         <br></br>
-        <AddCart />
+        <AddCart
+          handleAddCart = {this.handleAddCart.bind(this)}
+          inStock = {this.state.inStock}
+        />
+        { this.state.isError ? <div>Please select size</div> : null}
         <br></br>
         <br></br>
       </div>

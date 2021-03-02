@@ -21,26 +21,44 @@ class RelatedProductCard extends React.Component {
     this.getCurrentStyles();
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.current.data.id !== this.props.current.data.id) {
+      console.log(this.props.current.data.id);
+      console.log(prevProps.current.data.id);
+      this.getCurrentStyles();
+    }
+
+  }
+
+
   getCurrentStyles() {
-    let id = this.props.current.id;
+    let id = this.props.current.data.id;
     let extras = 'styles';
+    // console.log(id);
     axios.get('/products', {params: {id, extras}})
       .then(newStyles => {
         this.setState({
           currentStyle: newStyles.data
         });
-      });
+      })
   }
 
   updateParentProduct() {
-    this.props.update(this.props.current.id);
-    this.props.getRelated();
+    // console.log('ID:', this.props.current.data.id);
+    this.props.update(this.props.current.data.id)
+      .then(() => {
+        this.props.getRelated()
+          .then(() => console.log('cool'));
+      });
   }
 
   render() {
-    let styleImage = this.state.currentStyle.results[0].photos[0].thumbnail_url;
+    let styleImage = this.state.currentStyle.results[0].photos[0].url;
     let stylePrice =  this.state.currentStyle.results[0].original_price;
-    let id = this.props.current.id;
+    let id = this.props.current.data.id;
+    // console.log(styleImage);
+    // console.log(this.props.current.data.name);
+    // console.log(id);
 
 
     return(
@@ -49,8 +67,8 @@ class RelatedProductCard extends React.Component {
         <img id="relActionBtn" height="18" src="https://img.icons8.com/fluent-systems-regular/24/ffffff/star--v1.png"/>
             <img className="relProdImage" src={styleImage} />
         </div>
-        <div className="relProdCategory">{this.props.current.category.toUpperCase()}</div>
-        <div className="relProdName">{this.props.current.name}</div>
+        <div className="relProdCategory">{this.props.current.data.category.toUpperCase()}</div>
+        <div className="relProdName">{this.props.current.data.name}</div>
         <div className="relProdPrice">${stylePrice}</div>
           <div className="relProdReviews">
             <span className="avgstars">

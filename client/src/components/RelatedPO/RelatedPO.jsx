@@ -18,24 +18,30 @@ class RelatedPO extends React.Component {
     this.getRelatedProducts();
   }
 
+  // componentDidUpdate(prevProps) {
+  //   if (this.props.currProd.id !== prevProps.id) {
+  //     this.getRelatedProducts();
+  //   }
+  // }
+
   getRelatedProducts() {
     let id = this.props.currProd.id;
     let extras = 'related';
-    axios.get('/products', {params: {id, extras}})
+    return axios.get('/products', {params: {id, extras}})
       .then(related => {
+        // console.log(related);
         let relatedProds = related.data.map(product => {
           return axios.get('/products', {params: {id: product}});
         })
         Promise.all(relatedProds)
           .then(results => {
-            let products = results.map(product => {
-              return product.data;
-            })
             this.setState({
-              relatedProducts: products
+              relatedProducts: results
             });
           })
+          .catch(error => console.log('ERROR with Promise.all', error));
       })
+      .catch(error => console.log('ERROR retrieving data', error));
   }
 
 
@@ -46,7 +52,6 @@ class RelatedPO extends React.Component {
         <div></div>
       );
     } else {
-      console.log(this.state.relatedProducts);
       return(
       <div>
         <div className="relatedCont">

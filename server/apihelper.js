@@ -7,6 +7,8 @@
 const axios = require('axios');
 const config = require('../config.js');
 
+
+// order matters - you'll need to pass the id first before any extra params
 let getInfoFromAPI = (endpoint, id, extras) => {
 
   let options = {

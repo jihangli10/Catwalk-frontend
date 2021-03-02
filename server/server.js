@@ -19,7 +19,22 @@ app.use(express.static(path.join(__dirname, "../client/dist")));
 
 // PRODUCT OVERVIEW ROUTES //=============================================
 
+/* ===================EXAMPLE CLIENT SIDE REQUEST================== */
+
+// getCurrentStyles() {
+//   let id = this.props.current.data.id;
+//   let extras = 'styles';
+//   axios.get('/products', {params: {id, extras}})
+//     .then(newStyles => {
+//       this.setState({
+//         currentStyle: newStyles.data
+//       });
+//     })
+// }
+
+
 app.get('/products', (req, res) => {
+  // params will show up in a req.query object - you can grab their values inside your route handler, and pass them as arguments to the apihelper
   let id = req.query.id;
   let extras = req.query.extras
   apiHelper.getInfoFromAPI('products', id, extras)

@@ -1,11 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-<<<<<<< HEAD
 import QandA from './QandA/QandA.jsx';
-=======
 import axios from 'axios';
 import RelatedPO from './RelatedPO/RelatedPO.jsx';
->>>>>>> de9841a1c9b4096706ba6545cf708124a9882ebc
 import RateReview from './RateReview/RateReview.jsx'
 import StarRatings from './RateReview/StarRatings.jsx'
 

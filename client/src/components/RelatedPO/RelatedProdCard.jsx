@@ -2,19 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import styles from '../../data.js';
 import axios from 'axios';
-
-
+import RelatedModal from './RelatedModal.jsx';
 
 
 class RelatedProductCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      hasLoaded: false,
-      currentStyle: styles
+      currentStyle: styles,
+      showModal: false
     }
     this.getCurrentStyles = this.getCurrentStyles.bind(this);
     this.updateParentProduct = this.updateParentProduct.bind(this);
+    this.handleActionButtonClick = this.handleActionButtonClick.bind(this);
   }
 
   componentDidMount() {
@@ -23,10 +23,14 @@ class RelatedProductCard extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.current.data.id !== this.props.current.data.id) {
-      console.log(this.props.current.data.id);
-      console.log(prevProps.current.data.id);
       this.getCurrentStyles();
     }
+  }
+
+  handleActionButtonClick() {
+    this.setState({
+      showModal: !this.state.showModal
+    })
 
   }
 
@@ -34,7 +38,6 @@ class RelatedProductCard extends React.Component {
   getCurrentStyles() {
     let id = this.props.current.data.id;
     let extras = 'styles';
-    // console.log(id);
     axios.get('/products', {params: {id, extras}})
       .then(newStyles => {
         this.setState({
@@ -43,28 +46,32 @@ class RelatedProductCard extends React.Component {
       })
   }
 
-  updateParentProduct() {
-    // console.log('ID:', this.props.current.data.id);
-    this.props.update(this.props.current.data.id)
+  updateParentProduct(e) {
+    if (e.target.name !== 'star') {
+      this.props.update(this.props.current.data.id)
       .then(() => {
         this.props.getRelated()
           .then(() => console.log('cool'));
       });
+    }
   }
 
   render() {
+
     let styleImage = this.state.currentStyle.results[0].photos[0].url;
     let stylePrice =  this.state.currentStyle.results[0].original_price;
     let id = this.props.current.data.id;
-    // console.log(styleImage);
-    // console.log(this.props.current.data.name);
-    // console.log(id);
-
 
     return(
-      <div  onClick={this.updateParentProduct}className="relatedCard">
+
+      <div onClick={this.updateParentProduct}className="relatedCard">
+        <div className="modalCont">
+          <RelatedModal show={this.state.showModal} />
+        </div>
         <div className="relImageCont">
-        <img id="relActionBtn" height="18" src="https://img.icons8.com/fluent-systems-regular/24/ffffff/star--v1.png"/>
+            <div id="relActionBtn" >
+              <img name="star" height="18" onClick={this.handleActionButtonClick} src="https://img.icons8.com/fluent-systems-regular/24/ffffff/star--v1.png"/>
+            </div>
             <img className="relProdImage" src={styleImage} />
         </div>
         <div className="relProdCategory">{this.props.current.data.category.toUpperCase()}</div>

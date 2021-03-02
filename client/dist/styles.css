@@ -50,17 +50,26 @@ body {
   height: 100%;
   opacity: 1;
   z-index: 0;
-  transition: transform 1600ms;
-  transform: scale(1);
+  /* overflow: scroll; */
+}
+
+#relActionBtn:hover {
+  cursor: pointer;
 }
 
 .relatedCard {
   height: 375px;
   width: 281.25px;
+  flex: 3 0 0;
   padding: 0px;
   margin-right: 5px;
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(250, 250, 250);
   border: .25px solid black;
+}
+
+.relModal {
+  border: 1px solid black;
+  height: 50px;
 }
 
 .relatedCard:hover {

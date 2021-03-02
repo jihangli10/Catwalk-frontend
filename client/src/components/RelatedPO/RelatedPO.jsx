@@ -18,18 +18,12 @@ class RelatedPO extends React.Component {
     this.getRelatedProducts();
   }
 
-  // componentDidUpdate(prevProps) {
-  //   if (this.props.currProd.id !== prevProps.id) {
-  //     this.getRelatedProducts();
-  //   }
-  // }
 
   getRelatedProducts() {
     let id = this.props.currProd.id;
     let extras = 'related';
     return axios.get('/products', {params: {id, extras}})
       .then(related => {
-        // console.log(related);
         let relatedProds = related.data.map(product => {
           return axios.get('/products', {params: {id: product}});
         })

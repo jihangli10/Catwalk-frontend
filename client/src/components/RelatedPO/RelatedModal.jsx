@@ -18,17 +18,25 @@ class RelatedModal extends React.Component {
     } else {
       return(
         <div className="relModal" id="modal">
-        <h2>Modal Window</h2>
-        <div className="ModalContent">{this.props.children}</div>
-        <div className="modalCloseBtn">
-          <button onClick={this.props.handleClose} className="toggle-button" >
-            close
-          </button>
+          <div className="modalToggle">
+            <img onClick={this.props.handleClose} className="toggle-button" src="https://img.icons8.com/plumpy/24/000000/macos-close.png"/>
+            <div id="modalHeader">
+              COMPARING
+            </div>
+          </div>
+          <div>
+            <table className="modalTable">
+              <tbody id="content">
+                  <tr>
+                      <th>{this.props.parentProd.name}</th>
+                      <th>{this.props.selected.name}</th>
+                  </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
       );
     }
-
   }
 }
 

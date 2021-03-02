@@ -46,23 +46,25 @@ class RelatedProductCard extends React.Component {
   }
 
   render() {
-
-    let styleImage = this.state.currentStyle.results[0].photos[0].url;
-    let stylePrice =  this.state.currentStyle.results[0].original_price;
+    let defaultStyle = this.state.currentStyle.results[0];
+    let styleImage = defaultStyle.photos[0].url;
+    let stylePrice = defaultStyle.sale_price ? defaultStyle.sale_price : defaultStyle.original_price;
     let id = this.props.current.data.id;
+    console.log(defaultStyle.sale_price, stylePrice);
+    console.log(id);
 
     return(
 
-      <div onClick={this.updateParentProduct}className="relatedCard">
+      <div onClick={this.updateParentProduct} className="relatedCard">
         <div className="relImageCont">
             <div id="relActionBtn" >
-              <img name="star" height="18" onClick={this.props.handleActionClick} src="https://img.icons8.com/fluent-systems-regular/24/ffffff/star--v1.png"/>
+              <img name="star" height="18" onClick={() => this.props.handleActionClick(this.props.current.data)} src="https://img.icons8.com/fluent-systems-regular/24/ffffff/star--v1.png"/>
             </div>
             <img className="relProdImage" src={styleImage} />
         </div>
         <div className="relProdCategory">{this.props.current.data.category.toUpperCase()}</div>
-        <div className="relProdName">{this.props.current.data.name}</div>
-        <div className="relProdPrice">${stylePrice}</div>
+        <div className="relProdName">{this.props.current.data.name} </div>
+        <div className="relProdPrice">${stylePrice} <span className={defaultStyle.sale_price ? "sale" : "noSale"}>${defaultStyle.original_price}</span> </div>
           <div className="relProdReviews">
             <span className="avgstars">
               <i className="fas fa-star"></i>

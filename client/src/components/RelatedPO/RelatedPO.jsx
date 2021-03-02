@@ -12,7 +12,8 @@ class RelatedPO extends React.Component {
     super(props);
     this.state = {
       relatedProducts: null,
-      showModal: false
+      showModal: false,
+      productCard: null
     }
     this.getRelatedProducts = this.getRelatedProducts.bind(this);
     this.handleActionButtonClick = this.handleActionButtonClick.bind(this);
@@ -23,9 +24,10 @@ class RelatedPO extends React.Component {
     this.getRelatedProducts();
   }
 
-  handleActionButtonClick() {
+  handleActionButtonClick(productCard) {
     this.setState({
-      showModal: !this.state.showModal
+      showModal: !this.state.showModal,
+      productCard: productCard
     })
   }
 
@@ -41,6 +43,11 @@ class RelatedPO extends React.Component {
   getRelatedProducts() {
     let id = this.props.currProd.id;
     let extras = 'related';
+    if (this.state.showModal) {
+      this.setState({
+        showModal: false
+      });
+    }
     return axios.get('/products', {params: {id, extras}})
       .then(related => {
         let relatedProds = related.data.map(product => {
@@ -69,11 +76,11 @@ class RelatedPO extends React.Component {
       <div>
         <div className="relatedCont">
           <div className="modalCont">
-            <RelatedModal handleClose={this.handleModalClose} show={this.state.showModal} />
+            <RelatedModal selected={this.state.productCard} parentProd={this.props.currProd} handleClose={this.handleModalClose} show={this.state.showModal} />
           </div>
           <div className="relatedCarousel">
             {this.state.relatedProducts.map((product, i) => {
-              return <RelatedProdCard handleActionClick={this.handleActionButtonClick} getRelated={this.getRelatedProducts} update={this.props.updateProd} key={i} current={product}/>
+              return <RelatedProdCard handleActionClick={this.handleActionButtonClick} getRelated={this.getRelatedProducts} show={this.state.showModal} update={this.props.updateProd} key={i} parentProduct={this.props.currProd} current={product}/>
             })}
           </div>
         </div>

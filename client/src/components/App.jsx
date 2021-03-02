@@ -1,6 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+<<<<<<< HEAD
 import QandA from './QandA/QandA.jsx';
+=======
+import axios from 'axios';
+import RelatedPO from './RelatedPO/RelatedPO.jsx';
+>>>>>>> de9841a1c9b4096706ba6545cf708124a9882ebc
 import RateReview from './RateReview/RateReview.jsx'
 import StarRatings from './RateReview/StarRatings.jsx'
 
@@ -40,8 +45,28 @@ class App extends React.Component {
     super(props);
     this.state = {
       products:[],
-      currentProduct: {}
-    };
+      currentProduct: {
+        "id": 19378,
+        "campus": "hr-rfe",
+        "name": "Alberto Romper",
+        "slogan": "Voluptatibus sunt neque repellendus.",
+        "description": "Dolor deleniti blanditiis fugit et aut quisquam eius provident. Quasi labore vel ipsum numquam mollitia et. Accusamus asperiores a nisi.",
+        "category": "Romper",
+        "default_price": "826.00",
+        "created_at": "2021-02-23T19:24:34.674Z",
+        "updated_at": "2021-02-23T19:24:34.674Z"
+    }
+  };
+  this.updateCurrentProduct = this.updateCurrentProduct.bind(this);
+  }
+
+  updateCurrentProduct(target) {
+    return axios.get('/products', {params: {id: target}})
+      .then(product => {
+        this.setState({
+          currentProduct: product.data
+        })
+      })
   }
 
   render() {
@@ -62,8 +87,9 @@ class App extends React.Component {
           <br></br>
         </div>
         <div>
+          <RelatedPO updateProd={this.updateCurrentProduct} currProd={this.state.currentProduct} />
           <br></br>
-          <div className="section">YOUR OUTFITS</div>
+          <div className="section">YOUR OUTFIT</div>
           <br></br>
         </div>
 

@@ -1,3 +1,4 @@
+/* // APP STYLES //========================================================== */
 
 /* // APP STYLES //========================================================== */
 h1, h2, h3, h4, body {
@@ -40,6 +41,132 @@ body {
   overflow-y: auto;
 }
 /* // RATING AND REVIEW STYLES //============================================ */
+
+/* // RELATED PRODUCTS AND OUTFITS STYLES //================================= */
+
+.relatedCont {
+  position : relative;
+  display : block;
+  overflow : hidden;
+  width : 100%;
+  max-width : 100vw;
+  /* height : 100vh; */
+  max-height : 100%;
+  margin : 0 auto;
+}
+
+.relatedCarousel {
+  display: flex;
+  flex-direction: row;
+  /* flex-wrap: wrap; */
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  /* position: absolute; */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  z-index: 0;
+  /* overflow: scroll; */
+}
+
+
+/* // RELATED PRODUCT CARD //================================= */
+
+#relActionBtn:hover {
+  cursor: pointer;
+}
+
+.relatedCard {
+  height: 375px;
+  width: 281.25px;
+  flex: 3 0 0;
+  padding: 0px;
+  margin-right: 5px;
+  background-color: rgb(250, 250, 250);
+  border: .25px solid black;
+}
+
+.relatedCard:hover {
+  -webkit-filter: drop-shadow(0px 0px 5px rgb(180, 179, 179));
+  filter: drop-shadow(0px 0px 5px rgb(180, 180, 180));
+}
+
+
+.relImageCont {
+  position: relative;
+  width: 100%;
+  height: 250px;
+}
+
+#relActionBtn {
+  position: absolute;
+  top: 1;
+  right: 0;
+}
+
+.relProdImage {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.relProdCategory {
+  margin-left: 6px;
+  margin-top: 6px;
+  margin-bottom: 10px;
+  font-weight: 200;
+}
+
+.relProdName {
+  margin-left: 6px;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.relProdPrice {
+  margin-left: 6px;
+  font-weight: 200;
+  font-size: .9em;
+}
+
+.relProdReviews {
+  margin-top: 15px;
+  margin-left: 6px;
+
+}
+
+
+/* // RELATED PRODUCT MODAL //================================= */
+
+.relModal {
+  width: 500px;
+  background: white;
+  border: 1px solid #ccc;
+  transition: 1.1s ease-out;
+  box-shadow:
+    -2rem 2rem 2rem rgba(black, 0.2);
+  filter: blur(0);
+  transform: scale(1);
+  opacity: 1;
+  visibility: visible;
+  position: fixed;
+  top: 25%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+
+}
+
+
+
+
+
+
+
+/*================================================================================*/
 
 #ratingreviewcontainer {
   box-sizing: border-box;

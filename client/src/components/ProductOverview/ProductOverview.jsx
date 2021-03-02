@@ -16,7 +16,10 @@ class ProductOverview extends React.Component {
       isDisabled: true,
       selectedStyle: '',
       isError: false,
-      inStock: true
+      inStock: true,
+      styleData: [],
+      productData: [],
+      isLoading: true
     }
   }
 

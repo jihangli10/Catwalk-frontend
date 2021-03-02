@@ -2,19 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import styles from '../../data.js';
 import axios from 'axios';
-import RelatedModal from './RelatedModal.jsx';
 
 
 class RelatedProductCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentStyle: styles,
-      showModal: false
+      currentStyle: styles
     }
     this.getCurrentStyles = this.getCurrentStyles.bind(this);
     this.updateParentProduct = this.updateParentProduct.bind(this);
-    this.handleActionButtonClick = this.handleActionButtonClick.bind(this);
   }
 
   componentDidMount() {
@@ -26,14 +23,6 @@ class RelatedProductCard extends React.Component {
       this.getCurrentStyles();
     }
   }
-
-  handleActionButtonClick() {
-    this.setState({
-      showModal: !this.state.showModal
-    })
-
-  }
-
 
   getCurrentStyles() {
     let id = this.props.current.data.id;
@@ -65,12 +54,9 @@ class RelatedProductCard extends React.Component {
     return(
 
       <div onClick={this.updateParentProduct}className="relatedCard">
-        <div className="modalCont">
-          <RelatedModal show={this.state.showModal} />
-        </div>
         <div className="relImageCont">
             <div id="relActionBtn" >
-              <img name="star" height="18" onClick={this.handleActionButtonClick} src="https://img.icons8.com/fluent-systems-regular/24/ffffff/star--v1.png"/>
+              <img name="star" height="18" onClick={this.props.handleActionClick} src="https://img.icons8.com/fluent-systems-regular/24/ffffff/star--v1.png"/>
             </div>
             <img className="relProdImage" src={styleImage} />
         </div>

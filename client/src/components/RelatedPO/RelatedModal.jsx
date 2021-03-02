@@ -17,8 +17,15 @@ class RelatedModal extends React.Component {
       return null;
     } else {
       return(
-        <div className="relModal"></div>
-
+        <div className="relModal" id="modal">
+        <h2>Modal Window</h2>
+        <div className="ModalContent">{this.props.children}</div>
+        <div className="modalCloseBtn">
+          <button onClick={this.props.handleClose} className="toggle-button" >
+            close
+          </button>
+        </div>
+      </div>
       );
     }
 

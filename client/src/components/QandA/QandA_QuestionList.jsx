@@ -5,7 +5,7 @@ class QuestionList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      expand: false
+      showQuestionNumber: 2
     }
   }
 
@@ -19,23 +19,26 @@ class QuestionList extends React.Component {
     return 0;
   };
 
-  handleSeeMoreClick() {
+  handleSeeMoreClick(e) {
+    e.preventDefault();
     this.setState({
-      expand: true
+      showQuestionNumber: this.state.showQuestionNumber + 2
     })
   }
 
   render() {
-    let showButton = this.props.questions.length >= 5;
+    let showButton = this.props.questions.length > this.state.showQuestionNumber;
     return (
-      <div> {
-        this.props.questions.sort(this._compareHelpfulness).map((question, index) => {
-          if (index <= 3 || this.state.expand === true) {
-            return <Question question={question} key={question.question_id} />;
-          } else {
-            return null;
-          }
-        })
+      <div id='question-list'> {
+        this.props.questions
+          .sort(this._compareHelpfulness)
+          .map((question, index) => {
+            if (index < this.state.showQuestionNumber) {
+              return <Question question={question} key={question.question_id} />;
+            } else {
+              return null;
+            }
+          })
       }
       {showButton ? <button onClick={this.handleSeeMoreClick.bind(this)}>MORE ANSWERED QUESTIONS</button> : null}
       <button>ADD A QUESTION +</button>

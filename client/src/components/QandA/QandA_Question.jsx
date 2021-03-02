@@ -19,18 +19,24 @@ class Question extends React.Component{
     return 0;
   };
 
-  handleSeeMoreOrCollapseClick() {
+  handleSeeMoreOrCollapseClick(e) {
+    e.preventDefault();
     this.setState({
       expand: !this.state.expand
     })
+  }
+
+  handleAnswerHelpfulClick(e) {
+    e.preventDefault();
+
   }
 
   render() {
     const question = this.props.question;
     let showButton = Object.values(question.answers).length >= 3;
     return (
-      <div>
-        <div>Q: {question.question_body}</div>
+      <div className='section-question'>
+        <div><strong>Q: {question.question_body}</strong></div>
         <span> Helpful? <a href="#">Yes</a> ({question.question_helpfulness})</span> |
       <span><a href="#"> Add Answer</a></span>
         {Object.values(question.answers)

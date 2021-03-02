@@ -1,8 +1,8 @@
 import React from 'react';
 
 const Answer = ({answer}) => (
-  <div>
-    <div>A: {answer.body}</div>
+  <div className='section-answer'>
+    <div><strong>A: </strong>{answer.body}</div>
     <div>
       <span>by {answer.answerer_name}, </span>
       <span>{(new Date(answer.date).toDateString())}</span> |

@@ -19,6 +19,60 @@ body {
 /* // PRODUCT OVERVIEW STYLES //============================================= */
 .someDisplay {
   display: inline;
+  font-size: 10px;
+}
+
+.wrapper {
+  position: absolute;
+  z-index: 1;
+}
+
+.gridContainer {
+  display: grid;
+  grid-template-columns: 40px 200px auto 200px 40px;
+  grid-template-rows: 25% auto 100px;
+}
+
+.leftSide {
+  grid-column-start: 1;
+  grid-column-end: 4;
+  grid-row-start: 1;
+  grid-row-end: 3;
+}
+
+.rightSide {
+  grid-column-start: 4;
+  grid-column-end: 6;
+  grid-row-start: 1;
+  grid-row-end: 3;
+}
+
+.bottomSide {
+  grid-column-start: 1;
+  grid-column-end: 6;
+  grid-row-start: 3;
+  grid-row-end: 4;
+}
+
+.dropdownContainer {
+  display: grid;
+  grid-template-columns: auto 0px auto;
+}
+
+.size {
+  grid-column-start: 1;
+  grid-column-end: 2;
+}
+
+.quantity {
+  grid-column-start: 3;
+  grid-column-end: 4;
+}
+
+.styleGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 100px);
+  grid-auto-rows: 100px;
 }
 
 /* // Q AND A STYLES //====================================================== */

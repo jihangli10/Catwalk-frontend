@@ -42,7 +42,7 @@ A big thanks to Jodi Silverman, Jihang Li, Sung Kim, and Joseph Haller for contr
 
 ## License
 
-N/A
+<a href="https://iconscout.com/icons/star" target="_blank">Star Icon</a> by <a href="https://iconscout.com/contributors/fluent">Microsoft</a> on <a href="https://iconscout.com">Iconscout</a>
 
 ## Project Status
 

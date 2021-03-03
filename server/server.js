@@ -5,13 +5,10 @@ const path = require("path")
 const express = require("express"); // npm installed
 const axios = require('axios');
 const config = require('../config.js');
-
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
-
 app.use(express.static(path.join(__dirname, "../client/dist")));
-
 //================================================================================================================
 // SERVER ROUTES
 //================================================================================================================
@@ -23,7 +20,7 @@ app.use(async (req, res) => {
       url: req.url,
       data: req.body,
       headers: {
-        'Authorization':  config.TOKEN //this is what will be imported from config file
+        'Authorization': config.TOKEN //this is what will be imported from config file
       }
     });
     res.send(response.data);

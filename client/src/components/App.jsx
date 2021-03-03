@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import QandA from './QandA/QandA.jsx';
 import axios from 'axios';
 import RelatedPO from './RelatedPO/RelatedPO.jsx';
 import RateReview from './RateReview/RateReview.jsx'
@@ -59,7 +60,7 @@ class App extends React.Component {
   }
 
   updateCurrentProduct(target) {
-    return axios.get('/products', {params: {id: target}})
+    return axios.get(`/products/${target}`)
       .then(product => {
         this.setState({
           currentProduct: product.data
@@ -85,17 +86,15 @@ class App extends React.Component {
           <div className="section">RELATED PRODUCTS</div>
           <br></br>
         </div>
-        <div>
+        {/* <div>
           <RelatedPO updateProd={this.updateCurrentProduct} currProd={this.state.currentProduct} />
           <br></br>
           <div className="section">YOUR OUTFIT</div>
           <br></br>
-        </div>
-        <div>
-          <br></br>
-          <div className="section">QUESTION AND ANSWERS</div>
-          <br></br>
-        </div>
+        </div> */}
+
+        <QandA />
+
         <div>
           <br></br>
           <div className="section">RATINGS &amp; REVIEWS</div>

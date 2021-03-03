@@ -21,17 +21,19 @@
   },
   "homepage": "https://github.com/nypeach/frontEndCapstone#readme",
   "dependencies": {
+    "@babel/plugin-transform-runtime": "^7.13.9",
     "axios": "^0.21.1",
     "babel": "^6.23.0",
     "babel-loader": "^8.2.2",
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "file-loader": "^6.2.0",
+    "highlight-words-core": "^1.2.2",
     "live-server": "^1.2.1",
     "nodemon": "^2.0.7",
     "react": "^17.0.1",
-    "react-dev": "0.0.1",
-    "react-dom": "^17.0.1"
+    "react-dom": "^17.0.1",
+    "react-highlight-words": "^0.17.0"
   },
   "devDependencies": {
     "@babel/runtime": "^7.13.9",
@@ -40,6 +42,9 @@
     "@babel/core": "^7.13.1",
     "@babel/preset-env": "^7.13.5",
     "@babel/preset-react": "^7.10.4",
+    "chai": "^4.3.0",
+    "mocha": "^8.3.0",
+    "sinon": "^9.2.4",
     "webpack": "^5.24.1",
     "webpack-cli": "^4.5.0",
     "webpack-dev-server": "^3.11.2"

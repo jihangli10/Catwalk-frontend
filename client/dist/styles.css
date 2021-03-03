@@ -20,6 +20,69 @@ body {
 /* // PRODUCT OVERVIEW STYLES //============================================= */
 
 /* // Q AND A STYLES //====================================================== */
+#search-question {
+  margin: 10px 0;
+}
+
+#search-question-input {
+  width: 400px;
+}
+.section-question {
+  margin: 20px 0;
+}
+
+.section-answer {
+  margin: 10px 0;
+}
+
+#question-list {
+  max-height: 500px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.answer-photo {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 2px;
+  height: 80px;
+  width: auto;
+  margin: 2px;
+}
+
+.answer-photo:hover {
+  box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+  cursor: pointer;
+}
+
+.answer-image-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start
+}
+
+#question-button-row {
+  margin: 12px 0;
+}
+.question-header {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.question-actions {
+  margin-right: 30px;
+}
+.yes-help-clicked {
+  color: #a20;
+  font-weight: bold;
+}
+
+.report-clicked {
+  color: #a20;
+  font-weight: bold;
+}
 
 /* // RATING AND REVIEW STYLES //============================================ */
 
@@ -407,4 +470,3 @@ input:checked ~ label:hover ~ label, /* highlight previous selected stars for ne
 label:hover ~ input:checked ~ label /* highlight previous selected stars */ { color: #A6E72D;  }
 
 /* // RELATED PRODUCTS AND OUTFITS STYLES //================================= */
-

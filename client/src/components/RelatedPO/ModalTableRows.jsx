@@ -44,7 +44,7 @@ class ModalTableRows extends React.Component {
       return null;
     } else {
       return(
-        <div>
+        <div className="tableContInner">
           <table className="modalTable">
               <tbody id="content">
                   <tr>
@@ -55,9 +55,9 @@ class ModalTableRows extends React.Component {
           {common.map((char, i) => {
             return(
               <tr className="tableRow" key={i}>
-                <td className="left-col-inner">{p[char] ? parseInt(p[char].value).toFixed(2) : ''}</td>
+                <td className="left-col-inner">{p[char] ? parseInt(p[char].value).toFixed(0) : ''}</td>
                 <td className="center-col">{char}</td>
-                <td className="right-col-inner">{s[char] ? parseInt(s[char].value).toFixed(2) : ''}</td>
+                <td className="right-col-inner">{s[char] ? parseInt(s[char].value).toFixed(0) : ''}</td>
               </tr>
             )
           })}

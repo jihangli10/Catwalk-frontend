@@ -163,6 +163,7 @@ body {
   /* height : 100vh; */
   /* max-height : 100%;
   margin : 0 auto; */
+  /* position: relative; */
   height: 420px;
   width: 100%;
   position: relative;
@@ -277,24 +278,27 @@ body {
 
 /* // RELATED PRODUCT MODAL //================================= */
 
+.modalCont {
+
+  position: relative;
+  top: 40%;
+  right: 3%;
+}
+
 .relModal {
-  width: 500px;
+  max-width: 700px;
   max-height: 300px;
   background-color: rgb(255, 255, 255);
   border: 1px solid rgb(119, 119, 119);
   border-radius: 2px;
-  box-shadow: 0 0 1px .5px rgb(184, 184, 184);
+  box-shadow: .10px .10px 3px rgb(226, 224, 224);
   filter: blur(0);
-  transform: scale(1);
-  opacity: 3;
-  visibility: visible;
-  position: fixed;
-  top: 30%;
+  position: absolute;
+  top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
   overflow: scroll;
   z-index: 10;
-  justify-content: center;
+  transform: translate(-50%,-50%);
 }
 
 .relModal::-webkit-scrollbar {
@@ -329,6 +333,11 @@ body {
 
 .tableCont {
   padding: 8px;
+  /* position: fixed;
+  height: 100%; */
+}
+
+.tableContInner {
   justify-content: center;
 }
 
@@ -336,9 +345,11 @@ body {
   width: 100%;
 }
 
+
 .left-col {
   text-align: left;
   padding: 2px;
+  width:max-content;
 }
 
 .right-col {
@@ -346,19 +357,27 @@ body {
 }
 
 .center-col {
+  /* display: block; */
+  /* position:static; */
   text-align: center;
-  width: max-content;
+  justify-content: center;
   margin-bottom: auto;
+  width: auto;
+  vertical-align: top;
 }
 
 .left-col-inner {
   text-align: left;
   padding-left: 2%;
+  width: 200px;
+  vertical-align: top;
 }
 
 .right-col-inner {
   text-align: right;
   padding-right: 2%;
+  width: 200px;
+  vertical-align: top;
 }
 
 

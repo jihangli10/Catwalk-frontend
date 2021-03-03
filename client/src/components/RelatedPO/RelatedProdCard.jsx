@@ -8,7 +8,7 @@ class RelatedProductCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentStyle: styles,
+      currentStyle: null,
       reviews: null
     }
     this.getCurrentStyles = this.getCurrentStyles.bind(this);
@@ -61,35 +61,41 @@ class RelatedProductCard extends React.Component {
   }
 
   render() {
-    let defaultStyle = this.state.currentStyle.results[0];
-    let styleImage = defaultStyle.photos[0].url;
-    let stylePrice = defaultStyle.sale_price ? defaultStyle.sale_price : defaultStyle.original_price;
-    let id = this.props.current.data.id;
+    if (!this.state.currentStyle) {
+      return (
+        <div>loading...</div>
+      )
+    } else {
+      let defaultStyle = this.state.currentStyle.results[0];
+      let styleImage = defaultStyle.photos[0].url;
+      let stylePrice = defaultStyle.sale_price ? defaultStyle.sale_price : defaultStyle.original_price;
+      let id = this.props.current.data.id;
 
-    return(
+      return(
 
-      <div onClick={this.updateParentProduct} className="relatedCard">
-        <div className="relImageCont">
-            <div id="relActionBtn" >
-              <img name="star" height="18" onClick={() => this.props.handleActionClick(this.props.current.data, this.state.currentStyle, this.state.reviews)} src="https://img.icons8.com/fluent-systems-regular/24/ffffff/star--v1.png"/>
-            </div>
-            <img className="relProdImage" src={styleImage} />
-        </div>
-        <div className="relProdCategory">{this.props.current.data.category.toUpperCase()}</div>
-        <div className="relProdName">{this.props.current.data.name} </div>
-        <div className="relProdPrice">${stylePrice} <span className={defaultStyle.sale_price ? "sale" : "noSale"}>${defaultStyle.original_price}</span> </div>
-          <div className="relProdReviews">
-            <span className="avgstars">
-              <i className="fas fa-star"></i>
-              <i className="fas fa-star"></i>
-              <i className="fas fa-star"></i>
-              <i className="fas fa-star"></i>
-              <i className="fas fa-star"></i>
-            </span>
+        <div onClick={this.updateParentProduct} className="relatedCard">
+          <div className="relImageCont">
+              <div id="relActionBtn" >
+                <img name="star" height="18" onClick={() => this.props.handleActionClick(this.props.current.data, this.state.currentStyle, this.state.reviews)} src="https://img.icons8.com/fluent-systems-regular/24/ffffff/star--v1.png"/>
+              </div>
+              <img className="relProdImage" src={styleImage} />
           </div>
-      </div>
+          <div className="relProdCategory">{this.props.current.data.category.toUpperCase()}</div>
+          <div className="relProdName">{this.props.current.data.name} </div>
+          <div className="relProdPrice">${stylePrice} <span className={defaultStyle.sale_price ? "sale" : "noSale"}>${defaultStyle.original_price}</span> </div>
+            <div className="relProdReviews">
+              <span className="avgstars">
+                <i className="fas fa-star"></i>
+                <i className="fas fa-star"></i>
+                <i className="fas fa-star"></i>
+                <i className="fas fa-star"></i>
+                <i className="fas fa-star"></i>
+              </span>
+            </div>
+        </div>
 
-    );
+      );
+    }
   }
 }
 

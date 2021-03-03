@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
+import axios from 'axios';
 
 
 class YourOutfitCard extends React.Component {
@@ -9,15 +9,21 @@ class YourOutfitCard extends React.Component {
     this.state = {
 
     }
+
   }
+
 
   render() {
+
+
     return(
-      <div>  </div>
-    )
+
+      <div className="outfitCard">
+
+      </div>
+
+    );
   }
-
-
 }
 
 export default YourOutfitCard;

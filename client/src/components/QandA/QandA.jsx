@@ -3,8 +3,6 @@ import AddAnswer from './QandA_AddAnswer.jsx';
 import AddQuestion from './QandA_AddQuestion.jsx';
 import QuestionList from './QandA_QuestionList.jsx';
 import Search from './QandA_Search.jsx';
-import myData from '../../sampleData.json';
-import httpHandler from './httpHandler.js';
 import axios from 'axios';
 
 class QandA extends React.Component {

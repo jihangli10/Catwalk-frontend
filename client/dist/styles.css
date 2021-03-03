@@ -489,7 +489,7 @@ label:hover ~ input:checked ~ label /* highlight previous selected stars */ { co
   margin: 5px;
 }
 
-img {
+.imgReview {
   border: 1px solid #ddd; /* Gray border */
   border-radius: 4px;  /* Rounded border */
   padding: 5px; /* Some padding */
@@ -497,7 +497,7 @@ img {
 }
 
 /* Add a hover effect (blue shadow) */
-img:hover {
+.imgReview:hover {
   box-shadow: 0 0 2px 1px steelblue;
 }
 

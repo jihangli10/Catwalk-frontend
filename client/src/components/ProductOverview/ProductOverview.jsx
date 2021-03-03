@@ -52,7 +52,7 @@ class ProductOverview extends React.Component {
       .then(result => {
         let id = result[0].id;
         let extras = 'styles';
-        axios.get('/products', {params: {id, extras}} )
+        axios.get(`/products/${id}/styles`)
           .then(newStyles => {
 
             this.setState({

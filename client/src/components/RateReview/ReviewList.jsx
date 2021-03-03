@@ -1,45 +1,83 @@
 import React from 'react';
+import reviews from '../../data/reviews';
+import ReviewListItems from './ReviewListItems';
+import axios from 'axios';
 
 class ReviewList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      products: [],
-      currentProduct: {}
+     currentReview: {},
+    //  isOpen: false,
+     display: 5,
+     displayReviews: [],
     };
+    // this.getReviewBody = this.getReviewBody.bind(this);
+    // this.toggleReviewBody = this.toggleReviewBody.bind(this);
+    // this.handleDisplay = this.handleDisplay.bind(this);
+    // this.handleDisplayLess = this.handleDisplayLess.bind(this);
   }
 
-  sliderfunc() {
-    var slider = document.getElementById("size");
-    var output = document.getElementById("demo");
-    output.innerHTML = slider.value; // Display the default slider value
-
-    // Update the current slider value (each time you drag the slider handle)
-    slider.oninput = function () {
-      output.innerHTML = this.value;
-    }
+  handleDisplay () {
+    // if (this.props.reviews.length - this.state.display <= 2) {
+    //   this.setState({ display: reviews.length })
+    //   this.setState({ displayReviews: this.state.reviews.slice(0, this.state.display) });
+    // }
+    // this.setState( (prevState) => {
+    //   return {
+    //     display: prevState.dispay + 2,
+    //     displayReviews: this.state.reviews.slice(0, this.state.display)
+    //   }
+    // })
+    this.setState({
+      displayReviews: this.props.reviewList,
+      currentReview: this.props.reviewList[0]
+    })
   }
+  // handleDisplayLess() {
+  //   if (reviews.length - this.state.display <= 2) {
+  //     return;
+  //   }
+  //   this.setState((prevState) => {
+  //     return { display: prevState.dispay - 2,
+  //       displayReviews: this.state.reviews.slice(0, this.state.display)
+  //      }
+  //   })
+  // }
 
+  // componentDidMount() {
+  //   return axios.get('/reviews', { params: { product_id: 19090 } })
+  //     .then(data => {
+  //       this.setState({
+  //         reviews: data.data.results
+  //       })
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     });
+  //     this.handleDisplay();
+  // }
 
   render() {
 
-    /*
-
-1.2.2.1 Star Rating
-1.2.2.2 Date of Review
-1.2.2.3 Review Summary
-1.2.2.4 Review Body
-1.2.2.5 Recommend
-1.2.2.6 Reviewer Name
-1.2.2.7 Response to Review
-1.2.2.8 Rating Helpfulness
-*/
-
 
     return (
-
-
-
+      <div className="reviewlist">
+        <div><strong>248 reviews sorted by: relevance</strong></div>
+        <br></br>
+        <br></br>
+        <div id="reviewListTiles">
+          <ul className="no-bullets">
+            {this.props.reviewList.map(review => (
+              <li key={review.review_id} className="listrow">
+                <ReviewListItems reviewListItem={review} />
+                <br></br>
+                <br></br>
+              </li>
+            ))}
+            </ul>
+        </div>
+      </div>
     );
   }
 }

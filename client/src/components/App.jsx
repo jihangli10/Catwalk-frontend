@@ -1,8 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import QandA from './QandA/QandA.jsx';
 import axios from 'axios';
 import RelatedPO from './RelatedPO/RelatedPO.jsx';
 import RateReview from './RateReview/RateReview.jsx'
+import Star000 from './RateReview/Star000.jsx'
+import Star025 from './RateReview/Star025.jsx'
+import Star050 from './RateReview/Star050.jsx'
+import Star075 from './RateReview/Star075.jsx'
+import Star100 from './RateReview/Star100.jsx'
+import products from '../data/products'
+import reviews from '../data/reviews'
 import StarRatings from './RateReview/StarRatings.jsx'
 
 import ProductOverview from './ProductOverview/ProductOverview'
@@ -59,14 +67,13 @@ class App extends React.Component {
   }
 
   updateCurrentProduct(target) {
-    return axios.get('/products', {params: {id: target}})
+    return axios.get(`/products/${target}`)
       .then(product => {
         this.setState({
           currentProduct: product.data
         })
       })
   }
-
   render() {
 
     return (
@@ -91,11 +98,9 @@ class App extends React.Component {
           <div className="section">YOUR OUTFIT</div>
           <br></br>
         </div>
-        <div>
-          <br></br>
-          <div className="section">QUESTION AND ANSWERS</div>
-          <br></br>
-        </div>
+
+        <QandA />
+
         <div>
           <br></br>
           <div className="section">RATINGS &amp; REVIEWS</div>

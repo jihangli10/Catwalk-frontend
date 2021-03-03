@@ -13,6 +13,8 @@ import products from '../data/products'
 import reviews from '../data/reviews'
 import StarRatings from './RateReview/StarRatings.jsx'
 
+import ProductOverview from './ProductOverview/ProductOverview'
+
 
 // States
   // Products
@@ -78,6 +80,7 @@ class App extends React.Component {
       <div>
         <div>
           <h1>Main Page</h1>
+          <ProductOverview />
         </div>
         <div>
           <br></br>

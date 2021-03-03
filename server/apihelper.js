@@ -29,18 +29,6 @@ let getInfoFromAPI = (endpoint, id, extras) => {
 
 }
 
-let getStylesFromAPI = (endpoint) => {
-  axios.get( `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/${endpoint}`)
-    .then(result => {
-      var data = result.map(element => {
-        axios.get( `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/${endpoint}/${element.id}/styles`)
-          .then(result => {
-            return result;
-          })
-      })
-      return data;
-    })
-}
 
 //this export will have to be imported via require where you want to use it
 module.exports.getInfoFromAPI = getInfoFromAPI;

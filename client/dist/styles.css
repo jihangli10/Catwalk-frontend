@@ -320,6 +320,7 @@ body {
 .rrstats {
   flex: 5;
   box-sizing: border-box;
+  margin-bottom: 20px;
 }
 .average {
 font-size: 42px;
@@ -328,12 +329,15 @@ float: left;
 padding-bottom: 5%;
 }
 .avgstars {
-margin-top: 3%;
+margin-top: 5%;
 float: left;
 }
 
 /* BAR CHART */
-
+#bar-section {
+  margin-top: 60px;
+  margin-bottom: 48px;
+}
 /* The bar container */
 .bar-container {
   width: 90%;
@@ -359,6 +363,9 @@ float: left;
 .bar-1 {width: 15%; height: 15px; background-color: steelblue; font-size: 12px; white-space: nowrap; }
 
 /* SLIDERS */
+#slide-section {
+  margin-top: 48px;
+}
 .slidecontainer {
   width: 100%; /* Width of the outside container */
   padding-bottom: 15px;
@@ -469,4 +476,185 @@ input:checked + label:hover, input:checked ~ label:hover, /* highlight current a
 input:checked ~ label:hover ~ label, /* highlight previous selected stars for new rating */
 label:hover ~ input:checked ~ label /* highlight previous selected stars */ { color: #A6E72D;  }
 
-/* // RELATED PRODUCTS AND OUTFITS STYLES //================================= */
+/* REVIEW LIST IMAGES */
+.imgContainer {
+    display: flex;
+    flex-wrap:wrap;
+    padding: 5px;
+    float:left;
+    margin-right: 5px;
+    margin-bottom: 18px;
+}
+.item {
+  margin: 5px;
+}
+
+img {
+  border: 1px solid #ddd; /* Gray border */
+  border-radius: 4px;  /* Rounded border */
+  padding: 5px; /* Some padding */
+  width: 100px; /* Set a small width */
+}
+
+/* Add a hover effect (blue shadow) */
+img:hover {
+  box-shadow: 0 0 2px 1px steelblue;
+}
+
+
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width:100%;
+  height: 100%;
+  background: steelblue
+}
+
+.modal-main {
+  position:fixed;
+  background: white;
+  width: 80%;
+  height: auto;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+}
+
+.display-block {
+  display: block;
+}
+
+.display-none {
+  display: none;
+}
+
+.dialog {
+  box-shadow: 0 8px 6px -6px steelblue;
+  position: absolute;
+  top: 35%;
+}
+
+.image {
+  width: 500px;
+}
+
+#centerpoint {
+    top: 25%;
+    left: 25%;
+    position: relative;
+}
+
+#dialog {
+    position: absolute;
+
+    width: 600px;
+    margin-left: -300px;
+
+    height: 400px;
+    margin-top: -200px;
+}
+
+
+/* REVIEW LIST SECTION */
+
+.recommend {
+  font-weight: 500;
+  color: steelblue;
+  margin-bottom: 5px;
+}
+.response {
+  background-color: rgb(176, 196, 222,0.3);
+  padding: 6px;
+}
+.responseText {
+  margin-bottom: 12px;
+  margin-top: 12px;
+}
+.fa-user-check {
+  color:lightsteelblue;
+}
+ul.no-bullets {
+  list-style-type: none; /* Remove bullets */
+  padding: 0; /* Remove padding */
+  margin: 0; /* Remove margins */
+}
+.listrow {
+  display: inline-block;
+  width: 100%;
+  border-bottom:steelblue solid;
+  border-width: 1px;
+  margin-bottom: 12px;
+}
+.floatRight {
+  float: right;
+}
+.floatLeft {
+  float: left;
+}
+.listStars {
+  margin-top: 5px;
+}
+.list-body-trunc {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 250ch;
+}
+
+/* // READ MORE AND READ LESS//================================= */
+.readMore {
+  font-style: italic;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  color: steelblue;
+  font-weight: bold;
+}
+.reviewSummary {
+  margin-bottom: 6px;
+}
+
+.container {
+  border: 1px solid #000;
+  min-width: 150px;
+  position: relative;
+  width: 50%;
+}
+.container .content {
+  max-height: 3.5em;
+  overflow: hidden;
+  transition: max-height 0.5s ease;
+}
+.container .label-container {
+  bottom: 1px;
+  position: absolute;
+  right: 0;
+}
+.container .label-container #read-more-label {
+  background-color: white;
+  color: red;
+  cursor: pointer;
+  float: right;
+}
+.container .label-container #read-more-label:before {
+  content: "[Read More]";
+}
+.container .label-container .shadow {
+  background: webkit-linear-gradient(to right, rgba(255, 255, 255, 0) 0%, white 80%);
+  background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, white 80%);
+  padding: 0 30px;
+  transition: padding 0.5s linear;
+}
+.container #read-more-trigger {
+  display: none;
+}
+.container #read-more-trigger:checked ~ .label-container #read-more-label:before {
+  content: "[Read Less]";
+}
+.container #read-more-trigger:checked ~ .label-container .shadow {
+  padding: 0;
+}
+.container #read-more-trigger:checked ~ .content {
+  max-height: 100em;
+}

@@ -4,6 +4,13 @@ import QandA from './QandA/QandA.jsx';
 import axios from 'axios';
 import RelatedPO from './RelatedPO/RelatedPO.jsx';
 import RateReview from './RateReview/RateReview.jsx'
+import Star000 from './RateReview/Star000.jsx'
+import Star025 from './RateReview/Star025.jsx'
+import Star050 from './RateReview/Star050.jsx'
+import Star075 from './RateReview/Star075.jsx'
+import Star100 from './RateReview/Star100.jsx'
+import products from '../data/products'
+import reviews from '../data/reviews'
 import StarRatings from './RateReview/StarRatings.jsx'
 
 
@@ -65,7 +72,6 @@ class App extends React.Component {
         })
       })
   }
-
   render() {
 
     return (

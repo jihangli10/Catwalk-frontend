@@ -89,31 +89,47 @@ body {
 /* // RELATED PRODUCTS AND OUTFITS STYLES //================================= */
 
 .relatedCont {
-  position : relative;
+  /* position : relative;
   display : block;
   overflow : hidden;
   width : 100%;
   max-width : 100vw;
   /* height : 100vh; */
-  max-height : 100%;
-  margin : 0 auto;
+  /* max-height : 100%;
+  margin : 0 auto; */
+  height: 420px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  margin: 0 auto;
+
 }
 
 .relatedCarousel {
-  display: flex;
-  flex-direction: row;
+  /* display: flex; */
+  /* flex-direction: row; */
   /* flex-wrap: wrap; */
-  align-items: center;
+  /* align-items: center;
   justify-content: center;
-  align-content: center;
-  /* position: absolute; */
+  align-content: center; */
+  /* position: absolute;
   left: 0;
   top: 0;
+  overflow: hidden;
   width: 100%;
   height: 100%;
   opacity: 1;
   z-index: 0;
+  transition: all 1s ease; */
   /* overflow: scroll; */
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  width: 100%;
+  display: flex;
+  position: absolute;
+  left: 0;
+  transition: all 1s ease;
 }
 
 
@@ -124,18 +140,19 @@ body {
 }
 
 .relatedCard {
-  height: 375px;
-  width: 281.25px;
-  flex: 3 0 0;
-  padding: 0px;
-  margin-right: 5px;
+  height: 400px;
+  min-width: 300px;
+  max-width: 300px;
+  margin-right: 1rem;
   background-color: rgb(250, 250, 250);
   border: .25px solid black;
+  display: inline-block;
 }
 
 .relatedCard:hover {
-  -webkit-filter: drop-shadow(0px 0px 5px rgb(180, 179, 179));
-  filter: drop-shadow(0px 0px 5px rgb(180, 180, 180));
+  cursor: pointer;
+  -webkit-filter: drop-shadow(.25px .25px 15px rgb(180, 179, 179));
+  filter: drop-shadow(0px 0px 10px rgb(180, 180, 180));
 }
 
 
@@ -176,6 +193,15 @@ body {
   font-size: .9em;
 }
 
+.sale {
+  text-decoration: line-through;
+  color: crimson;
+  width: min-content;
+}
+
+.noSale {
+  display: none;
+}
 .relProdReviews {
   margin-top: 15px;
   margin-left: 6px;
@@ -187,23 +213,87 @@ body {
 
 .relModal {
   width: 500px;
-  background: white;
-  border: 1px solid #ccc;
-  transition: 1.1s ease-out;
-  box-shadow:
-    -2rem 2rem 2rem rgba(black, 0.2);
+  max-height: 300px;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgb(119, 119, 119);
+  border-radius: 2px;
+  box-shadow: 0 0 1px .5px rgb(184, 184, 184);
   filter: blur(0);
   transform: scale(1);
-  opacity: 1;
+  opacity: 3;
   visibility: visible;
   position: fixed;
-  top: 25%;
+  top: 30%;
   left: 50%;
   transform: translate(-50%, -50%);
+  overflow: scroll;
   z-index: 10;
-
+  justify-content: center;
 }
 
+.relModal::-webkit-scrollbar {
+  display: none;
+}
+
+.modalToggle {
+  display: grid;
+  grid-template-columns: 2;
+  grid-template-rows: 1;
+}
+
+.toggle-button:hover {
+  cursor: pointer;
+}
+
+.toggle-button {
+  margin: 2%;
+  height: 15px;
+  width:15px;
+  grid-column: 2;
+  justify-self: end;
+}
+#modalHeader {
+  margin: 4%;
+  grid-column: 1;
+  grid-row: 1;
+  justify-self: start;
+  justify-content: left;
+  align-content: flex-start;
+}
+
+.tableCont {
+  padding: 8px;
+  justify-content: center;
+}
+
+.modalTable {
+  width: 100%;
+}
+
+.left-col {
+  text-align: left;
+  padding: 2px;
+}
+
+.right-col {
+  text-align: right;
+}
+
+.center-col {
+  text-align: center;
+  width: max-content;
+  margin-bottom: auto;
+}
+
+.left-col-inner {
+  text-align: left;
+  padding-left: 2%;
+}
+
+.right-col-inner {
+  text-align: right;
+  padding-right: 2%;
+}
 
 
 

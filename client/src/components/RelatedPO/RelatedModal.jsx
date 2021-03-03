@@ -1,34 +1,36 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
+import ModalTableRows from './ModalTableRows.jsx';
+import axios from 'axios';
 
 class RelatedModal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      parentProdStyles: this.props.parentStyle,
+      selectedProdStyles: this.props.selectedStyle,
+      commonCharacteristics: []
     }
   }
 
-
   render() {
-
     if (!this.props.show) {
       return null;
     } else {
       return(
         <div className="relModal" id="modal">
-        <h2>Modal Window</h2>
-        <div className="ModalContent">{this.props.children}</div>
-        <div className="modalCloseBtn">
-          <button onClick={this.props.handleClose} className="toggle-button" >
-            close
-          </button>
+          <div className="modalToggle">
+            <img onClick={this.props.handleClose} className="toggle-button" src="https://img.icons8.com/plumpy/24/000000/macos-close.png"/>
+            <div id="modalHeader">
+              COMPARING
+            </div>
+          </div>
+          <div className="tableCont">
+            <ModalTableRows pStyles={this.props.parentStyle} sStyles={this.props.selectedStyle} pReviews={this.props.parentReview} sReviews={this.props.selectReview} selectProd={this.props.selected} parentProd={this.props.parentProd}/>
+          </div>
         </div>
-      </div>
       );
     }
-
   }
 }
 

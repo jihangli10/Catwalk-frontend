@@ -33,8 +33,7 @@ class StarRatings extends React.Component {
         '4.50': <div><Star100 /><Star100 /><Star100 /><Star100 /><Star050 /></div>,
         '4.75': <div><Star100 /><Star100 /><Star100 /><Star100 /><Star075 /></div>,
         '5.00': <div><Star100 /><Star100 /><Star100 /><Star100 /><Star100 /></div>
-      },
-      currentRating: (Math.round(props.rating * 4) / 4).toFixed(2)
+      }
     }
   }
 
@@ -47,7 +46,7 @@ class StarRatings extends React.Component {
   render() {
 
     return (
-        <span>{this.state.starRatings[this.state.currentRating]}</span>
+      <span>{this.state.starRatings[(Math.round(this.props.rating * 4) / 4).toFixed(2)]}</span>
     );
   }
 }

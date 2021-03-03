@@ -1,107 +1,83 @@
 import React from 'react';
-import reviews from '../../data/reviews'
-import StarRatings from './StarRatings'
+import reviews from '../../data/reviews';
+import ReviewListItems from './ReviewListItems';
+import axios from 'axios';
 
 class ReviewList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-     reviews:reviews,
-     currentReview: reviews[0],
-     isOpen: false,
-     displayReviewItems: 2
+     currentReview: {},
+    //  isOpen: false,
+     display: 5,
+     displayReviews: [],
     };
+    // this.getReviewBody = this.getReviewBody.bind(this);
+    // this.toggleReviewBody = this.toggleReviewBody.bind(this);
+    // this.handleDisplay = this.handleDisplay.bind(this);
+    // this.handleDisplayLess = this.handleDisplayLess.bind(this);
   }
 
-  toggle() {
-  this.setState({ isOpen: !this.state.isOpen });
+  handleDisplay () {
+    // if (this.props.reviews.length - this.state.display <= 2) {
+    //   this.setState({ display: reviews.length })
+    //   this.setState({ displayReviews: this.state.reviews.slice(0, this.state.display) });
+    // }
+    // this.setState( (prevState) => {
+    //   return {
+    //     display: prevState.dispay + 2,
+    //     displayReviews: this.state.reviews.slice(0, this.state.display)
+    //   }
+    // })
+    this.setState({
+      displayReviews: this.props.reviewList,
+      currentReview: this.props.reviewList[0]
+    })
   }
+  // handleDisplayLess() {
+  //   if (reviews.length - this.state.display <= 2) {
+  //     return;
+  //   }
+  //   this.setState((prevState) => {
+  //     return { display: prevState.dispay - 2,
+  //       displayReviews: this.state.reviews.slice(0, this.state.display)
+  //      }
+  //   })
+  // }
 
-  getRenderedItems(string) {
-    if (this.state.isOpen) {
-      return string;
-    }
-    return string.substring(0,250);
-  }
+  // componentDidMount() {
+  //   return axios.get('/reviews', { params: { product_id: 19090 } })
+  //     .then(data => {
+  //       this.setState({
+  //         reviews: data.data.results
+  //       })
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     });
+  //     this.handleDisplay();
+  // }
 
   render() {
 
 
     return (
       <div className="reviewlist">
-        <h2>Total Reviews, Sorted By Placeholder</h2>
         <div><strong>248 reviews sorted by: relevance</strong></div>
         <br></br>
-
-
-
+        <br></br>
         <div id="reviewListTiles">
           <ul className="no-bullets">
-            {this.state.reviews.map(review => (
+            {this.props.reviewList.map(review => (
               <li key={review.review_id} className="listrow">
-                <span className="floatRight"> {review.reviewer_name},&nbsp; {review.date.substring(0, 10)}</span><StarRatings
-                className="floatLeft listStars" rating={review.rating} />
+                <ReviewListItems reviewListItem={review} />
                 <br></br>
-                <div><strong>{review.summary.substring(0,60 )}</strong></div>
-                <div>
-                  {this.getRenderedItems(review.body)}
-                  <button onClick={this.toggle}>
-                    {this.state.isOpen ? 'less' : 'more'}
-                  </button>
-                </div>
-
-
-
-
-
-
-
-
-
+                <br></br>
               </li>
-            ))}</ul>
-        </div>
-
-
-
-
-
-
-        <div>
-          <i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i>  December 25, 2019
-              <p><strong>This is the first day of the rest of your life.</strong>  Today we are going to explore the meaning of life.  How can a wood chuck chuck if a wood chuck chucks wood.</p>
-          <p>- Jodi Silverman</p>
-          <br></br>
-          <hr></hr>
-        </div>
-
-        <div>
-          <i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i>  December 25, 2019
-              <p><strong>This is the first day of the rest of your life.</strong>  Today we are going to explore the meaning of life.  How can a wood chuck chuck if a wood chuck chucks wood.</p>
-          <p>- Jodi Silverman</p>
-          <br></br>
-          <hr></hr>
-        </div>
-
-        <div>
-          <i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i>  December 25, 2019
-              <p><strong>This is the first day of the rest of your life.</strong>  Today we are going to explore the meaning of life.  How can a wood chuck chuck if a wood chuck chucks wood.</p>
-          <p>- Jodi Silverman</p>
-          <br></br>
-          <hr></hr>
-        </div>
-
-        <div>
-          <i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i><i className="fas fa-star"></i>  December 25, 2019
-              <p><strong>This is the first day of the rest of your life.</strong>  Today we are going to explore the meaning of life.  How can a wood chuck chuck if a wood chuck chucks wood.</p>
-          <p>- Jodi Silverman</p>
-          <br></br>
-          <hr></hr>
+            ))}
+            </ul>
         </div>
       </div>
-
-
-
     );
   }
 }

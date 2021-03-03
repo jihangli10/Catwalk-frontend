@@ -1,6 +1,7 @@
 import React from 'react';
 import Answer from './QandA_Answer.jsx';
 import axios from 'axios';
+import Highlighter from "react-highlight-words";
 
 class Question extends React.Component{
   constructor(props) {
@@ -48,20 +49,29 @@ class Question extends React.Component{
     const question = this.props.question;
     let showButton = Object.values(question.answers).length >= 3;
     return (
-      <div className='section-question'>
-        <div><strong>Q: {question.question_body}</strong></div>
-        <span> Helpful?
-          {this.state.helpClicked?
-            <span className="yes-help-clicked">Yes</span> :
-            <a onClick={this.handleQuestionHelpfulClick.bind(this)} href="#">Yes</a>}
-          ({this.state.helpfulness})
-        </span> |
-      <span> <a href="#">Add Answer</a></span>
+      <div className="section-question">
+        <div className="question-header"><div><strong>
+          Q:{" "}
+          <Highlighter
+            highlightClassName="YourHighlightClass"
+            searchWords={this.props.searchQuery.length >= 3? this.props.searchQuery.split(' ') : []}
+            autoEscape={true}
+            textToHighlight={question.question_body}
+          />
+          </strong></div>
+          <div className="question-actions">{" "}Helpful?{" "}
+            {this.state.helpClicked?
+              <span className="yes-help-clicked">Yes</span> :
+              <a onClick={this.handleQuestionHelpfulClick.bind(this)} href="#">Yes</a>}
+            ({this.state.helpfulness}) |{" "}
+            <a href="#">Add Answer</a>
+          </div>
+        </div>
         {Object.values(question.answers)
           .sort(this._compareHelpfulness)
           .map((answer, index) => {
             if (index <= 1 || this.state.expand === true) {
-              return <Answer answer={answer} key={answer.id} />;
+              return <Answer answer={answer} key={answer.id} searchQuery={this.props.searchQuery}/>;
             } else {
               return null;
             }

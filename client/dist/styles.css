@@ -65,7 +65,15 @@ body {
 #question-button-row {
   margin: 12px 0;
 }
-
+.question-header {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.question-actions {
+  margin-right: 30px;
+}
 .yes-help-clicked {
   color: #a20;
   font-weight: bold;
@@ -75,6 +83,7 @@ body {
   color: #a20;
   font-weight: bold;
 }
+
 /* // RATING AND REVIEW STYLES //============================================ */
 
 /* // RELATED PRODUCTS AND OUTFITS STYLES //================================= */

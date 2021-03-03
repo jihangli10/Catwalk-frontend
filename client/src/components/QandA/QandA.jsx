@@ -36,7 +36,10 @@ class QandA extends React.Component {
       let queries = e.target.value.toLowerCase().split(' ');
       let displayQuestions = this.state.questions.filter(question => {
         return queries.every(query => {
-          return question.question_body.toLowerCase().includes(query)
+          return question.question_body.toLowerCase().includes(query) ||
+            Object.values(question.answers).some(answer => {
+              return answer.body.toLowerCase().includes(query);
+            })
         });
       });
       this.setState({
@@ -68,7 +71,7 @@ class QandA extends React.Component {
           handleQueryChange={this.handleQueryChange.bind(this)}
           searchQuery={this.state.searchQuery}
         />
-        <QuestionList questions={this.state.displayQuestions} showQuestionNumber={this.state.showQuestionNumber}/>
+        <QuestionList questions={this.state.displayQuestions} showQuestionNumber={this.state.showQuestionNumber} searchQuery={this.state.searchQuery}/>
         <div id="question-button-row">
         {showButton ? <button onClick={this.handleSeeMoreClick.bind(this)}>MORE ANSWERED QUESTIONS</button> : null}
         <button>ADD A QUESTION +</button>

@@ -27,7 +27,7 @@ class QuestionList extends React.Component {
           .sort(this._compareHelpfulness)
           .map((question, index) => {
             if (index < this.props.showQuestionNumber) {
-              return <Question question={question} key={question.question_id} />;
+              return <Question question={question} key={question.question_id} searchQuery={this.props.searchQuery}/>;
             } else {
               return null;
             }

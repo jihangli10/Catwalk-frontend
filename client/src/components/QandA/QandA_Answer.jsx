@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from './QandA_Image.jsx';
 import axios from 'axios';
+import Highlighter from "react-highlight-words";
 
 class Answer extends React.Component {
   constructor(props) {
@@ -39,26 +40,37 @@ class Answer extends React.Component {
     })
   }
 
+  handleImageClick(e) {
+    e.preventDefault();
+  }
+
   render() {
     let answer = this.props.answer;
     return (
       <div className="section-answer">
-      <div><strong>A: </strong>{answer.body}</div>
+      <div><strong>A:{" "}</strong>
+      <Highlighter
+            highlightClassName="YourHighlightClass"
+            searchWords={this.props.searchQuery.length >= 3? this.props.searchQuery.split(' ') : []}
+            autoEscape={true}
+            textToHighlight={answer.body}
+          />
+      </div>
       <div className="answer-image-container">{answer.photos.map((photo, index) => (
         <Image photo={photo} key={index}/>
       ))}</div>
       <div>
         <span>by {answer.answerer_name}, </span>
-        <span>{(new Date(answer.date).toDateString())}</span> |
-        <span> Helpful?
+        <span>{(new Date(answer.date).toDateString().slice(4))}</span> |
+        <span>{" "}Helpful?{" "}
           {this.state.helpClicked?
-            <span className="yes-help-clicked">Yes</span> :
+            <span className="yes-help-clicked">Yes{" "}</span> :
             <a onClick={this.handleAnswerHelpfulClick.bind(this)} href="#">Yes</a>}
-          ({this.state.helpfulness})</span> |
+          ({this.state.helpfulness})</span> | {" "}
         <span>
           {this.state.reported?
-            <span className="report-clicked"> Reported</span> :
-            <a onClick={this.handleAnswerReport.bind(this)} href="#"> Report</a>}
+            <span className="report-clicked">Reported{" "}</span> :
+            <a onClick={this.handleAnswerReport.bind(this)} href="#">Report</a>}
         </span>
       </div>
     </div>

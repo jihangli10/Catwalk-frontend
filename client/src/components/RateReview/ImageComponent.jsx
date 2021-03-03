@@ -19,7 +19,7 @@ class ImageComponent extends React.Component {
     return (
       <div >
         <img
-          className="imgContainer"
+          className="imgContainer imgReview"
           src={this.state.photo.url}
           onClick={this.handleShowDialog}
           alt="no image"
@@ -32,7 +32,7 @@ class ImageComponent extends React.Component {
             onClick={this.handleShowDialog}
           >
             <img
-              className="image"
+              className="image imgReview"
               src={this.state.photo.url}
               onClick={this.handleShowDialog}
               alt={this.state.photo.id}

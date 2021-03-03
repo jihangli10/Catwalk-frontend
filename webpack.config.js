@@ -15,7 +15,7 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: 'babel-loader'
+        use: 'babel-loader',
       },
       {
         test: /\.(png|svg|jpg)$/,
@@ -24,6 +24,7 @@ module.exports = {
     ]
   },
   mode: 'development',
+  watch: true,
   resolve: {
     extensions: ['.js', '.jsx']
   }

@@ -7,7 +7,7 @@ const axios = require('axios');
 const config = require('../config.js');
 const app = express();
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({extended:true}));
 app.use(express.static(path.join(__dirname, "../client/dist")));
 //================================================================================================================
 // SERVER ROUTES
@@ -24,8 +24,8 @@ app.use(async (req, res) => {
       }
     });
     res.send(response.data);
-  } catch (err) {
-    console.log(err.data);
+  } catch(err) {
+    console.log(err.response.data);
     res.sendStatus(500);
   }
 });

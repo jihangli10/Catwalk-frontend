@@ -24,7 +24,7 @@ class YourOutfitCard extends React.Component {
       <div className="outfitCard">
           <div className="outImageCont">
               <div id="outActionBtn" >
-                <img name="outAction" height="20" src="https://img.icons8.com/windows/32/ffffff/macos-close.png"/>
+                <img onClick={() => this.props.remove(newArticle.id)} name="outAction" height="20" src="https://img.icons8.com/windows/32/ffffff/macos-close.png"/>
               </div>
               <img className="relProdImage" src={newArticle.image}/>
           </div>

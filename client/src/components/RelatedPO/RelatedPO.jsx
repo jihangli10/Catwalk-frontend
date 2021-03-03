@@ -29,6 +29,7 @@ class RelatedPO extends React.Component {
     this.getReviewMeta = this.getReviewMeta.bind(this);
     this.createOutfitObject = this.createOutfitObject.bind(this);
     this.handleAddOutfit = this.handleAddOutfit.bind(this);
+    this.handleRemoveOutfit = this.handleRemoveOutfit.bind(this);
   }
 
   componentDidMount() {
@@ -77,7 +78,9 @@ class RelatedPO extends React.Component {
     }
     return axios.get(`/products/${id}/${extras}`)
       .then(related => {
-        let relatedProds = related.data.map(product => {
+        let elimDupes = new Set(related.data);
+        let newRelated = [...elimDupes];
+        let relatedProds = newRelated.map(product => {
           return axios.get(`/products/${product}`);
         })
         Promise.all(relatedProds)
@@ -123,6 +126,15 @@ class RelatedPO extends React.Component {
     this.createOutfitObject();
   }
 
+  handleRemoveOutfit(id) {
+    let newOutfits = this.state.outfits.filter(outfit => {
+      return outfit.id !== id;
+    })
+    this.setState({
+      outfits: newOutfits
+    });
+  }
+
   render() {
 
     if (!this.state.relatedProducts) {
@@ -130,7 +142,6 @@ class RelatedPO extends React.Component {
         <div></div>
       );
     } else {
-      console.log('outfit   ', this.state.outfits);
 
       return(
       <div>
@@ -159,7 +170,7 @@ class RelatedPO extends React.Component {
             </div>
             <div className="carouse">
               {this.state.outfits.map((outfit, key) => {
-                return <YourOutfitCard key={key} outfit={outfit}/>
+                return <YourOutfitCard remove={this.handleRemoveOutfit} key={key} outfit={outfit}/>
               })}
             </div>
           </div>

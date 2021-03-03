@@ -28,7 +28,6 @@ class ModalTableRows extends React.Component {
     let combined = parent.concat(select);
     let noDupes = new Set(combined);
     noDupes = [...noDupes];
-    console.log(parent, select, combined, noDupes);
     this.setState({
       commonCharacteristics: noDupes,
       hasLoaded: true
@@ -55,7 +54,7 @@ class ModalTableRows extends React.Component {
                   </tr>
           {common.map((char, i) => {
             return(
-              <tr key={i}>
+              <tr className="tableRow" key={i}>
                 <td className="left-col-inner">{p[char] ? parseInt(p[char].value).toFixed(2) : ''}</td>
                 <td className="center-col">{char}</td>
                 <td className="right-col-inner">{s[char] ? parseInt(s[char].value).toFixed(2) : ''}</td>

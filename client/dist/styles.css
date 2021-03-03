@@ -134,21 +134,26 @@ body {
 
 .relModal {
   width: 500px;
+  max-height: 300px;
   background-color: rgb(255, 255, 255);
-  border: 1px solid rgb(172, 172, 172);
+  border: 1px solid rgb(119, 119, 119);
   border-radius: 2px;
-  box-shadow:
-    -2rem 2rem 10rem rgba(black, 0.8);
+  box-shadow: 0 0 1px .5px rgb(184, 184, 184);
   filter: blur(0);
   transform: scale(1);
-  opacity: 1;
+  opacity: 3;
   visibility: visible;
   position: fixed;
   top: 30%;
   left: 50%;
   transform: translate(-50%, -50%);
+  overflow: scroll;
   z-index: 10;
+  justify-content: center;
+}
 
+.relModal::-webkit-scrollbar {
+  display: none;
 }
 
 .modalToggle {
@@ -179,6 +184,7 @@ body {
 
 .tableCont {
   padding: 8px;
+  justify-content: center;
 }
 
 .modalTable {
@@ -196,6 +202,7 @@ body {
 
 .center-col {
   text-align: center;
+  width: max-content;
   margin-bottom: auto;
 }
 

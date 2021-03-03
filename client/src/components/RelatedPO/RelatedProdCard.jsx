@@ -44,7 +44,7 @@ class RelatedProductCard extends React.Component {
       this.props.update(this.props.current.data.id)
       .then(() => {
         this.props.getRelated()
-          .then(() => console.log('cool'))
+          .then(() => this.props.getStyles(this.props.parentProduct.id))
           .catch(err => console.log(err));
       })
       .catch(err => console.log(err));
@@ -69,7 +69,7 @@ class RelatedProductCard extends React.Component {
       let defaultStyle = this.state.currentStyle.results[0];
       let styleImage = defaultStyle.photos[0].url;
       let stylePrice = defaultStyle.sale_price ? defaultStyle.sale_price : defaultStyle.original_price;
-      let id = this.props.current.data.id;
+     let id = this.props.current.data.id;
 
       return(
 

@@ -17,13 +17,13 @@ class AddOutfitCard extends React.Component {
 
 
     return(
-
-      <div className="addOutfitCard">
-        <div className="outfitBtnCont">
-          <div className="outfitBtnTitle">ADD TO OUTFIT</div>
-         <div id="outfitBtn">+</div>
+        <div className="addOutfitCard">
+          <div className="outfitBtnCont">
+            <div className="outfitBtnTitle">ADD TO OUTFIT</div>
+            <div onClick={this.props.handleClick} id="outfitBtn">+</div>
+          </div>
         </div>
-      </div>
+
 
     );
   }

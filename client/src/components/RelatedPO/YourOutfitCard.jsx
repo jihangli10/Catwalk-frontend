@@ -16,19 +16,21 @@ class YourOutfitCard extends React.Component {
 
   render() {
 
+    let newArticle = this.props.outfit;
+    let price = newArticle.sale_price ? newArticle.sale_price : newArticle.original_price;
 
     return(
 
       <div className="outfitCard">
           <div className="outImageCont">
               <div id="outActionBtn" >
-                <img name="outAction" height="20" src="https://img.icons8.com/windows/32/000000/macos-close.png"/>
+                <img name="outAction" height="20" src="https://img.icons8.com/windows/32/ffffff/macos-close.png"/>
               </div>
-              <img className="relProdImage"/>
+              <img className="relProdImage" src={newArticle.image}/>
           </div>
-          <div className="relProdCategory"></div>
-          <div className="relProdName"></div>
-          <div className="relProdPrice"><span ></span> </div>
+          <div className="relProdCategory">{newArticle.category}</div>
+          <div className="relProdName">{newArticle.name}</div>
+          <div className="relProdPrice">${price}<span className={newArticle.sale_price ? "sale" : "noSale"}>${newArticle.original_price}</span> </div>
             <div className="relProdReviews">
               <span className="avgstars">
                 <i className="fas fa-star"></i>

@@ -156,41 +156,15 @@ body {
 
 .relatedCont,
 .outfitCont {
-  /* position : relative;
-  display : block;
-  overflow : hidden;
-  width : 100%;
-  max-width : 100vw;
-  /* height : 100vh; */
-  /* max-height : 100%;
-  margin : 0 auto; */
-  /* position: relative; */
   height: 420px;
   width: 100%;
   position: relative;
   overflow: hidden;
   margin: 0 auto;
-
 }
 
 .relatedCarousel,
 .outfitCarousel {
-  /* display: flex; */
-  /* flex-direction: row; */
-  /* flex-wrap: wrap; */
-  /* align-items: center;
-  justify-content: center;
-  align-content: center; */
-  /* position: absolute;
-  left: 0;
-  top: 0;
-  overflow: hidden;
-  width: 100%;
-  height: 100%;
-  opacity: 1;
-  z-index: 0;
-  transition: all 1s ease; */
-  /* overflow: scroll; */
   margin: 0;
   padding: 0;
   list-style: none;
@@ -201,6 +175,7 @@ body {
   transition: all 1s ease;
 }
 /* // OUTFIT CARD //================================= */
+
 .addOutfitCard {
   height: 400px;
   min-width: 300px;
@@ -208,7 +183,7 @@ body {
   margin-right: 1rem;
   background-color: rgb(250, 250, 250);
   border: .25px solid black;
-  display: flex;
+  display: inline-flex;
   justify-content: center;
   align-items: center;
 }
@@ -217,6 +192,7 @@ body {
   -webkit-filter: drop-shadow(.25px .25px 15px rgb(180, 179, 179));
   filter: drop-shadow(0px 0px 10px rgb(180, 180, 180));
 }
+
 .outfitBtnTitle {
   font-weight: 500;
   font-size: 1.5em;

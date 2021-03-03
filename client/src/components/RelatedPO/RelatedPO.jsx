@@ -19,6 +19,7 @@ class RelatedPO extends React.Component {
       parentProductStyle: null,
       selectedReviews: null,
       parentReviews: null,
+      outfits: []
 
     }
     this.getRelatedProducts = this.getRelatedProducts.bind(this);
@@ -26,6 +27,8 @@ class RelatedPO extends React.Component {
     this.handleModalClose = this.handleModalClose.bind(this);
     this.getParentStyles = this.getParentStyles.bind(this);
     this.getReviewMeta = this.getReviewMeta.bind(this);
+    this.createOutfitObject = this.createOutfitObject.bind(this);
+    this.handleAddOutfit = this.handleAddOutfit.bind(this);
   }
 
   componentDidMount() {
@@ -33,6 +36,7 @@ class RelatedPO extends React.Component {
     this.getParentStyles(this.props.currProd.id);
     this.getReviewMeta(this.props.currProd.id);
   }
+
 
   handleActionButtonClick(productCard, productStyle, selectReviews) {
     this.setState({
@@ -96,6 +100,29 @@ class RelatedPO extends React.Component {
       })
   }
 
+  createOutfitObject() {
+    let outfitObj = {};
+    let defaultStyle = this.state.parentProductStyle.results[0];
+    outfitObj.id = this.props.currProd.id;
+    outfitObj.name = this.props.currProd.name;
+    outfitObj.category = this.props.currProd.category.toUpperCase();
+    outfitObj.image = defaultStyle.photos[0].url;
+    outfitObj.original_price = defaultStyle.original_price;
+    outfitObj.sale_price = defaultStyle.sale_price;
+    this.setState({
+      outfits: this.state.outfits.concat(outfitObj)
+    });
+  }
+
+  handleAddOutfit() {
+    let id = this.props.currProd.id;
+    let outfitIds = this.state.outfits.map(outfit => outfit.id);
+    if (outfitIds.includes(id)) {
+      return;
+    }
+    this.createOutfitObject();
+  }
+
   render() {
 
     if (!this.state.relatedProducts) {
@@ -103,6 +130,8 @@ class RelatedPO extends React.Component {
         <div></div>
       );
     } else {
+      console.log('outfit   ', this.state.outfits);
+
       return(
       <div>
         <div>
@@ -116,7 +145,7 @@ class RelatedPO extends React.Component {
           </div>
           <div className="relatedCarousel">
             {this.state.relatedProducts.map((product, i) => {
-              return <RelatedProdCard handleActionClick={this.handleActionButtonClick} getRelated={this.getRelatedProducts} show={this.state.showModal} update={this.props.updateProd} key={i} parentProduct={this.props.currProd} current={product}/>
+              return <RelatedProdCard getStyles={this.getParentStyles} handleActionClick={this.handleActionButtonClick} getRelated={this.getRelatedProducts} show={this.state.showModal} update={this.props.updateProd} key={i} parentProduct={this.props.currProd} current={product}/>
             })}
           </div>
         </div>
@@ -126,10 +155,12 @@ class RelatedPO extends React.Component {
         <div className="outfitCont">
           <div className="outfitCarousel">
             <div>
-              <AddOutfitCard />
+              <AddOutfitCard handleClick={this.handleAddOutfit} />
             </div>
-            <div>
-              <YourOutfitCard />
+            <div className="carouse">
+              {this.state.outfits.map((outfit, key) => {
+                return <YourOutfitCard key={key} outfit={outfit}/>
+              })}
             </div>
           </div>
         </div>

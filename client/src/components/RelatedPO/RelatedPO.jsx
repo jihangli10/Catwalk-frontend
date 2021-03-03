@@ -4,6 +4,7 @@ import YourOutfitCard from './YourOutfitCard.jsx';
 import RelatedProdCard from './RelatedProdCard.jsx';
 import axios from 'axios';
 import RelatedModal from './RelatedModal.jsx';
+import AddOutfitCard from './AddOutfitCard.jsx';
 
 
 
@@ -17,7 +18,8 @@ class RelatedPO extends React.Component {
       productCardStyle: null,
       parentProductStyle: null,
       selectedReviews: null,
-      parentReviews: null
+      parentReviews: null,
+
     }
     this.getRelatedProducts = this.getRelatedProducts.bind(this);
     this.handleActionButtonClick = this.handleActionButtonClick.bind(this);
@@ -123,7 +125,12 @@ class RelatedPO extends React.Component {
         <br></br>
         <div className="outfitCont">
           <div className="outfitCarousel">
-            <YourOutfitCard />
+            <div>
+              <AddOutfitCard />
+            </div>
+            <div>
+              <YourOutfitCard />
+            </div>
           </div>
         </div>
       </div>

@@ -154,7 +154,8 @@ body {
 
 /* // RELATED PRODUCTS AND OUTFITS STYLES //================================= */
 
-.relatedCont {
+.relatedCont,
+.outfitCont {
   /* position : relative;
   display : block;
   overflow : hidden;
@@ -172,7 +173,8 @@ body {
 
 }
 
-.relatedCarousel {
+.relatedCarousel,
+.outfitCarousel {
   /* display: flex; */
   /* flex-direction: row; */
   /* flex-wrap: wrap; */
@@ -197,6 +199,39 @@ body {
   position: absolute;
   left: 0;
   transition: all 1s ease;
+}
+/* // OUTFIT CARD //================================= */
+.addOutfitCard {
+  height: 400px;
+  min-width: 300px;
+  max-width: 300px;
+  margin-right: 1rem;
+  background-color: rgb(250, 250, 250);
+  border: .25px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.addOutfitCard:hover {
+  -webkit-filter: drop-shadow(.25px .25px 15px rgb(180, 179, 179));
+  filter: drop-shadow(0px 0px 10px rgb(180, 180, 180));
+}
+.outfitBtnTitle {
+  font-weight: 500;
+  font-size: 1.5em;
+  width: fit-content;
+}
+
+#outfitBtn {
+  margin-top: 4px;
+  font-size: 5em;
+  text-align: center;
+}
+
+#outfitBtn:hover {
+  color: steelblue;
+  cursor: pointer;
 }
 
 
@@ -225,13 +260,16 @@ body {
 }
 
 
-.relImageCont {
+
+.relImageCont,
+.outImageCont {
   position: relative;
   width: 100%;
   height: 250px;
 }
 
-#relActionBtn {
+#relActionBtn,
+#outActionBtn {
   position: absolute;
   top: 1;
   right: 0;

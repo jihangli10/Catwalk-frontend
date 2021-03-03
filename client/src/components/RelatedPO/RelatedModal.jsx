@@ -20,7 +20,7 @@ class RelatedModal extends React.Component {
       return(
         <div className="relModal" id="modal">
           <div className="modalToggle">
-            <img onClick={this.props.handleClose} className="toggle-button" src="https://img.icons8.com/plumpy/24/000000/macos-close.png"/>
+            <img onClick={this.props.handleClose} className="toggle-button" src="https://img.icons8.com/windows/32/000000/macos-close.png"/>
             <div id="modalHeader">
               COMPARING
             </div>

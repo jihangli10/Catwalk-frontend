@@ -103,6 +103,11 @@ class RelatedPO extends React.Component {
     } else {
       return(
       <div>
+        <div>
+          <br></br>
+          <div className="section">RELATED PRODUCTS</div>
+          <br></br>
+        </div>
         <div className="relatedCont">
           <div className="modalCont">
             <RelatedModal selected={this.state.productCard} parentProd={this.props.currProd} handleClose={this.handleModalClose} parentStyle={this.state.parentProductStyle} selectedStyle={this.state.productCardStyle} show={this.state.showModal} parentReview={this.state.parentReviews} selectReview={this.state.selectedReviews} />
@@ -113,6 +118,9 @@ class RelatedPO extends React.Component {
             })}
           </div>
         </div>
+        <br></br>
+          <div className="section">YOUR OUTFIT</div>
+        <br></br>
         <div className="outfitCont">
           <div className="outfitCarousel">
             <YourOutfitCard />

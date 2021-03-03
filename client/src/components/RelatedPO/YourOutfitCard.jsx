@@ -19,7 +19,9 @@ class YourOutfitCard extends React.Component {
     return(
 
       <div className="outfitCard">
-
+        <div className="outfitBtnCont">
+         <button id="outitBtn">+</button>
+        </div>
       </div>
 
     );

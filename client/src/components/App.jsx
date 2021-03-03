@@ -88,15 +88,7 @@ class App extends React.Component {
           <br></br>
         </div>
         <div>
-          <br></br>
-          <div className="section">RELATED PRODUCTS</div>
-          <br></br>
-        </div>
-        <div>
           <RelatedPO updateProd={this.updateCurrentProduct} currProd={this.state.currentProduct} />
-          <br></br>
-          <div className="section">YOUR OUTFIT</div>
-          <br></br>
         </div>
 
         <QandA />

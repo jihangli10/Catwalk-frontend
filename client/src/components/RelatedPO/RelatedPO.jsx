@@ -5,12 +5,14 @@ import RelatedProdCard from './RelatedProdCard.jsx';
 import axios from 'axios';
 import RelatedModal from './RelatedModal.jsx';
 import AddOutfitCard from './AddOutfitCard.jsx';
+import ls from 'local-storage';
 
 
 
 class RelatedPO extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
       relatedProducts: null,
       showModal: false,
@@ -38,6 +40,9 @@ class RelatedPO extends React.Component {
     this.getRelatedProducts();
     this.getParentStyles(this.props.currProd.id);
     this.getReviewMeta(this.props.currProd.id);
+    this.setState({
+      outfits: ls.get('outfits') || []
+    })
   }
 
   componentDidUpdate(prevProps) {
@@ -60,7 +65,6 @@ class RelatedPO extends React.Component {
 
   handleModalClose(e) {
     e.preventDefault();
-    console.log('click');
     this.setState({
       showModal: false
     })
@@ -136,7 +140,7 @@ class RelatedPO extends React.Component {
     outfitObj.sale_price = defaultStyle.sale_price;
     this.setState({
       outfits: this.state.outfits.concat(outfitObj)
-    });
+    }, () => ls.set('outfits', this.state.outfits));
   }
 
   handleAddOutfit() {
@@ -154,7 +158,7 @@ class RelatedPO extends React.Component {
     })
     this.setState({
       outfits: newOutfits
-    });
+    }, () => ls.set('outfits', this.state.outfits));
   }
 
   render() {

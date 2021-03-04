@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import styles from '../../data.js';
+import styles from '../../data/data.js';
 import axios from 'axios';
 
 

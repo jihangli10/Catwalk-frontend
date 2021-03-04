@@ -72,7 +72,7 @@ class QandA extends React.Component {
         <QuestionList questions={this.state.displayQuestions} showQuestionNumber={this.state.showQuestionNumber} searchQuery={this.state.searchQuery}/>
         <div id="question-button-row">
         {showButton ? <button onClick={this.handleSeeMoreClick.bind(this)}>MORE ANSWERED QUESTIONS</button> : null}
-        <button>ADD A QUESTION +</button>
+        &nbsp;&nbsp;<button>ADD A QUESTION +</button>
         </div>
         <br></br>
       </div>

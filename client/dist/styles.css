@@ -159,7 +159,7 @@ body {
   height: 420px;
   width: 100%;
   position: relative;
-  overflow: hidden;
+  overflow: scroll;
   margin: 0 auto;
 }
 

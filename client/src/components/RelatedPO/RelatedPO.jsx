@@ -165,14 +165,10 @@ class RelatedPO extends React.Component {
         <br></br>
         <div className="outfitCont">
           <div className="outfitCarousel">
-            <div>
               <AddOutfitCard handleClick={this.handleAddOutfit} />
-            </div>
-            <div className="carouse">
               {this.state.outfits.map((outfit, key) => {
                 return <YourOutfitCard remove={this.handleRemoveOutfit} key={key} outfit={outfit}/>
               })}
-            </div>
           </div>
         </div>
       </div>

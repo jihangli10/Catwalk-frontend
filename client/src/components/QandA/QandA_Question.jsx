@@ -9,9 +9,15 @@ class Question extends React.Component{
     this.state = {
       expand: false,
       reported: false,
-      helpfulness: this.props.question.question_helpfulness,
+      helpfulness: 0,
       helpClicked: false
     }
+  }
+
+  componentDidMount () {
+    this.setState({
+      helpfulness: this.props.question.question_helpfulness
+    })
   }
 
   _compareHelpfulness (a, b) {

@@ -7,10 +7,16 @@ class Answer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      helpfulness: this.props.answer.helpfulness,
+      helpfulness: 0,
       helpClicked: false,
       reported: false
     }
+  }
+
+  componentDidMount () {
+    this.setState({
+      helpfulness: this.props.answer.helpfulness,
+    })
   }
 
   handleAnswerHelpfulClick(e) {

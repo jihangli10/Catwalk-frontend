@@ -73,13 +73,13 @@ class RelatedProductCard extends React.Component {
     }
     this.setState({
       average: (Math.round(sum / count * 4) / 4).toFixed(2)
-    }, () => console.log(this.state.average))
+    })
   }
 
   render() {
     if (!this.state.currentStyle || !this.state.reviews) {
       return (
-        <div>loading...</div>
+        null
       )
     } else {
       let defaultStyle = this.state.currentStyle.results[0];

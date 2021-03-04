@@ -134,7 +134,6 @@ class RelatedPO extends React.Component {
     outfitObj.image = defaultStyle.photos[0].url;
     outfitObj.original_price = defaultStyle.original_price;
     outfitObj.sale_price = defaultStyle.sale_price;
-    outfitObj.reviews = this.state.parentReviews;
     this.setState({
       outfits: this.state.outfits.concat(outfitObj)
     });

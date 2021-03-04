@@ -36,7 +36,7 @@ class YourOutfitCard extends React.Component {
           </div>
           <div className="relProdCategory">{newArticle.category}</div>
           <div className="relProdName">{newArticle.name}</div>
-          <div className="relProdPrice">${price}<span className={newArticle.sale_price ? "sale" : "noSale"}>${newArticle.original_price}</span> </div>
+          <div className="relProdPrice"> ${price}<span className={newArticle.sale_price ? "sale" : "noSale"}>${newArticle.original_price}</span> </div>
             <div className="relProdReviews">
               <POAvgRating average={this.state.average} />
             </div>

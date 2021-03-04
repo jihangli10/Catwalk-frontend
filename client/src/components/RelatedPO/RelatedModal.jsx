@@ -9,14 +9,16 @@ class RelatedModal extends React.Component {
     this.state = {
       parentProdStyles: null,
       selectedProdStyles: null,
-      commonCharacteristics: []
+      commonCharacteristics: [],
+      key: null
     }
   }
 
   componentDidMount() {
     this.setState({
       parentProdStyles: this.props.parentStyle,
-      selectedProdStyles: this.props.selectedStyle
+      selectedProdStyles: this.props.selectedStyle,
+      key: this.props.key
     });
   }
 

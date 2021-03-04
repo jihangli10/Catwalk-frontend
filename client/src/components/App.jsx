@@ -20,7 +20,7 @@ class App extends React.Component {
     this.state = {
       products:[],
       currentProduct: {
-        "id": 19131,
+        "id": 19378,
         "campus": "hr-rfe",
         "name": "Alberto Romper",
         "slogan": "Voluptatibus sunt neque repellendus.",
@@ -28,10 +28,28 @@ class App extends React.Component {
         "category": "Romper",
         "default_price": "826.00",
         "created_at": "2021-02-23T19:24:34.674Z",
-        "updated_at": "2021-02-23T19:24:34.674Z"
+        "updated_at": "2021-02-23T19:24:34.674Z",
+        "features": [
+            {
+                "feature": "Sustainably Sourced",
+                "value": null
+            },
+            {
+                "feature": "Green Leaf Certified",
+                "value": null
+            },
+            {
+                "feature": "Cut",
+                "value": "\"Skinny\""
+            }
+        ]
     }
   };
   this.updateCurrentProduct = this.updateCurrentProduct.bind(this);
+  }
+
+  componentDidMount() {
+    this.updateCurrentProduct(this.state.currentProduct.id);
   }
 
   updateCurrentProduct(target) {

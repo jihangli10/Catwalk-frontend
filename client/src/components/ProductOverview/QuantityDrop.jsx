@@ -5,7 +5,7 @@ var QuantityDrop = ({ selectedQuantity, handleQuantityChange, isDisabled, curren
     <select value={selectedQuantity} onChange={handleQuantityChange} disabled={isDisabled ? true : false}>
       <option value='--'>--</option>
       {currentQuantity.map(element =>
-        <option value={element}>{element}</option>
+        <option key={element} value={element}>{element}</option>
       )}
     </select>
 

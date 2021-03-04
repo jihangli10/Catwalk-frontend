@@ -80,7 +80,9 @@ class App extends React.Component {
       <div>
         <div>
           <h1>Main Page</h1>
-          <ProductOverview />
+          <ProductOverview
+            currentProduct = {this.state.currentProduct}
+          />
         </div>
         <div>
           <br></br>
@@ -103,6 +105,7 @@ class App extends React.Component {
 
         <div>
           <br></br>
+          <a id='test'></a>
           <div className="section">RATINGS &amp; REVIEWS</div>
           <br></br>
           <RateReview />

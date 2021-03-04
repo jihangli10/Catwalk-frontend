@@ -59,6 +59,7 @@ body {
 .dropdownContainer {
   display: grid;
   grid-template-columns: auto 0px auto;
+  grid-column-gap: 10px;
 }
 
 .size {
@@ -80,9 +81,31 @@ body {
 }
 
 .mainImage {
-  object-fit: covwe;
+  object-fit: cover;
   width: 100%;
   height: 500px;
+}
+
+.cartButton {
+  background-image: url('https://www.goodfreephotos.com/albums/vector-images/shopping-cart-vector-clipart.png');
+}
+
+.cartContainer {
+  display: grid;
+  grid-template-columns: 100px 30px;
+  grid-column-gap: 5px;
+}
+
+.miniContainer {
+  display: grid;
+  grid-template-columns: 20px 10px;
+  grid-column-gap: 5px;
+}
+
+.miniContainer2 {
+  display:grid;
+  grid-template-columns: 80px 140px;
+  grid-column-gap: 5px;
 }
 
 /* // Q AND A STYLES //====================================================== */

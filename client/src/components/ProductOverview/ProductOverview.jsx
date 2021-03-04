@@ -5,6 +5,9 @@ import StyleList from './StyleList'
 import AddCart from './AddCart'
 import dummyData from './dummyData.js'
 import axios from 'axios'
+import CartStorage from './CartStorage'
+
+import StarRatings from '../RateReview/StarRatings'
 
 class ProductOverview extends React.Component {
   constructor(props) {
@@ -15,28 +18,35 @@ class ProductOverview extends React.Component {
       selectedQuantity: '',
       currentQuantity: [],
       maxLimit: 0,
-      data: dummyData,
       isDisabled: true,
       selectedStyle: '',
       isError: false,
       inStock: true,
       styleData: [],
       isLoading: true,
+      currentProduct: '',
       currentProductStyle: '',
       currentProductName: '',
       currentProductCategory: '',
       currentPrice: '',
       currentDescription: '',
       currentImage:'',
-      currentSizeQuantityList: {}
+      currentSizeQuantityList: {},
+      cartStorage: [],
+      cartStorageSize: 0
     }
   }
 
   sendLink () {
-    console.log('is clicked');
     //send to the Ratings and Review Module
     // var value = this.state;
     // console.log(value);
+  }
+
+  componentDidUpdate(prevProps) {
+    if(this.props.currentProduct !== prevProps.currentProduct) {
+      this.getDataandStyle();
+    }
   }
 
   componentDidMount() {
@@ -44,52 +54,31 @@ class ProductOverview extends React.Component {
   }
 
   getDataandStyle() {
-    axios.get('/products')
-      .then(product => {
-        var data = product.data
-        return data;
-      })
-      .then(result => {
-        let id = result[0].id;
-        let extras = 'styles';
-        axios.get(`/products/${id}/styles`)
-          .then(newStyles => {
-
+      let id = this.props.currentProduct.id;
+      axios.get(`/products/${id}/styles`)
+         .then(newStyles => {
             this.setState({
-              productData: result,
-              currentProductStyle: newStyles.data,
-              isLoading: false,
-              currentProductName: result[0].name,
-              currentProductCategory: result[0].category,
-              currentPrice: result[0].default_price,
-              currentDescription: result[0].description,
-              currentImage: newStyles.data.results[0].photos[0].url,
-              currentSizeQuantityList: newStyles.data.results[0].skus
-            })
-          })
-          .catch(err => {
-            console.log(err);
-          })
-      })
-      .catch(err => {
-        console.log(err);
-      })
+             currentProductStyle: newStyles.data,
+             isLoading: false,
+             currentProductName: this.props.currentProduct.name,
+             currentProductCategory: this.props.currentProduct.category,
+             currentPrice: this.props.currentProduct.default_price,
+             currentDescription: this.props.currentProduct.description,
+             currentImage: newStyles.data.results[0].photos[0].url,
+             currentSizeQuantityList: newStyles.data.results[0].skus,
+             selectedQuantity: '',
+             selectedSize: '',
+             isDisabled: true,
+             inStock: true,
 
-      // getCurrentStyles() {
-//   let id = this.props.current.data.id;
-//   let extras = 'styles';
-//   axios.get('/products', {params: {id, extras}})
-//     .then(newStyles => {
-//       this.setState({
-//         currentStyle: newStyles.data
-//       });
-//     })
-// }
+           })
+        })
+         .catch(err => {
+          console.log(err);
+        })
   }
 
   handleSizeChange(query) {
-    console.log(query.target);
-    console.log(query.target.childNodes[query.target.selectedIndex].getAttribute('id'));
     let skuValue = this.state.currentSizeQuantityList;
     let quantityValue;
     let storage = [];
@@ -112,11 +101,15 @@ class ProductOverview extends React.Component {
     //console.log(skuValue[query.target.className].size)
 
     if(query.target.value === 'Select Size') {
-      this.setState({ selectedSize: query.target.value, isDisabled: true, selectedQuantity: '--' })
+      this.setState({ selectedSize: query.target.value, isDisabled: true, selectedQuantity: '--', inStock: true })
     } else if(quantityValue === 0) {
       this.setState({ selectedSize: query.target.value, isDisabled: true, selectedQuantity:'--', inStock: false })
     } else {
-      this.setState({ selectedSize: query.target.value, isDisabled: false, selectedQuantity: '1', currentQuantity: [...storage] })
+      this.setState({
+        selectedSize: query.target.value,
+        isDisabled: false,
+        selectedQuantity: '1',
+        currentQuantity: [...storage], inStock: true })
     }
   }
 
@@ -125,12 +118,21 @@ class ProductOverview extends React.Component {
   handleAddCart() {
 
     if(this.state.selectedSize === 'Select Size' || this.state.selectedSize === '') {
-      console.log('should not pass here add cart')
       this.setState({ isError: true })
       //create some sort of error message
     } else {
-      console.log('pass here add cart')
-      this.setState({ isError: false })
+      console.log('hit here')
+      this.setState({
+        isError: false,
+        cartStorage: [...this.state.cartStorage, {
+          currentProductStyle: this.state.currentProductStyle,
+          currentPrice: this.state.currentPrice,
+          currentName: this.state.currentName,
+          currentProductName: this.state.currentProductName,
+          currentImage: this.state.currentImage,
+        }],
+        cartStorageSize: this.state.cartStorage.length+1
+      })
       //setState to a storage unit that shows the list of the item.
     }
   }
@@ -139,9 +141,12 @@ class ProductOverview extends React.Component {
     this.setState({ selectedQuantity: query.target.value })
   }
 
+  modalMode () {
+    console.log('it hits here')
+  }
+
   handleSelectedQuantity(query) {
     var temp = this.state.currentSizeQuantityList;
-    console.log('pass handled')
     var quantityValue = temp[query.target.value].quantity;
     var storage = [];
     for(let i = 1; i <= quantityValue; i++) {
@@ -164,13 +169,14 @@ class ProductOverview extends React.Component {
         </div><br></br>
 
       <div className='rightSide'>
-        <i class='fa fa-star-o'></i>
-        <i class='fa fa-star-o'></i>
-        <i class='fa fa-star-o'></i>
-        <i class='fa fa-star-o'></i>
-        <i class='fa fa-star-o'></i>
-        <div className= "someDisplay" onClick={this.sendLink}> Read All {this.state.currentValue} reviews </div>
-
+        <div className='miniContainer2'>
+        <div>
+        <StarRatings
+          rating='3'
+        />
+        </div>
+        <div className='someDisplay'><a href='#test'>Read All {this.state.currentValue} reviews</a></div>
+        </div>
         <div><h3>{this.state.currentProductCategory}</h3></div>
         <div><h2>{this.state.currentProductName}</h2></div>
         <div><h2>{this.state.currentPrice}</h2></div>
@@ -179,10 +185,6 @@ class ProductOverview extends React.Component {
         /></div>
         <br></br>
         <div className='dropdownContainer'>
-            {console.log('Check')}
-            {console.log(this.state.productData)}
-            {console.log(this.state.currentProductStyle)}
-            {console.log(this.state.currentQuantity)}
         <SizeDrop
           selectedSize = {this.state.selectedSize}
           handleSizeChange = {this.handleSizeChange.bind(this)}
@@ -197,10 +199,17 @@ class ProductOverview extends React.Component {
         />
         </div>
         <br></br>
+        <div className='cartContainer'>
         <AddCart
           handleAddCart = {this.handleAddCart.bind(this)}
           inStock = {this.state.inStock}
+          isCartMade = {this.state.isCartMade}
         />
+        <CartStorage
+          modalMode = {this.modalMode.bind(this)}
+          cartStorageSize = {this.state.cartStorageSize}
+        />
+        </div>
         { this.state.isError ? <div>Please select size</div> : null}
         <br></br>
         <br></br>
@@ -212,5 +221,9 @@ class ProductOverview extends React.Component {
   }
 }
 }
+
+//<a id="test">Jump to Review List</a>
+//<a href="#test">We clicked here</a>
+
 
 export default ProductOverview;

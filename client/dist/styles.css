@@ -1,77 +1,67 @@
-/* // APP STYLES //========================================================== */
-
-/* // APP STYLES //========================================================== */
+/*==============================================================================*/
+  /*APP STYLES*/
+/*==============================================================================*/
 h1, h2, h3, h4, body {
   font-family: 'Raleway', sans-serif;
   font-weight: 200;
 }
-
 body {
   font-size: 14px;
   margin-left: 10%;
   margin-right: 10%;
 }
-
 .section {
   font-size: 14px;
   text-transform: uppercase;
 }
-
-/* // PRODUCT OVERVIEW STYLES //============================================= */
+/*==============================================================================*/
+  /*PRODUCT OVERVIEW STYLES*/
+/*==============================================================================*/
 .someDisplay {
   display: inline;
   font-size: 10px;
 }
-
 .wrapper {
   position: absolute;
   z-index: 1;
 }
-
 .gridContainer {
   display: grid;
   grid-template-columns: 40px 200px auto 200px 40px;
   grid-template-rows: 25% auto 100px;
   grid-column-gap: 20px;
 }
-
 .leftSide {
   grid-column-start: 1;
   grid-column-end: 4;
   grid-row-start: 1;
   grid-row-end: 3;
 }
-
 .rightSide {
   grid-column-start: 4;
   grid-column-end: 6;
   grid-row-start: 1;
   grid-row-end: 3;
 }
-
 .bottomSide {
   grid-column-start: 1;
   grid-column-end: 6;
   grid-row-start: 3;
   grid-row-end: 4;
 }
-
 .dropdownContainer {
   display: grid;
   grid-template-columns: auto 0px auto;
   grid-column-gap: 10px;
 }
-
 .size {
   grid-column-start: 1;
   grid-column-end: 2;
 }
-
 .quantity {
   grid-column-start: 3;
   grid-column-end: 4;
 }
-
 .styleGrid {
   display: grid;
   grid-template-columns: repeat(4, 50px);
@@ -79,57 +69,49 @@ body {
   grid-row-gap: 10px;
   grid-column-gap: 10px;
 }
-
 .mainImage {
   object-fit: cover;
   width: 100%;
   height: 500px;
 }
-
 .cartButton {
   background-image: url('https://www.goodfreephotos.com/albums/vector-images/shopping-cart-vector-clipart.png');
 }
-
 .cartContainer {
   display: grid;
   grid-template-columns: 100px 30px;
   grid-column-gap: 5px;
 }
-
 .miniContainer {
   display: grid;
   grid-template-columns: 20px 10px;
   grid-column-gap: 5px;
 }
-
 .miniContainer2 {
   display:grid;
   grid-template-columns: 80px 140px;
   grid-column-gap: 5px;
 }
-
-/* // Q AND A STYLES //====================================================== */
+/*==============================================================================*/
+  /*QUESTIONS AND ANSWERS STYLES*/
+/*==============================================================================*/
 #search-question {
   margin: 10px 0;
 }
-
 #search-question-input {
   width: 400px;
 }
 .section-question {
   margin: 20px 0;
 }
-
 .section-answer {
   margin: 10px 0;
 }
-
 #question-list {
   max-height: 500px;
   overflow-x: hidden;
   overflow-y: auto;
 }
-
 .answer-photo {
   border: 1px solid #ddd;
   border-radius: 4px;
@@ -138,19 +120,16 @@ body {
   width: auto;
   margin: 2px;
 }
-
 .answer-photo:hover {
   box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
   cursor: pointer;
 }
-
 .answer-image-container {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: flex-start
 }
-
 #question-button-row {
   margin: 12px 0;
 }
@@ -167,15 +146,368 @@ body {
   color: #a20;
   font-weight: bold;
 }
-
 .report-clicked {
   color: #a20;
   font-weight: bold;
 }
-
-/* // RATING AND REVIEW STYLES //============================================ */
-
-/* // RELATED PRODUCTS AND OUTFITS STYLES //================================= */
+/*==============================================================================*/
+  /*RATING AND REVIEW STYLES*/
+/*==============================================================================*/
+#ratingreviewcontainer {
+  box-sizing: border-box;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+.break-column {
+  flex-basis: 100%;
+  width: 0;
+}
+/* AVERAGE STARS */
+.rrstats {
+  flex: 5;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+}
+.average {
+font-size: 42px;
+font-weight: 500;
+float: left;
+padding-bottom: 5%;
+}
+.avgstars {
+margin-top: 5%;
+float: left;
+}
+/* BAR CHART */
+#bar-section {
+  margin-top: 60px;
+  margin-bottom: 48px;
+}
+/* The bar container */
+.bar-container {
+  width: 90%;
+  background-color: rgb(176, 196, 222,0.2);
+  text-align: left;
+  color: black;
+  height: 15px;
+  margin-top: 5px;
+  margin-right: 25px;
+  flex: 4;
+}
+.bar-text {
+  font-size: 12px;
+  flex: 0.6;
+  margin-top: 3px;
+}
+/* Individual bars */
+.bar-5 {width: 60%; height: 15px; background-color: steelblue; font-size: 12px; white-space: nowrap; }
+.bar-4 {width: 30%; height: 15px; background-color: steelblue; font-size: 12px; white-space: nowrap; }
+.bar-3 {width: 10%; height: 15px; background-color: steelblue; font-size: 12px; white-space: nowrap; }
+.bar-2 {width: 04%; height: 15px; background-color: steelblue; font-size: 12px; white-space: nowrap; }
+.bar-1 {width: 15%; height: 15px; background-color: steelblue; font-size: 12px; white-space: nowrap; }
+/* SLIDERS */
+#slide-section {
+  margin-top: 48px;
+}
+.slidecontainer {
+  width: 100%; /* Width of the outside container */
+  padding-bottom: 15px;
+}
+.sliderrow {
+  display: flex;
+  flex-direction: row;
+  width: 90%;
+}
+.sliderleft {
+  flex: 1;
+  margin-left: 8px;
+  text-align:left;
+}
+.slidercenter {
+  flex: 1;
+}
+.sliderright {
+  flex: 1;
+  text-align:right;
+  margin-right: 8px;
+}
+.slider {
+  -webkit-appearance: none;
+  width: 90%;
+  height: 10px;
+  border-radius: 5px;
+  background: lightsteelblue;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+}
+.sliderlabel {
+  font-size: 12px;
+  margin-left: 2%;
+  padding-bottom: 7px;
+}
+.slidertext {
+  width: 100%;
+  font-size: 10px;
+}
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: steelblue;
+  cursor: pointer;
+}
+.slider::-moz-range-thumb {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: steelblue;
+  cursor: pointer;
+}
+/* GAP BETWEEN LEFT AND RIGHT */
+.gap {
+  flex: 0.5;
+}
+.reviewlist {
+  flex: 12;
+  margin-right: 25px;
+}
+/* Ratings widget */
+.rate {
+    display: inline-block;
+    border: 0;
+}
+/* Hide radio */
+.rate > input {
+    display: none;
+}
+/* Order correctly by floating highest to the right */
+.rate > label {
+    float: right;
+}
+/* The star of the show */
+.rate > label:before {
+    display: inline-block;
+    font-size: 2rem;
+    padding: .3rem .2rem;
+    margin: 0;
+    cursor: pointer;
+    font-family: FontAwesome;
+    content: "\f005 "; /* full star */
+}
+/* Half star trick */
+.rate .half:before {
+    content: "\f089 "; /* half star no outline */
+    position: absolute;
+    padding-right: 0;
+}
+/* Click + hover color */
+input:checked ~ label, /* color current and previous stars on checked */
+label:hover, label:hover ~ label { color: #73B100;  } /* color previous stars on hover */
+/* Hover highlights */
+input:checked + label:hover, input:checked ~ label:hover, /* highlight current and previous stars */
+input:checked ~ label:hover ~ label, /* highlight previous selected stars for new rating */
+label:hover ~ input:checked ~ label /* highlight previous selected stars */ { color: #A6E72D;  }
+/* REVIEW LIST IMAGES */
+.imgContainer {
+    display: flex;
+    flex-wrap:wrap;
+    padding: 5px;
+    float:left;
+    margin-right: 5px;
+    margin-bottom: 18px;
+}
+.item {
+  margin: 5px;
+}
+.imgReview {
+  border: 1px solid #ddd; /* Gray border */
+  border-radius: 4px;  /* Rounded border */
+  padding: 5px; /* Some padding */
+  width: 100px; /* Set a small width */
+}
+/* Add a hover effect (blue shadow) */
+.imgReview:hover {
+  box-shadow: 0 0 2px 1px steelblue;
+}
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width:100%;
+  height: 100%;
+  background: steelblue
+}
+.modal-main {
+  position:fixed;
+  background: white;
+  width: 80%;
+  height: auto;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+}
+.display-block {
+  display: block;
+}
+.display-none {
+  display: none;
+}
+.dialogNew {
+    background: black;
+    color: white;
+    border-radius: 1em;
+    padding: 1em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
+  }
+.dialog {
+  box-shadow: 0 8px 6px -6px steelblue;
+  position: absolute;
+}
+.image {
+  width: 500px;
+}
+#centerpoint {
+    top: 25%;
+    left: 25%;
+    position: relative;
+}
+#dialog {
+    position: absolute;
+    width: 600px;
+    margin-left: -300px;
+    height: 400px;
+    margin-top: -200px;
+}
+/* REVIEW LIST SECTION */
+button {
+  background-color: steelblue;
+  color: white;
+  border-radius: 2px;
+  border: none;
+  color: white;
+  padding: 10px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+}
+select {
+  border:transparent;
+  text-decoration-line: underline;
+  font-weight: bold;
+}
+.recommend {
+  font-weight: 500;
+  color: steelblue;
+  margin-top: 6px;
+    margin-bottom: 6px;
+}
+.response {
+  background-color: rgb(176, 196, 222,0.3);
+  padding: 6px;
+}
+.responseText {
+  margin-bottom: 12px;
+  margin-top: 12px;
+}
+.fa-user-check {
+  color:lightsteelblue;
+}
+ul.no-bullets {
+  list-style-type: none; /* Remove bullets */
+  padding: 0; /* Remove padding */
+  margin: 0; /* Remove margins */
+}
+.listrow {
+  display: inline-block;
+  width: 100%;
+  border-bottom:steelblue solid;
+  border-width: 1px;
+  margin-bottom: 12px;
+}
+.floatRight {
+  float: right;
+}
+.floatLeft {
+  float: left;
+}
+.listStars {
+  margin-top: 5px;
+}
+.list-body-trunc {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 250ch;
+}
+/* // READ MORE AND READ LESS//================================= */
+.readMore {
+  font-style: italic;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  color: steelblue;
+  font-weight: bold;
+}
+.reviewSummary {
+  margin-bottom: 6px;
+}
+.container {
+  border: 1px solid #000;
+  min-width: 150px;
+  position: relative;
+  width: 50%;
+}
+.container .content {
+  max-height: 3.5em;
+  overflow: hidden;
+  transition: max-height 0.5s ease;
+}
+.container .label-container {
+  bottom: 1px;
+  position: absolute;
+  right: 0;
+}
+.container .label-container #read-more-label {
+  background-color: white;
+  color: red;
+  cursor: pointer;
+  float: right;
+}
+.container .label-container #read-more-label:before {
+  content: "[Read More]";
+}
+.container .label-container .shadow {
+  background: webkit-linear-gradient(to right, rgba(255, 255, 255, 0) 0%, white 80%);
+  background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, white 80%);
+  padding: 0 30px;
+  transition: padding 0.5s linear;
+}
+.container #read-more-trigger {
+  display: none;
+}
+.container #read-more-trigger:checked ~ .label-container #read-more-label:before {
+  content: "[Read Less]";
+}
+.container #read-more-trigger:checked ~ .label-container .shadow {
+  padding: 0;
+}
+.container #read-more-trigger:checked ~ .content {
+  max-height: 100em;
+}
+/*==============================================================================*/
+  /*RELATED PRODUCTS AND OUTFITS STYLES*/
+/*==============================================================================*/
 
 .relatedCont,
 .outfitCont {
@@ -414,613 +746,4 @@ body {
   text-align: right;
   padding-right: 10%;
   width: 200px;
-}
-
-
-
-
-
-
-/*================================================================================*/
-/*======================================================================================================================*/
-  /*RATING AND REVIEW STYLES*/
-/*======================================================================================================================*/
-
-#ratingreviewcontainer {
-  box-sizing: border-box;
-}
-.row {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-}
-.break-column {
-  flex-basis: 100%;
-  width: 0;
-}
-
-
-/* AVERAGE STARS */
-.rrstats {
-  flex: 5;
-  box-sizing: border-box;
-  margin-bottom: 20px;
-}
-.average {
-font-size: 42px;
-font-weight: 500;
-float: left;
-padding-bottom: 5%;
-}
-.avgstars {
-margin-top: 5%;
-float: left;
-}
-
-/* BAR CHART */
-#bar-section {
-  margin-top: 60px;
-  margin-bottom: 48px;
-}
-/* The bar container */
-.bar-container {
-  width: 90%;
-  background-color: rgb(176, 196, 222,0.2);
-  text-align: left;
-  color: black;
-  height: 15px;
-  margin-top: 5px;
-  margin-right: 25px;
-  flex: 4;
-}
-.bar-text {
-  font-size: 12px;
-  flex: 0.6;
-  margin-top: 3px;
-}
-
-/* Individual bars */
-.bar-5 {width: 60%; height: 15px; background-color: steelblue; font-size: 12px; white-space: nowrap; }
-.bar-4 {width: 30%; height: 15px; background-color: steelblue; font-size: 12px; white-space: nowrap; }
-.bar-3 {width: 10%; height: 15px; background-color: steelblue; font-size: 12px; white-space: nowrap; }
-.bar-2 {width: 04%; height: 15px; background-color: steelblue; font-size: 12px; white-space: nowrap; }
-.bar-1 {width: 15%; height: 15px; background-color: steelblue; font-size: 12px; white-space: nowrap; }
-
-/* SLIDERS */
-#slide-section {
-  margin-top: 48px;
-}
-.slidecontainer {
-  width: 100%; /* Width of the outside container */
-  padding-bottom: 15px;
-}
-.sliderrow {
-  display: flex;
-  flex-direction: row;
-  width: 90%;
-}
-.sliderleft {
-  flex: 1;
-  margin-left: 8px;
-  text-align:left;
-}
-.slidercenter {
-  flex: 1;
-}
-.sliderright {
-  flex: 1;
-  text-align:right;
-  margin-right: 8px;
-}
-.slider {
-  -webkit-appearance: none;
-  width: 90%;
-  height: 10px;
-  border-radius: 5px;
-  background: lightsteelblue;
-  outline: none;
-  opacity: 0.7;
-  -webkit-transition: .2s;
-  transition: opacity .2s;
-}
-.sliderlabel {
-  font-size: 12px;
-  margin-left: 2%;
-  padding-bottom: 7px;
-}
-.slidertext {
-  width: 100%;
-  font-size: 10px;
-}
-
-.slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 15px;
-  height: 15px;
-  border-radius: 50%;
-  background: steelblue;
-  cursor: pointer;
-}
-
-.slider::-moz-range-thumb {
-  width: 15px;
-  height: 15px;
-  border-radius: 50%;
-  background: steelblue;
-  cursor: pointer;
-}
-
-
-/* GAP BETWEEN LEFT AND RIGHT */
-.gap {
-  flex: 0.5;
-}
-.reviewlist {
-  flex: 12;
-  margin-right: 25px;
-}
-
-/* Ratings widget */
-.rate {
-    display: inline-block;
-    border: 0;
-}
-/* Hide radio */
-.rate > input {
-    display: none;
-}
-/* Order correctly by floating highest to the right */
-.rate > label {
-    float: right;
-}
-/* The star of the show */
-.rate > label:before {
-    display: inline-block;
-    font-size: 2rem;
-    padding: .3rem .2rem;
-    margin: 0;
-    cursor: pointer;
-    font-family: FontAwesome;
-    content: "\f005 "; /* full star */
-}
-
-/* Half star trick */
-.rate .half:before {
-    content: "\f089 "; /* half star no outline */
-    position: absolute;
-    padding-right: 0;
-}
-/* Click + hover color */
-input:checked ~ label, /* color current and previous stars on checked */
-label:hover, label:hover ~ label { color: #73B100;  } /* color previous stars on hover */
-
-/* Hover highlights */
-input:checked + label:hover, input:checked ~ label:hover, /* highlight current and previous stars */
-input:checked ~ label:hover ~ label, /* highlight previous selected stars for new rating */
-label:hover ~ input:checked ~ label /* highlight previous selected stars */ { color: #A6E72D;  }
-
-/* REVIEW LIST IMAGES */
-.imgContainer {
-    display: flex;
-    flex-wrap:wrap;
-    padding: 5px;
-    float:left;
-    margin-right: 5px;
-    margin-bottom: 18px;
-}
-.item {
-  margin: 5px;
-}
-
-.imgReview {
-  border: 1px solid #ddd; /* Gray border */
-  border-radius: 4px;  /* Rounded border */
-  padding: 5px; /* Some padding */
-  width: 100px; /* Set a small width */
-}
-
-/* Add a hover effect (blue shadow) */
-.imgReview:hover {
-  box-shadow: 0 0 2px 1px steelblue;
-}
-
-
-
-.modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width:100%;
-  height: 100%;
-  background: steelblue
-}
-
-.modal-main {
-  position:fixed;
-  background: white;
-  width: 80%;
-  height: auto;
-  top:50%;
-  left:50%;
-  transform: translate(-50%,-50%);
-}
-
-.display-block {
-  display: block;
-}
-
-.display-none {
-  display: none;
-}
-
-.dialogNew {
-    background: black;
-    color: white;
-    border-radius: 1em;
-    padding: 1em;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%)
-  }
-
-
-.dialog {
-  box-shadow: 0 8px 6px -6px steelblue;
-  position: absolute;
-}
-
-.image {
-  width: 500px;
-}
-
-#centerpoint {
-    top: 25%;
-    left: 25%;
-    position: relative;
-}
-
-#dialog {
-    position: absolute;
-
-    width: 600px;
-    margin-left: -300px;
-
-    height: 400px;
-    margin-top: -200px;
-}
-
-
-/* REVIEW LIST SECTION */
-button {
-  background-color: steelblue;
-  color: white;
-  border-radius: 2px;
-  border: none;
-  color: white;
-  padding: 10px 10px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 12px;
-
-}
-
-select {
-  border:transparent;
-  text-decoration-line: underline;
-  font-weight: bold;
-}
-
-.recommend {
-  font-weight: 500;
-  color: steelblue;
-  margin-top: 6px;
-    margin-bottom: 6px;
-}
-.response {
-  background-color: rgb(176, 196, 222,0.3);
-  padding: 6px;
-}
-.responseText {
-  margin-bottom: 12px;
-  margin-top: 12px;
-}
-.fa-user-check {
-  color:lightsteelblue;
-}
-ul.no-bullets {
-  list-style-type: none; /* Remove bullets */
-  padding: 0; /* Remove padding */
-  margin: 0; /* Remove margins */
-}
-.listrow {
-  display: inline-block;
-  width: 100%;
-  border-bottom:steelblue solid;
-  border-width: 1px;
-  margin-bottom: 12px;
-}
-.floatRight {
-  float: right;
-}
-.floatLeft {
-  float: left;
-}
-.listStars {
-  margin-top: 5px;
-}
-.list-body-trunc {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 250ch;
-}
-
-/* // READ MORE AND READ LESS//================================= */
-.readMore {
-  font-style: italic;
-  margin-top: 5px;
-  margin-bottom: 10px;
-  color: steelblue;
-  font-weight: bold;
-}
-.reviewSummary {
-  margin-bottom: 6px;
-}
-
-.container {
-  border: 1px solid #000;
-  min-width: 150px;
-  position: relative;
-  width: 50%;
-}
-.container .content {
-  max-height: 3.5em;
-  overflow: hidden;
-  transition: max-height 0.5s ease;
-}
-.container .label-container {
-  bottom: 1px;
-  position: absolute;
-  right: 0;
-}
-.container .label-container #read-more-label {
-  background-color: white;
-  color: red;
-  cursor: pointer;
-  float: right;
-}
-.container .label-container #read-more-label:before {
-  content: "[Read More]";
-}
-.container .label-container .shadow {
-  background: webkit-linear-gradient(to right, rgba(255, 255, 255, 0) 0%, white 80%);
-  background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, white 80%);
-  padding: 0 30px;
-  transition: padding 0.5s linear;
-}
-.container #read-more-trigger {
-  display: none;
-}
-.container #read-more-trigger:checked ~ .label-container #read-more-label:before {
-  content: "[Read Less]";
-}
-.container #read-more-trigger:checked ~ .label-container .shadow {
-  padding: 0;
-}
-.container #read-more-trigger:checked ~ .content {
-  max-height: 100em;
-}
-
-
-/* // RELATED PRODUCTS AND OUTFITS STYLES //================================= */
-
-.relatedCont {
-  /* position : relative;
-  display : block;
-  overflow : hidden;
-  width : 100%;
-  max-width : 100vw;
-  /* height : 100vh; */
-  /* max-height : 100%;
-  margin : 0 auto; */
-  height: 420px;
-  width: 100%;
-  position: relative;
-  overflow: hidden;
-  margin: 0 auto;
-
-}
-
-.relatedCarousel {
-  /* display: flex; */
-  /* flex-direction: row; */
-  /* flex-wrap: wrap; */
-  /* align-items: center;
-  justify-content: center;
-  align-content: center; */
-  /* position: absolute;
-  left: 0;
-  top: 0;
-  overflow: hidden;
-  width: 100%;
-  height: 100%;
-  opacity: 1;
-  z-index: 0;
-  transition: all 1s ease; */
-  /* overflow: scroll; */
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  width: 100%;
-  display: flex;
-  position: absolute;
-  left: 0;
-  transition: all 1s ease;
-}
-
-
-/* // RELATED PRODUCT CARD //================================= */
-
-#relActionBtn:hover {
-  cursor: pointer;
-}
-
-.relatedCard {
-  height: 400px;
-  min-width: 300px;
-  max-width: 300px;
-  margin-right: 1rem;
-  background-color: rgb(250, 250, 250);
-  border: .25px solid black;
-  display: inline-block;
-}
-
-.relatedCard:hover {
-  cursor: pointer;
-  -webkit-filter: drop-shadow(.25px .25px 15px rgb(180, 179, 179));
-  filter: drop-shadow(0px 0px 10px rgb(180, 180, 180));
-}
-
-
-.relImageCont {
-  position: relative;
-  width: 100%;
-  height: 250px;
-}
-
-#relActionBtn {
-  position: absolute;
-  top: 1;
-  right: 0;
-}
-
-.relProdImage {
-  object-fit: cover;
-  width: 100%;
-  height: 100%;
-}
-
-.relProdCategory {
-  margin-left: 6px;
-  margin-top: 6px;
-  margin-bottom: 10px;
-  font-weight: 200;
-}
-
-.relProdName {
-  margin-left: 6px;
-  margin-bottom: 10px;
-  font-weight: 600;
-}
-
-.relProdPrice {
-  margin-left: 6px;
-  font-weight: 200;
-  font-size: .9em;
-}
-
-.sale {
-  text-decoration: line-through;
-  color: crimson;
-  width: min-content;
-}
-
-.noSale {
-  display: none;
-}
-.relProdReviews {
-  margin-top: 15px;
-  margin-left: 6px;
-
-}
-
-
-/* // RELATED PRODUCT MODAL //================================= */
-
-.relModal {
-  width: 500px;
-  max-height: 300px;
-  background-color: rgb(255, 255, 255);
-  border: 1px solid rgb(119, 119, 119);
-  border-radius: 2px;
-  box-shadow: 0 0 1px .5px rgb(184, 184, 184);
-  filter: blur(0);
-  transform: scale(1);
-  opacity: 3;
-  visibility: visible;
-  position: fixed;
-  top: 30%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  overflow: scroll;
-  z-index: 10;
-  justify-content: center;
-}
-
-.relModal::-webkit-scrollbar {
-  display: none;
-}
-
-.modalToggle {
-  display: grid;
-  grid-template-columns: 2;
-  grid-template-rows: 1;
-}
-
-.toggle-button:hover {
-  cursor: pointer;
-}
-
-.toggle-button {
-  margin: 2%;
-  height: 15px;
-  width:15px;
-  grid-column: 2;
-  justify-self: end;
-}
-#modalHeader {
-  margin: 4%;
-  grid-column: 1;
-  grid-row: 1;
-  justify-self: start;
-  justify-content: left;
-  align-content: flex-start;
-}
-
-.tableCont {
-  padding: 8px;
-  justify-content: center;
-}
-
-.modalTable {
-  width: 100%;
-}
-
-.left-col {
-  text-align: left;
-  padding: 2px;
-}
-
-.right-col {
-  text-align: right;
-}
-
-.center-col {
-  text-align: center;
-  width: max-content;
-  margin-bottom: auto;
-}
-
-.left-col-inner {
-  text-align: left;
-  padding-left: 2%;
-}
-
-.right-col-inner {
-  text-align: right;
-  padding-right: 2%;
 }

@@ -4,7 +4,7 @@ import StarRatings from './StarRatings';
 import ReviewsBar from './ReviewsBar';
 import AverageRating from './AverageRating';
 import ReviewsSliders from './ReviewsSliders';
-import ReviewList from './ReviewList';
+import ReviewListSort from './ReviewListSort';
 
 class RateReviews extends React.Component {
   constructor(props) {
@@ -15,7 +15,7 @@ class RateReviews extends React.Component {
     }
   }
   componentDidMount() {
-    return axios.get('/reviews', { params: { product_id: 19090 } })
+    return axios.get('/reviews', { params: { product_id: this.props.currProd.id } })
       .then(data => {
        // console.log(data.data.results)
         this.setState({
@@ -53,8 +53,8 @@ class RateReviews extends React.Component {
 
 
         <div className="reviewlist">
-          <ReviewList key={'reviews' + this.state.reviews.length}
-          reviewList={this.state.reviews}/>
+          <ReviewListSort key={'reviews' + this.state.reviews.length}
+          reviewListSort={this.state.reviews} />
         </div>
 
       </div>

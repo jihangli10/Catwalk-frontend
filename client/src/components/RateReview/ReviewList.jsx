@@ -1,81 +1,61 @@
 import React from 'react';
 import reviews from '../../data/reviews';
-import ReviewListItems from './ReviewListItems';
+import ReviewListItem from './ReviewListItem';
 import axios from 'axios';
 
 class ReviewList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-     currentReview: {},
-    //  isOpen: false,
-     display: 5,
-     displayReviews: [],
+      display: 0
     };
-    // this.getReviewBody = this.getReviewBody.bind(this);
-    // this.toggleReviewBody = this.toggleReviewBody.bind(this);
-    // this.handleDisplay = this.handleDisplay.bind(this);
-    // this.handleDisplayLess = this.handleDisplayLess.bind(this);
+    this.handleDisplay=this.handleDisplay.bind(this)
+  }
+
+  componentDidMount() {
+    if (this.props.reviewList.length <= 2) {
+      this.setState({
+        display: this.props.reviewList.length
+      })
+  } else {
+      this.setState({
+        display: 2
+      })
+  }
   }
 
   handleDisplay () {
-    // if (this.props.reviews.length - this.state.display <= 2) {
-    //   this.setState({ display: reviews.length })
-    //   this.setState({ displayReviews: this.state.reviews.slice(0, this.state.display) });
-    // }
-    // this.setState( (prevState) => {
-    //   return {
-    //     display: prevState.dispay + 2,
-    //     displayReviews: this.state.reviews.slice(0, this.state.display)
-    //   }
-    // })
-    this.setState({
-      displayReviews: this.props.reviewList,
-      currentReview: this.props.reviewList[0]
-    })
+    this.setState(prevState => ({
+      display: prevState.display + 2
+    }))
   }
-  // handleDisplayLess() {
-  //   if (reviews.length - this.state.display <= 2) {
-  //     return;
-  //   }
-  //   this.setState((prevState) => {
-  //     return { display: prevState.dispay - 2,
-  //       displayReviews: this.state.reviews.slice(0, this.state.display)
-  //      }
-  //   })
-  // }
 
-  // componentDidMount() {
-  //   return axios.get('/reviews', { params: { product_id: 19090 } })
-  //     .then(data => {
-  //       this.setState({
-  //         reviews: data.data.results
-  //       })
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     });
-  //     this.handleDisplay();
-  // }
+  // button Add More if displayReviews.length === this.props.reviewList.length
+
+
+
 
   render() {
-
-
+    var displayReviews = this.props.reviewList.slice(0, this.state.display)
+    var revListLength = this.props.reviewList.length
+    if (this.props.reviewList.length === 0) {
+      return '';
+    }
     return (
+
       <div className="reviewlist">
-        <div><strong>248 reviews sorted by: relevance</strong></div>
         <br></br>
         <br></br>
         <div id="reviewListTiles">
           <ul className="no-bullets">
-            {this.props.reviewList.map(review => (
+            {displayReviews.map(review => (
               <li key={review.review_id} className="listrow">
-                <ReviewListItems reviewListItem={review} />
-                <br></br>
-                <br></br>
+                <ReviewListItem reviewListItem={review} />
               </li>
             ))}
             </ul>
+          <button style={{ display: revListLength > this.state.display && revListLength > 2 ? "block" : "none" }} onClick={this.handleDisplay}>MORE REVIEWS</button>
+
         </div>
       </div>
     );

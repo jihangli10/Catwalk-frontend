@@ -10,19 +10,23 @@ class RateReviews extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-    reviews: [],
-    currentReview: {}
+      reviews: [],
+      currentReview: {}
     }
   }
   componentDidMount() {
     return axios.get('/reviews', { params: { product_id: this.props.currProd.id } })
       .then(data => {
-       // console.log(data.data.results)
+        // console.log(data.data.results)
         this.setState({
           reviews: data.data.results,
           currentReview: data.data.results[0]
         })
-        //console.log('this.state.currentReview', this.state.currentReview)
+        // 19091 HAS NO REVIEWS
+        // 19093 HAS 2 REVIEWS
+        // 19191 HAS 5 REVIEWS
+        // 19090 HAS A RESPONSE
+
       })
       .catch(err => {
         console.log(err);
@@ -32,33 +36,37 @@ class RateReviews extends React.Component {
   render() {
 
     return (
+      <div>
+        <button key={'reviews' + this.state.reviews.length} style={{ display: this.state.reviews.length === 0 ? "block" : "none" }} >ADD REVIEWS</button>
+        <div style={{ display: this.state.reviews.length !== 0 ? "block" : "none" }}>
 
-      <div id="ratingreviewcontainer" className="row">
-        <div className="rrstats break-column">
-          <div>
-            <AverageRating key={'avgRaiting' + this.state.reviews.length} avgReviews={this.state.reviews} avgCurrent={this.state.currentReview}/><StarRatings />
-          </div>
+          <div id="ratingreviewcontainer" className="row">
 
-          <div id="bar-section">
-          <ReviewsBar />
-          </div>
+            <div className="rrstats break-column">
+              <div>
+                <AverageRating key={'avgRaiting' + this.state.reviews.length} avgReviews={this.state.reviews} avgCurrent={this.state.currentReview} /><StarRatings />
+              </div>
 
-            <div id="slide-section">
-            <ReviewsSliders />
+              <div id="bar-section">
+                <ReviewsBar />
+              </div>
+
+              <div id="slide-section">
+                <ReviewsSliders />
+              </div>
+
+            </div>
+            <div className="gap">
             </div>
 
-        </div>
-        <div className="gap">
-        </div>
 
-
-        <div className="reviewlist">
-          <ReviewListSort key={'reviews' + this.state.reviews.length}
-          reviewListSort={this.state.reviews} />
+            <div className="reviewListSort" >
+              <ReviewListSort key={'reviews' + this.state.reviews.length}
+                reviewListSort={this.state.reviews} />
+            </div>
+          </div>
         </div>
-
       </div>
-
     );
   }
 }

@@ -20,7 +20,7 @@ class App extends React.Component {
     this.state = {
       products:[],
       currentProduct: {
-        "id": 19131,
+        "id": 19191,
         "campus": "hr-rfe",
         "name": "Alberto Romper",
         "slogan": "Voluptatibus sunt neque repellendus.",
@@ -68,7 +68,8 @@ class App extends React.Component {
           <a id='test'></a>
           <div className="section">RATINGS &amp; REVIEWS</div>
           <br></br>
-          <RateReview updateProd={this.updateCurrentProduct} currProd={this.state.currentProduct} />
+          {console.log(this.state.currentProduct)}
+          <RateReview key={'product' + this.state.currentProduct.description.length} updateProd={this.updateCurrentProduct} currProd={this.state.currentProduct} />
         </div>
       </div>
     );

@@ -4,18 +4,19 @@ import ReviewList from './ReviewList'
 class ReviewListSort extends React.Component {
   constructor(props) {
     super(props);
+    this.reviewListElement = React.createRef();
     this.state = {
       sort: 'Relevant',
       reviews: []
     };
-    this.sortByHelpful=this.sortByHelpful.bind(this)
+    this.sortByHelpful = this.sortByHelpful.bind(this)
   }
 
 
   //if (this.state.sort === 'Helpful') {
 
   sortByHelpful() {
-   return this.props.reviewListSort.sort(function (a, b) {
+    return this.props.reviewListSort.sort(function (a, b) {
       return a.helpfulness - b.helpfulness;
     })
   };
@@ -30,11 +31,22 @@ class ReviewListSort extends React.Component {
   }
 
   onChange(e) {
-    this.setState({sort: event.target.value});
+    this.setState({ sort: event.target.value });
+  }
+
+  handleClick() {
+    this.reviewListElement.current.handleDisplay();
   }
 
 
+  componentDidMount() {
+      this.setState({
+        reviews: this.props.reviewListSort
+      })
+  }
+
   render() {
+    var revListLength = this.props.reviewListSort.length
     if (this.props.reviewListSort.length === 0) {
       return '';
     }
@@ -49,11 +61,17 @@ class ReviewListSort extends React.Component {
           <noscript><input type="submit" value="Submit" /></noscript>
         </form>
         <br></br>
-        <div className="reviewlist">
-          <ReviewList key={'reviews' + this.state.reviews.length}
-            reviewList={this.props.reviewListSort} />
+          <ReviewList ref={this.reviewListElement}
+          key={'reviews' + this.state.reviews.length}
+            reviewList={this.state.reviews} />
+        <br></br>
+        <button style={{ display: revListLength >= this.state.reviews.length && revListLength > 2 ? "block" : "none" }} onClick={this.handleClick.bind(this)}>MORE REVIEWS</button>
+        <br></br>
+        <br></br>
         </div>
-      </div>
+
+
+
     );
   }
 }

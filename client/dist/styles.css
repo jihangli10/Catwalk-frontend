@@ -658,11 +658,13 @@ ul.no-bullets {
   position: relative;
   top: 40%;
   right: 3%;
+  max-height: 100px;
 }
 
 .relModal {
   max-width: 700px;
-  max-height: 300px;
+  min-height: fit-content;
+  max-height: 250px;
   background-color: rgb(255, 255, 255);
   border: 1px solid rgb(119, 119, 119);
   border-radius: 2px;
@@ -721,29 +723,32 @@ ul.no-bullets {
 
 .left-col {
   text-align: left;
-  padding: 2px;
+  padding-left: 2px;
+  padding-bottom: 10px;
   width:max-content;
 }
 
 .right-col {
   text-align: right;
+  padding-bottom: 10px;
 }
 
 .center-col {
   text-align: center;
   justify-content: center;
-  margin-bottom: auto;
   width: auto;
+  font-weight: 500;
+  height: 20px;
 }
 
 .left-col-inner {
   text-align: left;
-  padding-left: 10%;
   width: 200px;
+  height: 20px;
 }
 
 .right-col-inner {
   text-align: right;
-  padding-right: 10%;
   width: 200px;
+  height: 20px;
 }

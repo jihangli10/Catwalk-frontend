@@ -3,8 +3,9 @@ import reviews from '../../data/reviews';
 import StarRatings from './StarRatings';
 import ImageComponent from './ReviewListImages';
 import ReviewListImages from './ReviewListImages';
+import RatingHelpful from './RatingHelpful';
 
-class ReviewListItems extends React.Component {
+class ReviewListItem extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -41,7 +42,7 @@ class ReviewListItems extends React.Component {
           <div className="reviewSummary"><strong>{review.summary.substring(0, 60)}</strong></div>
           <div>
             {this.getReviewBody(review.body)}
-            <div className="readMore" onClick={this.toggleReviewBody}>
+            <div className="readMore" style={{ display: review.body.length > 250 ? "block" : "none" }} onClick={this.toggleReviewBody}>
               {this.state.isOpen ? ' ... less' : ' ... more'}
             </div>
             <div className="recommend" style={{ display: review.recommend ? "block" : "none" }}>&#10003; I recommend this product</div>
@@ -50,10 +51,13 @@ class ReviewListItems extends React.Component {
           <ReviewListImages
             photos={review.photos}
              />
+          <br></br><br></br>
         </div>
+        <RatingHelpful helpfulness={review.helpfulness} reviewID={review.review_id} />
+        <br></br>
       </div>
     );
   }
 }
 
-export default ReviewListItems;
+export default ReviewListItem;

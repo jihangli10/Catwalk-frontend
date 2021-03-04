@@ -150,6 +150,255 @@ body {
   font-weight: bold;
 }
 
+/* // RATING AND REVIEW STYLES //============================================ */
+
+/* // RELATED PRODUCTS AND OUTFITS STYLES //================================= */
+
+.relatedCont,
+.outfitCont {
+  height: 420px;
+  width: 100%;
+  position: relative;
+  overflow: scroll;
+  margin: 0 auto;
+}
+
+.relatedCarousel,
+.outfitCarousel {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  width: 100%;
+  display: flex;
+  position: absolute;
+  left: 0;
+  transition: all 1s ease;
+}
+/* // OUTFIT CARD //================================= */
+
+.addOutfitCard {
+  height: 400px;
+  min-width: 300px;
+  max-width: 300px;
+  margin-right: 1rem;
+  background-color: rgb(250, 250, 250);
+  border: .25px solid black;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.addOutfitCard:hover {
+  -webkit-filter: drop-shadow(.25px .25px 15px rgb(180, 179, 179));
+  filter: drop-shadow(0px 0px 10px rgb(180, 180, 180));
+}
+
+.outfitBtnTitle {
+  font-weight: 500;
+  font-size: 1.5em;
+  width: fit-content;
+}
+
+#outfitBtn {
+  margin-top: 4px;
+  font-size: 5em;
+  text-align: center;
+}
+
+#outfitBtn:hover {
+  color: steelblue;
+  cursor: pointer;
+}
+
+
+/* // RELATED PRODUCT CARD //================================= */
+
+#relActionBtn:hover {
+  cursor: pointer;
+}
+
+.relatedCard,
+.outfitCard {
+  height: 400px;
+  min-width: 300px;
+  max-width: 300px;
+  margin-right: 1rem;
+  background-color: rgb(250, 250, 250);
+  border: .25px solid black;
+  display: inline-block;
+}
+
+.relatedCard:hover,
+.outfitCard:hover {
+  cursor: pointer;
+  -webkit-filter: drop-shadow(.25px .25px 15px rgb(180, 179, 179));
+  filter: drop-shadow(0px 0px 10px rgb(180, 180, 180));
+}
+
+
+
+.relImageCont,
+.outImageCont {
+  position: relative;
+  width: 100%;
+  height: 250px;
+}
+
+#relActionBtn,
+#outActionBtn {
+  position: absolute;
+  top: 1;
+  right: 0;
+}
+
+.relProdImage {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.relProdCategory {
+  margin-left: 6px;
+  margin-top: 6px;
+  margin-bottom: 10px;
+  font-weight: 200;
+}
+
+.relProdName {
+  margin-left: 6px;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.relProdPrice {
+  margin-left: 6px;
+  font-weight: 200;
+  font-size: .9em;
+}
+
+.sale {
+  text-decoration: line-through;
+  color: crimson;
+  width: min-content;
+}
+
+.noSale {
+  display: none;
+}
+.relProdReviews {
+  margin-top: 15px;
+  margin-left: 6px;
+
+}
+
+
+/* // RELATED PRODUCT MODAL //================================= */
+
+.modalCont {
+
+  position: relative;
+  top: 40%;
+  right: 3%;
+}
+
+.relModal {
+  max-width: 700px;
+  max-height: 300px;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgb(119, 119, 119);
+  border-radius: 2px;
+  box-shadow: .10px .10px 3px rgb(226, 224, 224);
+  filter: blur(0);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  overflow: scroll;
+  z-index: 10;
+  transform: translate(-50%,-50%);
+}
+
+.relModal::-webkit-scrollbar {
+  display: none;
+}
+
+.modalToggle {
+  display: grid;
+  grid-template-columns: 2;
+  grid-template-rows: 1;
+}
+
+.toggle-button:hover {
+  cursor: pointer;
+}
+
+.toggle-button {
+  margin: 2%;
+  height: 15px;
+  width:15px;
+  grid-column: 2;
+  justify-self: end;
+}
+#modalHeader {
+  margin: 4%;
+  grid-column: 1;
+  grid-row: 1;
+  justify-self: start;
+  justify-content: left;
+  align-content: flex-start;
+}
+
+.tableCont {
+  padding: 8px;
+  /* position: fixed;
+  height: 100%; */
+}
+
+.tableContInner {
+  justify-content: center;
+}
+
+.modalTable {
+  width: 100%;
+}
+
+
+.left-col {
+  text-align: left;
+  padding: 2px;
+  width:max-content;
+}
+
+.right-col {
+  text-align: right;
+}
+
+.center-col {
+  /* display: block; */
+  /* position:static; */
+  text-align: center;
+  justify-content: center;
+  margin-bottom: auto;
+  width: auto;
+}
+
+.left-col-inner {
+  text-align: left;
+  padding-left: 10%;
+  width: 200px;
+}
+
+.right-col-inner {
+  text-align: right;
+  padding-right: 10%;
+  width: 200px;
+}
+
+
+
+
+
+
+/*================================================================================*/
 /*======================================================================================================================*/
   /*RATING AND REVIEW STYLES*/
 /*======================================================================================================================*/

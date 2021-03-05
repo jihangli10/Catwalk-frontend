@@ -92,6 +92,10 @@ body {
   grid-template-columns: 80px 140px;
   grid-column-gap: 5px;
 }
+
+.styleList1 {
+  outline: 1px solid blue;
+}
 /*==============================================================================*/
   /*QUESTIONS AND ANSWERS STYLES*/
 /*==============================================================================*/

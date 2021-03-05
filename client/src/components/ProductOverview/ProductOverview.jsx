@@ -33,7 +33,9 @@ class ProductOverview extends React.Component {
       currentImage:'',
       currentSizeQuantityList: {},
       cartStorage: [],
-      cartStorageSize: 0
+      cartStorageSize: [],
+      currentStyleId: '',
+      currentActive: ''
     }
   }
 
@@ -70,6 +72,7 @@ class ProductOverview extends React.Component {
              selectedSize: '',
              isDisabled: true,
              inStock: true,
+             currentStyleId: newStyles.data.results[0].styles_id
 
            })
         })
@@ -145,6 +148,15 @@ class ProductOverview extends React.Component {
     console.log('it hits here')
   }
 
+  handleStyle(id) {
+    this.setState({
+
+      currentActive: id
+
+    });
+
+  }
+
   handleSelectedQuantity(query) {
     var temp = this.state.currentSizeQuantityList;
     var quantityValue = temp[query.target.value].quantity;
@@ -179,10 +191,24 @@ class ProductOverview extends React.Component {
         </div>
         <div><h3>{this.state.currentProductCategory}</h3></div>
         <div><h2>{this.state.currentProductName}</h2></div>
-        <div><h2>{this.state.currentPrice}</h2></div>
-        <div><StyleList
+        <div><h2>${this.state.currentPrice}</h2></div>
+        <div>
+        <div className='styleGrid'>
+          {this.state.currentProductStyle.results.map(element => {
+            return(<StyleList
+              element = {element}
+              isActive = {this.state.currentActive === element.style_id}
+              handleStyle={this.handleStyle.bind(this, element.style_id)}
+            />)
+          })}
+          </div>
+            {/* <StyleList
           currentProductStyle={this.state.currentProductStyle}
-        /></div>
+          selectedStyle={this.state.selectedStyle}
+          handleStyle={this.handleStyle.bind(this)}
+          currentStyleId={this.state.currentStyleId}
+        /> */}
+        </div>
         <br></br>
         <div className='dropdownContainer'>
         <SizeDrop

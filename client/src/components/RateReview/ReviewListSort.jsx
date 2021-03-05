@@ -7,52 +7,97 @@ class ReviewListSort extends React.Component {
     this.reviewListElement = React.createRef();
     this.state = {
       sort: 'Relevant',
-      reviews: []
+      reviews: [],
+      displayed: 0
     };
     this.sortByHelpful = this.sortByHelpful.bind(this)
+    this.sortByRelative = this.sortByRelative.bind(this)
+    this.sortByNewest = this.sortByNewest.bind(this)
+    this.handleGetDisplayed = this.handleGetDisplayed.bind(this)
   }
-
-
-  //if (this.state.sort === 'Helpful') {
 
   sortByHelpful() {
     return this.props.reviewListSort.sort(function (a, b) {
-      return a.helpfulness - b.helpfulness;
+      return -(a.helpfulness - b.helpfulness);
     })
   };
 
   sortByRelative() {
-
+    // A little bit of Jihang enginnering magic, a little bit of Jodi coding magic //
     // get max Helpful
-    // divide helpful# by max Helpful to get relative between 0-1
-    // get oldest days to now
-    // divide days to now by max oldest days to get relative between 0-1
-    // sum divided Helpful and divided oldest to get new criteria
-  }
+    let maxHelpful = Math.max.apply(Math, this.props.reviewListSort.map(function (o) { return o.helpfulness; }))
+    // get max Date
+    let maxDate = Math.max.apply(Math, this.props.reviewListSort.map(function (o) { return Math.round((new Date() - new Date(o.date)) / (1000 * 60 * 60 * 24)) }))
+    // assign new array with sort key added to each review that has a value of helpful/maxHelpful + days/MaxDays
+    let sortByRelative = this.props.reviewListSort.map(function (review) {
+      var o = Object.assign({}, review);
+      o.a_sort = (o.helpfulness / maxHelpful) + ((new Date(o.date) / (1000 * 60 * 60 * 24)) / maxDate)
+      return o;
+    })
+    // return sorted sortByrelative
+    return sortByRelative.sort(function (a, b) {
+      return -(a.sort - b.sort);
+    })
+
+  };
+
+  sortByNewest() {
+    let sortByNewest = this.props.reviewListSort.map(function (el) {
+      var o = Object.assign({}, el);
+      o.a_sortDate = (new Date(o.date) / (1000 * 60 * 60 * 24))
+      return o;
+    })
+    return sortByNewest.sort(function (a, b) {
+      return -(a.a_sortDate - b.a_sortDate);
+    })
+  };
 
   onChange(e) {
     this.setState({ sort: event.target.value });
+    if (event.target.value === 'Relevant') {
+      this.setState({ reviews: this.sortByRelative() })
+    } else if (event.target.value === 'Helpful') {
+      this.setState({ reviews: this.sortByHelpful() })
+    } else if (event.target.value === 'Newest') {
+      this.setState({ reviews: this.sortByNewest() })
+    }
   }
 
   handleClick() {
     this.reviewListElement.current.handleDisplay();
   }
 
+  handleGetDisplayed(value) {
+    this.setState({ displayed: value })
+  }
+
 
   componentDidMount() {
+    if (this.props.reviewListSort.length <= 2) {
       this.setState({
+        displayed: this.props.reviewListSort.length,
         reviews: this.props.reviewListSort
       })
+    } else {
+      this.setState({
+        displayed: 2,
+        reviews: this.props.reviewListSort
+      })
+    }
   }
 
   render() {
-    var revListLength = this.props.reviewListSort.length
+    var revListSortLength = this.props.reviewListSort.length
     if (this.props.reviewListSort.length === 0) {
       return '';
     }
     return (
       <div>
-        <form><strong>248 reviews sorted by:</strong>
+
+        <form><strong>{this.state.reviews.length} reviews sorted by:</strong>
+          {console.log('this.state.displayed', this.state.displayed)}
+          {console.log('this.sortByRelative', this.sortByRelative())}
+          {console.log('this.sortByHelpful', this.sortByHelpful())}
           <select name='reviewSort' value={this.state.sort} onChange={this.onChange.bind(this)}>
             <option defaultValue>Relevant</option>
             <option>Helpful</option>
@@ -61,17 +106,15 @@ class ReviewListSort extends React.Component {
           <noscript><input type="submit" value="Submit" /></noscript>
         </form>
         <br></br>
-          <ReviewList ref={this.reviewListElement}
+        <ReviewList ref={this.reviewListElement}
           key={'reviews' + this.state.reviews.length}
-            reviewList={this.state.reviews} />
+          reviewList={this.state.reviews}
+          onGetCurrentDisplay={this.handleGetDisplayed} />
         <br></br>
-        <button style={{ display: revListLength >= this.state.reviews.length && revListLength > 2 ? "block" : "none" }} onClick={this.handleClick.bind(this)}>MORE REVIEWS</button>
+        <button style={{ display: revListSortLength >= this.state.displayed && revListSortLength > 2 ? "block" : "none" }} onClick={this.handleClick.bind(this)}>MORE REVIEWS</button>
         <br></br>
         <br></br>
-        </div>
-
-
-
+      </div>
     );
   }
 }

@@ -28,7 +28,12 @@ class ReviewList extends React.Component {
     this.setState(prevState => ({
       display: prevState.display + 2
     }))
+    this.props.onGetCurrentDisplay(this.state.display  + 2);
   }
+
+  // handlePassDisplay() {
+
+  // }
 
   render() {
     var displayReviews = this.props.reviewList.slice(0, this.state.display)
@@ -39,6 +44,7 @@ class ReviewList extends React.Component {
     return (
 
       <div className="reviewlist">
+        {console.log('revListLength',revListLength, 'this.state.display', this.state.display)}
         <br></br>
         <br></br>
         <div id="reviewListTiles">

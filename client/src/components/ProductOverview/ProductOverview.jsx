@@ -29,6 +29,7 @@ class ProductOverview extends React.Component {
       currentProductName: '',
       currentProductCategory: '',
       currentPrice: '',
+      currentSalePrice: '',
       currentDescription: '',
       currentImage:'',
       currentSizeQuantityList: {},
@@ -64,16 +65,18 @@ class ProductOverview extends React.Component {
              isLoading: false,
              currentProductName: this.props.currentProduct.name,
              currentProductCategory: this.props.currentProduct.category,
-             currentPrice: this.props.currentProduct.default_price,
+             currentPrice: newStyles.data.results[0].original_price,
+             currentSalePrice: newStyles.data.results[0].sale_price,
              currentDescription: this.props.currentProduct.description,
              currentImage: newStyles.data.results[0].photos[0].url,
              currentSizeQuantityList: newStyles.data.results[0].skus,
+             currentStyleName: newStyles.data.results[0].name,
              selectedQuantity: '',
              selectedSize: '',
              isDisabled: true,
              inStock: true,
-             currentStyleId: newStyles.data.results[0].styles_id
-
+             currentStyleId: newStyles.data.results[0].styles_id,
+             currentActive: newStyles.data.results[0].styles_id
            })
         })
          .catch(err => {
@@ -149,10 +152,22 @@ class ProductOverview extends React.Component {
   }
 
   handleStyle(id) {
+    let storedProductStyle;
+    for(let i = 0; i < this.state.currentProductStyle.results.length; i++) {
+      if(this.state.currentProductStyle.results[i].style_id === id) {
+        storedProductStyle = this.state.currentProductStyle.results[i];
+        break;
+      }
+    }
+
     this.setState({
-
+      currentImage: storedProductStyle.photos[0].url,
+      currentSizeQuantityList: storedProductStyle.skus,
+      currentStyleName: storedProductStyle.name,
+      currentStyleId: storedProductStyle.style_id,
+      currentPrice: storedProductStyle.original_price,
+      currentSalePrice: storedProductStyle.sale_price,
       currentActive: id
-
     });
 
   }
@@ -191,9 +206,11 @@ class ProductOverview extends React.Component {
         </div>
         <div><h3>{this.state.currentProductCategory}</h3></div>
         <div><h2>{this.state.currentProductName}</h2></div>
+        <div><h3>{this.state.currentStyleName}</h3></div>
         <div><h2>${this.state.currentPrice}</h2></div>
         <div>
         <div className='styleGrid'>
+          {this.state.currentActive === undefined ? this.setState({ currentActive: this.state.currentProductStyle.results[0].style_id }) : null}
           {this.state.currentProductStyle.results.map(element => {
             return(<StyleList
               element = {element}

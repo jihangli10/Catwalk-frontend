@@ -95,9 +95,6 @@ class ReviewListSort extends React.Component {
       <div>
 
         <form><strong>{this.state.reviews.length} reviews sorted by:</strong>
-          {console.log('this.state.displayed', this.state.displayed)}
-          {console.log('this.sortByRelative', this.sortByRelative())}
-          {console.log('this.sortByHelpful', this.sortByHelpful())}
           <select name='reviewSort' value={this.state.sort} onChange={this.onChange.bind(this)}>
             <option defaultValue>Relevant</option>
             <option>Helpful</option>

@@ -8,7 +8,8 @@ class AverageRating extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-    average: 0
+    average: 0,
+    starAverage: 0
     }
     this.getAverage=this.getAverage.bind(this);
   }
@@ -19,8 +20,9 @@ class AverageRating extends React.Component {
     for (var i = 0; i < this.props.avgReviews.length; i++) {
       sumRating += this.props.avgReviews[i].rating
     }
-    // console.log('sumRating', sumRating)
-    this.setState({ average: (Math.round(sumRating /this.props.avgReviews.length * 4) / 4).toFixed(2)})
+      console.log('sumRating', sumRating, 'this.props.avgReviews.length', this.props.avgReviews.length, 'sumRating / this.props.avgReviews.length', sumRating / this.props.avgReviews.length)
+    this.setState({ starAverage: (Math.round(sumRating /this.props.avgReviews.length * 4) / 4).toFixed(2)})
+      this.setState({ average: (sumRating / this.props.avgReviews.length).toFixed(1) })
   }
 
   componentDidMount() {
@@ -36,7 +38,7 @@ class AverageRating extends React.Component {
 
             <div>
             <span className="average">{this.state.average}&nbsp;</span>
-        <StarRatings rating={this.state.average} />
+        <StarRatings rating={this.state.starAverage} />
             </div>
     );
   }

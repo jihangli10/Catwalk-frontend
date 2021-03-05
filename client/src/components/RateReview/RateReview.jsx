@@ -1,8 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import StarRatings from './StarRatings';
-import ReviewsBar from './ReviewsBar';
 import AverageRating from './AverageRating';
+import RatingBreakdown from './RatingBreakdown';
 import ReviewsSliders from './ReviewsSliders';
 import ReviewListSort from './ReviewListSort';
 
@@ -12,25 +12,27 @@ class RateReviews extends React.Component {
     this.state = {
       reviews: [],
       currentReview: {}
+      // reviewFilter - array of selected stars
+      // filter reviews if reviewFilter includes individual review rating
+
     }
   }
   componentDidMount() {
-    return axios.get('/reviews', { params: { product_id: this.props.currProd.id } })
-      .then(data => {
-        // console.log(data.data.results)
-        this.setState({
-          reviews: data.data.results,
-          currentReview: data.data.results[0]
+  //   return axios.get('/reviews', { params: { product_id: this.props.currProd.id } })
+  //     .then(data => {
+  //       // console.log(data.data.results)
+  //       this.setState({
+  //         reviews: data.data.results,
+  //         currentReview: data.data.results[0]
+  //       })
+  //     })
+  //     .catch(err => {
+  //       console.log(err);
+  //     });
+    this.setState({
+          reviews: this.props.reviews,
+          currentReview: this.props.currentReview
         })
-        // 19091 HAS NO REVIEWS
-        // 19093 HAS 2 REVIEWS
-        // 19191 HAS 5 REVIEWS
-        // 19090 HAS A RESPONSE
-
-      })
-      .catch(err => {
-        console.log(err);
-      });
   }
 
   render() {
@@ -48,7 +50,7 @@ class RateReviews extends React.Component {
               </div>
 
               <div id="bar-section">
-                <ReviewsBar />
+                <RatingBreakdown />
               </div>
 
               <div id="slide-section">

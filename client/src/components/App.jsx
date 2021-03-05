@@ -4,6 +4,7 @@ import QandA from './QandA/QandA.jsx';
 import axios from 'axios';
 import RelatedPO from './RelatedPO/RelatedPO.jsx';
 import RateReview from './RateReview/RateReview.jsx'
+import RateReviewData from './RateReview/RateReviewData.jsx'
 import Star000 from './RateReview/Star000.jsx'
 import Star025 from './RateReview/Star025.jsx'
 import Star050 from './RateReview/Star050.jsx'
@@ -68,7 +69,7 @@ class App extends React.Component {
           <a id='test'></a>
           <div className="section">RATINGS &amp; REVIEWS</div>
           <br></br>
-          <RateReview key={'product' + this.state.currentProduct.description.length} updateProd={this.updateCurrentProduct} currProd={this.state.currentProduct} />
+          <RateReviewData key={'product' + this.state.currentProduct.description.length} updateProd={this.updateCurrentProduct} currProd={this.state.currentProduct} />
         </div>
       </div>
     );

@@ -38,20 +38,18 @@ class RelatedPO extends React.Component {
 
   componentDidMount() {
     this.getRelatedProducts();
-    this.getParentStyles(this.props.currProd.id);
     this.getReviewMeta(this.props.currProd.id);
     this.setState({
       outfits: ls.get('outfits') || []
     })
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.currProd.id !== prevProps.currProd.id) {
-      this.getRelatedProducts();
-      this.getParentStyles(this.props.currProd.id);
-      this.getReviewMeta(this.props.currProd.id);
-    }
-  }
+  // componentDidUpdate(prevProps) {
+  //   if (this.props.currProd.id !== prevProps.currProd.id) {
+  //     // this.getRelatedProducts();
+  //     this.getReviewMeta(this.props.currProd.id);
+  //   }
+  // }
 
 
   handleActionButtonClick(productCard, productStyle, selectReviews) {
@@ -176,10 +174,10 @@ class RelatedPO extends React.Component {
           <div className="section">RELATED PRODUCTS</div>
           <br></br>
         </div>
-        <div className="relatedCont">
           <div className="modalCont">
             <RelatedModal selected={this.state.productCard} parentProd={this.props.currProd} handleClose={this.handleModalClose} parentStyle={this.state.parentProductStyle} selectedStyle={this.state.productCardStyle} show={this.state.showModal} parentReview={this.state.parentReviews} selectReview={this.state.selectedReviews} />
           </div>
+        <div className="relatedCont">
           <div className="relatedCarousel">
             {this.state.relatedProducts.map((product, i) => {
               return <RelatedProdCard getStyles={this.getParentStyles} handleActionClick={this.handleActionButtonClick} getRelated={this.getRelatedProducts} selectedStyle={this.state.productCardStyle} show={this.state.showModal} update={this.props.updateProd} key={i} parentProduct={this.props.currProd} current={product}/>

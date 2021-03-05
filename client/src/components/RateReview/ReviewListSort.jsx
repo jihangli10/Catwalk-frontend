@@ -105,6 +105,7 @@ class ReviewListSort extends React.Component {
           </select>
           <noscript><input type="submit" value="Submit" /></noscript>
         </form>
+
         <br></br>
         <ReviewList ref={this.reviewListElement}
           key={'reviews' + this.state.reviews.length}

@@ -6,6 +6,7 @@ import AddCart from './AddCart'
 import dummyData from './dummyData.js'
 import axios from 'axios'
 import CartStorage from './CartStorage'
+import ImageModal from './ImageModal'
 
 import StarRatings from '../RateReview/StarRatings'
 
@@ -36,7 +37,9 @@ class ProductOverview extends React.Component {
       cartStorage: [],
       cartStorageSize: [],
       currentStyleId: '',
-      currentActive: ''
+      currentActive: '',
+      showExpandedImage: false,
+      activeIndex: 0
     }
   }
 
@@ -151,6 +154,32 @@ class ProductOverview extends React.Component {
     console.log('it hits here')
   }
 
+  handlePrevSlide () {
+    let index = this.state.activeIndex
+    let slides = this.state.currentProductStyle.results.length
+    if(index < 1) {
+      index = slides;
+    }
+    index--;
+    this.setState({
+      activeIndex: index,
+      currentImage: this.state.currentProductStyle.results[index].photos[0].url
+    })
+  }
+
+  handleNextSlide () {
+    let index = this.state.activeIndex;
+    let slides = this.state.currentProductStyle.results.length;
+    if(index === slides) {
+      index = -1;
+    }
+    index++;
+    this.setState({
+      activeIndex: index,
+      currentImage: this.state.currentProductStyle.results[index].photos[0].url
+    })
+  }
+
   handleStyle(id) {
     let storedProductStyle;
     for(let i = 0; i < this.state.currentProductStyle.results.length; i++) {
@@ -170,6 +199,15 @@ class ProductOverview extends React.Component {
       currentActive: id
     });
 
+  }
+
+  handleImageModal () {
+    console.log('Booyah')
+    this.setState({ showExpandedImage: true })
+  }
+
+  onClose () {
+    this.setState({ showExpandedImage: !this.state.showExpandedImage })
   }
 
   handleSelectedQuantity(query) {
@@ -192,7 +230,20 @@ class ProductOverview extends React.Component {
       <div className='gridContainer'>
 
         <div className='leftSide'>
-          <img src={this.state.currentImage} className='mainImage'></img>
+          <div className='imageDiv' >
+          <img onClick={this.handleImageModal.bind(this)} src={this.state.currentImage} className='mainImage'></img>
+
+          <ImageModal
+              showExpandedImage = {this.state.showExpandedImage}
+              currentImage = {this.state.currentImage}
+              currentProductStyle = {this.state.currentProductStyle}
+              onClose = {this.onClose.bind(this)}
+              handlePrevSlide = {this.handlePrevSlide.bind(this)}
+              handleNextSlide = {this.handleNextSlide.bind(this)}
+              activeIndex = {this.state.activeIndex}
+            />
+          </div>
+
         </div><br></br>
 
       <div className='rightSide'>

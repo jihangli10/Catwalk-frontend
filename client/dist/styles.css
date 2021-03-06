@@ -96,6 +96,51 @@ body {
 .styleList1 {
   outline: 1px solid blue;
 }
+
+.modalImage2 {
+  position: absolute;
+  top: 100px;
+  left: 50px;
+  right: 50px;
+  background: white;
+}
+
+.carouselContainer {
+  position: relative;
+  z-index: 23;
+  display: grid;
+  grid-template-columns: 50px auto 50px;
+  grid-template-rows: 30px auto 30px auto 30px;
+
+}
+
+.carouselImage {
+  position: relative;
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  grid-row-end: 5;
+}
+
+.carouselLeft {
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 3;
+  grid-row-end: 4;
+}
+
+.carouselRight {
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  grid-column-start: 3;
+  grid-column-end: 4;
+  grid-row-start: 3;
+  grid-row-end: 4;
+}
 /*==============================================================================*/
   /*QUESTIONS AND ANSWERS STYLES*/
 /*==============================================================================*/

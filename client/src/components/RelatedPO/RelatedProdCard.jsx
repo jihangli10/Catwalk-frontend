@@ -95,7 +95,7 @@ class RelatedProductCard extends React.Component {
               <div id="relActionBtn" >
                 <img name="star" height="18" onClick={() => this.props.handleActionClick(this.props.current.data, this.state.currentStyle, this.state.reviews)} src="https://img.icons8.com/fluent-systems-regular/24/ffffff/star--v1.png"/>
               </div>
-              <img className="relProdImage" src={styleImage} />
+              <img className="relProdImage" src={defaultStyle.photos[0].url} />
           </div>
           <div className="relProdCategory">{this.props.current.data.category.toUpperCase()}</div>
           <div className="relProdName">{this.props.current.data.name} </div>

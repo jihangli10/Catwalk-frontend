@@ -13,6 +13,7 @@ class ModalTableRows extends React.Component {
     }
     this.getCommonCharacteristics = this.getCommonCharacteristics.bind(this);
     this.getCommonFeatures = this.getCommonFeatures.bind(this);
+    this.determineFeatureVal = this.determineFeatureVal.bind(this);
   }
 
   componentDidMount() {
@@ -47,15 +48,15 @@ class ModalTableRows extends React.Component {
     let noDupes = new Set(combined);
     noDupes = [...noDupes];
 
-    let loseNulls = [];
-    noDupes.forEach(item => {
-      if (parent[item] || select[item]) {
-        loseNulls.push(item);
-      }
-    });
+    // let loseNulls = [];
+    // noDupes.forEach(item => {
+    //   if (parent[item] || select[item]) {
+    //     loseNulls.push(item);
+    //   }
+    // });
 
     this.setState({
-      commonFeatures: loseNulls,
+      commonFeatures: noDupes,
       pFeatures: parent,
       sFeatures: select
     });
@@ -74,6 +75,18 @@ class ModalTableRows extends React.Component {
     })
   }
 
+  determineFeatureVal(obj, key, check) {
+    let val;
+    if (obj[key] && obj[key] !== null) {
+      val = obj[key];
+    } else if (obj[key] === null) {
+      val = check;
+    } else {
+      val = '';
+    }
+    return val;
+  }
+
 
   render() {
     let common = this.state.commonCharacteristics;
@@ -83,39 +96,43 @@ class ModalTableRows extends React.Component {
     let features = this.state.commonFeatures;
     let pFeat = this.state.pFeatures;
     let sFeat = this.state.sFeatures;
+    let check = <img style={{height: '14px', width: '14px'}} src="https://img.icons8.com/metro/26/000000/checkmark.png"/>;
 
     if (!this.state.hasLoaded) {
       return null;
     } else {
       return(
-        <div className="tableContInner">
-          <table className="modalTable">
-              <tbody id="content">
-                  <tr>
-                    <th className="left-col">{this.props.parentProd.name}</th>
-                    <th className="center-col"></th>
-                    <th className="right-col">{this.props.selectProd.name}</th>
-                  </tr>
-          {features.map((feat, i) => {
-            return(
-              <tr className="tableRow" key={i}>
-                <td className="left-col-inner">{(pFeat[feat] && pFeat[feat] !== null) ? pFeat[feat] : ''}</td>
-                <td className="center-col">{feat}</td>
-                <td className="right-col-inner">{(sFeat[feat] && sFeat[feat] !== null) ? sFeat[feat] : ''}</td>
-              </tr>
-            )
-          })}
-          {common.map((char, i) => {
-            return(
-              <tr className="tableRow" key={i}>
-                <td className="left-col-inner">{(p[char] && p[char].value !== null) ? parseInt(p[char].value).toFixed(0) : ''}</td>
-                <td className="center-col">{char}</td>
-                <td className="right-col-inner">{(s[char] && s[char].value !== null) ? parseInt(s[char].value).toFixed(0) : ''}</td>
-              </tr>
-            )
-          })}
-            </tbody>
-          </table>
+        <div>
+            <div className="modalProductNames">
+              <div className="leftName">{this.props.parentProd.name}</div>
+              <div className="rightName">{this.props.selectProd.name}</div>
+            </div>
+          <div className="tableContInner">
+            <table className="modalTable">
+                <tbody id="content">
+            {features.map((feat, i) => {
+              let parent = this.determineFeatureVal(pFeat, feat, check);
+              let selected = this.determineFeatureVal(sFeat, feat, check);
+              return(
+                <tr className="tableRow" key={i}>
+                  <td className="left-col-inner">{parent}</td>
+                  <td className="center-col">{feat}</td>
+                  <td className="right-col-inner">{selected}</td>
+                </tr>
+              )
+            })}
+            {common.map((char, i) => {
+              return(
+                <tr className="tableRow" key={i}>
+                  <td className="left-col-inner">{(p[char] && p[char].value !== null) ? parseFloat(p[char].value).toFixed(2) : ''}</td>
+                  <td className="center-col">{char}</td>
+                  <td className="right-col-inner">{(s[char] && s[char].value !== null) ? parseFloat(s[char].value).toFixed(2) : ''}</td>
+                </tr>
+              )
+            })}
+              </tbody>
+            </table>
+          </div>
         </div>
 
 

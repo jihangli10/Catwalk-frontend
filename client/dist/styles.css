@@ -162,7 +162,7 @@ body {
 }
 /* The bar container */
 .bar-container {
-  width: 70%;
+  width: 100%;
   background-color: rgb(176, 196, 222,0.2);
   text-align: left;
   color: black;
@@ -171,17 +171,33 @@ body {
   margin-right: 25px;
   flex: 4;
 }
+.ratingBreakdown {
+  margin-top: 6px;
+  margin-bottom: 6px;
+  font-size: 12px;
+  color: #a20;
+}
+.clearAll:hover {
+  color: steelblue;
+  font-weight: bold;
+}
 .bar-text {
   font-size: 12px;
   flex: 1;
   margin-top: 3px;
 }
 /* Individual bars */
-.bar-5 {width: 60%; height: 15px; background-color: steelblue; font-size: 12px; white-space: nowrap; }
-.bar-4 {width: 30%; height: 15px; background-color: steelblue; font-size: 12px; white-space: nowrap; }
-.bar-3 {width: 10%; height: 15px; background-color: steelblue; font-size: 12px; white-space: nowrap; }
-.bar-2 {width: 04%; height: 15px; background-color: steelblue; font-size: 12px; white-space: nowrap; }
-.bar-1 {width: 15%; height: 15px; background-color: steelblue; font-size: 12px; white-space: nowrap; }
+.bar-5 {height: 15px; background-color: steelblue; font-size: 12px; white-space: nowrap; }
+.bar-4 {height: 15px; background-color: steelblue; font-size: 12px; white-space: nowrap; }
+.bar-3 {height: 15px; background-color: steelblue; font-size: 12px; white-space: nowrap; }
+.bar-2 {height: 15px; background-color: steelblue; font-size: 12px; white-space: nowrap; }
+.bar-1 {height: 15px; background-color: steelblue; font-size: 12px; white-space: nowrap; }
+.bar-5:hover {background-color: #a20}
+.bar-4:hover {background-color: #a20}
+.bar-3:hover {background-color: #a20}
+.bar-2:hover {background-color: #a20}
+.bar-1:hover {background-color: #a20}
+
 
 /* // RATING REVIEW //================================= */
 #ratingreviewcontainer {
@@ -424,8 +440,7 @@ select {
   font-weight: bold;
 }
 .recommend {
-  font-weight: 500;
-  color: steelblue;
+  font-weight:500;
   margin-top: 6px;
     margin-bottom: 6px;
 }

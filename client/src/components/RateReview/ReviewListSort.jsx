@@ -1,5 +1,6 @@
 import React from 'react';
 import ReviewList from './ReviewList'
+import AddNewReview from './AddNewReview';
 
 class ReviewListSort extends React.Component {
   constructor(props) {
@@ -8,12 +9,14 @@ class ReviewListSort extends React.Component {
     this.state = {
       sort: 'Relevant',
       reviews: [],
-      displayed: 0
+      displayed: 0,
+      isOpen: false
     };
     this.sortByHelpful = this.sortByHelpful.bind(this)
     this.sortByRelative = this.sortByRelative.bind(this)
     this.sortByNewest = this.sortByNewest.bind(this)
     this.handleGetDisplayed = this.handleGetDisplayed.bind(this)
+    this.handleAddReviewClick = this.handleAddReviewClick.bind(this)
   }
 
   sortByHelpful() {
@@ -71,17 +74,22 @@ class ReviewListSort extends React.Component {
     this.setState({ displayed: value })
   }
 
+  handleAddReviewClick() {
+    this.setState({ isOpen: !this.state.isOpen });
+  };
 
   componentDidMount() {
     if (this.props.reviewListSort.length <= 2) {
       this.setState({
         displayed: this.props.reviewListSort.length,
-        reviews: this.props.reviewListSort
+        reviews: this.props.reviewListSort,
+        isOpen: false
       })
     } else {
       this.setState({
         displayed: 2,
-        reviews: this.props.reviewListSort
+        reviews: this.props.reviewListSort,
+        isOpen: false
       })
     }
   }
@@ -109,7 +117,11 @@ class ReviewListSort extends React.Component {
           reviewList={this.state.reviews}
           onGetCurrentDisplay={this.handleGetDisplayed} />
         <br></br>
-        <button style={{ display: revListSortLength >= this.state.displayed && revListSortLength > 2 ? "block" : "none" }} onClick={this.handleClick.bind(this)}>MORE REVIEWS</button>
+        <div id="question-button-row">
+        <button style={{ display: revListSortLength >= this.state.displayed && revListSortLength > 2 ? "block" : "none" }} onClick={this.handleClick.bind(this)}>MORE REVIEWS</button>&nbsp;
+        <button style={{ display: revListSortLength >= this.state.displayed && revListSortLength > 2 ? "block" : "none" }} onClick={this.handleAddReviewClick.bind(this)}>ADD REVIEWS</button>
+          {this.state.isOpen ? (<AddNewReview handleAddReviewClick={this.handleAddReviewClick} addReviewProd={this.props.reviewProduct}/>) : null}
+        </div>
         <br></br>
         <br></br>
       </div>

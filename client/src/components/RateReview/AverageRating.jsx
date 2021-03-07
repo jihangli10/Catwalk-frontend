@@ -15,12 +15,10 @@ class AverageRating extends React.Component {
   }
 
     getAverage() {
-      // console.log('this.props.avgReviews', this.props.avgReviews)
     let sumRating = 0;
     for (var i = 0; i < this.props.avgReviews.length; i++) {
       sumRating += this.props.avgReviews[i].rating
     }
-      console.log('sumRating', sumRating, 'this.props.avgReviews.length', this.props.avgReviews.length, 'sumRating / this.props.avgReviews.length', sumRating / this.props.avgReviews.length)
     this.setState({ starAverage: (Math.round(sumRating /this.props.avgReviews.length * 4) / 4).toFixed(2)})
       this.setState({ average: (sumRating / this.props.avgReviews.length).toFixed(1) })
   }

@@ -44,7 +44,6 @@ class ReviewList extends React.Component {
     return (
 
       <div className="reviewlist">
-        {console.log('revListLength',revListLength, 'this.state.display', this.state.display)}
         <br></br>
         <br></br>
         <div id="reviewListTiles">

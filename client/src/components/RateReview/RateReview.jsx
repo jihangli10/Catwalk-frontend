@@ -6,18 +6,12 @@ import RatingBreakdown from './RatingBreakdown';
 import ReviewsSliders from './ReviewsSliders';
 import ReviewListSort from './ReviewListSort';
 
+// import RateReviewMeta from './RateReviewMeta';
+
 class RateReviews extends React.Component {
   constructor(props) {
     super(props);
   }
-
-  // componentDidMount() {
-
-  //   this.setState({
-  //     reviews: this.props.rateReviews
-  //   })
-  // }
-
 
   render() {
 
@@ -45,7 +39,9 @@ class RateReviews extends React.Component {
               </div>
 
               <div id="slide-section">
-                <ReviewsSliders />
+                <ReviewsSliders
+                characteristics={this.props.metaData}
+                key={'metaData' + this.props.metaData.length}/>
               </div>
 
             </div>
@@ -55,7 +51,7 @@ class RateReviews extends React.Component {
 
             <div className="reviewListSort" >
               <ReviewListSort key={'reviews' + this.props.rateReviews.length}
-                reviewListSort={this.props.rateReviews} />
+                reviewListSort={this.props.rateReviews} reviewProduct={this.props.reviewProd} />
             </div>
           </div>
         </div>

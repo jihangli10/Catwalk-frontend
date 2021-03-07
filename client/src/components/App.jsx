@@ -15,6 +15,7 @@ import reviews from '../data/reviews'
 import StarRatings from './RateReview/StarRatings.jsx'
 import ProductOverview from './ProductOverview/ProductOverview'
 
+
 class App extends React.Component {
   constructor(props) {
     super(props);

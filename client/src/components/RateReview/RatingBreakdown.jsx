@@ -54,7 +54,7 @@ class RatingBreakdown extends React.Component {
     return (
 
       <div>
-        <div className="row"><strong>Rating Breakdown</strong></div>
+        <div className="row responseText"><strong>Rating Breakdown</strong></div>
         <div className="ratingBreakdown" style={{ display: this.props.filter.length !== 0 ? "block" : "none" }}>
           <em >filtered by:&nbsp;</em>
             {this.props.filter.map(filter => (

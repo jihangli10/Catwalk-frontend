@@ -13,7 +13,8 @@ class RateReviewData extends React.Component {
     this.state = {
       reviews: [],
       filter: [],
-      displayReviews: []
+      displayReviews: [],
+      metaData: []
       // reviewFilter - array of selected stars
       // filter reviews if reviewFilter includes individual review rating
     }
@@ -25,6 +26,13 @@ class RateReviewData extends React.Component {
     return axios.get('/reviews', { params: { product_id: this.props.currProd.id } })
       .then(data => {
         this.setState({ reviews: data.data.results, displayReviews: data.data.results })
+      })
+      .then( () => {
+        return axios.get('/reviews/meta', { params: { product_id: this.props.currProd.id } })
+          .then(data => {
+            var metaDataTemp = [];
+            this.setState({ metaData: data.data.characteristics })
+          })
       })
       .catch(err => { console.log(err); });
   }
@@ -38,12 +46,10 @@ class RateReviewData extends React.Component {
   }
 
   onToggle(num) {
-    console.log('clicked')
     var tempArray = this.state.filter;
     if (this.state.filter.includes(num)) {
       tempArray.splice(this.state.filter.indexOf(num), 1);
     } else {
-      console.log('Here I am to save the day!!!')
       tempArray = tempArray.concat(num);
     }
     if (tempArray.length === 0) {
@@ -54,24 +60,22 @@ class RateReviewData extends React.Component {
     this.setState({ filter: tempArray, displayReviews: tempReview })
   }
   onClearAll() {
-    console.log('clicked')
     this.setState({ filter: [], displayReviews: this.state.reviews})
   }
 
   render() {
-    console.log('this.state.displayReviews', this.state.displayReviews)
     return (
       <div>
         <RateReview
-          key={'reviews' + this.state.reviews.length}
+          key={'reviews' + this.state.reviews.length + this.state.metaData.length}
           rateReviews={this.state.displayReviews}
           reviews={this.state.reviews}
           filter={this.state.filter}
           onToggleClick={this.onToggle}
           onClearAllClick={this.onClearAll}
+          metaData={this.state.metaData}
+          reviewProd={this.props.currProd}
         />
-        {console.log('this.state.reviews', this.state.reviews, 'this.state.currentReview', this.state.currentReview)}
-        {console.log('filtered >>>', this.state.reviews.filter(item => this.state.filter.includes(item.rating)))}
       </div>
     );
   }

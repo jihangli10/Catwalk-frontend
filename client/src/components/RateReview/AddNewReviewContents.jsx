@@ -13,7 +13,10 @@ class AddNewReviewContents extends React.Component {
       Comfort: null,
       Quality: null,
       Length: null,
-      Fit: null
+      Fit: null,
+      summary: '',
+      body: '',
+      bodyChars: 0
 
     };
     this.handleChange = this.handleChange.bind(this);
@@ -22,9 +25,13 @@ class AddNewReviewContents extends React.Component {
   // This event handler will handle any changes on the form
   handleChange(event) {
     const value = event.target.value;
-    (event.target.name === 'rating') ? this.setState({[event.target.name]: value, rated: true}) :
-      this.setState({ [event.target.name]: value });
-    console.log('this.state.rating', this.state.rating, 'this.state.rated', this.state.rated)
+    if (event.target.name === 'rating') {
+      this.setState({ [event.target.name]: value, rated: true })
+    } else if (event.target.name === 'body') {
+      this.setState({ [event.target.name]: value, bodyChars: this.state.bodyChars + 1 })
+    } else {
+      this.setState({[event.target.name]: value}, () => {console.log('STATE OF THE STATE', this.state)});
+    }
   }
 
 
@@ -66,7 +73,7 @@ class AddNewReviewContents extends React.Component {
       return axios.post('/qa/questions', body)
         .then(() => {
           alert('Your Question is submitted!');
-          this.props.handleAddQuestionClose();
+          this.props.handleAddReviewClick();
         })
         .catch(err => {
           console.log(err);
@@ -88,115 +95,209 @@ class AddNewReviewContents extends React.Component {
 
   render() {
     return (
-        <div>
+      <div className="reviewContainer">
         <div className="reviewTitle">Write Your Review About the&nbsp;<strong><span className="reviewSubTitle">{this.props.addNewReviewProduct.name} </span> </strong></div>
 
-          <br></br>
-
+        <br></br>
+        {/* ========================= OVERALL RATING SECTION ========================= */}
         <div className="reviewQ row">*Overall Rating&nbsp;<span className="rated" style={{ display: this.state.rated ? "block" : "none" }}>{this.state.rating}</span>
-
         </div>
-          <div className="row">
-            <fieldset className="rate">
-
-              <input type="radio" id="rating5" name="rating" value="5-Great" onChange={this.handleChange}/>
-                <label htmlFor="rating5"><span className="fa fa-star fa-2x faOverall"></span></label>
-              <input type="radio" id="rating4" name="rating" value="4-Good" onChange={this.handleChange}/>
-                <label htmlFor="rating4"><span className="fa fa-star fa-2x faOverall"></span></label>
-              <input type="radio" id="rating3" name="rating" value="3-Average" onChange={this.handleChange}/>
-                <label htmlFor="rating3"><span className="fa fa-star fa-2x faOverall"></span></label>
-              <input type="radio" id="rating2" name="rating" value="2-Fair" onChange={this.handleChange}/>
-                <label htmlFor="rating2"><span className="fa fa-star fa-2x faOverall"></span></label>
-              <input type="radio" id="rating1" name="rating" value="1-Poor" onChange={this.handleChange}/>
-                <label htmlFor="rating1"><span className="fa fa-star fa-2x faOverall"></span></label>
-
-            </fieldset>
-
-          </div>
-
-          <div className="reviewQ">*Do you recommend this product?</div>
-          <div className="reviewA row">
-            <input type="radio" name="recommend" value="Yes" className="ynRadio" onChange={this.handleChange}/>
-            <label htmlFor="recommendYes">Yes</label>&nbsp;
-            <input type="radio" name="recommend" value="No" className="ynRadio" onChange={this.handleChange}/>
-            <label htmlFor="recommendNo">No</label>
-          </div>
+        <div className="row">
+          <fieldset className="rate">
+            <input type="radio" id="rating5" name="rating" value="5-Great" onChange={this.handleChange} />
+            <label htmlFor="rating5"><span className="fa fa-star fa-2x faOverall"></span></label>
+            <input type="radio" id="rating4" name="rating" value="4-Good" onChange={this.handleChange} />
+            <label htmlFor="rating4"><span className="fa fa-star fa-2x faOverall"></span></label>
+            <input type="radio" id="rating3" name="rating" value="3-Average" onChange={this.handleChange} />
+            <label htmlFor="rating3"><span className="fa fa-star fa-2x faOverall"></span></label>
+            <input type="radio" id="rating2" name="rating" value="2-Fair" onChange={this.handleChange} />
+            <label htmlFor="rating2"><span className="fa fa-star fa-2x faOverall"></span></label>
+            <input type="radio" id="rating1" name="rating" value="1-Poor" onChange={this.handleChange} />
+            <label htmlFor="rating1"><span className="fa fa-star fa-2x faOverall"></span></label>
+          </fieldset>
         </div>
+        {/* ========================= RECOMMEND SECTION ========================= */}
+        <div className="reviewQ">*Do you recommend this product?</div>
+        <div className="reviewA row">
+          <input type="radio" name="recommend" value="Yes" className="ynRadio" onChange={this.handleChange} />
+          <label htmlFor="recommendYes">Yes</label>&nbsp;
+          <input type="radio" name="recommend" value="No" className="ynRadio" onChange={this.handleChange} />
+          <label htmlFor="recommendNo">No</label>
+        </div>
+        {/* ========================= CHARACTERISTIC RATING SECTION ========================= */}
+        <div className="reviewQ">*Characteristics Rating</div>
+        <br></br>
+        <br></br>
+        <table className="tableCharacteristics">
+          <tbody>
+            <tr>
+              <th><strong>Characteristic</strong></th>
+              <th><strong>1</strong></th>
+              <th><strong>2</strong></th>
+              <th><strong>3</strong></th>
+              <th><strong>4</strong></th>
+              <th><strong>5</strong></th>
+            </tr>
+            <tr><td colSpan="6" className="tdTop"></td></tr>
+            <tr>
+              <td rowSpan="2" className="tdRow"><strong>Size</strong></td>
+              <td>A size too small</td>
+              <td>1/2 a size to small</td>
+              <td>Perfect</td>
+              <td>1/2 a size too big</td>
+              <td>A size too big</td>
+            </tr>
+            <tr>
+              <td>
+                <input type="radio" name="Size" value="1" onChange={this.handleChange} /><label htmlFor="Size1"></label>
+              </td>
+              <td>
+                <input type="radio" name="Size" value="2" onChange={this.handleChange} /><label htmlFor="Size2"></label></td>
+              <td>
+                <input type="radio" name="Size" value="3" onChange={this.handleChange} /><label htmlFor="Size3"></label></td>
+              <td>
+                <input type="radio" name="Size" value="4" onChange={this.handleChange} /><label htmlFor="Size4"></label></td>
+              <td>
+                <input type="radio" name="Size" value="5" onChange={this.handleChange} /><label htmlFor="Size5"></label></td>
+            </tr>
+            <tr><td colSpan="6" className="tdTop"></td></tr>
+            <tr>
+              <td rowSpan="2" className="tdRow"><strong>Width</strong></td>
+              <td>Too Narrow</td>
+              <td>Slightly Narrow</td>
+              <td>Perfect</td>
+              <td>Slightly Wide</td>
+              <td>Too Wide</td>
+            </tr>
+            <tr>
+              <td>
+                <input type="radio" name="Width" value="1" onChange={this.handleChange} /><label htmlFor="Width1"></label>
+              </td>
+              <td>
+                <input type="radio" name="Width" value="2" onChange={this.handleChange} /><label htmlFor="Width2"></label></td>
+              <td>
+                <input type="radio" name="Width" value="3" onChange={this.handleChange} /><label htmlFor="Width3"></label></td>
+              <td>
+                <input type="radio" name="Width" value="4" onChange={this.handleChange} /><label htmlFor="Width4"></label></td>
+              <td>
+                <input type="radio" name="Width" value="5" onChange={this.handleChange} /><label htmlFor="Width5"></label></td>
+            </tr>
+            <tr><td colSpan="6" className="tdTop"></td></tr>
+            <tr>
+              <td rowSpan="2" className="tdRow"><strong>Comfort</strong></td>
+              <td>Uncomfortable</td>
+              <td>Slightly Uncomfortable</td>
+              <td>OK</td>
+              <td>Comfortable</td>
+              <td>Perfect</td>
+            </tr>
+            <tr>
+              <td>
+                <input type="radio" name="Comfort" value="1" onChange={this.handleChange} /><label htmlFor="Comfort1"></label>
+              </td>
+              <td>
+                <input type="radio" name="Comfort" value="2" onChange={this.handleChange} /><label htmlFor="Comfort2"></label></td>
+              <td>
+                <input type="radio" name="Comfort" value="3" onChange={this.handleChange} /><label htmlFor="Comfort3"></label></td>
+              <td>
+                <input type="radio" name="Comfort" value="4" onChange={this.handleChange} /><label htmlFor="Comfort4"></label></td>
+              <td>
+                <input type="radio" name="Comfort" value="5" onChange={this.handleChange} /><label htmlFor="Comfort5"></label></td>
+            </tr>
+            <tr><td colSpan="6" className="tdTop"></td></tr>
+            <tr>
+              <td rowSpan="2" className="tdRow"><strong>Quality</strong></td>
+              <td>Poor</td>
+              <td>Below Average</td>
+              <td>What I Expected</td>
+              <td>Pretty Good</td>
+              <td>Perfect</td>
+            </tr>
+            <tr>
+              <td>
+                <input type="radio" name="Quality" value="1" onChange={this.handleChange} /><label htmlFor="Quality1"></label>
+              </td>
+              <td>
+                <input type="radio" name="Quality" value="2" onChange={this.handleChange} /><label htmlFor="Quality2"></label></td>
+              <td>
+                <input type="radio" name="Quality" value="3" onChange={this.handleChange} /><label htmlFor="Quality3"></label></td>
+              <td>
+                <input type="radio" name="Quality" value="4" onChange={this.handleChange} /><label htmlFor="Quality4"></label></td>
+              <td>
+                <input type="radio" name="Quality" value="5" onChange={this.handleChange} /><label htmlFor="Quality5"></label></td>
+            </tr>
+            <tr><td colSpan="6" className="tdTop"></td></tr>
+            <tr>
+              <td rowSpan="2" className="tdRow"><strong>Length</strong></td>
+              <td>Runs Short</td>
+              <td>Runs Slightly Short</td>
+              <td>Perfect</td>
+              <td>Runs Slightly Long</td>
+              <td>Runs Long</td>
+            </tr>
+            <tr>
+              <td>
+                <input type="radio" name="Length" value="1" onChange={this.handleChange} /><label htmlFor="Length1"></label>
+              </td>
+              <td>
+                <input type="radio" name="Length" value="2" onChange={this.handleChange} /><label htmlFor="Length2"></label></td>
+              <td>
+                <input type="radio" name="Length" value="3" onChange={this.handleChange} /><label htmlFor="Length3"></label></td>
+              <td>
+                <input type="radio" name="Length" value="4" onChange={this.handleChange} /><label htmlFor="Length4"></label></td>
+              <td>
+                <input type="radio" name="Length" value="5" onChange={this.handleChange} /><label htmlFor="Length5"></label></td>
+            </tr>
+            <tr><td colSpan="6" className="tdTop"></td></tr>
+            <tr>
+              <td rowSpan="2" className="tdRow"><strong>Fit</strong></td>
+              <td>Runs Tight</td>
+              <td>Runs Slightly Tight</td>
+              <td>Perfect</td>
+              <td>Runs Slightly Loose</td>
+              <td>Runs Loose</td>
+            </tr>
+            <tr>
+              <td>
+                <input type="radio" name="Fit" value="1" onChange={this.handleChange} /><label htmlFor="Fit1"></label>
+              </td>
+              <td>
+                <input type="radio" name="Fit" value="2" onChange={this.handleChange} /><label htmlFor="Fit2"></label></td>
+              <td>
+                <input type="radio" name="Fit" value="3" onChange={this.handleChange} /><label htmlFor="Fit3"></label></td>
+              <td>
+                <input type="radio" name="Fit" value="4" onChange={this.handleChange} /><label htmlFor="Fit4"></label></td>
+              <td>
+                <input type="radio" name="Fit" value="5" onChange={this.handleChange} /><label htmlFor="Fit5"></label></td>
+            </tr>
+          </tbody>
+        </table>
+        {/* ========================= REVIEW SUMMARY SECTION ========================= */}
+        <div className="reviewQ row">Review Summary</div>
+        <div className="reviewA row">
+          <label htmlFor="summary">  <textarea type="text" name="summary" value={this.state.summary} placeholder="Example: Best purchase ever!" maxLength="60" cols="80" onChange={this.handleChange}/></label>
+        </div>
+        {/* ========================= REVIEW BODY SECTION ========================= */}
+        <div className="reviewQ row">*Review Body<div className="remainChars"><span><em>&nbsp;&nbsp;(# of Characters: {this.state.bodyChars} &nbsp;&nbsp; # Remaining: {1000 - this.state.bodyChars})</em></span></div></div>
+        <div className="reviewA row">
+          <label htmlFor="body">  <textarea type="text" name="body" value={this.state.body} placeholder="Why did you like the product (or Not)?" minLength="50" maxLength="1000" cols="80" onChange={this.handleChange} /></label>
+        </div>
+        {/* ========================= NICKNAME SECTION ========================= */}
+        <div className="reviewQ row">*What is Your Nickname?</div>
+        <div className="reviewA row">
+          <label htmlFor="nickname">  <textarea type="text" name="nickname" value={this.state.nickname} placeholder="Example: jackson11" maxLength="60" cols="80" onChange={this.handleChange} /></label>
+        </div>
+        {/* ========================= EMAIL SECTION ========================= */}
+        <div className="reviewQ row">*Your Email<div className="remainChars"><span><em>&nbsp;&nbsp;(For authentication reasons, you will not be emailed)</em></span></div></div>
+        <div className="reviewA row">
+          <label htmlFor="email">  <textarea type="text" name="email" value={this.state.email} placeholder="Example: jackson11@email.com" maxLength="60" cols="80" onChange={this.handleChange} /></label>
+        </div>
+
+
+
+      </div>
 
     )
   }
 }
 export default AddNewReviewContents;
-
-  /*
-
-
-
-  *Overall Rating
-
-    The overall rating will be selected via five selectable star icons.  Initially, the stars will all be outlines, and none will be solid.  Clicking on a star will fill that star and all of the stars to the left of it with solid color.  Customers will not be able to select fractions of a star.  After selecting a star, text will appear to the right of the stars explaining the meaning of the selection.  The text will vary as follows:
-
-      The text will vary as follows:
-      -1 star “Poor”
-      -2 stars “Fair”
-      -3 stars  “Average”
-      -4 stars  “Good”
-      -5 stars  “Great”
-
-  *Do you recommend this product?
-
-    Recommendation will be captured via a radio button array of “Yes” and “No”.  Default radio button behavior will apply.
-
-  *Characteristics
-
-    Any characteristics designated as applicable for the current product will appear in this area.  For these inputs, the title will be the characteristic title. The meaning of the selections is outlined below:
-    ![Characteristics](/Users/jodisilverman/seip2101/frontEndCapstone/client/assets/characteristics.jpg)
-
-  Review Summary
-
-    A text input allowing up to 60 characters.
-    Placeholder text should read: “Example: Best purchase ever!”
-
-  *Review Body
-
-    A text input allowing up to 1000 characters.
-
-    Placeholder text should read: “Why did you like the product or not?”.
-
-    The review must be over 50 characters long in order to be submitted.   If the user tries to submit a review shorter that 50 characters, then the submission should fail in the same manner as it would for a blank mandatory field.
-
-    Below the input for the Review body, a counter should appear.  This counter should let the user know how many characters are needed to reach the 50 character minimum.  It should appear in the format “Minimum required characters left: [##]”.  As the user types, the count of characters should update.   After the user reaches 50 characters, the counter should be replaced by a message stating “Minimum reached”.
-
-  Upload your photos
-
-    A button will appear allowing users to upload their photos to the form.
-
-    Clicking the button should open a separate window where the photo to be can be selected.
-
-    After the first image is uploaded, a thumbnail showing the image should appear.  A user should be able to add up to five images before the button to add disappears, preventing further additions.
-
-  *What is your nickname
-
-    A text input allowing up to 60 characters for the user’s display name.
-    Placeholder text should read: “Example: jackson11!”.
-    Below this field, the text “For privacy reasons, do not use your full name or email address” will appear.
-
-  *Your email
-
-    A text input allowing up to 60 characters.
-    Placeholder text should read: “Example: jackson11@email.com”.
-    Below this field, the text “For authentication reasons, you will not be emailed” will appear.
-
-  Submit review (button)
-    A button by which the review can be submitted.
-
-    Upon selecting this button the form’s inputs should be validated.   If there are any invalid entries, the submission should be prevented, and a warning message will appear.   This message should be titled “You must enter the following:”
-
-    This error will occur if:
-
-    -Any mandatory fields are blank.
-    -The review body is less than 50 characters.
-    -The email address provided is not in correct email format.
-    -The images selected are invalid or unable to be uploaded.
-
-    */

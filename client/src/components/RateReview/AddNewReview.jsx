@@ -46,8 +46,10 @@ class AddNewReview extends React.Component {
         <div className="qanda-modal-box">
           <i className="far fa-times-circle fa-2x" onClick={this.props.handleAddReviewClick}></i>
           <br></br>
+          <div className="reviewContainer">
           <AddNewReviewContents key={'ratings' + this.state.rating} addNewReviewProduct={this.props.addReviewProd}/>
           <div><button onClick={this.handleSubmit.bind(this)}>SUBMIT</button></div>
+          </div>
         </div>
       </div>
     )

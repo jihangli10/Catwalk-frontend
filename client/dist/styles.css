@@ -179,6 +179,7 @@ body {
   border:steelblue solid 1px;
   padding: 20px;
   box-sizing: border-box;
+  overflow: auto;
 }
 .qanda-modal-close {
   position: relative;
@@ -202,6 +203,9 @@ body {
   /*RATING AND REVIEW STYLES*/
 /*==============================================================================*/
 /* // ADD NEW REVIEW //=================================== */
+.reviewContainer {
+  overflow-y: auto
+}
 .reviewTitle {
   font-size: 18px;
 font-weight:500;
@@ -213,7 +217,7 @@ margin-bottom: 12px;
 .reviewQ {
   font-weight: 500;
   font-size: 16px;
-  margin-top: 6px;
+  margin-top: 12px;
   margin-bottom: 6px;
   float: left;
 }
@@ -221,6 +225,7 @@ margin-bottom: 12px;
   font-weight: 500;
   margin-left: 18px;
   margin-bottom: 6px;
+  width: 100%
 }
 .faOverall {
   margin-right: 6px;
@@ -242,6 +247,45 @@ margin-bottom: 12px;
   font-weight: 700;
   color:steelblue;
   font-size: 16px;
+}
+.tableCharacteristics {
+  margin-top: 5px;
+  margin-bottom: 15px;
+  table-layout: fixed;
+  border: solid steelblue 1px;
+  text-align: center;
+}
+.tdTop {
+  border-top: solid steelblue 1px;
+}
+.tdBottom {
+  border-bottom: solid steelblue 1px;
+}
+td {
+  padding: 3px;
+}
+.tdRow {
+  vertical-align: middle;
+}
+label {
+  vertical-align: middle;
+}
+.reviewTextQ {
+  flex: 1;
+  float: left;
+}
+.reviewTextA {
+  flex: 5;
+  float: left;
+}
+textarea {
+  border: solid steelblue 1px;
+}
+.remainChars {
+  color:  #a20;
+  text-align: left;
+  font-size: 12px;
+  margin-top: 6px;
 }
 
 
@@ -294,7 +338,10 @@ margin-bottom: 12px;
 
 /* // RATING REVIEW //================================= */
 #ratingreviewcontainer {
-  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  position: relative;
 }
 .row {
   display: flex;

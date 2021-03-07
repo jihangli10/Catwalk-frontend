@@ -79,7 +79,11 @@ class ProductOverview extends React.Component {
              isDisabled: true,
              inStock: true,
              currentStyleId: newStyles.data.results[0].styles_id,
-             currentActive: newStyles.data.results[0].styles_id
+             currentActive: newStyles.data.results[0].styles_id,
+             imageZoomed: false,
+             mouseX: '',
+             mouseY: '',
+             activeIndex: 0
            })
         })
          .catch(err => {
@@ -220,6 +224,35 @@ class ProductOverview extends React.Component {
     this.setState({ currentQuantity: [...storage] })
   }
 
+  imageZoomIn () {
+    this.setState({
+      imageZoomed: true
+    })
+  }
+
+  imageZoomOut () {
+    this.setState({
+      imageZoomed: false
+    })
+  }
+
+  handleMouseMove (e) {
+    //console.log('check')
+    const {
+      top: offsetTop,
+      left: offsetLeft
+    } = e.target.getBoundingClientRect()
+
+
+    const x = ((e.pageX - offsetLeft) / e.target.width) * 50;
+    const y = ((e.pageY - offsetTop) / e.target.height) * 50;
+
+    this.setState({
+      mouseX: x,
+      mouseY: y
+    })
+  }
+
   render() {
     if(this.state.isLoading) {
       return (
@@ -241,6 +274,12 @@ class ProductOverview extends React.Component {
               handlePrevSlide = {this.handlePrevSlide.bind(this)}
               handleNextSlide = {this.handleNextSlide.bind(this)}
               activeIndex = {this.state.activeIndex}
+              imageZoomed = {this.state.imageZoomed}
+              imageZoomIn = {this.imageZoomIn.bind(this)}
+              imageZoomOut = {this.imageZoomOut.bind(this)}
+              handleMouseMove = {this.handleMouseMove.bind(this)}
+              mouseX = {this.state.mouseX}
+              mouseY = {this.state.mouseY}
             />
           </div>
 

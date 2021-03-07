@@ -74,6 +74,7 @@ body {
   width: 100%;
   height: 500px;
 }
+
 .cartButton {
   background-image: url('https://www.goodfreephotos.com/albums/vector-images/shopping-cart-vector-clipart.png');
 }
@@ -99,19 +100,33 @@ body {
 
 .modalImage2 {
   position: absolute;
+  height: 615px;
+  width: 100%;
   top: 100px;
-  left: 50px;
+  left: 100px;
   right: 50px;
-  background: white;
 }
 
 .carouselContainer {
-  position: relative;
+  position: absolute;
   z-index: 23;
   display: grid;
-  grid-template-columns: 50px auto 50px;
-  grid-template-rows: 30px auto 30px auto 30px;
+  left: 25%;
+  top: 25%;
+  grid-template-columns: 50px 650px 30px;
+  grid-template-rows: 10px auto 30px auto 10px;
+  max-height: 100px;
+  max-width: 1300px;
 
+}
+
+.closeGrid {
+  position: 'relative';
+  z-index: 2;
+  grid-column-start: 3;
+  grid-column-end: 4;
+  grid-row-start: 1;
+  grid-row-end: 2;
 }
 
 .carouselImage {
@@ -120,12 +135,37 @@ body {
   grid-column-end: 3;
   grid-row-start: 2;
   grid-row-end: 5;
+  cursor: zoom-in;
+  overflow: hidden;
+  height: 1200px;
+  width: 615px;
+
+}
+
+.carouselImage2 {
+  position:relative;
+  z-index: 2;
+  grid-column-start: 1;
+  grid-column-end: 4;
+  grid-row-start: 1;
+  grid-row-end: 6;
+  max-width: 1200px;
+  max-height: 500px;
+}
+
+.carouselImagePlus {
+  cursor: zoom-in;
+}
+
+.carouselImageMinus {
+  cursor: zoom-out;
 }
 
 .carouselLeft {
   position: absolute;
-  top: 50%;
-  left: 15px;
+  z-index: 9;
+  top: 25%;
+  left: 25%;
   grid-column-start: 1;
   grid-column-end: 2;
   grid-row-start: 3;
@@ -134,13 +174,57 @@ body {
 
 .carouselRight {
   position: absolute;
-  top: 50%;
-  right: 15px;
+  z-index: 9;
+  top: 25%;
+  left: 25%;
   grid-column-start: 3;
   grid-column-end: 4;
   grid-row-start: 3;
   grid-row-end: 4;
 }
+
+.rightArrow {
+  background-color: white;
+  color: black;
+}
+
+.leftArrow {
+  background-color: white;
+  color: black;
+}
+
+.closing {
+  background: transparent;
+}
+
+.fa-times-circle::before {
+  background: white;
+  height: 50px;
+  width: 50px;
+}
+
+.fa-chevron-left::before {
+  background: transparent;
+  height: 50px;
+  width: 50px;
+}
+
+.fa-chevron-right::before {
+  background: transparent;
+}
+
+.fas {
+  color: white;
+}
+
+.far {
+  color: black
+}
+
+.dumbButton {
+  background: transparent;
+}
+
 /*==============================================================================*/
   /*QUESTIONS AND ANSWERS STYLES*/
 /*==============================================================================*/

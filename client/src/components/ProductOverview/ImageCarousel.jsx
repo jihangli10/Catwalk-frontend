@@ -1,19 +1,75 @@
 import React from 'react'
 
-var ImageCarousel = ({ showExpandedImage, currentImage, currentProductStyle, onClose, handlePrevSlide, handleNextSlide, activeIndex }) => (
-  <div className='carouselContainer'>
+var ImageCarousel = ({ showExpandedImage, currentImage, currentProductStyle, onClose, handlePrevSlide, handleNextSlide, activeIndex, imageZoomed, imageZoomIn, imageZoomOut, handleMouseMove, mouseX, mouseY }) => {
+
+  const transform = {
+    transformOrigin: `${mouseX}% ${mouseY}%`
+  }
+  const isZoom = Object.assign({}, transform, {
+    transform: imageZoomed ? 'scale(2.5)' : 'scale(1.0)',
+
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
+    width: '100%',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    height: '576px',
+    maxHeight: '576px',
+    maxWidth: '720px',
+    backgroundSize: 'cover',
+    overflow: 'hidden',
+
+    transition: 'transform .1s ease-out'
+  })
+
+
+  const imgStyles = {
+    height: '480px', //450 //480
+    width: '720px', //690
+    float: 'left',
+    marginLeft: '10px',
+    overflow: 'hidden',
+    borderStyle: 'solid',
+    cursor: imageZoomed ? 'zoom-out' : 'zoom-in',
+
+  }
+  if(imageZoomed) {
+    return (
+    <div className='carouselContainer'>
+      <div className='carouselImage2'>
+      <div style={imgStyles} onMouseOver={imageZoomIn} onMouseMove={handleMouseMove} onClick={imageZoomOut}>
+      <img src={currentImage} style={isZoom}></img>
+      </div>
+      </div>
+      </div>
+    )
+  } else {
+    return (<div className='carouselContainer'>
     <div className='carouselLeft'>
 
-      {activeIndex === 0 ? null: <button onClick={handlePrevSlide}>L</button>}
+      {activeIndex === 0 ? null: <button className='dumbButton' onClick={handlePrevSlide}> <i className='fas fa-chevron-left'></i> </button>}
     </div>
-    <div className='carouselImage'>
-    <img src={currentImage} className='mainImage'></img>
-    <button onClick={onClose}>Close</button>
+
+    <div className='carouselImage2'>
+    <div style={imgStyles} onClick={imageZoomIn}>
+      <img src={currentImage} style={isZoom}></img>
+
     </div>
+
+    </div>
+    <div className='closeGrid'>
+    <button className='dumbButton' onClick={onClose}><i className="far fa-times-circle"></i></button>
+    </div>
+
     <div className='carouselRight'>
-      {activeIndex === currentProductStyle.results.length-1 ? null: <button onClick={handleNextSlide}>R</button>}
+      {activeIndex === currentProductStyle.results.length-1 ? null: <button className='dumbButton' onClick={handleNextSlide}> <i className='fas fa-chevron-right'></i> </button>}
     </div>
-  </div>
-)
+  </div>)
+  }
+
+
+}
+
+
 
 export default ImageCarousel;

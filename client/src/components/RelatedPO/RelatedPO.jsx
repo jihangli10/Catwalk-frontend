@@ -109,9 +109,10 @@ class RelatedPO extends React.Component {
           .then(results => {
             this.setState({
               relatedProducts: results
-            });
+            }, () => {
+            this.checkCarouselState('relatedProducts')
+          });
           })
-          .then(() => this.checkCarouselState('relatedProducts'))
           .catch(error => console.log('ERROR with Promise.all', error));
       })
       .catch(error => console.log('ERROR retrieving data', error));
@@ -173,7 +174,17 @@ class RelatedPO extends React.Component {
       outfits: newOutfits
     }, () => {
       ls.set('outfits', this.state.outfits);
-      this.checkCarouselState('outfits');
+      if (this.state.outindex > 0) {
+        this.state.outindex--;
+        let track = document.querySelector(`.out-track`);
+        track.style.transform = this.state.outindex > 1 ? "translateX(" + (this.state.outindex - 1) * (252.22) + "px)" : "translateX(0px)";
+        this.setState({
+          outindex: 0
+        }, () => {
+          document.querySelector(`.prev-out-card`).classList.remove('show');
+          this.checkCarouselState('outfits');
+        })
+      }
     });
   }
 
@@ -185,9 +196,7 @@ class RelatedPO extends React.Component {
       cards = 252.22 + ((this.state[list].length - 1) * 256.66);
     }
     let doc = document.body.clientWidth;
-    let state = `${list}Hide`
-    console.log('C: ', cards);
-    console.log('D: ', doc);
+    let state = `${list}Hide`;
     if (cards > doc) {
       this.setState({
         [state]: false
@@ -198,9 +207,6 @@ class RelatedPO extends React.Component {
       })
     }
   }
-
-
-
 
   handleCarouselNext(e) {
     let doc = document.body.clientWidth;
@@ -221,7 +227,6 @@ class RelatedPO extends React.Component {
       if (index >= totalCards - screenRatio) {
         next.classList.add('hide');
       }
-
     })
   }
 
@@ -246,9 +251,11 @@ class RelatedPO extends React.Component {
   render() {
 
     if (!this.state.relatedProducts) {
+
       return(
         <div></div>
       );
+
     } else {
 
       return(

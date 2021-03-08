@@ -48,7 +48,6 @@ class RelatedProductCard extends React.Component {
         this.props.getRelated()
           .then(() => {
             this.props.getStyles(this.props.parentProduct.id);
-            this.props.checkCarousel('relatedProducts');
           })
           .catch(err => console.log(err));
       })

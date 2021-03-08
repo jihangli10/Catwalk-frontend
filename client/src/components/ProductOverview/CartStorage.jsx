@@ -4,7 +4,7 @@ var CartStorage = ({ modalMode, cartStorageSize }) => (
   <div className='cartImage'>
     <button onClick={modalMode}>
       <div className='miniContainer'>
-        <i className="fas fa-shopping-cart"></i>
+        <i className="fas overview-fas fa-shopping-cart"></i>
 
         {cartStorageSize}
       </div></button>

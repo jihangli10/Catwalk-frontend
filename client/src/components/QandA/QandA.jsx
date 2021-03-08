@@ -12,17 +12,36 @@ class QandA extends React.Component {
       questions: [],
       searchQuery: '',
       displayQuestions: [],
-      showQuestionNumber: 2
+      showQuestionNumber: 2,
+      showAddQuestion: false,
+      showAddAnswer: false,
+      showImageZoom: false,
+      product_id: null,
+      question_id: null,
+      question_body: null
     }
   }
 
   componentDidMount() {
-    return axios.get('/qa/questions', {params: { product_id: 19378 }})
+    this.updateContent.apply(this);
+  }
+
+  componentDidUpdate(previousProps) {
+    if (previousProps.currentProduct.id !== this.props.currentProduct.id) {
+      this.updateContent.apply(this);
+    }
+  }
+
+  updateContent() {
+    return axios.get('/qa/questions', {params: { product_id: this.props.currentProduct.id }})
+    // return axios.get('/qa/questions', {params: { product_id: 19093 }})
       .then(data => {
         this.setState({
           questions: data.data.results,
-          displayQuestions: data.data.results
-        })
+          displayQuestions: data.data.results,
+          product_id: data.data.product_id
+        }, () => {console.log('data:', data.data.results[data.data.results.length - 1])})
+
       })
       .catch(err => {
       console.log(err);
@@ -59,20 +78,78 @@ class QandA extends React.Component {
     })
   }
 
+  handleAddQuestionClick(e) {
+    e.preventDefault();
+    this.setState({
+      showAddQuestion: true
+    })
+  }
+
+  handleAddQuestionClose() {
+    this.setState({
+      showAddQuestion: false
+    })
+  }
+
+  handleAddAnswerClick(e) {
+    e.preventDefault();
+    this.setState({
+      question_id: e.target.getAttribute("questionid"),
+      question_body: e.target.getAttribute("questionbody"),
+      showAddAnswer: true
+    })
+  }
+
+  handleAddAnswerClose() {
+    this.setState({
+      showAddAnswer: false
+    })
+  }
+
+  forceUpdate() {
+    this.updateContent.apply(this);
+  }
+
   render() {
     let showButton = this.state.questions.length > this.state.showQuestionNumber;
+    let hasQuestion = this.state.questions.length >= 1;
     return (
       <div id='qanda' >
         <br></br>
         <div className='section'>Question and Answers</div>
+        {this.state.showAddQuestion? <AddQuestion
+          handleAddQuestionClose={this.handleAddQuestionClose.bind(this)}
+          forceUpdate={this.forceUpdate.bind(this)}
+          product_id={this.state.product_id}
+          product_name={this.props.currentProduct.name}/>
+          : null
+        }
+
+        {this.state.showAddAnswer? <AddAnswer
+          handleAddAnswerClick={this.handleAddAnswerClick.bind(this)}
+          handleAddAnswerClose={this.handleAddAnswerClose.bind(this)}
+          forceUpdate={this.forceUpdate.bind(this)}
+          question_id={this.state.question_id}
+          question_body={this.state.question_body}
+          product_name={this.props.currentProduct.name}
+          />
+          : null
+        }
         <Search
           handleQueryChange={this.handleQueryChange.bind(this)}
           searchQuery={this.state.searchQuery}
         />
-        <QuestionList questions={this.state.displayQuestions} showQuestionNumber={this.state.showQuestionNumber} searchQuery={this.state.searchQuery}/>
+        {hasQuestion? <QuestionList
+          questions={this.state.displayQuestions}
+          showQuestionNumber={this.state.showQuestionNumber}
+          searchQuery={this.state.searchQuery}
+          showAddAnswer={this.state.showAddAnswer}
+          handleAddAnswerClick={this.handleAddAnswerClick.bind(this)}
+        />
+        : <div>This product has no questions.</div>}
         <div id="question-button-row">
         {showButton ? <button onClick={this.handleSeeMoreClick.bind(this)}>MORE ANSWERED QUESTIONS</button> : null}
-        &nbsp;&nbsp;<button>ADD A QUESTION +</button>
+        &nbsp;&nbsp;<button onClick={this.handleAddQuestionClick.bind(this)}>ADD A QUESTION +</button>
         </div>
         <br></br>
       </div>

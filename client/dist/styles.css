@@ -19,6 +19,16 @@ body {
 /*==============================================================================*/
   /*PRODUCT OVERVIEW STYLES*/
 /*==============================================================================*/
+.modal-wrapper {
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  background: rgba(0,0,0,1.0);
+  z-index: 130;
+}
+
 .someDisplay {
   display: inline;
   font-size: 10px;
@@ -30,27 +40,53 @@ body {
 .gridContainer {
   display: grid;
   grid-template-columns: 40px 200px auto 200px 40px;
-  grid-template-rows: 25% auto 100px;
+  grid-template-rows: 25% auto 50px 100px;
   grid-column-gap: 20px;
 }
 .leftSide {
   grid-column-start: 1;
   grid-column-end: 4;
   grid-row-start: 1;
-  grid-row-end: 3;
+  grid-row-end: 4;
 }
 .rightSide {
   grid-column-start: 4;
   grid-column-end: 6;
   grid-row-start: 1;
-  grid-row-end: 3;
+  grid-row-end: 4;
 }
 .bottomSide {
   grid-column-start: 1;
   grid-column-end: 6;
+  grid-row-start: 4;
+  grid-row-end: 5;
+}
+
+.styleCarousel {
+  grid-column-start: 1;
+  grid-column-end: 4;
   grid-row-start: 3;
   grid-row-end: 4;
+  left: 35%;
+  position: relative;
+  justify-items: center;
+  z-index: 5;
 }
+
+.styleMiniGrid {
+  display: grid;
+  left: 25%;
+  grid-template-columns: 20px 260px 20px;
+
+}
+
+.styleMiniGridImage {
+  display: grid;
+  grid-template-columns: repeat(4, 50px);
+  grid-column-gap: 15px;
+  left: 20px;
+}
+
 .dropdownContainer {
   display: grid;
   grid-template-columns: auto 0px auto;
@@ -75,7 +111,9 @@ body {
   object-fit: cover;
   width: 100%;
   height: 500px;
+  max-height: 100%;
 }
+
 .cartButton {
   background-image: url('https://www.goodfreephotos.com/albums/vector-images/shopping-cart-vector-clipart.png');
 }
@@ -94,6 +132,157 @@ body {
   grid-template-columns: 80px 140px;
   grid-column-gap: 5px;
 }
+
+.styleList1 {
+  outline: 1px solid blue;
+}
+
+.modalImage2 {
+  position: absolute;
+  height: 615px;
+  width: 100%;
+  top: 100px;
+  left: 100px;
+  right: 50px;
+}
+
+.carouselContainer {
+  position: absolute;
+  z-index: 23;
+  display: grid;
+  left: 25%;
+  top: 25%;
+  grid-template-columns: 50px 650px 30px;
+  grid-template-rows: 10px auto 30px auto 10px;
+  max-height: 100px;
+  max-width: 1300px;
+
+}
+
+.closeGrid {
+  position: 'relative';
+  z-index: 2;
+  grid-column-start: 3;
+  grid-column-end: 4;
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
+
+.carouselImage {
+  position: relative;
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  grid-row-end: 5;
+  cursor: zoom-in;
+  overflow: hidden;
+  height: 1200px;
+  width: 615px;
+
+}
+
+.carouselImage2 {
+  position:relative;
+  z-index: 2;
+  grid-column-start: 1;
+  grid-column-end: 4;
+  grid-row-start: 1;
+  grid-row-end: 6;
+  max-width: 1200px;
+  max-height: 500px;
+}
+
+.carouselImagePlus {
+  cursor: zoom-in;
+}
+
+.carouselImageMinus {
+  cursor: zoom-out;
+}
+
+.carouselLeft {
+  position: absolute;
+  z-index: 9;
+  top: 25%;
+  left: 25%;
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 3;
+  grid-row-end: 4;
+}
+
+.carouselRight {
+  position: absolute;
+  z-index: 9;
+  top: 25%;
+  left: 25%;
+  grid-column-start: 3;
+  grid-column-end: 4;
+  grid-row-start: 3;
+  grid-row-end: 4;
+}
+
+.styleMiniLeft {
+  grid-column-start:1;
+  grid-column-end: 2;
+  position:relative;
+  z-index: 5;
+  top: 15px;
+
+
+}
+
+.styleMiniRight {
+  grid-column-start:3;
+  grid-column-end: 4;
+  position: relative;
+  top: 15px;
+  right: 5px;
+}
+
+
+.rightArrow {
+  background-color: white;
+  color: black;
+}
+
+.leftArrow {
+  background-color: white;
+  color: black;
+}
+
+.closing {
+  background: transparent;
+}
+
+.overview-fa-times-circle::before {
+  background: white;
+  height: 50px;
+  width: 50px;
+}
+
+.overview-fa-chevron-left::before {
+  background: transparent;
+  height: 50px;
+  width: 50px;
+}
+
+.overview-fa-chevron-right::before {
+  background: transparent;
+}
+
+.overview-fas {
+  color: white;
+}
+
+.overview-far {
+  color: black
+}
+
+.dumbButton {
+  background: transparent;
+}
+
 /*==============================================================================*/
   /*QUESTIONS AND ANSWERS STYLES*/
 /*==============================================================================*/
@@ -101,16 +290,35 @@ body {
   margin: 10px 0;
 }
 #search-question-input {
-  width: 400px;
+  width: 99%;
+  height: 40px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  border: 1px solid black;
+  padding: 8px;
+  font-size: 20px;
+}
+#search-question-input:focus {
+  outline-width: 0;
+  font-size: 20px;
+}
+#search-question-input::-webkit-input-placeholder {
+  font-size: 20px;
 }
 .section-question {
   margin: 20px 0;
 }
 .section-answer {
+  margin: 15px 0 30px 0;
+}
+.answer-body {
+  margin: 10px 0;
+}
+.answer-user-information {
   margin: 10px 0;
 }
 #question-list {
-  max-height: 500px;
+  max-height: 78vh;
   overflow-x: hidden;
   overflow-y: auto;
 }
@@ -122,9 +330,17 @@ body {
   width: auto;
   margin: 2px;
 }
+.qanda-content-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+.qanda-symbol {
+  width: 20px;
+}
 .answer-photo:hover {
   box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
-  cursor: pointer;
 }
 .answer-image-container {
   display: flex;
@@ -200,6 +416,42 @@ body {
   color:steelblue;
   text-align: right;
   float:right
+}
+/* .answer-image-individual-container {
+  position: relative;
+} */
+.modal-close-image-button {
+  position: relative;
+  top: 0;
+  left: 100%;
+  transform: translate(-100%, 0);
+}
+.modal-image {
+  position: relative;
+  top: 0;
+  left: 100%;
+  transform: translate(-100%, 0);
+}
+.clickable:hover {
+  cursor: pointer;
+}
+#qanda-add-input {
+  width: 100%;
+  height: 60px;
+}
+.qanda-explain {
+  color: rgb(230, 66, 25);
+  font-size: 12px;
+}
+.qanda-form-row {
+  margin: 5px 0;
+}
+
+.qanda-form-entry {
+  margin: 12px 0;
+}
+.YourHighlightClass {
+  background-color: rgb(176, 196, 222);
 }
 /*==============================================================================*/
   /*RATING AND REVIEW STYLES*/
@@ -458,9 +710,9 @@ float: left;
     font-weight: 900;/* full star */
     color:lightsteelblue;
 }
-/* .fa-user-check {
+.qanda-fa-user-check {
   color:lightsteelblue;
-} */
+}
 
 /* Click + hover color */
 input:checked ~ label, /* color current and previous stars on checked */

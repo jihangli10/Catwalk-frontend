@@ -20,20 +20,29 @@ class QuestionList extends React.Component {
   };
 
 
+
   render() {
+    let hasQuestion = this.props.questions.length >= 1;
     return (
+      <div>
+      {hasQuestion? null : <div>This product has no questions.</div>}
       <div id='question-list'> {
         this.props.questions
           .sort(this._compareHelpfulness)
           .map((question, index) => {
             if (index < this.props.showQuestionNumber) {
-              return <Question question={question} key={question.question_id} searchQuery={this.props.searchQuery}/>;
+              return <Question
+                question={question}
+                key={question.question_id}
+                searchQuery={this.props.searchQuery}
+                handleAddAnswerClick={this.props.handleAddAnswerClick}/>
             } else {
               return null;
             }
           })
       }
 
+      </div>
       </div>
     )
   }

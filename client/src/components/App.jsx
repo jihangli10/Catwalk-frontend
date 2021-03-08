@@ -62,10 +62,13 @@ class App extends React.Component {
         })
       })
   }
+
+
+
   render() {
 
     return (
-      <div>
+      <div style={this.state.blurBackground ? {background: 'black'}: null}>
         <div>
           <h1>Main Page</h1>
           <ProductOverview
@@ -81,7 +84,7 @@ class App extends React.Component {
           <RelatedPO updateProd={this.updateCurrentProduct} currProd={this.state.currentProduct} />
         </div>
 
-        <QandA />
+        <QandA updateProd={this.updateCurrentProduct} currentProduct={this.state.currentProduct}/>
 
         <div>
           <br></br>

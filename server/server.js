@@ -15,6 +15,7 @@ app.use(express.static(path.join(__dirname, "../client/dist")));
 // SERVER ROUTES
 //================================================================================================================
 app.use(async (req, res) => {
+  console.log(req.body)
   try {
     let response = await axios({
       baseURL: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/',
@@ -22,7 +23,8 @@ app.use(async (req, res) => {
       url: req.url,
       data: req.body,
       headers: {
-        'Authorization': config.TOKEN //this is what will be imported from config file
+        'Authorization': config.TOKEN, //this is what will be imported from config file
+        'Content-Type': 'application/json'
       }
     });
     res.send(response.data);
@@ -31,6 +33,8 @@ app.use(async (req, res) => {
     res.sendStatus(500);
   }
 });
+
+
 //================================================================================================================
 // SERVER LISTENING
 //================================================================================================================

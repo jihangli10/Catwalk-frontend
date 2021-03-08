@@ -9,7 +9,7 @@ class ReviewList extends React.Component {
     this.state = {
       display: 0
     };
-    this.handleDisplay=this.handleDisplay.bind(this)
+    this.handleDisplay = this.handleDisplay.bind(this)
   }
 
   componentDidMount() {
@@ -17,23 +17,23 @@ class ReviewList extends React.Component {
       this.setState({
         display: this.props.reviewList.length
       })
-  } else {
+    } else {
       this.setState({
         display: 2
       })
-  }
+    }
   }
 
-  handleDisplay () {
+  handleDisplay() {
     this.setState(prevState => ({
       display: prevState.display + 2
     }))
+    this.props.onGetCurrentDisplay(this.state.display  + 2);
   }
 
-  // button Add More if displayReviews.length === this.props.reviewList.length
+  // handlePassDisplay() {
 
-
-
+  // }
 
   render() {
     var displayReviews = this.props.reviewList.slice(0, this.state.display)
@@ -53,8 +53,7 @@ class ReviewList extends React.Component {
                 <ReviewListItem reviewListItem={review} />
               </li>
             ))}
-            </ul>
-          <button style={{ display: revListLength > this.state.display && revListLength > 2 ? "block" : "none" }} onClick={this.handleDisplay}>MORE REVIEWS</button>
+          </ul>
 
         </div>
       </div>

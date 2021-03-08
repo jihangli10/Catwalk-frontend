@@ -62,10 +62,13 @@ class App extends React.Component {
         })
       })
   }
+
+
+
   render() {
 
     return (
-      <div>
+      <div style={this.state.blurBackground ? {background: 'black'}: null}>
         <div>
           <h1>Main Page</h1>
           <ProductOverview

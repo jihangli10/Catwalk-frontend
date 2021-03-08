@@ -22,11 +22,7 @@ class App extends React.Component {
     this.state = {
       products:[],
       currentProduct: {
-<<<<<<< HEAD
         "id": 19378,
-=======
-        "id": 19090,
->>>>>>> 8cd28f7899ed15f2e9cdb4644e3a79c01fabad75
         "campus": "hr-rfe",
         "name": "Alberto Romper",
         "slogan": "Voluptatibus sunt neque repellendus.",

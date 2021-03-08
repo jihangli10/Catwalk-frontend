@@ -1,6 +1,6 @@
 import React from 'react'
 import ImageCarousel from './ImageCarousel'
-var ImageModal = ({ showExpandedImage, currentImage, currentProductStyle, onClose, handlePrevSlide, handleNextSlide, activeIndex, imageZoomed, imageZoomIn, imageZoomOut, handleMouseMove, mouseX, mouseY }) => (
+var ImageModal = ({ showExpandedImage, currentImage, currentProductStyle, onClose, handlePrevSlide, handleNextSlide, activeIndex, imageZoomed, imageZoomIn, imageZoomOut, handleMouseMove, mouseX, mouseY}) => (
   <div>
     {showExpandedImage ? <div
       className='modalImage2'>

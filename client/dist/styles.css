@@ -28,27 +28,53 @@ body {
 .gridContainer {
   display: grid;
   grid-template-columns: 40px 200px auto 200px 40px;
-  grid-template-rows: 25% auto 100px;
+  grid-template-rows: 25% auto 50px 100px;
   grid-column-gap: 20px;
 }
 .leftSide {
   grid-column-start: 1;
   grid-column-end: 4;
   grid-row-start: 1;
-  grid-row-end: 3;
+  grid-row-end: 4;
 }
 .rightSide {
   grid-column-start: 4;
   grid-column-end: 6;
   grid-row-start: 1;
-  grid-row-end: 3;
+  grid-row-end: 4;
 }
 .bottomSide {
   grid-column-start: 1;
   grid-column-end: 6;
+  grid-row-start: 4;
+  grid-row-end: 5;
+}
+
+.styleCarousel {
+  grid-column-start: 1;
+  grid-column-end: 4;
   grid-row-start: 3;
   grid-row-end: 4;
+  left: 35%;
+  position: relative;
+  justify-items: center;
+  z-index: 5;
 }
+
+.styleMiniGrid {
+  display: grid;
+  left: 25%;
+  grid-template-columns: 20px 260px 20px;
+
+}
+
+.styleMiniGridImage {
+  display: grid;
+  grid-template-columns: repeat(4, 50px);
+  grid-column-gap: 15px;
+  left: 20px;
+}
+
 .dropdownContainer {
   display: grid;
   grid-template-columns: auto 0px auto;
@@ -182,6 +208,25 @@ body {
   grid-row-start: 3;
   grid-row-end: 4;
 }
+
+.styleMiniLeft {
+  grid-column-start:1;
+  grid-column-end: 2;
+  position:relative;
+  z-index: 5;
+  top: 15px;
+
+
+}
+
+.styleMiniRight {
+  grid-column-start:3;
+  grid-column-end: 4;
+  position: relative;
+  top: 15px;
+  right: 5px;
+}
+
 
 .rightArrow {
   background-color: white;

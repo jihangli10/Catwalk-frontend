@@ -7,6 +7,7 @@ import dummyData from './dummyData.js'
 import axios from 'axios'
 import CartStorage from './CartStorage'
 import ImageModal from './ImageModal'
+import MiniCarouselStyle from './MiniCarouselStyle'
 
 import StarRatings from '../RateReview/StarRatings'
 
@@ -39,7 +40,11 @@ class ProductOverview extends React.Component {
       currentStyleId: '',
       currentActive: '',
       showExpandedImage: false,
-      activeIndex: 0
+      activeIndex: 0,
+      indexCurrent: 0,
+      indexBox: [],
+      indexStart: 0,
+      indexEnd: 0
     }
   }
 
@@ -83,7 +88,10 @@ class ProductOverview extends React.Component {
              imageZoomed: false,
              mouseX: '',
              mouseY: '',
-             activeIndex: 0
+             activeIndex: 0,
+             indexBox: newStyles.data.results.slice(0, 4),
+             indexStart: 0,
+             indexEnd: 3
            })
         })
          .catch(err => {
@@ -171,6 +179,14 @@ class ProductOverview extends React.Component {
     })
   }
 
+  handleMiniPrevSlide () {
+    this.setState({
+      indexBox: this.state.currentProductStyle.results.slice(this.state.indexStart-1, this.state.indexEnd),
+      indexStart: this.state.indexStart - 1,
+      indexEnd: this.state.indexEnd - 1
+    })
+  }
+
   handleNextSlide () {
     let index = this.state.activeIndex;
     let slides = this.state.currentProductStyle.results.length;
@@ -181,6 +197,14 @@ class ProductOverview extends React.Component {
     this.setState({
       activeIndex: index,
       currentImage: this.state.currentProductStyle.results[index].photos[0].url
+    })
+  }
+
+  handleMiniNextSlide () {
+    this.setState({
+      indexBox: this.state.currentProductStyle.results.slice(this.state.indexStart+1, this.state.indexEnd+2),
+      indexStart: this.state.indexStart + 1,
+      indexEnd: this.state.indexEnd + 1
     })
   }
 
@@ -207,11 +231,11 @@ class ProductOverview extends React.Component {
 
   handleImageModal () {
     console.log('Booyah')
-    this.setState({ showExpandedImage: true })
+    this.setState({ showExpandedImage: true})
   }
 
   onClose () {
-    this.setState({ showExpandedImage: !this.state.showExpandedImage })
+    this.setState({ showExpandedImage: !this.state.showExpandedImage})
   }
 
   handleSelectedQuantity(query) {
@@ -253,6 +277,31 @@ class ProductOverview extends React.Component {
     })
   }
 
+  handleMiniStyle (id) {
+    let storedProductStyle;
+    for(let i = 0; i < this.state.indexBox.length; i++) {
+      if(this.state.indexBox[i].style_id === id) {
+        storedProductStyle = this.state.currentProductStyle.results[i];
+        break;
+      }
+    }
+
+    if(storedProductStyle === undefined) {
+
+    } else {
+
+    this.setState({
+      currentImage: storedProductStyle.photos[0].url,
+      currentSizeQuantityList: storedProductStyle.skus,
+      currentStyleName: storedProductStyle.name,
+      currentStyleId: storedProductStyle.style_id,
+      currentPrice: storedProductStyle.original_price,
+      currentSalePrice: storedProductStyle.sale_price,
+      currentActive: id
+    });
+  }
+}
+
   render() {
     if(this.state.isLoading) {
       return (
@@ -263,7 +312,7 @@ class ProductOverview extends React.Component {
       <div className='gridContainer'>
 
         <div className='leftSide'>
-          <div className='imageDiv' >
+          <div className='imageDiv'>
           <img onClick={this.handleImageModal.bind(this)} src={this.state.currentImage} className='mainImage'></img>
 
           <ImageModal
@@ -284,7 +333,32 @@ class ProductOverview extends React.Component {
           </div>
 
         </div><br></br>
+      <div className='styleCarousel'>
 
+        <div className='styleMiniGrid'>
+        <div className='styleMiniLeft' onClick={this.state.indexStart === 0 ? null :this.handleMiniPrevSlide.bind(this)}>
+        {this.state.indexStart === 0 ? null : <i className='fas fa-chevron-left'></i>}
+      </div>
+        {this.state.currentActive === undefined ? this.setState({ currentActive: this.state.currentProductStyle.results[0].style_id }) : null}
+        <div className='styleMiniGridImage'>
+        {this.state.indexBox.map(element => {
+          return (
+            <MiniCarouselStyle
+              element = {element}
+              isActive = {this.state.currentActive === element.style_id}
+              handleMiniStyle = {this.handleMiniStyle.bind(this, element.style_id)}
+            />
+          )
+        })}
+
+        </div>
+        <div className='styleMiniRight' onClick={this.state.indexEnd === this.state.currentProductStyle.results.length-1 ? null : this.handleMiniNextSlide.bind(this)}>
+        {this.state.indexEnd === this.state.currentProductStyle.results.length-1 ? null : <i className='fas fa-chevron-right'></i>}
+        </div>
+        </div>
+
+
+      </div>
       <div className='rightSide'>
         <div className='miniContainer2'>
         <div>

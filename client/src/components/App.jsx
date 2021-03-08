@@ -29,7 +29,8 @@ class App extends React.Component {
         "default_price": "826.00",
         "created_at": "2021-02-23T19:24:34.674Z",
         "updated_at": "2021-02-23T19:24:34.674Z"
-    }
+    },
+    hasBackground: false
   };
   this.updateCurrentProduct = this.updateCurrentProduct.bind(this);
   }
@@ -42,14 +43,30 @@ class App extends React.Component {
         })
       })
   }
+
+  blurBackground() {
+    this.setState({
+      hasBackground: true
+    })
+  }
+
+  unBlurBackground() {
+    this.setState({
+      hasBackground: false
+    })
+  }
+
   render() {
 
     return (
-      <div>
+      <div style={this.state.blurBackground ? {background: 'black'}: null}>
         <div>
           <h1>Main Page</h1>
           <ProductOverview
             currentProduct = {this.state.currentProduct}
+            hasBackground = {this.state.hasBackground}
+            blurBackground = {this.blurBackground.bind(this)}
+            unBlurBackground = {this.unBlurBackground.bind(this)}
           />
         </div>
         <div>

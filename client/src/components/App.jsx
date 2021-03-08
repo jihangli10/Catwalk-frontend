@@ -22,7 +22,7 @@ class App extends React.Component {
     this.state = {
       products:[],
       currentProduct: {
-        "id": 19378,
+        "id": 19783,
         "campus": "hr-rfe",
         "name": "Alberto Romper",
         "slogan": "Voluptatibus sunt neque repellendus.",
@@ -84,7 +84,7 @@ class App extends React.Component {
           <RelatedPO updateProd={this.updateCurrentProduct} currProd={this.state.currentProduct} />
         </div>
 
-        <QandA />
+        <QandA updateProd={this.updateCurrentProduct} currentProduct={this.state.currentProduct}/>
 
         <div>
           <br></br>

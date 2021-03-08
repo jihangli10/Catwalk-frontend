@@ -36,7 +36,7 @@ class ReviewListItem extends React.Component {
 
       <div id="reviewListTiles">
         <div key={review.review_id}>
-          <span className="floatRight"> <i className="fas fa-user-check"></i>&nbsp; {review.reviewer_name},&nbsp;{(new Date(review.date).toDateString().slice(4))} </span><StarRatings
+          <span className="floatRight"> <i className="fas fa-user-check qanda-fa-user-check"></i>&nbsp; {review.reviewer_name},&nbsp;{(new Date(review.date).toDateString().slice(4))} </span><StarRatings
             className="floatLeft listStars" rating={review.rating} />
           <br></br>
           <div className="reviewSummary"><strong>{review.summary.substring(0, 60)}</strong></div>

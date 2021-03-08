@@ -61,7 +61,7 @@ class App extends React.Component {
           <RelatedPO updateProd={this.updateCurrentProduct} currProd={this.state.currentProduct} />
         </div>
 
-        <QandA />
+        <QandA updateProd={this.updateCurrentProduct} currentProduct={this.state.currentProduct}/>
 
         <div>
           <br></br>

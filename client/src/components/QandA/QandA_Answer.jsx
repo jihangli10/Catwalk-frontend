@@ -1,7 +1,7 @@
 import React from 'react';
-import Image from './QandA_Image.jsx';
 import axios from 'axios';
 import Highlighter from "react-highlight-words";
+import PhotoGallery from './QandA_PhotoGallery.jsx';
 
 class Answer extends React.Component {
   constructor(props) {
@@ -9,7 +9,7 @@ class Answer extends React.Component {
     this.state = {
       helpfulness: 0,
       helpClicked: false,
-      reported: false
+      reported: false,
     }
   }
 
@@ -52,30 +52,29 @@ class Answer extends React.Component {
 
   render() {
     let answer = this.props.answer;
+    let isSeller = answer.answerer_name.toLowerCase() === 'seller';
     return (
       <div className="section-answer">
-      <div><strong>A:{" "}</strong>
-      <Highlighter
-            highlightClassName="YourHighlightClass"
-            searchWords={this.props.searchQuery.length >= 3? this.props.searchQuery.split(' ') : []}
-            autoEscape={true}
-            textToHighlight={answer.body}
-          />
-      </div>
-      <div className="answer-image-container">{answer.photos.map((photo, index) => (
-        <Image photo={photo} key={index}/>
-      ))}</div>
-      <div>
-        <span>by {answer.answerer_name}, </span>
-        <span>{(new Date(answer.date).toDateString().slice(4))}</span> |
-        <span>{" "}Helpful?{" "}
+        <div className="answer-body">
+        <Highlighter
+          highlightClassName="YourHighlightClass"
+          searchWords={this.props.searchQuery.length >= 3? this.props.searchQuery.split(' ') : []}
+          autoEscape={true}
+          textToHighlight={answer.body}
+        />
+        </div>
+      <PhotoGallery photos={answer.photos} deletable={false}/>
+      <div className="answer-user-information">
+        <span style={{ fontWeight: isSeller ? "bold" : 200 }}><i className="fas fa-user-check"></i> {answer.answerer_name},&nbsp;&nbsp;</span>
+        <span>{(new Date(answer.date).toDateString().slice(4))}</span>&nbsp;&nbsp;|&nbsp;&nbsp;
+        <span>&nbsp;Helpful?&nbsp;&nbsp;
           {this.state.helpClicked?
-            <span className="yes-help-clicked">Yes{" "}</span> :
+            <span className="yes-help-clicked">Yes&nbsp;&nbsp;</span> :
             <a onClick={this.handleAnswerHelpfulClick.bind(this)} href="#">Yes</a>}
-          ({this.state.helpfulness})</span> | {" "}
-        <span>
+          ({this.state.helpfulness})</span>&nbsp;&nbsp;|&nbsp;&nbsp;
+        <span>&nbsp;
           {this.state.reported?
-            <span className="report-clicked">Reported{" "}</span> :
+            <span className="report-clicked">Reported&nbsp;</span> :
             <a onClick={this.handleAnswerReport.bind(this)} href="#">Report</a>}
         </span>
       </div>

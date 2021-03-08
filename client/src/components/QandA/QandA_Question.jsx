@@ -21,10 +21,10 @@ class Question extends React.Component{
   }
 
   _compareHelpfulness (a, b) {
-    if (a.helpfulness < b.helpfulness) {
+    if (a.helpfulness < b.helpfulness || b.answerer_name.toLowerCase() === 'seller') {
       return 1;
     }
-    if (a.helpfulness > b.helpfulness) {
+    if (a.helpfulness > b.helpfulness || a.answerer_name.toLowerCase() === 'seller') {
       return -1;
     }
     return 0;
@@ -54,43 +54,55 @@ class Question extends React.Component{
   render() {
     const question = this.props.question;
     let showButton = Object.values(question.answers).length >= 3;
+    let hasAnswer = Object.values(question.answers).length >= 1;
     return (
       <div className="section-question">
-        <div className="question-header"><div><strong>
-          Q:{" "}
-          <Highlighter
-            highlightClassName="YourHighlightClass"
-            searchWords={this.props.searchQuery.length >= 3? this.props.searchQuery.split(' ') : []}
-            autoEscape={true}
-            textToHighlight={question.question_body}
-          />
-          </strong></div>
-          <div className="question-actions">{" "}Helpful?{" "}
+        <div className="question-header">
+          <b><div className="qanda-content-container">
+            <div className="qanda-symbol">Q:</div>
+            <Highlighter
+              highlightClassName="YourHighlightClass"
+              searchWords={this.props.searchQuery.length >= 3? this.props.searchQuery.split(' ') : []}
+              autoEscape={true}
+              textToHighlight={question.question_body}
+            />
+
+          </div></b>
+          <div className="question-actions">&nbsp;&nbsp;Helpful?&nbsp;&nbsp;
             {this.state.helpClicked?
               <span className="yes-help-clicked">Yes</span> :
               <a onClick={this.handleQuestionHelpfulClick.bind(this)} href="#">Yes</a>}
-            ({this.state.helpfulness}) |{" "}
-            <a href="#">Add Answer</a>
+            ({this.state.helpfulness})&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="#" questionbody={question.question_body} questionid={this.props.question.question_id} onClick={this.props.handleAddAnswerClick}>Add Answer</a>
           </div>
         </div>
-        {Object.values(question.answers)
-          .sort(this._compareHelpfulness)
-          .map((answer, index) => {
-            if (index <= 1 || this.state.expand === true) {
-              return <Answer answer={answer} key={answer.id} searchQuery={this.props.searchQuery}/>;
-            } else {
-              return null;
-            }
-        })}
-        {showButton ? <a href="#" onClick={this.handleSeeMoreOrCollapseClick.bind(this)}>{this.state.expand? 'COLLAPSE' : 'LOAD MORE'} ANSWERS</a> : null}
+
+        {/* Answer List */}
+        <div>
+        {hasAnswer?
+          <div className="qanda-content-container">
+            <div className="qanda-symbol section-answer"><b>A:</b></div>
+            <div>
+            {Object.values(question.answers)
+              .sort(this._compareHelpfulness)
+              .map((answer, index) => {
+                if (index <= 1 || this.state.expand === true) {
+                  return <Answer answer={answer} key={answer.id} searchQuery={this.props.searchQuery}/>;
+                } else {
+                  return null;
+                }
+            })}
+            {showButton ? <a href="#" onClick={this.handleSeeMoreOrCollapseClick.bind(this)}>{this.state.expand? 'COLLAPSE' : 'LOAD MORE'} ANSWERS</a> : null}
+            </div>
+
+          </div>
+        : <div>This question has no answer.</div>}
+        </div>
+
+
       </div>
     )
   }
-}
-({question}) => {
-
-
-
 }
 
 export default Question;

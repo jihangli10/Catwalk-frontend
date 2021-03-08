@@ -128,7 +128,7 @@ body {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: flex-start
+  justify-content: flex-start;
 }
 #question-button-row {
   margin: 12px 0;
@@ -150,11 +150,198 @@ body {
   color: #a20;
   font-weight: bold;
 }
+.qanda-modal-wrapper {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.qanda-modal-backdrop {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.qanda-modal-box {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 70%;
+  width: 60%;
+  background-color: white;
+  z-index: 101;
+  box-shadow: 0 8px 6px -6px steelblue;
+  border:steelblue solid 1px;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow: auto;
+}
+.qanda-modal-close {
+  position: relative;
+  top: 0;
+  left: 100%;
+  transform: translate(-100%, 0);
+}
+.qanda-clickable:hover {
+  cursor: pointer;
+}
+.qanda-error-message {
+  color: red;
+}
+.fa-times-circle {
+  cursor: pointer;
+  color:steelblue;
+  text-align: right;
+  float:right
+}
 /*==============================================================================*/
   /*RATING AND REVIEW STYLES*/
 /*==============================================================================*/
+/* // ADD NEW REVIEW //=================================== */
+.reviewContainer {
+  overflow-y: auto
+}
+.reviewTitle {
+  font-size: 18px;
+font-weight:500;
+margin-bottom: 12px;
+}
+.reviewSubTitle {
+ font-size: 16px;
+}
+.reviewQ {
+  font-weight: 500;
+  font-size: 16px;
+  margin-top: 12px;
+  margin-bottom: 6px;
+  float: left;
+}
+.reviewA {
+  font-weight: 500;
+  margin-left: 18px;
+  margin-bottom: 6px;
+  width: 100%
+}
+.faOverall {
+  margin-right: 6px;
+}
+.faOverall:hover {
+  color:steelblue
+}
+.ynRadio {
+  font-family: FontAwesome;
+  display: inline-block;
+  content: "\f111";
+  font-weight: 600;
+}
+.ynRadio:checked {
+  content: "\f192";
+  font-weight: 600;
+}
+.rated {
+  font-weight: 700;
+  color:steelblue;
+  font-size: 16px;
+}
+.tableCharacteristics {
+  margin-top: 5px;
+  margin-bottom: 15px;
+  table-layout: fixed;
+  border: solid steelblue 1px;
+  text-align: center;
+}
+.tdTop {
+  border-top: solid steelblue 1px;
+}
+.tdBottom {
+  border-bottom: solid steelblue 1px;
+}
+td {
+  padding: 3px;
+}
+.tdRow {
+  vertical-align: middle;
+}
+label {
+  vertical-align: middle;
+}
+.reviewTextQ {
+  flex: 1;
+  float: left;
+}
+.reviewTextA {
+  flex: 5;
+  float: left;
+}
+textarea {
+  border: solid steelblue 1px;
+}
+.remainChars {
+  color:  #a20;
+  text-align: left;
+  font-size: 12px;
+  margin-top: 6px;
+}
+
+
+
+/* // RATING BREAKDOWN //================================= */
+/* BAR CHART */
+#bar-section {
+  margin-top: 60px;
+  margin-bottom: 48px;
+}
+/* The bar container */
+.bar-container {
+  width: 100%;
+  background-color: rgb(176, 196, 222,0.2);
+  text-align: left;
+  color: black;
+  height: 15px;
+  margin-top: 5px;
+  margin-right: 25px;
+  flex: 4;
+}
+.ratingBreakdown {
+  margin-top: 6px;
+  margin-bottom: 6px;
+  font-size: 12px;
+  color: #a20;
+}
+.clearAll:hover {
+  color: steelblue;
+  font-weight: bold;
+  cursor: pointer;
+}
+.bar-text {
+  font-size: 12px;
+  flex: 1;
+  margin-top: 3px;
+}
+/* Individual bars */
+.bar-5 {height: 15px; background-color: steelblue; font-size: 12px; white-space: nowrap; }
+.bar-4 {height: 15px; background-color: steelblue; font-size: 12px; white-space: nowrap; }
+.bar-3 {height: 15px; background-color: steelblue; font-size: 12px; white-space: nowrap; }
+.bar-2 {height: 15px; background-color: steelblue; font-size: 12px; white-space: nowrap; }
+.bar-1 {height: 15px; background-color: steelblue; font-size: 12px; white-space: nowrap; }
+.bar-5:hover {background-color: #a20; cursor:pointer}
+.bar-4:hover {background-color: #a20; cursor:pointer}
+.bar-3:hover {background-color: #a20; cursor:pointer}
+.bar-2:hover {background-color: #a20; cursor:pointer}
+.bar-1:hover {background-color: #a20; cursor:pointer}
+
+
+/* // RATING REVIEW //================================= */
 #ratingreviewcontainer {
-  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  position: relative;
 }
 .row {
   display: flex;
@@ -181,107 +368,72 @@ padding-bottom: 5%;
 margin-top: 5%;
 float: left;
 }
-/* BAR CHART */
-#bar-section {
-  margin-top: 60px;
-  margin-bottom: 48px;
-}
-/* The bar container */
-.bar-container {
+
+/* // 5-POINT SCALE //================================= */
+#myProgress {
   width: 90%;
-  background-color: rgb(176, 196, 222,0.2);
-  text-align: left;
-  color: black;
-  height: 15px;
-  margin-top: 5px;
-  margin-right: 25px;
-  flex: 4;
+  background-color: rgb(176, 196, 222,0.6);
 }
-.bar-text {
-  font-size: 12px;
-  flex: 0.6;
-  margin-top: 3px;
-}
-/* Individual bars */
-.bar-5 {width: 60%; height: 15px; background-color: steelblue; font-size: 12px; white-space: nowrap; }
-.bar-4 {width: 30%; height: 15px; background-color: steelblue; font-size: 12px; white-space: nowrap; }
-.bar-3 {width: 10%; height: 15px; background-color: steelblue; font-size: 12px; white-space: nowrap; }
-.bar-2 {width: 04%; height: 15px; background-color: steelblue; font-size: 12px; white-space: nowrap; }
-.bar-1 {width: 15%; height: 15px; background-color: steelblue; font-size: 12px; white-space: nowrap; }
-/* SLIDERS */
-#slide-section {
-  margin-top: 48px;
-}
-.slidecontainer {
-  width: 100%; /* Width of the outside container */
-  padding-bottom: 15px;
-}
-.sliderrow {
-  display: flex;
-  flex-direction: row;
-  width: 90%;
-}
-.sliderleft {
-  flex: 1;
-  margin-left: 8px;
-  text-align:left;
-}
-.slidercenter {
-  flex: 1;
-}
-.sliderright {
-  flex: 1;
-  text-align:right;
-  margin-right: 8px;
-}
-.slider {
-  -webkit-appearance: none;
-  width: 90%;
+#myBar {
+  width: 75%;
   height: 10px;
-  border-radius: 5px;
-  background: lightsteelblue;
-  outline: none;
-  opacity: 0.7;
-  -webkit-transition: .2s;
-  transition: opacity .2s;
+  background-color: rgb(176, 196, 222,0.6);
+  margin-right: 10%;
+  text-align: right;
 }
-.sliderlabel {
-  font-size: 12px;
-  margin-left: 2%;
-  padding-bottom: 7px;
+.fa-caret-down {
+  color:steelblue;
+  position: relative;
+    right: -13px;
+    bottom: 16px;
 }
-.slidertext {
-  width: 100%;
-  font-size: 10px;
+.scaleText {
+  font-size: 13px;
+  margin-bottom: 7px;
+  margin-top: 7px;
 }
-.slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 15px;
-  height: 15px;
-  border-radius: 50%;
-  background: steelblue;
-  cursor: pointer;
+.tableScale {
+  width: 90%;
+  float:left;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  table-layout: fixed;
 }
-.slider::-moz-range-thumb {
-  width: 15px;
-  height: 15px;
-  border-radius: 50%;
-  background: steelblue;
-  cursor: pointer;
+.tdL{
+  text-align: left;
+  font-size: 11px;
 }
+.tdC {
+  text-align: center;
+  font-size: 11px;
+}
+.tdR {
+  text-align: right;
+  font-size: 11px;
+}
+
+
 /* GAP BETWEEN LEFT AND RIGHT */
 .gap {
   flex: 0.5;
 }
-.reviewlist {
+.reviewListSort {
   flex: 12;
   margin-right: 25px;
+  max-height: 500px;
+}
+.reviewlist {
+  margin-right: 25px;
+  max-height: 475px;
+  overflow: auto;
+}
+#reviewlistTiles {
+  margin-right: 30px;
 }
 /* Ratings widget */
 .rate {
-    display: inline-block;
-    border: 0;
+  display: inline-block;
+  border: 0;
 }
 /* Hide radio */
 .rate > input {
@@ -290,6 +442,7 @@ float: left;
 /* Order correctly by floating highest to the right */
 .rate > label {
     float: right;
+    color:lightsteelblue
 }
 /* The star of the show */
 .rate > label:before {
@@ -299,21 +452,21 @@ float: left;
     margin: 0;
     cursor: pointer;
     font-family: FontAwesome;
-    content: "\f005 "; /* full star */
+    content: " ";
+    font-weight: 900;/* full star */
+    color:lightsteelblue;
 }
-/* Half star trick */
-.rate .half:before {
-    content: "\f089 "; /* half star no outline */
-    position: absolute;
-    padding-right: 0;
-}
+/* .fa-user-check {
+  color:lightsteelblue;
+} */
+
 /* Click + hover color */
 input:checked ~ label, /* color current and previous stars on checked */
-label:hover, label:hover ~ label { color: #73B100;  } /* color previous stars on hover */
+label:hover, label:hover ~ label { color: steelblue;  } /* color previous stars on hover */
 /* Hover highlights */
 input:checked + label:hover, input:checked ~ label:hover, /* highlight current and previous stars */
 input:checked ~ label:hover ~ label, /* highlight previous selected stars for new rating */
-label:hover ~ input:checked ~ label /* highlight previous selected stars */ { color: #A6E72D;  }
+label:hover ~ input:checked ~ label /* highlight previous selected stars */ { color: steelblue; font-weight: 900; }
 /* REVIEW LIST IMAGES */
 .imgContainer {
     display: flex;
@@ -322,6 +475,8 @@ label:hover ~ input:checked ~ label /* highlight previous selected stars */ { co
     float:left;
     margin-right: 5px;
     margin-bottom: 18px;
+      margin-bottom: 12px;
+  margin-top: 12px;
 }
 .item {
   margin: 5px;
@@ -359,7 +514,7 @@ label:hover ~ input:checked ~ label /* highlight previous selected stars */ { co
 .display-none {
   display: none;
 }
-.dialogNew {
+.dialogOLD {
     background: black;
     color: white;
     border-radius: 1em;
@@ -370,9 +525,10 @@ label:hover ~ input:checked ~ label /* highlight previous selected stars */ { co
     margin-right: -50%;
     transform: translate(-50%, -50%)
   }
-.dialog {
+.dialogNew {
   box-shadow: 0 8px 6px -6px steelblue;
-  position: absolute;
+  position: fixed !important;
+  top: 50px !important;
 }
 .image {
   width: 500px;
@@ -382,13 +538,7 @@ label:hover ~ input:checked ~ label /* highlight previous selected stars */ { co
     left: 25%;
     position: relative;
 }
-#dialog {
-    position: absolute;
-    width: 600px;
-    margin-left: -300px;
-    height: 400px;
-    margin-top: -200px;
-}
+
 /* REVIEW LIST SECTION */
 button {
   background-color: steelblue;
@@ -401,6 +551,9 @@ button {
   text-decoration: none;
   display: inline-block;
   font-size: 12px;
+  cursor:pointer;
+  margin-top: 6px;
+  margin-bottom: 6px;
 }
 select {
   border:transparent;
@@ -408,22 +561,21 @@ select {
   font-weight: bold;
 }
 .recommend {
-  font-weight: 500;
-  color: steelblue;
+  font-weight:500;
   margin-top: 6px;
     margin-bottom: 6px;
 }
 .response {
   background-color: rgb(176, 196, 222,0.3);
   padding: 6px;
+    margin-bottom: 6px;
+  margin-top: 6px;
 }
 .responseText {
   margin-bottom: 12px;
   margin-top: 12px;
 }
-.fa-user-check {
-  color:lightsteelblue;
-}
+
 ul.no-bullets {
   list-style-type: none; /* Remove bullets */
   padding: 0; /* Remove padding */

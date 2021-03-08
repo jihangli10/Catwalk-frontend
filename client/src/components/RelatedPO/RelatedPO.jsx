@@ -223,7 +223,8 @@ class RelatedPO extends React.Component {
     let next = `${name}HideNext`;
     let track = document.querySelector(`.${name}-track`);
     this.setState({
-      [state]: this.state[state] + 1
+      [state]: this.state[state] + 1,
+      [prev]: false
     }, () => {
       let index = this.state[state];
       let totalCards = name === 'outfits' ? this.state.outfits.length + 1 : this.state.relatedProducts.length;
@@ -245,7 +246,6 @@ class RelatedPO extends React.Component {
     let prev = `${name}HidePrev`;
     let next = `${name}HideNext`;
     let track = document.querySelector(`.${name}-track`);
-    console.log(track);
     this.setState({
       [state]: this.state[state] - 1
     }, () => {

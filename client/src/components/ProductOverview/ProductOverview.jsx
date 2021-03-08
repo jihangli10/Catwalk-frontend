@@ -50,11 +50,6 @@ class ProductOverview extends React.Component {
     }
   }
 
-  sendLink () {
-    //send to the Ratings and Review Module
-    // var value = this.state;
-    // console.log(value);
-  }
 
   componentDidUpdate(prevProps) {
     if(this.props.currentProduct !== prevProps.currentProduct) {

@@ -40,7 +40,7 @@ class QandA extends React.Component {
           questions: data.data.results,
           displayQuestions: data.data.results,
           product_id: data.data.product_id
-        }, () => {console.log('data:', data.data.results[data.data.results.length - 1])})
+        })
 
       })
       .catch(err => {

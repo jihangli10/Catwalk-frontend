@@ -15,7 +15,6 @@ app.use(express.static(path.join(__dirname, "../client/dist")));
 // SERVER ROUTES
 //================================================================================================================
 app.use(async (req, res) => {
-  console.log(req.body)
   try {
     let response = await axios({
       baseURL: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rfe/',

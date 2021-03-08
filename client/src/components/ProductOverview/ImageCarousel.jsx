@@ -35,6 +35,7 @@ var ImageCarousel = ({ showExpandedImage, currentImage, currentProductStyle, onC
   }
   if(imageZoomed) {
     return (
+      <div className='modal-wrapper'>
     <div className='carouselContainer'>
       <div className='carouselImage2'>
       <div style={imgStyles} onMouseOver={imageZoomIn} onMouseMove={handleMouseMove} onClick={imageZoomOut}>
@@ -42,9 +43,12 @@ var ImageCarousel = ({ showExpandedImage, currentImage, currentProductStyle, onC
       </div>
       </div>
       </div>
+      </div>
     )
   } else {
-    return (<div className='carouselContainer'>
+    return (
+    <div className='modal-wrapper'>
+    <div className='carouselContainer'>
     <div className='carouselLeft'>
 
       {activeIndex === 0 ? null: <button className='dumbButton' onClick={handlePrevSlide}> <i className='fas fa-chevron-left'></i> </button>}
@@ -64,7 +68,9 @@ var ImageCarousel = ({ showExpandedImage, currentImage, currentProductStyle, onC
     <div className='carouselRight'>
       {activeIndex === currentProductStyle.results.length-1 ? null: <button className='dumbButton' onClick={handleNextSlide}> <i className='fas fa-chevron-right'></i> </button>}
     </div>
-  </div>)
+  </div>
+  </div>
+  )
   }
 
 

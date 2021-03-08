@@ -17,6 +17,16 @@ body {
 /*==============================================================================*/
   /*PRODUCT OVERVIEW STYLES*/
 /*==============================================================================*/
+.modal-wrapper {
+  position: fixed;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  background: rgba(0,0,0,1.0);
+  z-index: 130;
+}
+
 .someDisplay {
   display: inline;
   font-size: 10px;

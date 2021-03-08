@@ -44,7 +44,9 @@ class ProductOverview extends React.Component {
       indexCurrent: 0,
       indexBox: [],
       indexStart: 0,
-      indexEnd: 0
+      indexEnd: 0,
+      starAverage: 0,
+      isClicked: false
     }
   }
 
@@ -68,31 +70,41 @@ class ProductOverview extends React.Component {
       let id = this.props.currentProduct.id;
       axios.get(`/products/${id}/styles`)
          .then(newStyles => {
-            this.setState({
-             currentProductStyle: newStyles.data,
-             isLoading: false,
-             currentProductName: this.props.currentProduct.name,
-             currentProductCategory: this.props.currentProduct.category,
-             currentPrice: newStyles.data.results[0].original_price,
-             currentSalePrice: newStyles.data.results[0].sale_price,
-             currentDescription: this.props.currentProduct.description,
-             currentImage: newStyles.data.results[0].photos[0].url,
-             currentSizeQuantityList: newStyles.data.results[0].skus,
-             currentStyleName: newStyles.data.results[0].name,
-             selectedQuantity: '',
-             selectedSize: '',
-             isDisabled: true,
-             inStock: true,
-             currentStyleId: newStyles.data.results[0].styles_id,
-             currentActive: newStyles.data.results[0].styles_id,
-             imageZoomed: false,
-             mouseX: '',
-             mouseY: '',
-             activeIndex: 0,
-             indexBox: newStyles.data.results.slice(0, 4),
-             indexStart: 0,
-             indexEnd: 3
-           })
+           axios.get('/reviews', { params: { product_id: id } })
+            .then(addedData => {
+              let sumRating = 0;
+              for (var i = 0; i < addedData.data.results.length; i++) {
+                sumRating += addedData.data.results[i].rating
+             }
+              this.setState({
+                currentProductStyle: newStyles.data,
+                isLoading: false,
+                currentProductName: this.props.currentProduct.name,
+                currentProductCategory: this.props.currentProduct.category,
+                currentPrice: newStyles.data.results[0].original_price,
+                currentSalePrice: newStyles.data.results[0].sale_price,
+                currentDescription: this.props.currentProduct.description,
+                currentImage: newStyles.data.results[0].photos[0].url,
+                currentSizeQuantityList: newStyles.data.results[0].skus,
+                currentStyleName: newStyles.data.results[0].name,
+                selectedQuantity: '',
+                selectedSize: '',
+                isDisabled: true,
+                inStock: true,
+                currentStyleId: newStyles.data.results[0].styles_id,
+                currentActive: newStyles.data.results[0].styles_id,
+                imageZoomed: false,
+                mouseX: '',
+                mouseY: '',
+                activeIndex: 0,
+                indexBox: newStyles.data.results.slice(0, 4),
+                indexStart: 0,
+                indexEnd: 3,
+                starAverage: (Math.round(sumRating /addedData.data.results.length * 4) / 4).toFixed(2),
+                reviewAmount: addedData.data.results.length
+              })
+            })
+
         })
          .catch(err => {
           console.log(err);
@@ -231,11 +243,11 @@ class ProductOverview extends React.Component {
 
   handleImageModal () {
     console.log('Booyah')
-    this.setState({ showExpandedImage: true})
+    this.setState({ showExpandedImage: true, isClicked: true})
   }
 
   onClose () {
-    this.setState({ showExpandedImage: !this.state.showExpandedImage})
+    this.setState({ showExpandedImage: !this.state.showExpandedImage, isClicked: false})
   }
 
   handleSelectedQuantity(query) {
@@ -309,6 +321,7 @@ class ProductOverview extends React.Component {
       )
     } else {
     return (
+      <div >
       <div className='gridContainer'>
 
         <div className='leftSide'>
@@ -363,10 +376,10 @@ class ProductOverview extends React.Component {
         <div className='miniContainer2'>
         <div>
         <StarRatings
-          rating='3'
+          rating={this.state.starAverage}
         />
         </div>
-        <div className='someDisplay'><a href='#test'>Read All {this.state.currentValue} reviews</a></div>
+        <div className='someDisplay'><a href='#test' style={{ textDecoration: 'none'}}>Read All {this.state.reviewAmount} reviews</a></div>
         </div>
         <div><h3>{this.state.currentProductCategory}</h3></div>
         <div><h2>{this.state.currentProductName}</h2></div>
@@ -423,6 +436,7 @@ class ProductOverview extends React.Component {
       </div>
       <br></br>
         <div className ='bottomSide'><br></br>{this.state.currentDescription}</div>
+    </div>
     </div>
     );
   }

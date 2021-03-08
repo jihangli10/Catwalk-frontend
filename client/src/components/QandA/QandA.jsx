@@ -26,6 +26,12 @@ class QandA extends React.Component {
     this.updateContent.apply(this);
   }
 
+  componentDidUpdate(previousProps) {
+    if (previousProps.currentProduct.id !== this.props.currentProduct.id) {
+      this.updateContent.apply(this);
+    }
+  }
+
   updateContent() {
     return axios.get('/qa/questions', {params: { product_id: this.props.currentProduct.id }})
     // return axios.get('/qa/questions', {params: { product_id: 19093 }})

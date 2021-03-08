@@ -65,7 +65,7 @@ class Answer extends React.Component {
         </div>
       <PhotoGallery photos={answer.photos} deletable={false}/>
       <div className="answer-user-information">
-        <span style={{ fontWeight: isSeller ? "bold" : 200 }}><i className="fas fa-user-check"></i> {answer.answerer_name},&nbsp;&nbsp;</span>
+        <span style={{ fontWeight: isSeller ? "bold" : 200 }}><i className="fas fa-user-check qanda-fa-user-check"></i> {answer.answerer_name},&nbsp;&nbsp;</span>
         <span>{(new Date(answer.date).toDateString().slice(4))}</span>&nbsp;&nbsp;|&nbsp;&nbsp;
         <span>&nbsp;Helpful?&nbsp;&nbsp;
           {this.state.helpClicked?

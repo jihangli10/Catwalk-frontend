@@ -350,7 +350,7 @@ class ProductOverview extends React.Component {
 
         <div className='styleMiniGrid'>
         <div className='styleMiniLeft' onClick={this.state.indexStart === 0 ? null :this.handleMiniPrevSlide.bind(this)}>
-        {this.state.indexStart === 0 ? null : <i className='fas fa-chevron-left'></i>}
+        {this.state.indexStart === 0 ? null : <i className='fas overview-fas overview-fa-chevron-left fa-chevron-left'></i>}
       </div>
         {this.state.currentActive === undefined ? this.setState({ currentActive: this.state.currentProductStyle.results[0].style_id }) : null}
         <div className='styleMiniGridImage'>
@@ -366,7 +366,7 @@ class ProductOverview extends React.Component {
 
         </div>
         <div className='styleMiniRight' onClick={this.state.indexEnd === this.state.currentProductStyle.results.length-1 ? null : this.handleMiniNextSlide.bind(this)}>
-        {this.state.indexEnd === this.state.currentProductStyle.results.length-1 ? null : <i className='fas fa-chevron-right'></i>}
+        {this.state.indexEnd === this.state.currentProductStyle.results.length-1 ? null : <i className='fas overview-fas overview-fa-chevron-right fa-chevron-right'></i>}
         </div>
         </div>
 

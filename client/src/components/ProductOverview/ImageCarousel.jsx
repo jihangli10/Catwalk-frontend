@@ -51,7 +51,7 @@ var ImageCarousel = ({ showExpandedImage, currentImage, currentProductStyle, onC
     <div className='carouselContainer'>
     <div className='carouselLeft'>
 
-      {activeIndex === 0 ? null: <button className='dumbButton' onClick={handlePrevSlide}> <i className='fas fa-chevron-left'></i> </button>}
+      {activeIndex === 0 ? null: <button className='dumbButton' onClick={handlePrevSlide}> <i className='fas overview-fas overview-fa-chevron-left fa-chevron-left'></i> </button>}
     </div>
 
     <div className='carouselImage2'>
@@ -62,11 +62,11 @@ var ImageCarousel = ({ showExpandedImage, currentImage, currentProductStyle, onC
 
     </div>
     <div className='closeGrid'>
-    <button className='dumbButton' onClick={onClose}><i className="far fa-times-circle"></i></button>
+    <button className='dumbButton' onClick={onClose}><i className="far overview-far overview-fa-times-circle fa-times-circle"></i></button>
     </div>
 
     <div className='carouselRight'>
-      {activeIndex === currentProductStyle.results.length-1 ? null: <button className='dumbButton' onClick={handleNextSlide}> <i className='fas fa-chevron-right'></i> </button>}
+      {activeIndex === currentProductStyle.results.length-1 ? null: <button className='dumbButton' onClick={handleNextSlide}> <i className='fas overview-fas overview-fa-chevron-right fa-chevron-right'></i> </button>}
     </div>
   </div>
   </div>

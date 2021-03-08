@@ -108,7 +108,7 @@ body {
   grid-column-gap: 10px;
 }
 .mainImage {
-  object-fit: contain;
+  object-fit: cover;
   width: 100%;
   height: 500px;
   max-height: 100%;
@@ -255,27 +255,27 @@ body {
   background: transparent;
 }
 
-.fa-times-circle::before {
+.overview-fa-times-circle::before {
   background: white;
   height: 50px;
   width: 50px;
 }
 
-.fa-chevron-left::before {
+.overview-fa-chevron-left::before {
   background: transparent;
   height: 50px;
   width: 50px;
 }
 
-.fa-chevron-right::before {
+.overview-fa-chevron-right::before {
   background: transparent;
 }
 
-.fas {
+.overview-fas {
   color: white;
 }
 
-.far {
+.overview-far {
   color: black
 }
 
@@ -710,9 +710,9 @@ float: left;
     font-weight: 900;/* full star */
     color:lightsteelblue;
 }
-/* .fa-user-check {
+.qanda-fa-user-check {
   color:lightsteelblue;
-} */
+}
 
 /* Click + hover color */
 input:checked ~ label, /* color current and previous stars on checked */

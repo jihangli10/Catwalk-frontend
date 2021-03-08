@@ -33,6 +33,7 @@ class ProductOverview extends React.Component {
       currentPrice: '',
       currentSalePrice: '',
       currentDescription: '',
+      currentSlogan: '',
       currentImage:'',
       currentSizeQuantityList: {},
       cartStorage: [],
@@ -46,7 +47,8 @@ class ProductOverview extends React.Component {
       indexStart: 0,
       indexEnd: 0,
       starAverage: 0,
-      isClicked: false
+      isClicked: false,
+      currentZoomImage: ''
     }
   }
 
@@ -78,6 +80,7 @@ class ProductOverview extends React.Component {
                 currentProductCategory: this.props.currentProduct.category,
                 currentPrice: newStyles.data.results[0].original_price,
                 currentSalePrice: newStyles.data.results[0].sale_price,
+                currentSlogan: this.props.currentProduct.slogan,
                 currentDescription: this.props.currentProduct.description,
                 currentImage: newStyles.data.results[0].photos[0].url,
                 currentSizeQuantityList: newStyles.data.results[0].skus,
@@ -96,7 +99,8 @@ class ProductOverview extends React.Component {
                 indexStart: 0,
                 indexEnd: 3,
                 starAverage: (Math.round(sumRating /addedData.data.results.length * 4) / 4).toFixed(2),
-                reviewAmount: addedData.data.results.length
+                reviewAmount: addedData.data.results.length,
+                currentZoomImage: newStyles.data.results[0].photos[0].url
               })
             })
 
@@ -180,9 +184,10 @@ class ProductOverview extends React.Component {
       index = slides;
     }
     index--;
+    console.log('handlePrevSlide')
     this.setState({
       activeIndex: index,
-      currentImage: this.state.currentProductStyle.results[index].photos[0].url
+      currentZoomImage: this.state.currentProductStyle.results[index].photos[0].url
     })
   }
 
@@ -203,7 +208,7 @@ class ProductOverview extends React.Component {
     index++;
     this.setState({
       activeIndex: index,
-      currentImage: this.state.currentProductStyle.results[index].photos[0].url
+      currentZoomImage: this.state.currentProductStyle.results[index].photos[0].url
     })
   }
 
@@ -242,7 +247,7 @@ class ProductOverview extends React.Component {
   }
 
   onClose () {
-    this.setState({ showExpandedImage: !this.state.showExpandedImage, isClicked: false})
+    this.setState({ showExpandedImage: !this.state.showExpandedImage, isClicked: false, currentImage: this.state.currentZoomImage})
   }
 
   handleSelectedQuantity(query) {
@@ -322,7 +327,7 @@ class ProductOverview extends React.Component {
         <div className='leftSide'>
           <div className='imageDiv'>
           <img onClick={this.handleImageModal.bind(this)} src={this.state.currentImage} className='mainImage'></img>
-
+          {console.log(this.state.currentZoomimage)}
           <ImageModal
               showExpandedImage = {this.state.showExpandedImage}
               currentImage = {this.state.currentImage}
@@ -337,6 +342,7 @@ class ProductOverview extends React.Component {
               handleMouseMove = {this.handleMouseMove.bind(this)}
               mouseX = {this.state.mouseX}
               mouseY = {this.state.mouseY}
+              currentZoomImage = {this.state.currentZoomImage}
             />
           </div>
 
@@ -430,7 +436,7 @@ class ProductOverview extends React.Component {
         <br></br>
       </div>
       <br></br>
-        <div className ='bottomSide'><br></br>{this.state.currentDescription}</div>
+        <div className ='bottomSide'><br></br><div className='sloganName'>{this.state.currentSlogan}</div><br></br>{this.state.currentDescription}</div>
     </div>
     </div>
     );

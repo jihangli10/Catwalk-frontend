@@ -110,7 +110,9 @@ class RelatedPO extends React.Component {
             this.setState({
               relatedProducts: results
             }, () => {
-            this.checkCarouselState('relatedProducts')
+              // document.querySelector('.rel-track').style.transform = "translateX(0px)";
+              // document.querySelector(`.prev-rel-card`).classList.remove('show');
+              this.checkCarouselState('relatedProducts');
           });
           })
           .catch(error => console.log('ERROR with Promise.all', error));
@@ -200,7 +202,7 @@ class RelatedPO extends React.Component {
     if (cards > doc) {
       this.setState({
         [state]: false
-      })
+      });
     } else {
       this.setState({
         [state]: true

@@ -37,7 +37,7 @@ class ProductOverview extends React.Component {
       currentImage:'',
       currentSizeQuantityList: {},
       cartStorage: [],
-      cartStorageSize: [],
+      cartStorageSize: 0,
       currentStyleId: '',
       currentActive: '',
       showExpandedImage: false,
@@ -145,7 +145,9 @@ class ProductOverview extends React.Component {
     }
   }
 
-
+  cartModal () {
+    //creates an axio get request and sets state with all the data stored in cart
+  }
 
   handleAddCart() {
 
@@ -154,6 +156,7 @@ class ProductOverview extends React.Component {
       //create some sort of error message
     } else {
       console.log('hit here')
+      //make an axios post call to store in the data
       this.setState({
         isError: false,
         cartStorage: [...this.state.cartStorage, {
@@ -173,18 +176,17 @@ class ProductOverview extends React.Component {
     this.setState({ selectedQuantity: query.target.value })
   }
 
-  modalMode () {
-    console.log('it hits here')
-  }
+
 
   handlePrevSlide () {
     let index = this.state.activeIndex
+
     let slides = this.state.currentProductStyle.results.length
     if(index < 1) {
       index = slides;
     }
+    console.log(index);
     index--;
-    console.log('handlePrevSlide')
     this.setState({
       activeIndex: index,
       currentZoomImage: this.state.currentProductStyle.results[index].photos[0].url
@@ -205,6 +207,7 @@ class ProductOverview extends React.Component {
     if(index === slides) {
       index = -1;
     }
+
     index++;
     this.setState({
       activeIndex: index,
@@ -222,12 +225,17 @@ class ProductOverview extends React.Component {
 
   handleStyle(id) {
     let storedProductStyle;
+    let currentIndex;
     for(let i = 0; i < this.state.currentProductStyle.results.length; i++) {
       if(this.state.currentProductStyle.results[i].style_id === id) {
         storedProductStyle = this.state.currentProductStyle.results[i];
+        currentIndex = i;
+        console.log(currentIndex);
         break;
       }
     }
+
+    console.log(currentIndex);
 
     this.setState({
       currentImage: storedProductStyle.photos[0].url,
@@ -236,14 +244,15 @@ class ProductOverview extends React.Component {
       currentStyleId: storedProductStyle.style_id,
       currentPrice: storedProductStyle.original_price,
       currentSalePrice: storedProductStyle.sale_price,
-      currentActive: id
+      currentActive: id,
+      activeIndex: currentIndex
     });
 
   }
 
   handleImageModal () {
     console.log('Booyah')
-    this.setState({ showExpandedImage: true, isClicked: true})
+    this.setState({ showExpandedImage: true, isClicked: true, currentZoomImage: this.state.currentImage})
   }
 
   onClose () {
@@ -291,9 +300,11 @@ class ProductOverview extends React.Component {
 
   handleMiniStyle (id) {
     let storedProductStyle;
+    let currentIndex;
     for(let i = 0; i < this.state.indexBox.length; i++) {
       if(this.state.indexBox[i].style_id === id) {
         storedProductStyle = this.state.currentProductStyle.results[i];
+        currentIndex = i;
         break;
       }
     }
@@ -309,7 +320,8 @@ class ProductOverview extends React.Component {
       currentStyleId: storedProductStyle.style_id,
       currentPrice: storedProductStyle.original_price,
       currentSalePrice: storedProductStyle.sale_price,
-      currentActive: id
+      currentActive: id,
+      activeIndex: currentIndex
     });
   }
 }
@@ -330,7 +342,6 @@ class ProductOverview extends React.Component {
         <div className='leftSide'>
           <div className='imageDiv'>
           <img onClick={this.handleImageModal.bind(this)} src={this.state.currentImage} className='mainImage'></img>
-          {console.log(this.state.currentZoomimage)}
           <ImageModal
               showExpandedImage = {this.state.showExpandedImage}
               currentImage = {this.state.currentImage}
@@ -425,7 +436,7 @@ class ProductOverview extends React.Component {
           isCartMade = {this.state.isCartMade}
         />
         <CartStorage
-          modalMode = {this.modalMode.bind(this)}
+          cartModal = {this.cartModal.bind(this)}
           cartStorageSize = {this.state.cartStorageSize}
         />
         </div>

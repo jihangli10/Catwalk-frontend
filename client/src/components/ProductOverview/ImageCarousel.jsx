@@ -50,7 +50,7 @@ var ImageCarousel = ({ showExpandedImage, currentImage, currentProductStyle, onC
     <div className='modal-wrapper'>
     <div className='carouselContainer'>
     <div className='carouselLeft'>
-
+      {console.log(activeIndex)}
       {activeIndex === 0 ? null: <button className='dumbButton' onClick={handlePrevSlide}> <i className='fas overview-fas overview-fa-chevron-left fa-chevron-left'></i> </button>}
     </div>
 

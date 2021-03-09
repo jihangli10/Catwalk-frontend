@@ -1,6 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-import AddNewReviewContents from './AddNewReviewContents';
 import PhotoGallery from '../QandA/QandA_PhotoGallery.jsx';
 import config from '../../../../config.js';
 

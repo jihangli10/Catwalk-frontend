@@ -120,7 +120,7 @@ class ReviewListSort extends React.Component {
         <div id="question-button-row">
           <button style={{ display: revListSortLength >= this.state.displayed && revListSortLength > 2 ? "inline" : "none" }} onClick={this.handleClick.bind(this)}>MORE REVIEWS</button>&nbsp;&nbsp;
          <button key={'reviews' + this.props.reviewListSort.length} style={{ display: this.props.reviewListSort.length !== 0 ? "inline" : "none" }} onClick={this.handleAddReviewClick.bind(this)}>ADD REVIEWS</button>
-          {this.state.isOpen ? (<AddNewReview handleAddReviewClick={this.handleAddReviewClick} addReviewProd={this.props.reviewProduct} addReviewChar={this.props.reviewCharacteristics} />) : null}
+          {this.state.isOpen ? (<AddNewReview key={this.props.reviewProduct.id} handleAddReviewClick={this.handleAddReviewClick} addReviewProd={this.props.reviewProduct} addReviewChar={this.props.reviewCharacteristics} />) : null}
         </div>
         <br></br>
         <br></br>

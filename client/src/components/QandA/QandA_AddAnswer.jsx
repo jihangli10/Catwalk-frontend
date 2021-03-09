@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import PhotoGallery from './QandA_PhotoGallery.jsx';
+import FormPhotoGallery from './QandA_FormPhotoGallery.jsx';
 import config from '../../../../config.js';
 
 class AddAnswer extends React.Component {
@@ -102,9 +102,6 @@ class AddAnswer extends React.Component {
   }
 
   handlePhotoDelete(e) {
-    if (document.getElementById('add-answer-photo') === null) {
-      document.getElementById('add-answer-photo').value = null;
-    }
     let newPhotos = this.state.photos;
     newPhotos.splice(e.target.getAttribute('index'), 1);
     this.setState({
@@ -173,7 +170,11 @@ class AddAnswer extends React.Component {
           <div><input type="file" id="add-answer-photo" name="answer-photos" onChange={this.handleUploadPhoto.bind(this)}/></div>
           </div>
           : <div className="qanda-error-message">You've reached the maxmimum number of uploads (5 photos)</div>}
-          <PhotoGallery photos={this.state.photos} deletable={false} handlePhotoDelete={this.handlePhotoDelete.bind(this)}/>
+          <FormPhotoGallery
+            photos={this.state.photos}
+            handlePhotoDelete={this.handlePhotoDelete.bind(this)}
+            handleImageClick={this.props.handleImageClick}
+          />
         </div>
 
         <div><button onClick={this.handleSubmit.bind(this)}>Submit Answer</button></div>

@@ -2,6 +2,7 @@ import React from 'react';
 import AddAnswer from './QandA_AddAnswer.jsx';
 import AddQuestion from './QandA_AddQuestion.jsx';
 import QuestionList from './QandA_QuestionList.jsx';
+import ImageZoom from './QandA_ImageZoom.jsx';
 import Search from './QandA_Search.jsx';
 import axios from 'axios';
 
@@ -18,8 +19,11 @@ class QandA extends React.Component {
       showImageZoom: false,
       product_id: null,
       question_id: null,
-      question_body: null
+      question_body: null,
+      photo: '',
     }
+    this.handleImageClick = this.handleImageClick.bind(this);
+    this.forceUpdate = this.forceUpdate.bind(this);
   }
 
   componentDidMount() {
@@ -40,7 +44,7 @@ class QandA extends React.Component {
           questions: data.data.results,
           displayQuestions: data.data.results,
           product_id: data.data.product_id
-        }, () => {console.log('data:', data.data.results[data.data.results.length - 1])})
+        })
 
       })
       .catch(err => {
@@ -106,6 +110,19 @@ class QandA extends React.Component {
     })
   }
 
+  handleImageClick(e) {
+    this.setState({
+      photo: e.target.getAttribute("src"),
+      showImageZoom: true
+    })
+  }
+
+  handleImageClose() {
+    this.setState({
+      showImageZoom: false
+    })
+  }
+
   forceUpdate() {
     this.updateContent.apply(this);
   }
@@ -119,7 +136,7 @@ class QandA extends React.Component {
         <div className='section'>Question and Answers</div>
         {this.state.showAddQuestion? <AddQuestion
           handleAddQuestionClose={this.handleAddQuestionClose.bind(this)}
-          forceUpdate={this.forceUpdate.bind(this)}
+          forceUpdate={this.forceUpdate}
           product_id={this.state.product_id}
           product_name={this.props.currentProduct.name}/>
           : null
@@ -128,10 +145,18 @@ class QandA extends React.Component {
         {this.state.showAddAnswer? <AddAnswer
           handleAddAnswerClick={this.handleAddAnswerClick.bind(this)}
           handleAddAnswerClose={this.handleAddAnswerClose.bind(this)}
-          forceUpdate={this.forceUpdate.bind(this)}
+          handleImageClick={this.handleImageClick}
+          forceUpdate={this.forceUpdate}
           question_id={this.state.question_id}
           question_body={this.state.question_body}
           product_name={this.props.currentProduct.name}
+          />
+          : null
+        }
+
+        {this.state.showImageZoom? <ImageZoom
+          photo={this.state.photo}
+          handleImageClose={this.handleImageClose.bind(this)}
           />
           : null
         }
@@ -145,6 +170,7 @@ class QandA extends React.Component {
           searchQuery={this.state.searchQuery}
           showAddAnswer={this.state.showAddAnswer}
           handleAddAnswerClick={this.handleAddAnswerClick.bind(this)}
+          handleImageClick={this.handleImageClick}
         />
         : <div>This product has no questions.</div>}
         <div id="question-button-row">

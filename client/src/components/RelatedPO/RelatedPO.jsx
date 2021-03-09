@@ -5,6 +5,7 @@ import RelatedProdCard from './RelatedProdCard.jsx';
 import axios from 'axios';
 import RelatedModal from './RelatedModal.jsx';
 import AddOutfitCard from './AddOutfitCard.jsx';
+import CreateFeatures from './CreateFeatures.jsx';
 import ls from 'local-storage';
 
 
@@ -195,23 +196,29 @@ class RelatedPO extends React.Component {
   checkCarouselState(list) {
     let cards;
     if (list === 'outfits') {
-      cards = 252.22 + (this.state[list].length * 257);
+      cards = 252.22 + (this.state[list].length * 256.8);
     } else {
-      cards = 252.22 + ((this.state[list].length - 1) * 257);
+      cards = 252.22 + ((this.state[list].length - 1) * 256.8);
     }
     let doc = document.body.clientWidth;
+    let index = `${list}index`;
     let hideNext = `${list}HideNext`;
     let hidePrev = `${list}HidePrev`;
-    if (cards > doc) {
+    if (cards > doc && this.state[index] > 0) {
+      this.setState({
+        [hideNext]: false
+      });
+    } else if (cards > doc && this.state[index] === 0) {
       this.setState({
         [hideNext]: false,
         [hidePrev]: true
       });
     } else {
       this.setState({
-        [hidePrev]: true,
-        [hideNext]: true
-      })
+        [hideNext]: true,
+        index: 0,
+        [hidePrev]: true
+      });
     }
   }
 
@@ -309,6 +316,9 @@ class RelatedPO extends React.Component {
                   <button onClick={this.handleCarouselNext} className={this.state.outfitsHideNext ? "hide outfits next-out-card" : "outfits show next-out-card"}><i className="outfits show fas fa-chevron-right fa-2x"></i></button>
               </div>
             </div>
+          </div>
+          <div>
+            <CreateFeatures product={this.props.currProd} />
           </div>
         </div>
       );

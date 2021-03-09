@@ -48,13 +48,6 @@ class ModalTableRows extends React.Component {
     let noDupes = new Set(combined);
     noDupes = [...noDupes];
 
-    // let loseNulls = [];
-    // noDupes.forEach(item => {
-    //   if (parent[item] || select[item]) {
-    //     loseNulls.push(item);
-    //   }
-    // });
-
     this.setState({
       commonFeatures: noDupes,
       pFeatures: parent,

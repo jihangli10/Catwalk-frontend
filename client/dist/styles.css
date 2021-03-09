@@ -936,8 +936,8 @@ ul.no-bullets {
   width: 100%;
 }
 
-.rel-track,
-.out-track {
+.relatedProducts-track,
+.outfits-track {
   display: inline-flex;
   height: 100%;
   transition:ease-in-out 0.55s;
@@ -1237,3 +1237,7 @@ ul.no-bullets {
   height: 30px;
   width: 250px;
 }
+
+/* .featureName {
+  margin-right: 8px;
+} */

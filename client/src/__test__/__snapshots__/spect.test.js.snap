@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App is working should contain main page header 1`] = `ShallowWrapper {}`;

@@ -5,6 +5,7 @@ import RelatedProdCard from './RelatedProdCard.jsx';
 import axios from 'axios';
 import RelatedModal from './RelatedModal.jsx';
 import AddOutfitCard from './AddOutfitCard.jsx';
+import CreateFeatures from './CreateFeatures.jsx';
 import ls from 'local-storage';
 
 
@@ -23,11 +24,12 @@ class RelatedPO extends React.Component {
       parentReviews: null,
       outfits: [],
       average: 0,
-      relindex: 0,
-      outindex: 0,
-      relatedProductsHide: false,
-      outfitsHide: false
-
+      relatedProductsindex: 0,
+      outfitsindex: 0,
+      relatedProductsHideNext: false,
+      outfitsHideNext: false,
+      relatedProductsHidePrev: false,
+      outfitsHidePrev: false
     }
     this.getRelatedProducts = this.getRelatedProducts.bind(this);
     this.handleActionButtonClick = this.handleActionButtonClick.bind(this);
@@ -59,6 +61,8 @@ class RelatedPO extends React.Component {
   componentDidUpdate(prevProps, prevState) {
     if (this.state.outfits.length !== prevState.outfits.length) {
       this.checkCarouselState('outfits');
+    } else if (prevProps.currProd.id !== this.props.currProd.id) {
+      this.checkCarouselState('relatedProducts');
     }
   }
 
@@ -108,11 +112,11 @@ class RelatedPO extends React.Component {
         Promise.all(relatedProds)
           .then(results => {
             this.setState({
-              relatedProducts: results
+              relatedProducts: results,
+              relatedProductsindex: 0
             }, () => {
-              // document.querySelector('.rel-track').style.transform = "translateX(0px)";
-              // document.querySelector(`.prev-rel-card`).classList.remove('show');
               this.checkCarouselState('relatedProducts');
+              document.querySelector('.relatedProducts-track').style.transform = "translateX(0px)";
           });
           })
           .catch(error => console.log('ERROR with Promise.all', error));
@@ -176,14 +180,13 @@ class RelatedPO extends React.Component {
       outfits: newOutfits
     }, () => {
       ls.set('outfits', this.state.outfits);
-      if (this.state.outindex > 0) {
-        this.state.outindex--;
-        let track = document.querySelector(`.out-track`);
-        track.style.transform = this.state.outindex > 1 ? "translateX(" + (this.state.outindex - 1) * (252.22) + "px)" : "translateX(0px)";
+      if (this.state.outfitsindex > 0) {
         this.setState({
-          outindex: 0
+          outfitsindex: this.state.outfitsindex - 1,
+          outfitsHidePrev: true
         }, () => {
-          document.querySelector(`.prev-out-card`).classList.remove('show');
+          let track = document.querySelector(`.outfits-track`);
+          track.style.transform = this.state.outindex > 1 ? "translateX(" + (this.state.outindex - 1) * (252.22) + "px)" : "translateX(0px)";
           this.checkCarouselState('outfits');
         })
       }
@@ -193,20 +196,29 @@ class RelatedPO extends React.Component {
   checkCarouselState(list) {
     let cards;
     if (list === 'outfits') {
-      cards = 252.22 + (this.state[list].length * 256.66);
+      cards = 252.22 + (this.state[list].length * 256.8);
     } else {
-      cards = 252.22 + ((this.state[list].length - 1) * 256.66);
+      cards = 252.22 + ((this.state[list].length - 1) * 256.8);
     }
     let doc = document.body.clientWidth;
-    let state = `${list}Hide`;
-    if (cards > doc) {
+    let index = `${list}index`;
+    let hideNext = `${list}HideNext`;
+    let hidePrev = `${list}HidePrev`;
+    if (cards > doc && this.state[index] > 0) {
       this.setState({
-        [state]: false
+        [hideNext]: false
+      });
+    } else if (cards > doc && this.state[index] === 0) {
+      this.setState({
+        [hideNext]: false,
+        [hidePrev]: true
       });
     } else {
       this.setState({
-        [state]: true
-      })
+        [hideNext]: true,
+        index: 0,
+        [hidePrev]: true
+      });
     }
   }
 
@@ -214,20 +226,23 @@ class RelatedPO extends React.Component {
     let doc = document.body.clientWidth;
     let name = e.target.classList[0];
     let state = `${name}index`;
-    let prev = document.querySelector(`.prev-${name}-card`);
-    let next = document.querySelector(`.next-${name}-card`);
+    let prev = `${name}HidePrev`;
+    let next = `${name}HideNext`;
     let track = document.querySelector(`.${name}-track`);
     this.setState({
-      [state]: this.state[state] + 1
+      [state]: this.state[state] + 1,
+      [prev]: false
     }, () => {
-      prev.classList.add('show');
       let index = this.state[state];
-      let totalCards = name === 'out' ? this.state.outfits.length + 1 : this.state.relatedProducts.length;
+      let totalCards = name === 'outfits' ? this.state.outfits.length + 1 : this.state.relatedProducts.length;
       let screenRatio = Math.floor(doc / 256);
       let offset = index === 1 ? "translateX(" + index * -(252.22) + "px)" : "translateX(" + index * -(256.66) + "px)";
       track.style.transform = offset;
       if (index >= totalCards - screenRatio) {
-        next.classList.add('hide');
+        this.setState({
+          [prev]: false,
+          [next]: true
+        })
       }
     })
   }
@@ -235,17 +250,19 @@ class RelatedPO extends React.Component {
   handleCarouselPrev(e) {
     let name = e.target.classList[0];
     let state = `${name}index`;
-    let prev = document.querySelector(`.prev-${name}-card`);
-    let next = document.querySelector(`.next-${name}-card`);
+    let prev = `${name}HidePrev`;
+    let next = `${name}HideNext`;
     let track = document.querySelector(`.${name}-track`);
     this.setState({
       [state]: this.state[state] - 1
     }, () => {
-      next.classList.remove('hide');
       let index = this.state[state];
       track.style.transform = index === 1 ? "translateX(" + index * -(252.22) + "px)" : "translateX(" + index * -(256.66) + "px)";
       if (this.state[state] === 0) {
-        prev.classList.remove("show");
+        this.setState({
+          [prev]: true,
+          [next]: false
+        })
       }
     })
   }
@@ -272,14 +289,14 @@ class RelatedPO extends React.Component {
             </div>
           <div className="relCont">
             <div className="relatedCarousel">
-              <div className="rel-track">
+              <div className="relatedProducts-track">
               {this.state.relatedProducts.map((product, i) => {
                 return <RelatedProdCard getStyles={this.getParentStyles} handleActionClick={this.handleActionButtonClick} getRelated={this.getRelatedProducts} selectedStyle={this.state.productCardStyle} show={this.state.showModal} update={this.props.updateProd} key={i} parentProduct={this.props.currProd} current={product}/>
               })}
               </div>
               <div className="nav-card">
-                <button onClick={this.handleCarouselPrev} className="rel prev-rel-card"><span  className="rel fas fa-chevron-left fa-2x"></span></button>
-                <button onClick={this.handleCarouselNext} className={this.state.relatedProductsHide ? "hide rel next-rel-card" : "rel next-rel-card"}><i className="rel fas fa-chevron-right fa-2x"></i></button>
+                <button onClick={this.handleCarouselPrev} className={this.state.relatedProductsHidePrev ? "hide relatedProducts prev-rel-card" : "relatedProducts show prev-rel-card"}><span  className="relatedProducts fas fa-chevron-left fa-2x"></span></button>
+                <button onClick={this.handleCarouselNext} className={this.state.relatedProductsHideNext ? "hide relatedProducts next-rel-card" : "relatedProducts show next-rel-card"}><i className="relatedProducts fas fa-chevron-right fa-2x"></i></button>
             </div>
             </div>
           </div>
@@ -288,15 +305,15 @@ class RelatedPO extends React.Component {
             <br></br>
           <div className="outCont">
             <div className="outfitCarousel">
-              <div className="out-track">
+              <div className="outfits-track">
                 <AddOutfitCard handleClick={this.handleAddOutfit} />
                 {this.state.outfits.map((outfit, key) => {
                   return <YourOutfitCard  remove={this.handleRemoveOutfit} key={key} outfit={outfit} avg={this.state.average} />
                 })}
               </div>
                 <div className="nav-card">
-                  <button onClick={this.handleCarouselPrev} className="out prev-out-card"><i className="out fas fa-chevron-left fa-2x"></i></button>
-                  <button onClick={this.handleCarouselNext} className={this.state.outfitsHide ? "hide out next-out-card" : "out next-out-card"}><i className="out show fas fa-chevron-right fa-2x"></i></button>
+                  <button onClick={this.handleCarouselPrev} className={this.state.outfitsHidePrev ? "hide outfits prev-out-card" : "outfits show prev-out-card"}><i className="outfits fas fa-chevron-left fa-2x"></i></button>
+                  <button onClick={this.handleCarouselNext} className={this.state.outfitsHideNext ? "hide outfits next-out-card" : "outfits show next-out-card"}><i className="outfits show fas fa-chevron-right fa-2x"></i></button>
               </div>
             </div>
           </div>

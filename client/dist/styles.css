@@ -469,7 +469,7 @@ margin-bottom: 12px;
  font-size: 16px;
 }
 .reviewQ {
-  font-weight: 500;
+  font-weight: 600;
   font-size: 16px;
   margin-top: 12px;
   margin-bottom: 6px;
@@ -477,8 +477,7 @@ margin-bottom: 12px;
 }
 .reviewA {
   font-weight: 500;
-  margin-left: 18px;
-  margin-bottom: 6px;
+  margin-bottom: 12px;
   width: 100%
 }
 .faOverall {
@@ -500,23 +499,23 @@ margin-bottom: 12px;
 .rated {
   font-weight: 700;
   color:steelblue;
-  font-size: 16px;
+  font-size: 18px;
+  float:right;
+  margin-top: 3px;
 }
 .tableCharacteristics {
   margin-top: 5px;
   margin-bottom: 15px;
-  table-layout: fixed;
   border: solid steelblue 1px;
   text-align: center;
+  table-layout: fixed;
+  width: 95%;
 }
 .tdTop {
   border-top: solid steelblue 1px;
 }
 .tdBottom {
   border-bottom: solid steelblue 1px;
-}
-td {
-  padding: 3px;
 }
 .tdRow {
   vertical-align: middle;
@@ -541,6 +540,7 @@ textarea {
   font-size: 12px;
   margin-top: 6px;
 }
+
 
 
 
@@ -688,6 +688,7 @@ float: left;
 .rate {
   display: inline-block;
   border: 0;
+  margin-left: -12px;
 }
 /* Hide radio */
 .rate > input {

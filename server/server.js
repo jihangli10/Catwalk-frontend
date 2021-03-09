@@ -41,7 +41,6 @@ app.use(async (req, res, next) => {
 
 app.post('/uploadphoto', upload.array(), async (req, res) => {
   try {
-    console.log(req.body)
     let response = await axios({
       url: `https://api.imgbb.com/1/upload?key=${config.imgBBToken}`,
       method: 'post',

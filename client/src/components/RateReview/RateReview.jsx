@@ -50,8 +50,12 @@ class RateReviews extends React.Component {
 
 
             <div className="reviewListSort" >
-              <ReviewListSort key={'reviews' + this.props.rateReviews.length}
-                reviewListSort={this.props.rateReviews} reviewProduct={this.props.reviewProd} />
+              <ReviewListSort
+                key={'reviews' + this.props.rateReviews.length}
+                reviewListSort={this.props.rateReviews}
+                reviewProduct={this.props.reviewProd}
+                reviewCharacteristics={this.props.metaData}
+                key={'metaData' + this.props.metaData.length} />
             </div>
           </div>
         </div>

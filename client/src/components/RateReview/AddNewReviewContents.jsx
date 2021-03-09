@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import PhotoGallery from '../QandA/QandA_PhotoGallery.jsx';
 
 class AddNewReviewContents extends React.Component {
   constructor(props) {
@@ -16,11 +17,41 @@ class AddNewReviewContents extends React.Component {
       Fit: null,
       summary: '',
       body: '',
-      bodyChars: 0
+      bodyChars: 0,
+      nickname:'',
+      photos: [],
+      errors: []
 
     };
     this.handleChange = this.handleChange.bind(this);
   }
+
+  handleErrors() {
+    const errArray = [];
+    if (!this.state.rating) {
+      errArray.push('"Overall Rating" is required')
+    }
+    if (!this.state.recommend) {
+      errArray.push('"Do you recommend this product?" is required')
+    }
+    if (!this.state.nickname) {
+      errArray.push('"Do you recommend this product?" is required')
+    }
+    if (this.state.bodyChars <= 50 && this.state.bodyChars >= 1000) {
+      errArray.push('"Review Body" must contain at least 50 and no more than 1000 characters')
+    }
+    if (/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/.test(this.state.email)) {
+      return;
+    } else {
+      errArray.push('Invalid email address')
+    }
+    if (!this.state.Size && !this.state.Width && !this.state.Comfort && !this.state.Quality &&
+      !this.state.Length && !this.state.Fit) {
+      errArray.push('You must rate at least one "Characteristic')
+    }
+    this.setState({errors: errArray})
+  }
+
 
   // This event handler will handle any changes on the form
   handleChange(event) {
@@ -34,34 +65,44 @@ class AddNewReviewContents extends React.Component {
     }
   }
 
+  handleUploadPhoto(event) {
+    event.preventDefault();
+    const formData = new FormData();
+    formData.append('image', event.target.files[0]);
+    const settings = {
+      method: 'POST',
+      url: `https://api.imgbb.com/1/upload?key=${config.imgBBToken}`,
+      data: formData,
 
-  _isInputValid() {
-    let emailParts = this.state.emailQuery.split('@');
-    let emailValid = function () {
-      if (emailParts.length === 2 && emailParts[0] !== '' && emailParts[1] !== '') {
-        let domain = emailParts[1].split('.');
-        return domain.length >= 2 && domain.every(part => {
-          return part !== ''
-        })
-      }
-      return false;
-    }();
-    let addQuestionValid = this.state.addQuestionQuery !== '';
-    let nicknameValid = this.state.nicknameQuery !== '';
-    if (addQuestionValid && nicknameValid && emailValid) {
-      return true;
-    } else {
-      this.setState({
-        addQuestionValid,
-        nicknameValid,
-        emailValid
-      });
-      return false;
     }
+    return axios(settings)
+      .then(res => {
+        let photos = this.state.photos
+        photos.push(res.data.data.url);
+        this.setState({
+          photos: photos
+        })
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }
 
-  handleSubmit(e) {
-    e.preventDefault();
+
+  handlePhotoDelete(event) {
+    if (document.getElementById('add-review-photo') === null) {
+      document.getElementById('add-review-photo').value = null;
+    }
+    let newPhotos = this.state.photos;
+    newPhotos.splice(e.target.getAttribute('index'), 1);
+    this.setState({
+      photos: newPhotos
+    })
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    this.handleErrors
     if (this._isInputValid()) {
       var body = {
         "body": this.state.addQuestionQuery,
@@ -87,9 +128,7 @@ class AddNewReviewContents extends React.Component {
 
   componentDidMount() {
     this.setState({
-      rating: null,
-      rated: false,
-      recommend: 'Yes'
+      rating: null
     })
   }
 
@@ -100,10 +139,11 @@ class AddNewReviewContents extends React.Component {
 
         <br></br>
         {/* ========================= OVERALL RATING SECTION ========================= */}
-        <div className="reviewQ row">*Overall Rating&nbsp;<span className="rated" style={{ display: this.state.rated ? "block" : "none" }}>{this.state.rating}</span>
+        <div className="reviewQ row">*Overall Rating&nbsp;
         </div>
         <div className="row">
           <fieldset className="rate">
+            <span className="rated" style={{ display: this.state.rated ? "inline" : "none" }}>&nbsp;&nbsp;&nbsp;{this.state.rating}</span>
             <input type="radio" id="rating5" name="rating" value="5-Great" onChange={this.handleChange} />
             <label htmlFor="rating5"><span className="fa fa-star fa-2x faOverall"></span></label>
             <input type="radio" id="rating4" name="rating" value="4-Good" onChange={this.handleChange} />
@@ -128,10 +168,10 @@ class AddNewReviewContents extends React.Component {
         <div className="reviewQ">*Characteristics Rating</div>
         <br></br>
         <br></br>
-        <table className="tableCharacteristics">
+        <table className="tableCharacteristics reviewA">
           <tbody>
             <tr>
-              <th><strong>Characteristic</strong></th>
+              <th><strong>Type</strong></th>
               <th><strong>1</strong></th>
               <th><strong>2</strong></th>
               <th><strong>3</strong></th>
@@ -292,7 +332,31 @@ class AddNewReviewContents extends React.Component {
         <div className="reviewA row">
           <label htmlFor="email">  <textarea type="text" name="email" value={this.state.email} placeholder="Example: jackson11@email.com" maxLength="60" cols="80" onChange={this.handleChange} /></label>
         </div>
+        {/* ========================= UPLOAD YOUR PHOTOS ========================= */}
 
+        <div className="qanda-form-entry">
+
+          {this.state.photos.length <= 4 ?
+            <div>
+              <div className="qanda-form-row"><label htmlFor="add-review-photo">Upload your photos</label></div>
+              <div><input type="file" id="add-review-photo" name="review-photos" onChange={this.handleUploadPhoto.bind(this)} /></div>
+            </div>
+            : <div className="qanda-error-message">You've reached the maxmimum number of uploads (5 photos)</div>}
+          <PhotoGallery photos={this.state.photos} deletable={false} handlePhotoDelete={this.handlePhotoDelete.bind(this)} />
+        </div>
+        {/* ========================= ERROR HANDLING ========================= */}
+        <div className="reviewListErrors" style={{ display: this.state.errors.length > 0 ? "block" : "none" }}>
+          <ul className="no-bullets">
+            {this.state.errors.map(error => (
+              <li key={error}>
+                {error} />
+              </li>
+            ))}
+          </ul>
+
+
+
+        </div>
 
 
       </div>

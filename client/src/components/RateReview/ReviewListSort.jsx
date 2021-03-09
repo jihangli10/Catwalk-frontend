@@ -118,9 +118,9 @@ class ReviewListSort extends React.Component {
           onGetCurrentDisplay={this.handleGetDisplayed} />
         <br></br>
         <div id="question-button-row">
-        <button style={{ display: revListSortLength >= this.state.displayed && revListSortLength > 2 ? "block" : "none" }} onClick={this.handleClick.bind(this)}>MORE REVIEWS</button>&nbsp;
-        <button style={{ display: revListSortLength >= this.state.displayed && revListSortLength > 2 ? "block" : "none" }} onClick={this.handleAddReviewClick.bind(this)}>ADD REVIEWS</button>
-          {this.state.isOpen ? (<AddNewReview handleAddReviewClick={this.handleAddReviewClick} addReviewProd={this.props.reviewProduct}/>) : null}
+          <button style={{ display: revListSortLength >= this.state.displayed && revListSortLength > 2 ? "inline" : "none" }} onClick={this.handleClick.bind(this)}>MORE REVIEWS</button>&nbsp;&nbsp;
+         <button key={'reviews' + this.props.reviewListSort.length} style={{ display: this.props.reviewListSort.length !== 0 ? "inline" : "none" }} onClick={this.handleAddReviewClick.bind(this)}>ADD REVIEWS</button>
+          {this.state.isOpen ? (<AddNewReview handleAddReviewClick={this.handleAddReviewClick} addReviewProd={this.props.reviewProduct} addReviewChar={this.props.reviewCharacteristics} />) : null}
         </div>
         <br></br>
         <br></br>

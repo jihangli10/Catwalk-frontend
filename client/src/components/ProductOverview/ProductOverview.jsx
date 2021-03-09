@@ -147,6 +147,7 @@ class ProductOverview extends React.Component {
 
   cartModal () {
     //creates an axio get request and sets state with all the data stored in cart
+    //it also creates a modal from the get request and setState to a list of data in state.
   }
 
   handleAddCart() {

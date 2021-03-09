@@ -24,7 +24,8 @@ class AddNewReview extends React.Component {
       bodyChars: 0,
       nickname: '',
       photos: [],
-      errors: []
+      errors: [],
+      email: ''
 
     };
     this.handleChange = this.handleChange.bind(this);

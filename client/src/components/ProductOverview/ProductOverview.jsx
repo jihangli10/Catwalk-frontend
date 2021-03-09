@@ -315,6 +315,9 @@ class ProductOverview extends React.Component {
 }
 
   render() {
+
+    let stylePrice = this.state.currentSalePrice ? this.state.currentSalePrice : this.state.currentPrice;
+
     if(this.state.isLoading) {
       return (
         <div>Please Wait...</div>
@@ -385,7 +388,7 @@ class ProductOverview extends React.Component {
         <div><h3>{this.state.currentProductCategory}</h3></div>
         <div><h2>{this.state.currentProductName}</h2></div>
         <div><h3>{this.state.currentStyleName}</h3></div>
-        <div><h2>${this.state.currentPrice}</h2></div>
+        <div><h2>${stylePrice} <span className={this.state.currentSalePrice ? 'sale': 'noSale'}>${this.state.currentPrice}</span></h2></div>
         <div>
         <div className='styleGrid'>
           {this.state.currentActive === undefined ? this.setState({ currentActive: this.state.currentProductStyle.results[0].style_id }) : null}
@@ -397,12 +400,7 @@ class ProductOverview extends React.Component {
             />)
           })}
           </div>
-            {/* <StyleList
-          currentProductStyle={this.state.currentProductStyle}
-          selectedStyle={this.state.selectedStyle}
-          handleStyle={this.handleStyle.bind(this)}
-          currentStyleId={this.state.currentStyleId}
-        /> */}
+
         </div>
         <br></br>
         <div className='dropdownContainer'>

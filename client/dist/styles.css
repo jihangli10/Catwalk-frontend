@@ -415,6 +415,7 @@ body {
   border:steelblue solid 1px;
   padding: 20px;
   box-sizing: border-box;
+  overflow: auto;
 }
 .qanda-picture-box {
   position: relative;

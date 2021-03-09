@@ -176,7 +176,6 @@ class AddAnswer extends React.Component {
             handleImageClick={this.props.handleImageClick}
           />
         </div>
-
         <div><button onClick={this.handleSubmit.bind(this)}>Submit Answer</button></div>
         </div>
       </div>

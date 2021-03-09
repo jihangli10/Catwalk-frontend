@@ -63,7 +63,7 @@ class Answer extends React.Component {
           textToHighlight={answer.body}
         />
         </div>
-      <PhotoGallery photos={answer.photos} deletable={false}/>
+      <PhotoGallery photos={answer.photos} deletable={false} handleImageClick={this.props.handleImageClick}/>
       <div className="answer-user-information">
         <span style={{ fontWeight: isSeller ? "bold" : 200 }}><i className="fas fa-user-check qanda-fa-user-check"></i> {answer.answerer_name},&nbsp;&nbsp;</span>
         <span>{(new Date(answer.date).toDateString().slice(4))}</span>&nbsp;&nbsp;|&nbsp;&nbsp;

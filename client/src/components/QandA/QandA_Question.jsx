@@ -87,7 +87,12 @@ class Question extends React.Component{
               .sort(this._compareHelpfulness)
               .map((answer, index) => {
                 if (index <= 1 || this.state.expand === true) {
-                  return <Answer answer={answer} key={answer.id} searchQuery={this.props.searchQuery}/>;
+                  return <Answer
+                    answer={answer}
+                    key={answer.id}
+                    searchQuery={this.props.searchQuery}
+                    handleImageClick={this.props.handleImageClick}
+                  />;
                 } else {
                   return null;
                 }

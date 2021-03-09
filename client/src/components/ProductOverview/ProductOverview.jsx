@@ -375,6 +375,7 @@ class ProductOverview extends React.Component {
               element = {element}
               isActive = {this.state.currentActive === element.style_id}
               handleMiniStyle = {this.handleMiniStyle.bind(this, element.style_id)}
+              key = {element.style_id}
             />
           )
         })}

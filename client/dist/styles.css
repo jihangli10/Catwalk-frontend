@@ -3,7 +3,7 @@
 /*==============================================================================*/
 h1, h2, h3, h4, body {
   font-family: 'Raleway', sans-serif;
-  font-weight: 200;
+  font-weight: 300;
 }
 body {
   font-size: 14px;
@@ -344,9 +344,9 @@ body {
   border: 1px solid #ddd;
   border-radius: 4px;
   padding: 2px;
-  height: 80px;
+  height: 100px;
   width: auto;
-  margin: 2px;
+  margin: 4px 2px;
 }
 .qanda-content-container {
   display: flex;
@@ -417,11 +417,34 @@ body {
   box-sizing: border-box;
   overflow: auto;
 }
+.qanda-picture-box {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: fit-content;
+  height: fit-content;
+  background-color: white;
+  z-index: 102;
+  box-shadow: 0 8px 6px -6px steelblue;
+  border:steelblue solid 1px;
+  box-sizing: border-box;
+}
 .qanda-modal-close {
   position: relative;
   top: 0;
   left: 100%;
   transform: translate(-100%, 0);
+}
+.qanda-zoomin-picture {
+  max-width: 90vw;
+  max-height: 90vh;
+  display: block;
+}
+.qanda-close-button {
+  right: 10px;
+  top: 10px;
+  position: absolute;
 }
 .qanda-clickable:hover {
   cursor: pointer;
@@ -435,20 +458,14 @@ body {
   text-align: right;
   float:right
 }
-/* .answer-image-individual-container {
+.answer-image-individual-container {
   position: relative;
-} */
-.modal-close-image-button {
-  position: relative;
-  top: 0;
-  left: 100%;
-  transform: translate(-100%, 0);
 }
-.modal-image {
-  position: relative;
-  top: 0;
-  left: 100%;
-  transform: translate(-100%, 0);
+.modal-gallery-close-button {
+  right: 8px;
+  top: 8px;
+  position: absolute;
+  height: 10px;
 }
 .clickable:hover {
   cursor: pointer;
@@ -476,7 +493,7 @@ body {
 /*==============================================================================*/
 /* // ADD NEW REVIEW //=================================== */
 .reviewContainer {
-  overflow-y: auto
+  overflow-y: hidden;
 }
 .reviewTitle {
   font-size: 18px;
@@ -612,7 +629,7 @@ textarea {
 #ratingreviewcontainer {
   width: 100%;
   height: 100%;
-  overflow: auto;
+  overflow: hidden;
   position: relative;
 }
 .row {

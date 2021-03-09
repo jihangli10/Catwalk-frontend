@@ -35,7 +35,9 @@ class QuestionList extends React.Component {
                 question={question}
                 key={question.question_id}
                 searchQuery={this.props.searchQuery}
+                handleImageClick={this.props.handleImageClick}
                 handleAddAnswerClick={this.props.handleAddAnswerClick}/>
+
             } else {
               return null;
             }

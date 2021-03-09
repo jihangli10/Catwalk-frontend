@@ -52,8 +52,6 @@ class AddQuestion extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     if (this._isInputValid()) {
-      console.log(parseInt(this.props.product_id, 10))
-      console.log(this.props.product_id)
       let body = {
         "body": this.state.addQuery,
         "name": this.state.nicknameQuery,

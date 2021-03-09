@@ -25,13 +25,16 @@ class RateReviewData extends React.Component {
   componentDidMount() {
     return axios.get('/reviews', { params: { product_id: this.props.currProd.id } })
       .then(data => {
-        this.setState({ reviews: data.data.results, displayReviews: data.data.results })
-      })
-      .then( () => {
+        let reviews = data.data.results;
+        let displayReview = data.data.results;
         return axios.get('/reviews/meta', { params: { product_id: this.props.currProd.id } })
           .then(data => {
             var metaDataTemp = [];
-            this.setState({ metaData: data.data.characteristics })
+            this.setState({
+              reviews: reviews,
+              displayReviews: displayReview,
+              metaData: data.data.characteristics
+            })
           })
       })
       .catch(err => { console.log(err); });

@@ -317,9 +317,6 @@ class RelatedPO extends React.Component {
               </div>
             </div>
           </div>
-          <div>
-            <CreateFeatures product={this.props.currProd} />
-          </div>
         </div>
       );
     }

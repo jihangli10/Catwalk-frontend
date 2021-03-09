@@ -1,6 +1,6 @@
 import React from 'react'
 
-var ImageCarousel = ({ showExpandedImage, currentImage, currentProductStyle, onClose, handlePrevSlide, handleNextSlide, activeIndex, imageZoomed, imageZoomIn, imageZoomOut, handleMouseMove, mouseX, mouseY }) => {
+var ImageCarousel = ({ showExpandedImage, currentImage, currentProductStyle, onClose, handlePrevSlide, handleNextSlide, activeIndex, imageZoomed, imageZoomIn, imageZoomOut, handleMouseMove, mouseX, mouseY, currentZoomImage }) => {
 
   const transform = {
     transformOrigin: `${mouseX}% ${mouseY}%`
@@ -39,7 +39,7 @@ var ImageCarousel = ({ showExpandedImage, currentImage, currentProductStyle, onC
     <div className='carouselContainer'>
       <div className='carouselImage2'>
       <div style={imgStyles} onMouseOver={imageZoomIn} onMouseMove={handleMouseMove} onClick={imageZoomOut}>
-      <img src={currentImage} style={isZoom}></img>
+      <img src={currentZoomImage} style={isZoom}></img>
       </div>
       </div>
       </div>
@@ -50,13 +50,13 @@ var ImageCarousel = ({ showExpandedImage, currentImage, currentProductStyle, onC
     <div className='modal-wrapper'>
     <div className='carouselContainer'>
     <div className='carouselLeft'>
-
+      {console.log(activeIndex)}
       {activeIndex === 0 ? null: <button className='dumbButton' onClick={handlePrevSlide}> <i className='fas overview-fas overview-fa-chevron-left fa-chevron-left'></i> </button>}
     </div>
 
     <div className='carouselImage2'>
     <div style={imgStyles} onClick={imageZoomIn}>
-      <img src={currentImage} style={isZoom}></img>
+      <img src={currentZoomImage} style={isZoom}></img>
 
     </div>
 

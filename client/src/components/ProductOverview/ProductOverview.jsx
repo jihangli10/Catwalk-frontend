@@ -33,10 +33,11 @@ class ProductOverview extends React.Component {
       currentPrice: '',
       currentSalePrice: '',
       currentDescription: '',
+      currentSlogan: '',
       currentImage:'',
       currentSizeQuantityList: {},
       cartStorage: [],
-      cartStorageSize: [],
+      cartStorageSize: 0,
       currentStyleId: '',
       currentActive: '',
       showExpandedImage: false,
@@ -46,15 +47,11 @@ class ProductOverview extends React.Component {
       indexStart: 0,
       indexEnd: 0,
       starAverage: 0,
-      isClicked: false
+      isClicked: false,
+      currentZoomImage: ''
     }
   }
 
-  sendLink () {
-    //send to the Ratings and Review Module
-    // var value = this.state;
-    // console.log(value);
-  }
 
   componentDidUpdate(prevProps) {
     if(this.props.currentProduct !== prevProps.currentProduct) {
@@ -83,6 +80,7 @@ class ProductOverview extends React.Component {
                 currentProductCategory: this.props.currentProduct.category,
                 currentPrice: newStyles.data.results[0].original_price,
                 currentSalePrice: newStyles.data.results[0].sale_price,
+                currentSlogan: this.props.currentProduct.slogan,
                 currentDescription: this.props.currentProduct.description,
                 currentImage: newStyles.data.results[0].photos[0].url,
                 currentSizeQuantityList: newStyles.data.results[0].skus,
@@ -101,7 +99,8 @@ class ProductOverview extends React.Component {
                 indexStart: 0,
                 indexEnd: 3,
                 starAverage: (Math.round(sumRating /addedData.data.results.length * 4) / 4).toFixed(2),
-                reviewAmount: addedData.data.results.length
+                reviewAmount: addedData.data.results.length,
+                currentZoomImage: newStyles.data.results[0].photos[0].url
               })
             })
 
@@ -146,7 +145,9 @@ class ProductOverview extends React.Component {
     }
   }
 
-
+  cartModal () {
+    //creates an axio get request and sets state with all the data stored in cart
+  }
 
   handleAddCart() {
 
@@ -155,6 +156,7 @@ class ProductOverview extends React.Component {
       //create some sort of error message
     } else {
       console.log('hit here')
+      //make an axios post call to store in the data
       this.setState({
         isError: false,
         cartStorage: [...this.state.cartStorage, {
@@ -174,20 +176,20 @@ class ProductOverview extends React.Component {
     this.setState({ selectedQuantity: query.target.value })
   }
 
-  modalMode () {
-    console.log('it hits here')
-  }
+
 
   handlePrevSlide () {
     let index = this.state.activeIndex
+
     let slides = this.state.currentProductStyle.results.length
     if(index < 1) {
       index = slides;
     }
+    console.log(index);
     index--;
     this.setState({
       activeIndex: index,
-      currentImage: this.state.currentProductStyle.results[index].photos[0].url
+      currentZoomImage: this.state.currentProductStyle.results[index].photos[0].url
     })
   }
 
@@ -205,10 +207,11 @@ class ProductOverview extends React.Component {
     if(index === slides) {
       index = -1;
     }
+
     index++;
     this.setState({
       activeIndex: index,
-      currentImage: this.state.currentProductStyle.results[index].photos[0].url
+      currentZoomImage: this.state.currentProductStyle.results[index].photos[0].url
     })
   }
 
@@ -222,12 +225,17 @@ class ProductOverview extends React.Component {
 
   handleStyle(id) {
     let storedProductStyle;
+    let currentIndex;
     for(let i = 0; i < this.state.currentProductStyle.results.length; i++) {
       if(this.state.currentProductStyle.results[i].style_id === id) {
         storedProductStyle = this.state.currentProductStyle.results[i];
+        currentIndex = i;
+        console.log(currentIndex);
         break;
       }
     }
+
+    console.log(currentIndex);
 
     this.setState({
       currentImage: storedProductStyle.photos[0].url,
@@ -236,18 +244,19 @@ class ProductOverview extends React.Component {
       currentStyleId: storedProductStyle.style_id,
       currentPrice: storedProductStyle.original_price,
       currentSalePrice: storedProductStyle.sale_price,
-      currentActive: id
+      currentActive: id,
+      activeIndex: currentIndex
     });
 
   }
 
   handleImageModal () {
     console.log('Booyah')
-    this.setState({ showExpandedImage: true, isClicked: true})
+    this.setState({ showExpandedImage: true, isClicked: true, currentZoomImage: this.state.currentImage})
   }
 
   onClose () {
-    this.setState({ showExpandedImage: !this.state.showExpandedImage, isClicked: false})
+    this.setState({ showExpandedImage: !this.state.showExpandedImage, isClicked: false, currentImage: this.state.currentZoomImage})
   }
 
   handleSelectedQuantity(query) {
@@ -291,9 +300,11 @@ class ProductOverview extends React.Component {
 
   handleMiniStyle (id) {
     let storedProductStyle;
+    let currentIndex;
     for(let i = 0; i < this.state.indexBox.length; i++) {
       if(this.state.indexBox[i].style_id === id) {
         storedProductStyle = this.state.currentProductStyle.results[i];
+        currentIndex = i;
         break;
       }
     }
@@ -309,12 +320,16 @@ class ProductOverview extends React.Component {
       currentStyleId: storedProductStyle.style_id,
       currentPrice: storedProductStyle.original_price,
       currentSalePrice: storedProductStyle.sale_price,
-      currentActive: id
+      currentActive: id,
+      activeIndex: currentIndex
     });
   }
 }
 
   render() {
+
+    let stylePrice = this.state.currentSalePrice ? this.state.currentSalePrice : this.state.currentPrice;
+
     if(this.state.isLoading) {
       return (
         <div>Please Wait...</div>
@@ -327,7 +342,6 @@ class ProductOverview extends React.Component {
         <div className='leftSide'>
           <div className='imageDiv'>
           <img onClick={this.handleImageModal.bind(this)} src={this.state.currentImage} className='mainImage'></img>
-
           <ImageModal
               showExpandedImage = {this.state.showExpandedImage}
               currentImage = {this.state.currentImage}
@@ -342,6 +356,7 @@ class ProductOverview extends React.Component {
               handleMouseMove = {this.handleMouseMove.bind(this)}
               mouseX = {this.state.mouseX}
               mouseY = {this.state.mouseY}
+              currentZoomImage = {this.state.currentZoomImage}
             />
           </div>
 
@@ -384,7 +399,7 @@ class ProductOverview extends React.Component {
         <div><h3>{this.state.currentProductCategory}</h3></div>
         <div><h2>{this.state.currentProductName}</h2></div>
         <div><h3>{this.state.currentStyleName}</h3></div>
-        <div><h2>${this.state.currentPrice}</h2></div>
+        <div className='pricePoint'>${stylePrice} <span className={this.state.currentSalePrice ? 'sale': 'noSale'}>${this.state.currentPrice}</span></div><br></br>
         <div>
         <div className='styleGrid'>
           {this.state.currentActive === undefined ? this.setState({ currentActive: this.state.currentProductStyle.results[0].style_id }) : null}
@@ -396,12 +411,7 @@ class ProductOverview extends React.Component {
             />)
           })}
           </div>
-            {/* <StyleList
-          currentProductStyle={this.state.currentProductStyle}
-          selectedStyle={this.state.selectedStyle}
-          handleStyle={this.handleStyle.bind(this)}
-          currentStyleId={this.state.currentStyleId}
-        /> */}
+
         </div>
         <br></br>
         <div className='dropdownContainer'>
@@ -426,7 +436,7 @@ class ProductOverview extends React.Component {
           isCartMade = {this.state.isCartMade}
         />
         <CartStorage
-          modalMode = {this.modalMode.bind(this)}
+          cartModal = {this.cartModal.bind(this)}
           cartStorageSize = {this.state.cartStorageSize}
         />
         </div>
@@ -435,7 +445,7 @@ class ProductOverview extends React.Component {
         <br></br>
       </div>
       <br></br>
-        <div className ='bottomSide'><br></br>{this.state.currentDescription}</div>
+        <div className ='bottomSide'><br></br><div className='sloganName'>{this.state.currentSlogan}</div><br></br>{this.state.currentDescription}</div>
     </div>
     </div>
     );

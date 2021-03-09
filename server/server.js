@@ -28,7 +28,6 @@ app.use(async (req, res) => {
     });
     res.send(response.data);
   } catch(err) {
-    console.log(err.response.data);
     res.sendStatus(500);
   }
 });

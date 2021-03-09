@@ -25,7 +25,7 @@ body {
   bottom: 0px;
   left: 0px;
   right: 0px;
-  background: rgba(0,0,0,1.0);
+  background: rgba(0,0,0,0.4);
   z-index: 130;
 }
 
@@ -64,12 +64,11 @@ body {
 
 .styleCarousel {
   grid-column-start: 1;
-  grid-column-end: 4;
-  grid-row-start: 3;
-  grid-row-end: 4;
-  left: 35%;
+  grid-column-end: 2;
+  grid-row-start: 1;
+  grid-row-end: 3;
+  top: 5%;
   position: relative;
-  justify-items: center;
   z-index: 5;
 }
 
@@ -77,13 +76,18 @@ body {
   display: grid;
   left: 25%;
   grid-template-columns: 20px 260px 20px;
+  grid-template-rows: 20px 260px 20px;
 
 }
 
 .styleMiniGridImage {
   display: grid;
-  grid-template-columns: repeat(4, 50px);
-  grid-column-gap: 15px;
+  grid-template-rows: repeat(4, 50px);
+  grid-row-gap: 15px;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  grid-column-start: 2;
+  grid-column-end: 3;
   left: 20px;
 }
 
@@ -223,21 +227,26 @@ body {
 }
 
 .styleMiniLeft {
-  grid-column-start:1;
-  grid-column-end: 2;
+  grid-column-start:2;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 2;
   position:relative;
-  z-index: 5;
-  top: 15px;
-
+  z-index: 7;
+  top: 5px;
+  left: 20px;
 
 }
 
 .styleMiniRight {
-  grid-column-start:3;
-  grid-column-end: 4;
+  grid-column-start:2;
+  grid-column-end: 3;
+  grid-row-start: 3;
+  grid-row-end: 4;
   position: relative;
-  top: 15px;
-  right: 5px;
+  z-index: 7;
+  bottom: 15px;
+  left: 20px;
 }
 
 
@@ -281,6 +290,15 @@ body {
 
 .dumbButton {
   background: transparent;
+}
+
+.sloganName {
+  font-weight: bold;
+  font-size: x-large;
+}
+
+.pricePoint {
+  font-size: 1em;
 }
 
 /*==============================================================================*/

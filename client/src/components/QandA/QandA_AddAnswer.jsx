@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import ReactDOM from 'react-dom';
 import FormPhotoGallery from './QandA_FormPhotoGallery.jsx';
 import config from '../../../../config.js';
 
@@ -56,9 +57,11 @@ class AddAnswer extends React.Component {
     e.preventDefault();
     const formData = new FormData();
     formData.append('image', e.target.files[0]);
+    console.log(JSON.stringify(formData));
     const settings = {
       method: 'POST',
-      url: `https://api.imgbb.com/1/upload?key=${config.imgBBToken}`,
+      // url: `https://api.imgbb.com/1/upload?key=${config.imgBBToken}`,
+      url: '/uploadphoto',
       data: formData,
 
     }
@@ -110,7 +113,8 @@ class AddAnswer extends React.Component {
   }
 
   render() {
-    return (
+
+    return ReactDOM.createPortal(
       <div className="qanda-modal-wrapper">
         <div className="qanda-modal-backdrop"  onClick={this.props.handleAddAnswerClose}/>
         <div className="qanda-modal-box">
@@ -178,7 +182,7 @@ class AddAnswer extends React.Component {
         </div>
         <div><button onClick={this.handleSubmit.bind(this)}>Submit Answer</button></div>
         </div>
-      </div>
+      </div>, document.getElementById('modal-root')
     )
   }
 }

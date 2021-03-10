@@ -41,6 +41,7 @@ class RateReviewData extends React.Component {
   }
 
   updateStateByFilter() {
+    console.log(this.state.filter)
     if (this.state.filter.length === 0) {
      this.setState({displayReviews: this.state.reviews})
     } else {

@@ -40,7 +40,7 @@ body {
 .gridContainer {
   display: grid;
   grid-template-columns: 40px 200px auto 200px 40px;
-  grid-template-rows: 25% auto 50px 100px;
+  grid-template-rows: 25% auto 50px 50px 150px;
   grid-column-gap: 20px;
 }
 .leftSide {
@@ -57,9 +57,21 @@ body {
 }
 .bottomSide {
   grid-column-start: 1;
-  grid-column-end: 6;
+  grid-column-end: 4;
   grid-row-start: 4;
-  grid-row-end: 5;
+  grid-row-end: 6;
+  border-right-style: solid;
+}
+
+.bottomRightSide {
+  grid-column-start: 4;
+  grid-column-end: 6;
+  grid-row-start: 5;
+  grid-row-end: 6;
+}
+
+.featuresContainer {
+  top: 15px;
 }
 
 .styleCarousel {
@@ -75,7 +87,7 @@ body {
 .styleMiniGrid {
   display: grid;
   left: 25%;
-  grid-template-columns: 20px 260px 20px;
+  grid-template-columns: 20px 50px 20px;
   grid-template-rows: 20px 260px 20px;
 
 }

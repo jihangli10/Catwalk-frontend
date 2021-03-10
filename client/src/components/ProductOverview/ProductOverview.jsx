@@ -8,6 +8,7 @@ import axios from 'axios'
 import CartStorage from './CartStorage'
 import ImageModal from './ImageModal'
 import MiniCarouselStyle from './MiniCarouselStyle'
+import CreateFeatures from '../RelatedPO/CreateFeatures'
 
 import StarRatings from '../RateReview/StarRatings'
 
@@ -250,6 +251,10 @@ class ProductOverview extends React.Component {
 
   }
 
+  setCurrentActive () {
+    this.setState({ currentActive: this.state.currentProductStyle.results[0].style_id })
+  }
+
   handleImageModal () {
     console.log('Booyah')
     this.setState({ showExpandedImage: true, isClicked: true, currentZoomImage: this.state.currentImage})
@@ -367,7 +372,7 @@ class ProductOverview extends React.Component {
         <div className='styleMiniLeft' onClick={this.state.indexStart === 0 ? null :this.handleMiniPrevSlide.bind(this)}>
         {this.state.indexStart === 0 ? null : <i className='fas overview-fas overview-fa-chevron-left fa-chevron-left'></i>}
       </div>
-        {this.state.currentActive === undefined ? this.setState({ currentActive: this.state.currentProductStyle.results[0].style_id }) : null}
+        {/* {this.state.currentActive === undefined ? this.setCurrentActive() : null} */}
         <div className='styleMiniGridImage'>
         {this.state.indexBox.map(element => {
           return (
@@ -403,12 +408,14 @@ class ProductOverview extends React.Component {
         <div className='pricePoint'>${stylePrice} <span className={this.state.currentSalePrice ? 'sale': 'noSale'}>${this.state.currentPrice}</span></div><br></br>
         <div>
         <div className='styleGrid'>
-          {this.state.currentActive === undefined ? this.setState({ currentActive: this.state.currentProductStyle.results[0].style_id }) : null}
+          {/* {this.state.currentActive === undefined ? this.setState({ currentActive: this.state.currentProductStyle.results[0].style_id }) : null} */}
+          {/* need to refactor the above */}
           {this.state.currentProductStyle.results.map(element => {
             return(<StyleList
               element = {element}
               isActive = {this.state.currentActive === element.style_id}
               handleStyle={this.handleStyle.bind(this, element.style_id)}
+              key={element.style_id}
             />)
           })}
           </div>
@@ -447,6 +454,12 @@ class ProductOverview extends React.Component {
       </div>
       <br></br>
         <div className ='bottomSide'><br></br><div className='sloganName'>{this.state.currentSlogan}</div><br></br>{this.state.currentDescription}</div>
+        <div className='bottomRightSide'>
+          <CreateFeatures
+            product = {this.props.currentProduct}
+          />
+
+        </div>
     </div>
     </div>
     );

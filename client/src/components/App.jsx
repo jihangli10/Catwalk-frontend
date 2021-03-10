@@ -78,7 +78,6 @@ class App extends React.Component {
         </div>
         <div>
           <br></br>
-          <div className="section">CATEGORY</div>
           <br></br>
         </div>
         <div>

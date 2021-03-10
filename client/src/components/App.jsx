@@ -61,6 +61,7 @@ class App extends React.Component {
           currentProduct: product.data
         })
       })
+      .catch(err =>  console.log('ERROR GETTING PRODS: ++++++++++', err));
   }
 
 
@@ -77,7 +78,6 @@ class App extends React.Component {
         </div>
         <div>
           <br></br>
-          <div className="section">CATEGORY</div>
           <br></br>
         </div>
         <div>

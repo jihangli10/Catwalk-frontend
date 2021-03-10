@@ -48,13 +48,6 @@ class ModalTableRows extends React.Component {
     let noDupes = new Set(combined);
     noDupes = [...noDupes];
 
-    // let loseNulls = [];
-    // noDupes.forEach(item => {
-    //   if (parent[item] || select[item]) {
-    //     loseNulls.push(item);
-    //   }
-    // });
-
     this.setState({
       commonFeatures: noDupes,
       pFeatures: parent,
@@ -124,9 +117,9 @@ class ModalTableRows extends React.Component {
             {common.map((char, i) => {
               return(
                 <tr className="tableRow" key={i}>
-                  <td className="left-col-inner">{(p[char] && p[char].value !== null) ? parseFloat(p[char].value).toFixed(2) : ''}</td>
+                  <td className="left-col-inner">{(p[char] && p[char].value !== null) ? (Math.round(parseFloat(p[char].value) * 4) / 4).toFixed(2) : ''}</td>
                   <td className="center-col">{char}</td>
-                  <td className="right-col-inner">{(s[char] && s[char].value !== null) ? parseFloat(s[char].value).toFixed(2) : ''}</td>
+                  <td className="right-col-inner">{(s[char] && s[char].value !== null) ? (Math.round(parseFloat(s[char].value) * 4) / 4).toFixed(2) : ''}</td>
                 </tr>
               )
             })}

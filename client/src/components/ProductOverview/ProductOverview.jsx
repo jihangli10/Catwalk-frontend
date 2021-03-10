@@ -49,7 +49,7 @@ class ProductOverview extends React.Component {
       indexEnd: 0,
       starAverage: 0,
       isClicked: false,
-      currentZoomImage: ''
+      currentZoomImage: '',
     }
   }
 
@@ -101,7 +101,8 @@ class ProductOverview extends React.Component {
                 indexEnd: 3,
                 starAverage: (Math.round(sumRating /addedData.data.results.length * 4) / 4).toFixed(2),
                 reviewAmount: addedData.data.results.length,
-                currentZoomImage: newStyles.data.results[0].photos[0].url
+                currentZoomImage: newStyles.data.results[0].photos[0].url,
+
               })
             })
 
@@ -252,9 +253,6 @@ class ProductOverview extends React.Component {
 
   }
 
-  setCurrentActive () {
-    this.setState({ currentActive: this.state.currentProductStyle.results[0].style_id })
-  }
 
   handleImageModal () {
     console.log('Booyah')
@@ -376,10 +374,16 @@ class ProductOverview extends React.Component {
         {/* {this.state.currentActive === undefined ? this.setCurrentActive() : null} */}
         <div className='styleMiniGridImage'>
         {this.state.indexBox.map(element => {
+          let value;
+          if(this.state.currentActive === undefined) {
+            value = this.state.currentProductStyle.results[0].style_id;
+          } else {
+            value = this.state.currentActive;
+          }
           return (
             <MiniCarouselStyle
               element = {element}
-              isActive = {this.state.currentActive === element.style_id}
+              isActive = {value === element.style_id}
               handleMiniStyle = {this.handleMiniStyle.bind(this, element.style_id)}
               key = {element.style_id}
             />
@@ -411,10 +415,18 @@ class ProductOverview extends React.Component {
         <div className='styleGrid'>
           {/* {this.state.currentActive === undefined ? this.setState({ currentActive: this.state.currentProductStyle.results[0].style_id }) : null} */}
           {/* need to refactor the above */}
+          {console.log(this.state.currentProductStyle)}
           {this.state.currentProductStyle.results.map(element => {
+            let value;
+            if(this.state.currentActive === undefined) {
+              value = this.state.currentProductStyle.results[0].style_id;
+            } else {
+              value = this.state.currentActive;
+            }
+
             return(<StyleList
               element = {element}
-              isActive = {this.state.currentActive === element.style_id}
+              isActive = {value === element.style_id}
               handleStyle={this.handleStyle.bind(this, element.style_id)}
               key={element.style_id}
             />)

@@ -102,6 +102,7 @@ class ProductOverview extends React.Component {
                 starAverage: (Math.round(sumRating /addedData.data.results.length * 4) / 4).toFixed(2),
                 reviewAmount: addedData.data.results.length,
                 currentZoomImage: newStyles.data.results[0].photos[0].url,
+                isExpanded: false
 
               })
             })
@@ -302,6 +303,10 @@ class ProductOverview extends React.Component {
     })
   }
 
+  handleExpandedImage () {
+    this.setState({ isExpanded: !this.state.isExpanded })
+  }
+
   handleMiniStyle (id) {
     let storedProductStyle;
     let currentIndex;
@@ -343,7 +348,8 @@ class ProductOverview extends React.Component {
       <div >
       <div className='gridContainer'>
 
-        <div className='leftSide'>
+        <div className={this.state.isExpanded ? 'expandedSide' : 'leftSide'}>
+
           <div className='imageDiv'>
           <img onClick={this.handleImageModal.bind(this)} src={this.state.currentImage} className='mainImage'></img>
           <ImageModal
@@ -365,6 +371,7 @@ class ProductOverview extends React.Component {
           </div>
 
         </div><br></br>
+        <button className={this.state.isExpanded ? 'expandView' :'nonExpandView'} onClick={this.handleExpandedImage.bind(this)}>B</button>
       <div className='styleCarousel'>
 
         <div className='styleMiniGrid'>
@@ -398,7 +405,7 @@ class ProductOverview extends React.Component {
 
 
       </div>
-      <div className='rightSide'>
+      <div className={this.state.isExpanded ? 'rightSide2' : 'rightSide'}>
         <div className='miniContainer2'>
         <div>
         <StarRatings
@@ -407,15 +414,15 @@ class ProductOverview extends React.Component {
         </div>
         <div className='someDisplay'><a href='#test' style={{ textDecoration: 'none'}}>Read All {this.state.reviewAmount} reviews</a></div>
         </div>
-        <div><h3>{this.state.currentProductCategory}</h3></div>
-        <div><h2>{this.state.currentProductName}</h2></div>
-        <div><h3>{this.state.currentStyleName}</h3></div>
+        <div className='productCategory'>{this.state.currentProductCategory.toUpperCase()}</div>
+        <div className='productName'>{this.state.currentProductName}</div>
+
         <div className='pricePoint'>${stylePrice} <span className={this.state.currentSalePrice ? 'sale': 'noSale'}>${this.state.currentPrice}</span></div><br></br>
-        <div>
+        <div className='bottomMiddle2'>
+        <div className='styleNameContainer'><span className='styleMain'>STYLE &gt;</span> <span className='currentStyleName'>{this.state.currentStyleName.toUpperCase()}</span></div>
         <div className='styleGrid'>
           {/* {this.state.currentActive === undefined ? this.setState({ currentActive: this.state.currentProductStyle.results[0].style_id }) : null} */}
           {/* need to refactor the above */}
-          {console.log(this.state.currentProductStyle)}
           {this.state.currentProductStyle.results.map(element => {
             let value;
             if(this.state.currentActive === undefined) {
@@ -431,10 +438,12 @@ class ProductOverview extends React.Component {
               key={element.style_id}
             />)
           })}
-          </div>
+            </div>
+
 
         </div>
         <br></br>
+        <div className='bottomMiddle'>
         <div className='dropdownContainer'>
         <SizeDrop
           selectedSize = {this.state.selectedSize}
@@ -464,6 +473,7 @@ class ProductOverview extends React.Component {
         { this.state.isError ? <div>Please select size</div> : null}
         <br></br>
         <br></br>
+      </div>
       </div>
       <br></br>
         <div className ='bottomSide'><br></br><div className='sloganName'>{this.state.currentSlogan}</div><br></br>{this.state.currentDescription}</div>

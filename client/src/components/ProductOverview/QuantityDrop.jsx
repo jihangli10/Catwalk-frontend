@@ -1,7 +1,7 @@
 import React from 'react';
 
 var QuantityDrop = ({ selectedQuantity, handleQuantityChange, isDisabled, currentQuantity }) => (
-  <div className='quantity'>
+  <div className='quantityDropDown'>
     <select value={selectedQuantity} onChange={handleQuantityChange} disabled={isDisabled ? true : false}>
       <option value='--'>--</option>
       {currentQuantity.map(element =>

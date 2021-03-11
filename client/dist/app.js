@@ -1037,7 +1037,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var reac
   \*******************/
 /***/ ((module) => {
 
-eval("module.exports = {\n  TOKEN: '1001fd10922d32a6e8062dcf3bf300b5be689abb',\n  imgBBToken: '27935cb4ddb1b2ef9437802097cd50d3'\n};\n\n//# sourceURL=webpack://frontendcapstone/./config.js?");
+eval("// Note: depending on the API requirements this may alter\n// Note: may need something else depending on API requirements\nmodule.exports = {\n  TOKEN: '976070e46e649e7802e0d62de309d06f8a147086',\n  // may be called API Key or other\n  imgBBToken: '27935cb4ddb1b2ef9437802097cd50d3'\n};\n\n//# sourceURL=webpack://frontendcapstone/./config.js?");
 
 /***/ }),
 

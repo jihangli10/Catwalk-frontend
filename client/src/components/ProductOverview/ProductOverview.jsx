@@ -8,6 +8,7 @@ import axios from 'axios'
 import CartStorage from './CartStorage'
 import ImageModal from './ImageModal'
 import MiniCarouselStyle from './MiniCarouselStyle'
+import CreateFeatures from '../RelatedPO/CreateFeatures'
 
 import StarRatings from '../RateReview/StarRatings'
 
@@ -45,10 +46,10 @@ class ProductOverview extends React.Component {
       indexCurrent: 0,
       indexBox: [],
       indexStart: 0,
-      indexEnd: 0,
+      indexEnd: 3,
       starAverage: 0,
       isClicked: false,
-      currentZoomImage: ''
+      currentZoomImage: '',
     }
   }
 
@@ -65,42 +66,47 @@ class ProductOverview extends React.Component {
 
   getDataandStyle() {
       let id = this.props.currentProduct.id;
-      axios.get(`/products/${id}/styles`)
+      return axios.get(`/products/${id}/styles`)
          .then(newStyles => {
-           axios.get('/reviews', { params: { product_id: id } })
+           return axios.get('/reviews', { params: { product_id: id, count: 1000 } })
             .then(addedData => {
               let sumRating = 0;
               for (var i = 0; i < addedData.data.results.length; i++) {
                 sumRating += addedData.data.results[i].rating
              }
-              this.setState({
-                currentProductStyle: newStyles.data,
-                isLoading: false,
-                currentProductName: this.props.currentProduct.name,
-                currentProductCategory: this.props.currentProduct.category,
-                currentPrice: newStyles.data.results[0].original_price,
-                currentSalePrice: newStyles.data.results[0].sale_price,
-                currentSlogan: this.props.currentProduct.slogan,
-                currentDescription: this.props.currentProduct.description,
-                currentImage: newStyles.data.results[0].photos[0].url,
-                currentSizeQuantityList: newStyles.data.results[0].skus,
-                currentStyleName: newStyles.data.results[0].name,
-                selectedQuantity: '',
-                selectedSize: '',
-                isDisabled: true,
-                inStock: true,
-                currentStyleId: newStyles.data.results[0].styles_id,
-                currentActive: newStyles.data.results[0].styles_id,
-                imageZoomed: false,
-                mouseX: '',
-                mouseY: '',
-                activeIndex: 0,
-                indexBox: newStyles.data.results.slice(0, 4),
-                indexStart: 0,
-                indexEnd: 3,
-                starAverage: (Math.round(sumRating /addedData.data.results.length * 4) / 4).toFixed(2),
-                reviewAmount: addedData.data.results.length,
-                currentZoomImage: newStyles.data.results[0].photos[0].url
+              return axios.get('/cart')
+                .then((result) => {
+                  this.setState({
+                    currentProductStyle: newStyles.data,
+                    isLoading: false,
+                    currentProductName: this.props.currentProduct.name,
+                    currentProductCategory: this.props.currentProduct.category,
+                    currentPrice: newStyles.data.results[0].original_price,
+                    currentSalePrice: newStyles.data.results[0].sale_price,
+                    currentSlogan: this.props.currentProduct.slogan,
+                    currentDescription: this.props.currentProduct.description,
+                    currentImage: newStyles.data.results[0].photos[0].url,
+                    currentSizeQuantityList: newStyles.data.results[0].skus,
+                    currentStyleName: newStyles.data.results[0].name,
+                    selectedQuantity: '',
+                    selectedSize: '',
+                    isDisabled: true,
+                    inStock: true,
+                    currentStyleId: newStyles.data.results[0].styles_id,
+                    currentActive: newStyles.data.results[0].styles_id,
+                    imageZoomed: false,
+                    mouseX: '',
+                    mouseY: '',
+                    activeIndex: 0,
+                    indexBox: newStyles.data.results.slice(0, 4),
+                    indexStart: 0,
+                    indexEnd: 3,
+                    starAverage: (Math.round(sumRating /addedData.data.results.length * 4) / 4).toFixed(2),
+                    reviewAmount: addedData.data.results.length,
+                    currentZoomImage: newStyles.data.results[0].photos[0].url,
+                    isExpanded: false,
+                    cartStorageSize: result.data.length
+                })
               })
             })
 
@@ -147,6 +153,21 @@ class ProductOverview extends React.Component {
 
   cartModal () {
     //creates an axio get request and sets state with all the data stored in cart
+    //it also creates a modal from the get request and setState to a list of data in state.
+  }
+
+  forceUpdate () {
+    this.getCartResult();
+  }
+
+  getCartResult () {
+    axios.get('/cart')
+      .then((result) => {
+        this.setState({ cartStorageSize: result.length })
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
 
   handleAddCart() {
@@ -155,19 +176,29 @@ class ProductOverview extends React.Component {
       this.setState({ isError: true })
       //create some sort of error message
     } else {
-      console.log('hit here')
       //make an axios post call to store in the data
-      this.setState({
-        isError: false,
-        cartStorage: [...this.state.cartStorage, {
-          currentProductStyle: this.state.currentProductStyle,
-          currentPrice: this.state.currentPrice,
-          currentName: this.state.currentName,
-          currentProductName: this.state.currentProductName,
-          currentImage: this.state.currentImage,
-        }],
-        cartStorageSize: this.state.cartStorage.length+1
-      })
+      console.log(this.state.currentProductStyle.product_id)
+      let bodyInfo = {
+        "sku_id": parseInt(this.state.currentProductStyle.product_id, 6)
+      }
+      return axios.post('/cart', bodyInfo)
+        .then((res) => {
+          console.log('it was successfully stored')
+        })
+        .catch(err => {
+          console.log(err);
+        })
+      // this.setState({
+      //   isError: false,
+      //   cartStorage: [...this.state.cartStorage, {
+      //     currentProductStyle: this.state.currentProductStyle,
+      //     currentPrice: this.state.currentPrice,
+      //     currentName: this.state.currentName,
+      //     currentProductName: this.state.currentProductName,
+      //     currentImage: this.state.currentImage,
+      //   }],
+      //   cartStorageSize: this.state.cartStorage.length+1
+      // })
       //setState to a storage unit that shows the list of the item.
     }
   }
@@ -185,7 +216,6 @@ class ProductOverview extends React.Component {
     if(index < 1) {
       index = slides;
     }
-    console.log(index);
     index--;
     this.setState({
       activeIndex: index,
@@ -230,12 +260,10 @@ class ProductOverview extends React.Component {
       if(this.state.currentProductStyle.results[i].style_id === id) {
         storedProductStyle = this.state.currentProductStyle.results[i];
         currentIndex = i;
-        console.log(currentIndex);
         break;
       }
     }
 
-    console.log(currentIndex);
 
     this.setState({
       currentImage: storedProductStyle.photos[0].url,
@@ -249,6 +277,7 @@ class ProductOverview extends React.Component {
     });
 
   }
+
 
   handleImageModal () {
     console.log('Booyah')
@@ -282,7 +311,6 @@ class ProductOverview extends React.Component {
   }
 
   handleMouseMove (e) {
-    //console.log('check')
     const {
       top: offsetTop,
       left: offsetLeft
@@ -296,6 +324,10 @@ class ProductOverview extends React.Component {
       mouseX: x,
       mouseY: y
     })
+  }
+
+  handleExpandedImage () {
+    this.setState({ isExpanded: !this.state.isExpanded })
   }
 
   handleMiniStyle (id) {
@@ -339,9 +371,10 @@ class ProductOverview extends React.Component {
       <div >
       <div className='gridContainer'>
 
-        <div className='leftSide'>
+        <div className={this.state.isExpanded ? 'expandImage' : 'leftSide'}>
+
           <div className='imageDiv'>
-          <img onClick={this.handleImageModal.bind(this)} src={this.state.currentImage} className='mainImage'></img>
+          <img onClick={this.state.isExpanded ? this.handleImageModal.bind(this) : null} src={this.state.currentImage} className={this.state.isExpanded ?  'hoverMainImage':'mainImage'}></img>
           <ImageModal
               showExpandedImage = {this.state.showExpandedImage}
               currentImage = {this.state.currentImage}
@@ -361,19 +394,26 @@ class ProductOverview extends React.Component {
           </div>
 
         </div><br></br>
+        <div className={this.state.isExpanded ? 'expandView' :'nonExpandView'} onClick={this.handleExpandedImage.bind(this)}>{this.state.isExpanded ? <i className="fas fa-expand" style={{position:'relative', zIndex:'100', background:'transparent', color:'white', marginTop: '5px', marginLeft: '10px'}}></i> : <i className="fas fa-expand" style={{position:'relative', zIndex:'100', background:'transparent', color:'white', marginTop: '5px'}}></i>}</div>
       <div className='styleCarousel'>
 
         <div className='styleMiniGrid'>
         <div className='styleMiniLeft' onClick={this.state.indexStart === 0 ? null :this.handleMiniPrevSlide.bind(this)}>
-        {this.state.indexStart === 0 ? null : <i className='fas overview-fas overview-fa-chevron-left fa-chevron-left'></i>}
+        {this.state.indexStart === 0 ? null : <i className='fas overview-fas overview-fa-chevron-up fa-chevron-up'></i>}
       </div>
-        {this.state.currentActive === undefined ? this.setState({ currentActive: this.state.currentProductStyle.results[0].style_id }) : null}
+        {/* {this.state.currentActive === undefined ? this.setCurrentActive() : null} */}
         <div className='styleMiniGridImage'>
         {this.state.indexBox.map(element => {
+          let value;
+          if(this.state.currentActive === undefined) {
+            value = this.state.currentProductStyle.results[0].style_id;
+          } else {
+            value = this.state.currentActive;
+          }
           return (
             <MiniCarouselStyle
               element = {element}
-              isActive = {this.state.currentActive === element.style_id}
+              isActive = {value === element.style_id}
               handleMiniStyle = {this.handleMiniStyle.bind(this, element.style_id)}
               key = {element.style_id}
             />
@@ -381,14 +421,14 @@ class ProductOverview extends React.Component {
         })}
 
         </div>
-        <div className='styleMiniRight' onClick={this.state.indexEnd === this.state.currentProductStyle.results.length-1 ? null : this.handleMiniNextSlide.bind(this)}>
-        {this.state.indexEnd === this.state.currentProductStyle.results.length-1 ? null : <i className='fas overview-fas overview-fa-chevron-right fa-chevron-right'></i>}
+        <div className='styleMiniRight' onClick={this.state.indexEnd >= this.state.currentProductStyle.results.length-1 ? null : this.handleMiniNextSlide.bind(this)}>
+        {this.state.indexEnd >= this.state.currentProductStyle.results.length-1 ? null : <i className='fas overview-fas overview-fa-chevron-down fa-chevron-down'></i>}
         </div>
         </div>
 
 
       </div>
-      <div className='rightSide'>
+      <div className={this.state.isExpanded ? 'rightSide2' : 'rightSide'}>
         <div className='miniContainer2'>
         <div>
         <StarRatings
@@ -397,24 +437,37 @@ class ProductOverview extends React.Component {
         </div>
         <div className='someDisplay'><a href='#test' style={{ textDecoration: 'none'}}>Read All {this.state.reviewAmount} reviews</a></div>
         </div>
-        <div><h3>{this.state.currentProductCategory}</h3></div>
-        <div><h2>{this.state.currentProductName}</h2></div>
-        <div><h3>{this.state.currentStyleName}</h3></div>
+        <div className='productCategory'>{this.state.currentProductCategory.toUpperCase()}</div>
+        <div className='productName'>{this.state.currentProductName}</div>
+
         <div className='pricePoint'>${stylePrice} <span className={this.state.currentSalePrice ? 'sale': 'noSale'}>${this.state.currentPrice}</span></div><br></br>
-        <div>
+        <div className='bottomMiddle2'>
+        <div className='styleNameContainer'><span className='styleMain'>STYLE &gt;</span> <span className='currentStyleName'>{this.state.currentStyleName.toUpperCase()}</span></div>
         <div className='styleGrid'>
-          {this.state.currentActive === undefined ? this.setState({ currentActive: this.state.currentProductStyle.results[0].style_id }) : null}
+          {/* {this.state.currentActive === undefined ? this.setState({ currentActive: this.state.currentProductStyle.results[0].style_id }) : null} */}
+          {/* need to refactor the above */}
+
           {this.state.currentProductStyle.results.map(element => {
+            let value;
+            if(this.state.currentActive === undefined) {
+              value = this.state.currentProductStyle.results[0].style_id;
+            } else {
+              value = this.state.currentActive;
+            }
+
             return(<StyleList
               element = {element}
-              isActive = {this.state.currentActive === element.style_id}
+              isActive = {value === element.style_id}
               handleStyle={this.handleStyle.bind(this, element.style_id)}
+              key={element.style_id}
             />)
           })}
-          </div>
+            </div>
+
 
         </div>
         <br></br>
+        <div className='bottomMiddle'>
         <div className='dropdownContainer'>
         <SizeDrop
           selectedSize = {this.state.selectedSize}
@@ -445,8 +498,15 @@ class ProductOverview extends React.Component {
         <br></br>
         <br></br>
       </div>
+      </div>
       <br></br>
         <div className ='bottomSide'><br></br><div className='sloganName'>{this.state.currentSlogan}</div><br></br>{this.state.currentDescription}</div>
+        <div className='bottomRightSide'>
+          <CreateFeatures
+            product = {this.props.currentProduct}
+          />
+
+        </div>
     </div>
     </div>
     );

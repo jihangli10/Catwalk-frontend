@@ -14,8 +14,9 @@ import products from '../data/products'
 import reviews from '../data/reviews'
 import StarRatings from './RateReview/StarRatings.jsx'
 import ProductOverview from './ProductOverview/ProductOverview'
+import Header from './Header/Header';
 class App extends React.Component {
-  constructor(props) {
+  constructor(props) {+
     super(props);
     this.state = {
       products: [],
@@ -75,18 +76,19 @@ class App extends React.Component {
     return (
       <div style={this.state.blurBackground ? { background: 'black' } : null}>
         <div>
-          <h1>Main Page</h1>
+          <Header />
+        </div>
+        <div>
           <ProductOverview
             currentProduct={this.state.currentProduct}
           />
         </div>
         <div>
           <br></br>
-          <div className="section">CATEGORY</div>
           <br></br>
         </div>
         <div>
-          <RelatedPO updateProd={this.updateCurrentProduct} currProd={this.state.currentProduct} />
+          <RelatedPO updateProd={this.updateCurrentProduct} parentReviews={this.state.metaData} currProd={this.state.currentProduct} />
         </div>
         <QandA updateProd={this.updateCurrentProduct} currentProduct={this.state.currentProduct} />
         <div>

@@ -6,7 +6,6 @@ import config from '../../../../config.js';
 class AddNewReview extends React.Component {
   constructor(props) {
     super(props);
-    console.log('this.props.addReviewProd.id', this.props.addReviewProd.id)
 
 
     this.state = {
@@ -36,7 +35,6 @@ class AddNewReview extends React.Component {
 
     let reviewChars = this.props.addReviewChar
     for (var keys in reviewChars) {
-      console.log('keys in addReviewChar', keys);
       characteristics[reviewChars[keys].id] = parseInt(this.state[keys]);
     }
 
@@ -54,7 +52,6 @@ class AddNewReview extends React.Component {
         "photos": this.state.photos,
         "characteristics": characteristics
      };
-      console.log(body);
       return axios.post('/reviews', body)
         .then(() => {
           alert('Your Review is submitted!');

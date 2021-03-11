@@ -37,15 +37,17 @@ class QandA extends React.Component {
   }
 
   updateContent() {
-    return axios.get('/qa/questions', {params: { product_id: this.props.currentProduct.id }})
-    // return axios.get('/qa/questions', {params: { product_id: 19093 }})
+    return axios.get('/qa/questions', {params: {
+      product_id: this.props.currentProduct.id,
+      page: 1,
+      count: 1000
+    }})
       .then(data => {
         this.setState({
           questions: data.data.results,
           displayQuestions: data.data.results,
           product_id: data.data.product_id
         })
-
       })
       .catch(err => {
       console.log(err);

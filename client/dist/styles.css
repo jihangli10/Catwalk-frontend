@@ -12,9 +12,65 @@ body {
   /* width: 1500px;
   margin: auto; */
 }
+
+
 .section {
   font-size: 14px;
   text-transform: uppercase;
+}
+
+
+/*==============================================================================*/
+  /*HEADER STYLES*/
+/*==============================================================================*/
+
+.projectCatHeader {
+  /* background-color: rgb(176, 196, 222,0.6); */
+  height: 80px;
+  box-sizing: border-box;
+  display: flex;
+  position:relative;
+  /* padding: 15px; */
+  margin-bottom: 25px;
+  width: 100%;
+  border-bottom: 1px solid black;
+
+}
+
+.logoText {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  padding-left: 5px;
+  padding-bottom: 5px;
+  font-weight: 100;
+  font-size: 2.5em;
+  text-shadow: -1px 1px 1px rgba(51, 51, 51, 0.4)
+}
+
+.header-search {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  padding-right: 5px;
+  padding-bottom: 8px;
+  font-weight: 100;
+  font-size: 1.8em;
+}
+
+#header-search-input {
+  height: 20px;
+  width: 152px;
+}
+
+.magnifier {
+  display: inline-block;
+  margin-left: 5px;
+  margin-top: 5px;
+}
+
+.mag {
+  margin-top: 3px;
 }
 /*==============================================================================*/
   /*PRODUCT OVERVIEW STYLES*/
@@ -517,8 +573,10 @@ body {
   border: 1px solid #ddd;
   border-radius: 4px;
   padding: 2px;
-  height: 100px;
+  max-height: 100px;
   width: auto;
+  height: auto;
+  max-width: 300px;
   margin: 4px 2px;
 }
 .qanda-content-container {

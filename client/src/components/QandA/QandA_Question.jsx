@@ -21,10 +21,16 @@ class Question extends React.Component{
   }
 
   _compareHelpfulness (a, b) {
-    if (a.helpfulness < b.helpfulness || b.answerer_name.toLowerCase() === 'seller') {
+    if (b.answerer_name.toLowerCase() === 'seller') {
       return 1;
     }
-    if (a.helpfulness > b.helpfulness || a.answerer_name.toLowerCase() === 'seller') {
+    if (a.answerer_name.toLowerCase() === 'seller') {
+      return -1;
+    }
+    if (a.helpfulness < b.helpfulness) {
+      return 1;
+    }
+    if (a.helpfulness > b.helpfulness) {
       return -1;
     }
     return 0;

@@ -8,15 +8,17 @@ import POAvgRating from './POAvgRating.jsx';
 class YourOutfitCard extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      average: 0
-    }
+    this.getAverage = this.getAverage.bind(this);
   }
 
-  componentDidMount() {
-    this.setState({
-      average: this.props.avg
-    });
+  getAverage(reviews) {
+    let sum = 0;
+    let count = 0;
+    for (let i in reviews) {
+      sum += (parseInt(i) * parseInt(reviews[i]));
+      count += parseInt(reviews[i]);
+    }
+    return (Math.round(sum / count * 4) / 4).toFixed(2);
   }
 
 
@@ -24,6 +26,7 @@ class YourOutfitCard extends React.Component {
 
     let newArticle = this.props.outfit;
     let price = newArticle.sale_price ? newArticle.sale_price : newArticle.original_price;
+    let average = this.getAverage(newArticle.reviews);
 
     return(
 
@@ -38,7 +41,7 @@ class YourOutfitCard extends React.Component {
           <div className="relProdName">{newArticle.name}</div>
           <div className="relProdPrice"> ${price}<span className={newArticle.sale_price ? "sale" : "noSale"}>${newArticle.original_price}</span> </div>
             <div className="relProdReviews">
-              <POAvgRating average={this.state.average} />
+              <POAvgRating average={average} />
             </div>
         </div>
 

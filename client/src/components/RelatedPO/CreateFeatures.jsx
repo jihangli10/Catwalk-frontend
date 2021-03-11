@@ -18,7 +18,7 @@ const CreateFeatures = (props) => {
     let check = <img style={{height: '14px', width: '14px'}} src="https://img.icons8.com/metro/26/000000/checkmark.png"/>;
     let len = value ? value.length - 1 : null;
     let val = value ? value.slice(1, len) : check;
-    return <div className="overviewFeatures" key={key}><span className="featureName">{feature} </span><span className="featureVal"> {val}</span></div>;
+    return <div className="overviewFeatures" key={key}><span className="featureName">{feature} </span><span className="featureVal"> {val}</span><br></br></div>;
   }
 
   return (

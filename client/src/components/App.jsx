@@ -16,7 +16,7 @@ import StarRatings from './RateReview/StarRatings.jsx'
 import ProductOverview from './ProductOverview/ProductOverview'
 import Header from './Header/Header';
 class App extends React.Component {
-  constructor(props) {
+  constructor(props) {+
     super(props);
     this.state = {
       products: [],

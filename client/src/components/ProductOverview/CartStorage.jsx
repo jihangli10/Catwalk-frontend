@@ -2,7 +2,7 @@ import React from 'react';
 
 var CartStorage = ({ cartModal, cartStorageSize }) => (
   <div className='cartImage'>
-    <button onClick={cartModal}>
+    <button className='cartButtonStorage' onClick={cartModal}>
       <div className='miniContainer'>
         <i className="fas overview-fas fa-shopping-cart"></i>
 

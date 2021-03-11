@@ -1,19 +1,27 @@
 import React from 'react'
 
 var StyleList = ({ element, isActive, handleStyle }) => {
-        const adjustStyle = {
+
+
+         const adjustStyle = {
            background: element.name,
-           border: isActive ? '3px solid blue' : null,
            borderRadius: '50%',
            width: '50px',
-           height: '50px'
+           height: '50px',
         }
-        console.log(element.id)
-        console.log(element.style_id);
+
+        const checkStyle = {
+           position: 'absolute',
+           marginLeft: '45px'
+        }
+
+        const circleStyle = {
+           position: 'absolute',
+           background: 'white',
+        }
 
         return(
-        // <div className='circularPic' style={adjustStyle} onClick={handleStyle}></div>
-        <div>
+           <div>{isActive ? <i className="fas fa-check" style={checkStyle}></i> : null}
            <img className='test5' style={adjustStyle} onClick={handleStyle} src={element.photos[0].thumbnail_url} width='50px' height='50px' className='grid-item'></img>
         </div>
         )
@@ -25,3 +33,5 @@ export default StyleList
 //<div>
 {/* <img className='test5' style={adjustStyle} onClick={handleStyle} src={element.photos[0].url} width='50px' height='50px' className='grid-item'></img>
 </div> */}
+
+//<div classNamestyle={adjustStyle} onClick={handleStyle}></div>

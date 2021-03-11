@@ -19,7 +19,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      products:[],
+      products: [],
       metaData: {},
       currentProduct: {
         "id": 19783,
@@ -32,29 +32,24 @@ class App extends React.Component {
         "created_at": "2021-02-23T19:24:34.674Z",
         "updated_at": "2021-02-23T19:24:34.674Z",
         "features": [
-            {
-                "feature": "Sustainably Sourced",
-                "value": null
-            },
-            {
-                "feature": "Green Leaf Certified",
-                "value": null
-            },
-            {
-                "feature": "Cut",
-                "value": "\"Skinny\""
-            }
+          {
+            "feature": "Sustainably Sourced",
+            "value": null
+          },
+          {
+            "feature": "Green Leaf Certified",
+            "value": null
+          },
+          {
+            "feature": "Cut",
+            "value": "\"Skinny\""
+          }
         ]
-    }
-  };
-  this.updateCurrentProduct = this.updateCurrentProduct.bind(this);
-  this.getReviewMeta = this.getReviewMeta.bind(this);
-  window.addEventListener('click', (e) => {
-    let date = new Date();
-    console.log(date);
-    console.log(e);
-  })
-}
+      }
+    };
+    this.updateCurrentProduct = this.updateCurrentProduct.bind(this);
+    this.getReviewMeta = this.getReviewMeta.bind(this);
+  }
   componentDidMount() {
     this.updateCurrentProduct(this.state.currentProduct.id);
   }
@@ -74,18 +69,18 @@ class App extends React.Component {
       .then((results) => {
         this.setState({
           metaData: results.data
-        }, () => console.log('META DATA IMPORT', this.state.metaData));
+        })
       })
   }
   render() {
     return (
-      <div style={this.state.blurBackground ? {background: 'black'}: null}>
+      <div style={this.state.blurBackground ? { background: 'black' } : null}>
         <div>
           <Header />
         </div>
         <div>
           <ProductOverview
-            currentProduct = {this.state.currentProduct}
+            currentProduct={this.state.currentProduct}
           />
         </div>
         <div>
@@ -96,13 +91,13 @@ class App extends React.Component {
         <div>
           <RelatedPO updateProd={this.updateCurrentProduct} parentReviews={this.state.metaData} currProd={this.state.currentProduct} />
         </div>
-        <QandA updateProd={this.updateCurrentProduct} currentProduct={this.state.currentProduct}/>
+        <QandA updateProd={this.updateCurrentProduct} currentProduct={this.state.currentProduct} />
         <div>
           <br></br>
           <a id='test'></a>
           <div className="section">RATINGS &amp; REVIEWS</div>
           <br></br>
-          <RateReviewData key={'product' + this.state.currentProduct.description.length} metaData={this.state.metaData} currProd={this.state.currentProduct} />
+          <RateReviewData key={'product' + this.state.currentProduct.description.length} metaData={this.state.metaData.characteristics} currProd={this.state.currentProduct} />
         </div>
       </div>
     );

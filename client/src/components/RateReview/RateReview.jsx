@@ -3,8 +3,8 @@ import axios from 'axios';
 import StarRatings from './StarRatings';
 import AverageRating from './AverageRating';
 import RatingBreakdown from './RatingBreakdown';
-import ReviewsSliders from './ReviewsSliders';
-import ReviewListSort from './ReviewListSort';
+import ReviewCharacteristics from './ReviewCharacteristics';
+import ReviewList from './ReviewList';
 
 // import RateReviewMeta from './RateReviewMeta';
 
@@ -17,31 +17,32 @@ class RateReviews extends React.Component {
 
     return (
       <div>
-        <button key={'reviews' + this.props.rateReviews.length} style={{ display: this.props.rateReviews.length === 0 ? "block" : "none" }} >ADD REVIEWS</button>
-        <div style={{ display: this.props.rateReviews.length !== 0 ? "block" : "none" }}>
+        <button key={'reviews' + this.props.displayReviews.length} style={{ display: this.props.displayReviews.length === 0 ? "block" : "none" }} >ADD REVIEWS</button>
+        <div style={{ display: this.props.displayReviews.length !== 0 ? "block" : "none" }}>
 
           <div id="ratingreviewcontainer" className="row">
 
             <div className="rrstats break-column">
               <div>
-                <AverageRating key={'avgRaiting' + this.props.rateReviews.length} avgReviews={this.props.rateReviews} /><StarRatings />
+                <br></br>
+                <AverageRating key={'avgRaiting' + this.props.reviews.length} reviews={this.props.reviews} /><StarRatings />
               </div>
 
-              <div id="bar-section">
+               <div id="bar-section">
                 <RatingBreakdown
-                  key={'reviews' + this.props.rateReviews.length}
-                  ratingBreakdowns={this.props.rateReviews}
+                  key={'reviews' + this.props.reviews.length}
+                  ratingBreakdowns={this.props.reviews}
                   reviews={this.props.reviews}
                   filter={this.props.filter}
-                  onToggleFunc={this.props.onToggleClick}
-                  onClearAllFunc={this.props.onClearAllClick}
+                  onToggle={this.props.onToggle}
+                  onClearAll={this.props.onClearAll}
                 />
               </div>
 
               <div id="slide-section">
-                <ReviewsSliders
-                characteristics={this.props.metaData}
-                key={'metaData' + this.props.metaData.length}/>
+                <ReviewCharacteristics
+                metaData={this.props.metaData}
+                />
               </div>
 
             </div>
@@ -50,13 +51,27 @@ class RateReviews extends React.Component {
 
 
             <div className="reviewListSort" >
-              <ReviewListSort
-                key={'reviews' + this.props.rateReviews.length}
-                reviewListSort={this.props.rateReviews}
-                reviewProduct={this.props.reviewProd}
-                reviewCharacteristics={this.props.metaData}
-                key={'metaData' + this.props.metaData.length} />
+              <br></br>
+              <ReviewList
+                onToggle={this.props.onToggle}
+                onClearAll={this.props.onClearAll}
+                sortByHelpful={this.props.sortByHelpful}
+                sortByRelative={this.props.sortByRelative}
+                sortByNewest={this.props.sortByNewest}
+                onChange={this.props.onChange}
+                onClickAddMore={this.props.onClickAddMore}
+                reviews={this.props.reviews}
+                filter={this.props.filter}
+                displayReviews={this.props.displayReviews}
+                sort={this.props.sort}
+                numberDisplayed={this.props.numberDisplayed}
+                isOpen={this.props.isOpen}
+                metaData={this.props.metaData}
+                currProd={this.props.currProd}
+                />
             </div>
+
+
           </div>
         </div>
       </div>

@@ -1,39 +1,39 @@
 import React from 'react';
 
-class ReviewsSliders extends React.Component {
+class ReviewCharacteristics extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      reviews: []
     }
   }
 
-  sliderfunc() {
-    var slider = document.getElementById("size");
-    var output = document.getElementById("demo");
-    output.innerHTML = slider.value; // Display the default slider value
-    // test for change
-    // Update the current slider value (each time you drag the slider handle)
-    slider.oninput = function () {
-      output.innerHTML = this.value;
-    }
-  }
-
+  // sliderfunc() {
+  //   var slider = document.getElementById("size");
+  //   var output = document.getElementById("demo");
+  //   output.innerHTML = slider.value; // Display the default slider value
+  //   // test for change
+  //   // Update the current slider value (each time you drag the slider handle)
+  //   slider.oninput = function () {
+  //     output.innerHTML = this.value;
+  //   }
+  // }
 
   render() {
+    if (this.props.metaData === undefined) {
+      return '';
+    }
 
-    let meta = this.props.characteristics;
-    let myBarSize = meta.Size ? { width: Math.round((meta.Size.value / 5 * 100)) + '%' } : { width: '0%' }
-    let myBarLength = meta.Length ? { width: Math.round((meta.Length.value / 5 * 100)) + '%' } : { width: '0%' }
-    let myBarWidth = meta.Width ? { width: Math.round((meta.Width.value / 5 * 100)) + '%' } : { width: '0%' }
-    let myBarFit = meta.Fit ? { width: Math.round((meta.Fit.value / 5 * 100)) + '%' } : { width: '0%' }
-    let myBarComfort = meta.Comfort ? { width: Math.round((meta.Comfort.value / 5 * 100)) + '%' } : { width: '0%' }
-    let myBarQuality = meta.Quality ? { width: Math.round((meta.Quality.value / 5 * 100)) + '%' } : { width: '0%' }
+    let myBarSize = this.props.metaData.Size ? { width: Math.round((this.props.metaData.Size.value / 5 * 100)) + '%' } : { width: '0%' }
+    let myBarLength = this.props.metaData.Length ? { width: Math.round((this.props.metaData.Length.value / 5 * 100)) + '%' } : { width: '0%' }
+    let myBarWidth = this.props.metaData.Width ? { width: Math.round((this.props.metaData.Width.value / 5 * 100)) + '%' } : { width: '0%' }
+    let myBarFit = this.props.metaData.Fit ? { width: Math.round((this.props.metaData.Fit.value / 5 * 100)) + '%' } : { width: '0%' }
+    let myBarComfort = this.props.metaData.Comfort ? { width: Math.round((this.props.metaData.Comfort.value / 5 * 100)) + '%' } : { width: '0%' }
+    let myBarQuality = this.props.metaData.Quality ? { width: Math.round((this.props.metaData.Quality.value / 5 * 100)) + '%' } : { width: '0%' }
     return (
       <div>
         <div className="row responseText"><strong>Characteristics</strong></div>
         <div>
-          <div className="scaleText" style={{ display: meta.Size ? "block" : "none" }}>SIZE
+          <div className="scaleText" style={{ display: this.props.metaData.Size ? "block" : "none" }}>SIZE
           <div id="myProgress">
             <div style={myBarSize} id="myBar"><i className="fas fa-caret-down fa-3x"></i></div>
           </div>
@@ -42,7 +42,7 @@ class ReviewsSliders extends React.Component {
           </tbody></table>
           </div>
           <br></br>
-          <div className="scaleText" style={{ display: meta.Length ? "block" : "none" }}>LENGTH
+          <div className="scaleText" style={{ display: this.props.metaData.Length ? "block" : "none" }}>LENGTH
           <div id="myProgress">
             <div style={myBarLength} id="myBar"><i className="fas fa-caret-down fa-3x"></i></div>
           </div>
@@ -51,7 +51,7 @@ class ReviewsSliders extends React.Component {
           </tbody></table>
           </div>
           <br></br>
-          <div className="scaleText" style={{ display: meta.Width ? "block" : "none" }}>WIDTH
+          <div className="scaleText" style={{ display: this.props.metaData.Width ? "block" : "none" }}>WIDTH
           <div id="myProgress">
             <div style={myBarWidth} id="myBar"><i className="fas fa-caret-down fa-3x"></i></div>
           </div>
@@ -60,7 +60,7 @@ class ReviewsSliders extends React.Component {
           </tbody></table>
           </div>
           <br></br>
-          <div className="scaleText" style={{ display: meta.Fit ? "block" : "none" }}>FIT
+          <div className="scaleText" style={{ display: this.props.metaData.Fit ? "block" : "none" }}>FIT
           <div id="myProgress">
             <div style={myBarFit} id="myBar"><i className="fas fa-caret-down fa-3x"></i></div>
           </div>
@@ -69,7 +69,7 @@ class ReviewsSliders extends React.Component {
           </tbody></table>
           </div>
           <br></br>
-          <div className="scaleText" style={{ display: meta.Comfort ? "block" : "none" }}>COMFORT
+          <div className="scaleText" style={{ display: this.props.metaData.Comfort ? "block" : "none" }}>COMFORT
           <div id="myProgress">
             <div style={myBarComfort} id="myBar"><i className="fas fa-caret-down fa-3x"></i></div>
           </div>
@@ -78,7 +78,7 @@ class ReviewsSliders extends React.Component {
           </tbody></table>
           </div>
           <br></br>
-          <div className="scaleText" style={{ display: meta.Comfort ? "block" : "none" }}>QUALITY
+          <div className="scaleText" style={{ display: this.props.metaData.Comfort ? "block" : "none" }}>QUALITY
           <div id="myProgress">
             <div style={myBarQuality} id="myBar"><i className="fas fa-caret-down fa-3x"></i></div>
           </div>
@@ -95,4 +95,4 @@ class ReviewsSliders extends React.Component {
   }
 }
 
-export default ReviewsSliders;
+export default ReviewCharacteristics;

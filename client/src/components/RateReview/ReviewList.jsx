@@ -6,56 +6,52 @@ import axios from 'axios';
 class ReviewList extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      display: 0
-    };
-    this.handleDisplay = this.handleDisplay.bind(this)
   }
 
-  componentDidMount() {
-    if (this.props.reviewList.length <= 2) {
-      this.setState({
-        display: this.props.reviewList.length
-      })
-    } else {
-      this.setState({
-        display: 2
-      })
-    }
-  }
-
-  handleDisplay() {
-    this.setState(prevState => ({
-      display: prevState.display + 2
-    }))
-    this.props.onGetCurrentDisplay(this.state.display  + 2);
-  }
-
-  // handlePassDisplay() {
-
-  // }
 
   render() {
-    var displayReviews = this.props.reviewList.slice(0, this.state.display)
-    var revListLength = this.props.reviewList.length
-    if (this.props.reviewList.length === 0) {
+    if (this.props.displayReviews.length === 0) {
       return '';
     }
+    if (this.props.reviews.length === 0) {
+      return '';
+    }
+
     return (
+      <div>
 
-      <div className="reviewlist">
-        <br></br>
-        <br></br>
-        <div id="reviewListTiles">
-          <ul className="no-bullets">
-            {displayReviews.map(review => (
-              <li key={review.review_id} className="listrow">
-                <ReviewListItem reviewListItem={review} />
-              </li>
-            ))}
-          </ul>
+        <form><strong>{this.props.reviews.length} reviews sorted by:</strong>
+          <select name='sort' defaultValue={this.props.sort} onChange={this.props.onChange}>
+            <option defaultValue>Relevant</option>
+            <option>Helpful</option>
+            <option>Newest</option>
+          </select>
+          <noscript><input type="submit" value="Submit" /></noscript>
+        </form>
 
+        <div className="reviewlist">
+          <br></br>
+          <br></br>
+          <div id="reviewListTiles">
+            <ul className="no-bullets">
+              {console.log('DISPLAY REVIEWS AT REVIEW LIST ITEMS', this.props.displayReviews)}
+              {this.props.displayReviews.map(review => (
+                <li key={review.review_id} className="listrow">
+                  <ReviewListItem reviewListItem={review} />
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
+
+
+        <div id="question-button-row">
+          <button style={{ display: this.props.reviews.length >= this.props.numberDisplayed ? "inline" : "none" }} onClick={this.props.onClickAddMore}>MORE REVIEWS</button>&nbsp;&nbsp;
+         <button key={'reviews' + this.props.reviews.length} style={{ display: this.props.reviews.length !== 0 ? "inline" : "none" }} onClick={this.onAddReviewClick}>ADD REVIEWS</button>
+          {this.props.isOpen ? (<AddNewReview key={this.props.currProd.id} onAddReviewClick={this.props.onAddReviewClick} currProd={this.props.currentProduct} metaData={this.props.metaData} />) : null}
+        </div>
+
+
       </div>
     );
   }

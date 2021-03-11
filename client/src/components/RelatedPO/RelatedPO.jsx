@@ -21,9 +21,8 @@ class RelatedPO extends React.Component {
       productCardStyle: null,
       parentProductStyle: null,
       selectedReviews: null,
-      parentReviews: null,
-      outfits: [],
       average: 0,
+      outfits: [],
       relatedProductsindex: 0,
       outfitsindex: 0,
       relatedProductsHideNext: false,
@@ -35,7 +34,7 @@ class RelatedPO extends React.Component {
     this.handleActionButtonClick = this.handleActionButtonClick.bind(this);
     this.handleModalClose = this.handleModalClose.bind(this);
     this.getParentStyles = this.getParentStyles.bind(this);
-    this.getReviewMeta = this.getReviewMeta.bind(this);
+    // this.getReviewMeta = this.getReviewMeta.bind(this);
     this.createOutfitObject = this.createOutfitObject.bind(this);
     this.handleAddOutfit = this.handleAddOutfit.bind(this);
     this.handleRemoveOutfit = this.handleRemoveOutfit.bind(this);
@@ -52,7 +51,8 @@ class RelatedPO extends React.Component {
   componentDidMount() {
     this.getRelatedProducts();
     this.getParentStyles(this.props.currProd.id);
-    this.getReviewMeta(this.props.currProd.id);
+    this.getAverage(this.props.parentReviews.ratings);
+    // this.getReviewMeta(this.props.currProd.id);
     this.setState({
       outfits: ls.get('outfits') || []
     }, () => this.checkCarouselState('outfits'))
@@ -63,6 +63,7 @@ class RelatedPO extends React.Component {
       this.checkCarouselState('outfits');
     } else if (prevProps.currProd.id !== this.props.currProd.id) {
       this.checkCarouselState('relatedProducts');
+      this.getAverage();
     }
   }
 
@@ -124,17 +125,17 @@ class RelatedPO extends React.Component {
       .catch(error => console.log('ERROR retrieving data', error));
   }
 
-  getReviewMeta(id) {
-    axios.get('/reviews/meta', {params: {product_id: id}})
-      .then((results) => {
-        this.setState({
-          parentReviews: results.data
-        }, () => this.getAverage());
-      })
-  }
+  // getReviewMeta(id) {
+  //   axios.get('/reviews/meta', {params: {product_id: id}})
+  //     .then((results) => {
+  //       this.setState({
+  //         parentReviews: results.data
+  //       }, () => this.getAverage());
+  //     })
+  // }
 
-  getAverage() {
-    let reviews = this.state.parentReviews.ratings;
+  getAverage(reviews) {
+    // let reviews = this.props.parentReviews.ratings;
     let sum = 0;
     let count = 0;
     for (let i in reviews) {
@@ -155,6 +156,7 @@ class RelatedPO extends React.Component {
     outfitObj.image = defaultStyle.photos[0].url;
     outfitObj.original_price = defaultStyle.original_price;
     outfitObj.sale_price = defaultStyle.sale_price;
+    outfitObj.reviews = this.props.parentReviews.ratings;
     this.setState({
       outfits: this.state.outfits.concat(outfitObj)
     }, () => {
@@ -182,7 +184,7 @@ class RelatedPO extends React.Component {
       ls.set('outfits', this.state.outfits);
       if (this.state.outfitsindex > 0) {
         this.setState({
-          outfitsindex: this.state.outfitsindex - 1,
+          outfitsindex: 0,
           outfitsHidePrev: true
         }, () => {
           let track = document.querySelector(`.outfits-track`);
@@ -285,7 +287,7 @@ class RelatedPO extends React.Component {
             <br></br>
           </div>
             <div className="modalCont">
-              <RelatedModal selected={this.state.productCard} parentProd={this.props.currProd} handleClose={this.handleModalClose} parentStyle={this.state.parentProductStyle} selectedStyle={this.state.productCardStyle} show={this.state.showModal} parentReview={this.state.parentReviews} selectReview={this.state.selectedReviews} />
+              <RelatedModal selected={this.state.productCard} parentProd={this.props.currProd} handleClose={this.handleModalClose} parentStyle={this.state.parentProductStyle} selectedStyle={this.state.productCardStyle} show={this.state.showModal} parentReview={this.props.parentReviews} selectReview={this.state.selectedReviews} />
             </div>
           <div className="relCont">
             <div className="relatedCarousel">
@@ -308,7 +310,7 @@ class RelatedPO extends React.Component {
               <div className="outfits-track">
                 <AddOutfitCard handleClick={this.handleAddOutfit} />
                 {this.state.outfits.map((outfit, key) => {
-                  return <YourOutfitCard  remove={this.handleRemoveOutfit} key={key} outfit={outfit} avg={this.state.average} />
+                  return <YourOutfitCard remove={this.handleRemoveOutfit} key={key} outfit={outfit} />
                 })}
               </div>
                 <div className="nav-card">

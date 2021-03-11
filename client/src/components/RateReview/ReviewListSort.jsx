@@ -55,7 +55,7 @@ class ReviewListSort extends React.Component {
     })
   };
 
-  onChange(e) {
+  onChange(event) {
     this.setState({ sort: event.target.value });
     if (event.target.value === 'Relevant') {
       this.setState({ reviews: this.sortByRelative() })

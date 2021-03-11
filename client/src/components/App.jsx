@@ -94,7 +94,7 @@ class App extends React.Component {
           <a id='test'></a>
           <div className="section">RATINGS &amp; REVIEWS</div>
           <br></br>
-          <RateReviewData key={'product' + this.state.currentProduct.description.length} metaData={this.state.metaData} currProd={this.state.currentProduct} />
+          <RateReviewData key={'product' + this.state.currentProduct.description.length} metaData={this.state.metaData.characteristics} currProd={this.state.currentProduct} />
         </div>
       </div>
     );

@@ -14,26 +14,40 @@ class RateReviewData extends React.Component {
       reviews: [],
       filter: [],
       displayReviews: [],
-      sort: 'Newest'
+      sort: '',
+      numberDisplayed: 0,
+      isOpen: false
     }
     this.onToggle = this.onToggle.bind(this)
     this.onClearAll = this.onClearAll.bind(this)
     this.sortByHelpful = this.sortByHelpful.bind(this)
     this.sortByRelative = this.sortByRelative.bind(this)
     this.sortByNewest = this.sortByNewest.bind(this)
+    this.onChange=this.onChange.bind(this)
+    this.onClickAddMore=this.onClickAddMore.bind(this)
+    this.onAddReviewClick=this.onAddReviewClick.bind(this)
   }
   // SET INITIAL STATE ==================================================================== //
+
   componentDidMount() {
-    return axios.get('/reviews', { params: { product_id: this.props.currProd.id } })
+    return axios.get('/reviews', { params: { product_id: this.props.currProd.id, count: 1000 } })
       .then(data => {
-        this.setState({ reviews: data.data.results, displayReviews: data.data.results })
+        if (data.data.results.length <= 2) {
+          var tempNumDisplayed = data.data.results.length;
+        } else {
+          var tempNumDisplayed = 2;
+        }
+        this.setState({
+          reviews: data.data.results,
+          displayReviews: data.data.results.slice(0, this.state.tempNumDisplayed),
+          sort: 'Relative',
+          numberDisplayed: tempNumDisplayed })
       })
       .catch(err => { console.log(err); });
   }
 
-  // DISPLAY DATA ========================================================================= //
-
   // FILTER DATA ========================================================================== //
+
   onToggle(num) {
     console.log('clicked')
     var tempArray = this.state.filter;
@@ -47,17 +61,17 @@ class RateReviewData extends React.Component {
     } else {
       var tempReview = this.state.reviews.filter(item => tempArray.includes(item.rating));
     }
-    this.setState({ filter: tempArray, displayReviews: tempReview }, () => {
-      console.log('FILTER ON TOGGLE', this.state.filter, 'SORT AT FILTER', this.state.sort, 'DISPLAY REVIEWS ON TOGGLE', this.state.displayReviews)
+    this.setState({ filter: tempArray, displayReviews: tempReview.slice(0, this.state.numberDisplayed) }, () => {
+      console.log('FILTER ON TOGGLE =', this.state.filter, ' | SORT AT FILTER =', this.state.sort, ' | DISPLAY REVIEWS ON TOGGLE =', this.state.displayReviews)
     })
   }
 
   onClearAll() {
     console.log('clicked')
-    this.setState({ filter: [], displayReviews: this.state.reviews })
+    this.setState({ filter: [], displayReviews: this.state.reviews.slice(0, this.state.numberDisplayed) })
   }
 
-  // SORT DATA ============================================================================ //
+  // SORT DATA ========================================================================== //
 
   sortByHelpful() {
     return this.state.displayReviews.sort(function (a, b) {
@@ -104,9 +118,24 @@ class RateReviewData extends React.Component {
     }
   }
 
+  onClickAddMore() {
+      this.setState(prevState => ({
+        numberDisplayed: prevState.numberDisplayed + 2
+      },
+        this.setState({ displayReviews: this.reviews.slice(0, this.state.numberDisplayed)},
+        console.log(displayReviews)
+        )
+      ))
+  }
+
+  onAddReviewClick() {
+    this.setState({ isOpen: !this.state.isOpen });
+  };
 
 
 
+
+// SORT DATA ========================================================================== //
 
   render() {
 
@@ -117,7 +146,8 @@ class RateReviewData extends React.Component {
         {console.log('this.props.metaData', this.props.metaData)}
         {console.log('this.state.reviews', this.state.reviews)}
         {console.log('this.state.filter', this.state.filter)}
-        {console.log('this.state.displayReviews', this.state.displayReviews)}
+        {console.log('this.state.displayReviews', this.state.displayReviews.slice(0,this.state.numberDisplayed))}
+        {console.log('this.state.numberDisplayed', this.state.numberDisplayed)}
 
         <button onClick={() => this.onToggle(5)}>5</button>
         <button onClick={() => this.onToggle(4)}>4</button>
@@ -134,6 +164,30 @@ class RateReviewData extends React.Component {
           </select>
           <noscript><input type="submit" value="Submit" /></noscript>
         </form>
+
+        <button onClick={this.onClickAddMore}>ADD MORE</button>
+
+        <div>
+          =======================================================================================
+          <RateReview
+            onToggle={this.onToggle.bind(this)}
+            onClearAll={this.onClearAll.bind(this)}
+            sortByHelpful={this.sortByHelpful.bind(this)}
+            sortByRelative={this.sortByRelative.bind(this)}
+            sortByNewest={this.sortByNewest.bind(this)}
+            onChange={this.onChange.bind(this)}
+            onClickAddMore={this.onClickAddMore.bind(this)}
+            reviews={this.state.reviews}
+            filter={this.state.filter}
+            displayReviews={this.state.displayReviews}
+            sort={this.state.sort}
+            numberDisplayed={this.state.numberDisplayed}
+            isOpen={this.state.isOpen}
+            metaData={this.props.metaData}
+            currProd={this.props.currProd}
+          />
+
+        </div>
 
       </div>
     );

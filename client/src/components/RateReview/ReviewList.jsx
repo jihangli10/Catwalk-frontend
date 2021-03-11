@@ -47,7 +47,7 @@ class ReviewList extends React.Component {
 
         <div id="question-button-row">
           <button style={{ display: this.props.reviews.length >= this.props.numberDisplayed ? "inline" : "none" }} onClick={this.props.onClickAddMore}>MORE REVIEWS</button>&nbsp;&nbsp;
-         <button key={'reviews' + this.props.reviews.length} style={{ display: this.props.reviews.length !== 0 ? "inline" : "none" }} onClick={this.onAddReviewClick}>ADD REVIEWS</button>
+         <button key={'reviews' + this.props.reviews.length} style={{ display: this.props.reviews.length !== 0 ? "inline" : "none" }} onClick={this.props.onAddReviewClick}>ADD REVIEWS</button>
           {this.props.isOpen ? (<AddNewReview key={this.props.currProd.id} onAddReviewClick={this.props.onAddReviewClick} currProd={this.props.currentProduct} metaData={this.props.metaData} />) : null}
         </div>
 

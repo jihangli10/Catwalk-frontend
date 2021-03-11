@@ -1,21 +1,19 @@
 import React from 'react';
 import { shallow, mount, render } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 import renderer from 'react-test-renderer';
 
 import App from '.././components/App.jsx';
 
-function setup() {
-  const wrapper = mount(<App />);
-  return wrapper;
-}
 
-
-describe('App is working', () => {
-  it('should contain main page header', () => {
-    const myApp = setup();
-    // const header = <h1>Main Page</h1>;
-    expect(myApp).toMatchSnapshot();
+describe('App', () => {
+  it('should show text', () => {
+    const wrapper = shallow(<App />);
+    const text = wrapper.find('div h1');
+    expect(text.text()).toBe('Main Page');
   });
+})
+
 
   // it('should contain current product state', () => {
   //   let tree = renderer
@@ -23,4 +21,4 @@ describe('App is working', () => {
   //     .toJSON();
   //     expect(tree).toMatchSnapshot();
   // });
-});
+

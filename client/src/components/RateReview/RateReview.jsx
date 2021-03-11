@@ -60,6 +60,7 @@ class RateReviews extends React.Component {
                 sortByNewest={this.props.sortByNewest}
                 onChange={this.props.onChange}
                 onClickAddMore={this.props.onClickAddMore}
+                onAddReviewClick={this.onAddReviewClick}
                 reviews={this.props.reviews}
                 filter={this.props.filter}
                 displayReviews={this.props.displayReviews}
@@ -68,6 +69,7 @@ class RateReviews extends React.Component {
                 isOpen={this.props.isOpen}
                 metaData={this.props.metaData}
                 currProd={this.props.currProd}
+
                 />
             </div>
 

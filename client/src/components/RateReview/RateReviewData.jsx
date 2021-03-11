@@ -177,6 +177,7 @@ class RateReviewData extends React.Component {
             sortByNewest={this.sortByNewest.bind(this)}
             onChange={this.onChange.bind(this)}
             onClickAddMore={this.onClickAddMore.bind(this)}
+            onAddReviewClick={this.onAddReviewClick.bind(this)}
             reviews={this.state.reviews}
             filter={this.state.filter}
             displayReviews={this.state.displayReviews}

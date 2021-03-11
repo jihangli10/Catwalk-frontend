@@ -1,6 +1,7 @@
 import React from 'react';
 import reviews from '../../data/reviews';
 import ReviewListItem from './ReviewListItem';
+import AddNewReview from './AddNewReview';
 import axios from 'axios';
 
 class ReviewList extends React.Component {
@@ -46,9 +47,9 @@ class ReviewList extends React.Component {
 
 
         <div id="question-button-row">
-          <button style={{ display: this.props.reviews.length >= this.props.numberDisplayed ? "inline" : "none" }} onClick={this.props.onClickAddMore}>MORE REVIEWS</button>&nbsp;&nbsp;
+          <button style={{ display: this.props.reviews.length >= this.props.numberDisplayed && this.props.reviews.length > 2 ? "inline" : "none" }} onClick={this.props.onClickAddMore}>MORE REVIEWS</button>&nbsp;&nbsp;
          <button key={'reviews' + this.props.reviews.length} style={{ display: this.props.reviews.length !== 0 ? "inline" : "none" }} onClick={this.props.onAddReviewClick}>ADD REVIEWS</button>
-          {this.props.isOpen ? (<AddNewReview key={this.props.currProd.id} onAddReviewClick={this.props.onAddReviewClick} currProd={this.props.currentProduct} metaData={this.props.metaData} />) : null}
+          {this.props.isOpen ? (<AddNewReview key={this.props.currProd.id} onAddReviewClick={this.props.onAddReviewClick} currProd={this.props.currProd} metaData={this.props.metaData} />) : null}
         </div>
 
 

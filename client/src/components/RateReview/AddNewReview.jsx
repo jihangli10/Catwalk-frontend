@@ -33,16 +33,17 @@ class AddNewReview extends React.Component {
   handleSubmit(event) {
     let characteristics = {};
 
-    let reviewChars = this.props.addReviewChar
-    for (var keys in reviewChars) {
-      characteristics[reviewChars[keys].id] = parseInt(this.state[keys]);
+    let metaData = this.props.metaData
+    for (var keys in metaData) {
+      console.log(keys)
+      characteristics[metaData[keys].id] = parseInt(this.state[keys]);
     }
 
     event.preventDefault();
     if (this.handleErrors()) {
       console.log('no Errors')
       var body = {
-        "product_id": parseInt(this.props.addReviewProd.id, 10),
+        "product_id": parseInt(this.props.currProd.id, 10),
         "rating": parseInt(this.state.rating.substring(0, 1)),
         "summary": this.state.summary,
         "body": this.state.body,
@@ -55,7 +56,7 @@ class AddNewReview extends React.Component {
       return axios.post('/reviews', body)
         .then(() => {
           alert('Your Review is submitted!');
-          this.props.handleAddReviewClick();
+          this.props.onAddReviewClick();
         })
         .catch(err => {
           console.log(err);
@@ -153,25 +154,29 @@ class AddNewReview extends React.Component {
 
 
   componentDidMount() {
-    console.log(this.props.addReviewChar)
-    // let characteristics = this.props.addReviewChar;
-    for (var keys in this.props.addReviewChar) {
+    console.log(this.props.metaData)
+    let characteristics = this.props.metaData;
+    for (var keys in this.props.metaData) {
       console.log('keys in addReviewChar', keys);
       this.setState({[keys]: true})
     }
 }
 
 render() {
+  console.log('META DATA ON ADD REVIEW FORM', this.props.metaData)
+  // if (this.metaData === undefined) {
+  //   return '';
+  // }
   console.log('FIRST STATE OF THE STATE >>>>', this.state)
     return (
       <div className="qanda-modal-wrapper">
-        <div className="qanda-modal-backdrop" onClick={this.props.handleAddReviewClick} />
+        <div className="qanda-modal-backdrop" onClick={this.props.onAddReviewClick} />
         <div className="qanda-modal-box">
-          <i className="far fa-times-circle fa-2x" onClick={this.props.handleAddReviewClick}></i>
+          <i className="far fa-times-circle fa-2x" onClick={this.props.onAddReviewClick}></i>
           <br></br>
           <div className="reviewContainer">
             <div className="reviewContainer">
-              <div className="reviewTitle">Write Your Review About the&nbsp;<strong><span className="reviewSubTitle">{this.props.addReviewProd.name} </span> </strong></div>
+              <div className="reviewTitle">Write Your Review About the&nbsp;<strong><span className="reviewSubTitle">{this.props.currProd.name} </span> </strong></div>
               {/* ========================= OVERALL RATING SECTION ========================= */}
               <div className="reviewQ row">*Overall Rating&nbsp;
         </div>

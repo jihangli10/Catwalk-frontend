@@ -5,6 +5,7 @@ import AverageRating from './AverageRating';
 import RatingBreakdown from './RatingBreakdown';
 import ReviewCharacteristics from './ReviewCharacteristics';
 import ReviewList from './ReviewList';
+import AddNewReview from './AddNewReview';
 
 // import RateReviewMeta from './RateReviewMeta';
 
@@ -24,7 +25,6 @@ class RateReviews extends React.Component {
 
             <div className="rrstats break-column">
               <div>
-                <br></br>
                 <AverageRating key={'avgRaiting' + this.props.reviews.length} reviews={this.props.reviews} /><StarRatings />
               </div>
 
@@ -51,7 +51,6 @@ class RateReviews extends React.Component {
 
 
             <div className="reviewListSort" >
-              <br></br>
               <ReviewList
                 onToggle={this.props.onToggle}
                 onClearAll={this.props.onClearAll}
@@ -60,7 +59,7 @@ class RateReviews extends React.Component {
                 sortByNewest={this.props.sortByNewest}
                 onChange={this.props.onChange}
                 onClickAddMore={this.props.onClickAddMore}
-                onAddReviewClick={this.onAddReviewClick}
+                onAddReviewClick={this.props.onAddReviewClick}
                 reviews={this.props.reviews}
                 filter={this.props.filter}
                 displayReviews={this.props.displayReviews}

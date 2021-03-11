@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import RateReview from './RateReview';
+import AddNewReview from './AddNewReview';
 // 19091 HAS NO REVIEWS
 // 19093 HAS 2 REVIEWS
 // 19191 HAS 5 REVIEWS
@@ -24,7 +25,7 @@ class RateReviewData extends React.Component {
     this.sortByNewest = this.sortByNewest.bind(this)
     this.onChange=this.onChange.bind(this)
     this.onClickAddMore=this.onClickAddMore.bind(this)
-    this.onAddReviewClick=this.onAddReviewClick.bind(this)
+    this.onAddReviewClick = this.onAddReviewClick.bind(this)
   }
   // SET INITIAL STATE ==================================================================== //
   componentDidMount() {
@@ -37,7 +38,7 @@ class RateReviewData extends React.Component {
         }
         this.setState({
           reviews: data.data.results,
-          displayReviews: data.data.results.slice(0, this.state.tempNumDisplayed),
+          displayReviews: data.data.results.slice(0, tempNumDisplayed),
           sort: 'Relative',
           numberDisplayed: tempNumDisplayed })
       })
@@ -108,44 +109,20 @@ class RateReviewData extends React.Component {
     }
   }
   onClickAddMore() {
-      this.setState(prevState => ({
-        numberDisplayed: prevState.numberDisplayed + 2
-      },
-        this.setState({ displayReviews: this.reviews.slice(0, this.state.numberDisplayed)},
-        console.log(displayReviews)
-        )
-      ))
+      this.setState({
+        numberDisplayed: this.state.numberDisplayed + 2,
+        displayReviews: this.state.reviews.slice(0, this.state.numberDisplayed + 2)
+        })
   }
   onAddReviewClick() {
+    console.log('Clicked')
     this.setState({ isOpen: !this.state.isOpen });
   };
 // SORT DATA ========================================================================== //
   render() {
     return (
       <div>
-        {console.log('this.props.currProd', this.props.currProd)}
-        {console.log('this.props.metaData', this.props.metaData)}
-        {console.log('this.state.reviews', this.state.reviews)}
-        {console.log('this.state.filter', this.state.filter)}
-        {console.log('this.state.displayReviews', this.state.displayReviews.slice(0,this.state.numberDisplayed))}
-        {console.log('this.state.numberDisplayed', this.state.numberDisplayed)}
-        <button onClick={() => this.onToggle(5)}>5</button>
-        <button onClick={() => this.onToggle(4)}>4</button>
-        <button onClick={() => this.onToggle(3)}>3</button>
-        <button onClick={() => this.onToggle(2)}>2</button>
-        <button onClick={() => this.onToggle(1)}>1</button>
-        <button onClick={() => this.onClearAll()}>ClearAll</button>
-        <form><strong>{this.state.reviews.length} reviews sorted by:</strong>
-          <select name='reviewSort' value={this.state.sort} onChange={this.onChange.bind(this)}>
-            <option defaultValue>Relevant</option>
-            <option>Helpful</option>
-            <option>Newest</option>
-          </select>
-          <noscript><input type="submit" value="Submit" /></noscript>
-        </form>
-        <button onClick={this.onClickAddMore}>ADD MORE</button>
-        <div>
-          =======================================================================================
+
           <RateReview
             onToggle={this.onToggle.bind(this)}
             onClearAll={this.onClearAll.bind(this)}
@@ -154,7 +131,7 @@ class RateReviewData extends React.Component {
             sortByNewest={this.sortByNewest.bind(this)}
             onChange={this.onChange.bind(this)}
             onClickAddMore={this.onClickAddMore.bind(this)}
-            onAddReviewClick={this.onAddReviewClick.bind(this)}
+            onAddReviewClick={this.onAddReviewClick}
             reviews={this.state.reviews}
             filter={this.state.filter}
             displayReviews={this.state.displayReviews}
@@ -164,7 +141,6 @@ class RateReviewData extends React.Component {
             metaData={this.props.metaData}
             currProd={this.props.currProd}
           />
-        </div>
       </div>
     );
   }

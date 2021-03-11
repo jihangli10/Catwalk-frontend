@@ -57,7 +57,6 @@ class AddAnswer extends React.Component {
     e.preventDefault();
     const formData = new FormData();
     formData.append('image', e.target.files[0]);
-    console.log(JSON.stringify(formData));
     const settings = {
       method: 'POST',
       // url: `https://api.imgbb.com/1/upload?key=${config.imgBBToken}`,

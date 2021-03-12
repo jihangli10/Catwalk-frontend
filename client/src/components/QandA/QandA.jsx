@@ -39,6 +39,7 @@ class QandA extends React.Component {
   updateContent() {
     return axios.get('/qa/questions', {params: {
       product_id: this.props.currentProduct.id,
+      // product_id: 19378,
       page: 1,
       count: 1000
     }})

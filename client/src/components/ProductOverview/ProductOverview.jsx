@@ -50,6 +50,7 @@ class ProductOverview extends React.Component {
       starAverage: 0,
       isClicked: false,
       currentZoomImage: '',
+      currentSku: 0
     }
   }
 
@@ -118,6 +119,7 @@ class ProductOverview extends React.Component {
 
   handleSizeChange(query) {
     let skuValue = this.state.currentSizeQuantityList;
+    let trueSkuValue = query.target.childNodes[query.target.selectedIndex].getAttribute('id');
     let quantityValue;
     let storage = [];
     if(query.target.childNodes[query.target.selectedIndex].getAttribute('id') === '0') {
@@ -125,6 +127,7 @@ class ProductOverview extends React.Component {
       quantityValue = 0;
     } else {
      quantityValue = skuValue[query.target.childNodes[query.target.selectedIndex].getAttribute('id')].quantity;
+
 
     if(quantityValue > 15) {
       for(let i = 1; i <= 15; i++) {
@@ -147,7 +150,9 @@ class ProductOverview extends React.Component {
         selectedSize: query.target.value,
         isDisabled: false,
         selectedQuantity: '1',
-        currentQuantity: [...storage], inStock: true })
+        currentQuantity: [...storage], inStock: true,
+        currentSku: trueSkuValue
+      })
     }
   }
 
@@ -157,7 +162,7 @@ class ProductOverview extends React.Component {
   }
 
   forceUpdate () {
-    this.getCartResult();
+    this.getDataandStyle();
   }
 
   getCartResult () {
@@ -179,11 +184,12 @@ class ProductOverview extends React.Component {
       //make an axios post call to store in the data
       console.log(this.state.currentProductStyle.product_id)
       let bodyInfo = {
-        "sku_id": parseInt(this.state.currentProductStyle.product_id, 6)
+        "sku_id": this.state.currentSku
       }
       return axios.post('/cart', bodyInfo)
         .then((res) => {
           console.log('it was successfully stored')
+          this.forceUpdate();
         })
         .catch(err => {
           console.log(err);
@@ -469,6 +475,7 @@ class ProductOverview extends React.Component {
         <br></br>
         <div className='bottomMiddle'>
         <div className='dropdownContainer'>
+          {console.log(this.state.currentSizeQuantityList)}
         <SizeDrop
           selectedSize = {this.state.selectedSize}
           handleSizeChange = {this.handleSizeChange.bind(this)}
@@ -488,6 +495,7 @@ class ProductOverview extends React.Component {
           handleAddCart = {this.handleAddCart.bind(this)}
           inStock = {this.state.inStock}
           isCartMade = {this.state.isCartMade}
+          currentSku = {this.state.currentSku}
         />
         <CartStorage
           cartModal = {this.cartModal.bind(this)}

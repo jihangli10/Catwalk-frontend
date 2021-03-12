@@ -10,9 +10,9 @@ var ImageCarousel = ({ showExpandedImage, currentImage, currentProductStyle, onC
 
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
-    width: '100%',
-    marginLeft: 'auto',
-    marginRight: 'auto',
+    width: '720px',
+    marginLeft: '0px',
+    marginRight: '0px',
     height: '576px',
     maxHeight: '576px',
     maxWidth: '720px',

@@ -115,7 +115,7 @@ class AddAnswer extends React.Component {
   render() {
 
     return ReactDOM.createPortal(
-      <Track>
+      <Track moduleName={"AddAnswerModal"}>
       <div className="qanda-modal-wrapper">
         <div className="qanda-modal-backdrop"  onClick={this.props.handleAddAnswerClose}/>
         <div className="qanda-modal-box">

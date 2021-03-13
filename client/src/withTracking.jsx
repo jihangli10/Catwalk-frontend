@@ -19,11 +19,13 @@ class Track extends React.Component {
     let elementName = findElementName(e.target).toString();
     let moduleName = this.props.moduleName;
     let timeClicked = (new Date()).toISOString();
+
     let body = {
       element: elementName,
       widget: moduleName,
       time: timeClicked
     };
+    console.log(body)
     return axios.post('/interactions', body)
       .then((res) => {
         console.log(`click on a/an ${elementName} in module ${moduleName} recorded at ${timeClicked} !`);

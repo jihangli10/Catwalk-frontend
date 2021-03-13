@@ -816,6 +816,7 @@ textarea {
 
 /* // RATING BREAKDOWN //================================= */
 /* BAR CHART */
+
 #bar-section {
   margin-top: 60px;
   margin-bottom: 24px;
@@ -893,6 +894,9 @@ float: left;
 }
 
 /* // 5-POINT SCALE //================================= */
+.reviewSort {
+  margin-bottom: 18px;
+}
 #myProgress {
   width: 90%;
   background-color: rgb(176, 196, 222,0.6);

@@ -113,7 +113,7 @@ class AddNewReview extends React.Component {
     } else if (event.target.name === 'body') {
       this.setState({ [event.target.name]: value, bodyChars: this.state.bodyChars + 1 })
     } else {
-      this.setState({ [event.target.name]: value }, () => { console.log('STATE OF THE STATE', this.state) });
+      this.setState({ [event.target.name]: value }, () => { });
     }
   }
 

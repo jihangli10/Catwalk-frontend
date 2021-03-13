@@ -5,7 +5,7 @@ import axios from 'axios';
 import RelatedPO from './RelatedPO/RelatedPO.jsx';
 import RateReview from './RateReview/RateReview.jsx'
 import RateReviewData from './RateReview/RateReviewData.jsx'
-import Track from '../withTracking.jsx';
+import Track from '../Track.jsx';
 import Star000 from './RateReview/Star000.jsx'
 import Star025 from './RateReview/Star025.jsx'
 import Star050 from './RateReview/Star050.jsx'

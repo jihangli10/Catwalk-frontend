@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import ReactDOM from 'react-dom';
 import FormPhotoGallery from './QandA_FormPhotoGallery.jsx';
-import Track from '../../withTracking.jsx';
+import Track from '../../Track.jsx';
 import config from '../../../../config.js';
 
 class AddAnswer extends React.Component {
@@ -115,7 +115,7 @@ class AddAnswer extends React.Component {
   render() {
 
     return ReactDOM.createPortal(
-      <Track>
+      <Track moduleName={"AddAnswerModal"}>
       <div className="qanda-modal-wrapper">
         <div className="qanda-modal-backdrop"  onClick={this.props.handleAddAnswerClose}/>
         <div className="qanda-modal-box">

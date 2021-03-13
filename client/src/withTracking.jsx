@@ -11,7 +11,7 @@ class Track extends React.Component {
       } else if (el.className) {
         elementName = el.className;
       } else {
-        elementName = el.tagName;
+        elementName = findElementName(el.parentNode)
       }
       return elementName;
     }

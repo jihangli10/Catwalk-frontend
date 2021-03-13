@@ -25,10 +25,9 @@ class Track extends React.Component {
       widget: moduleName,
       time: timeClicked
     };
-    console.log(body)
     return axios.post('/interactions', body)
       .then((res) => {
-        console.log(`click on a/an ${elementName} in module ${moduleName} recorded at ${timeClicked} !`);
+        console.log(`click on ${elementName} in module ${moduleName} recorded at ${timeClicked} !`);
       })
       .catch(err => {
         console.log(err);

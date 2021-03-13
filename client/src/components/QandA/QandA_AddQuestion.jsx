@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import ReactDOM from 'react-dom';
-import Track from '../../withTracking.jsx';
+import Track from '../../Track.jsx';
 
 class AddQuestion extends React.Component {
   constructor(props) {

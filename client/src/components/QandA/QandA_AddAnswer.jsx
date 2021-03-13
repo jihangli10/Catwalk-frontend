@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import ReactDOM from 'react-dom';
 import FormPhotoGallery from './QandA_FormPhotoGallery.jsx';
-import Track from '../../withTracking.jsx';
+import Track from '../../Track.jsx';
 import config from '../../../../config.js';
 
 class AddAnswer extends React.Component {

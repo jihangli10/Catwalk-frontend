@@ -7,7 +7,7 @@ class Track extends React.Component {
     const findElementName = el => {
       let elementName;
       if (el.id) {
-        elementName = el.className;
+        elementName = el.id;
       } else if (el.className) {
         elementName = el.className;
         console.log(elementName);
@@ -17,7 +17,7 @@ class Track extends React.Component {
       return elementName;
     }
 
-    let elementName = findElementName(e.target);
+    let elementName = findElementName(e.target).toString();
     let moduleName = this.props.moduleName;
     let timeClicked = (new Date()).toISOString();
     let body = {
@@ -25,6 +25,7 @@ class Track extends React.Component {
       widget: moduleName,
       time: timeClicked
     };
+    console.log(body)
     return axios.post('/interactions', body)
       .then((res) => {
         console.log(`click on a/an ${elementName} in module ${moduleName} recorded at ${timeClicked} !`);

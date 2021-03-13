@@ -5,6 +5,7 @@ import axios from 'axios';
 import RelatedPO from './RelatedPO/RelatedPO.jsx';
 import RateReview from './RateReview/RateReview.jsx'
 import RateReviewData from './RateReview/RateReviewData.jsx'
+import Track from '../withTracking.jsx';
 import Star000 from './RateReview/Star000.jsx'
 import Star025 from './RateReview/Star025.jsx'
 import Star050 from './RateReview/Star050.jsx'
@@ -75,9 +76,12 @@ class App extends React.Component {
   render() {
     return (
       <div style={this.state.blurBackground ? { background: 'black' } : null}>
+        <Track moduleName={"Header"}>
         <div>
           <Header />
         </div>
+        </Track>
+        <Track moduleName={"ProductOverivew"}>
         <div>
           <ProductOverview
             currentProduct={this.state.currentProduct}
@@ -87,10 +91,16 @@ class App extends React.Component {
           <br></br>
           <br></br>
         </div>
+        </Track>
+        <Track moduleName={"RelatedProductOutfit"}>
         <div>
           <RelatedPO updateProd={this.updateCurrentProduct} parentReviews={this.state.metaData} currProd={this.state.currentProduct} />
         </div>
+        </Track>
+        <Track moduleName={"QuestionsAndAnswers"}>
         <QandA updateProd={this.updateCurrentProduct} currentProduct={this.state.currentProduct} />
+        </Track>
+        <Track moduleName={"RatingsAndReviews"}>
         <div>
           <br></br>
           <a id='test'></a>
@@ -98,6 +108,7 @@ class App extends React.Component {
           <br></br>
           <RateReviewData key={'product' + this.state.currentProduct.description.length} metaData={this.state.metaData.characteristics} currProd={this.state.currentProduct} />
         </div>
+        </Track>
       </div>
     );
   }

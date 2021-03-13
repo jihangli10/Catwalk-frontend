@@ -3,7 +3,7 @@
 /*==============================================================================*/
 h1, h2, h3, h4, body {
   font-family: 'Raleway', sans-serif;
-  font-weight: 300;
+  font-weight: 400;
 }
 body {
   font-size: 14px;
@@ -716,7 +716,7 @@ body {
 .qanda-form-entry {
   margin: 12px 0;
 }
-.YourHighlightClass {
+.highlighted-word {
   background-color: rgb(176, 196, 222);
 }
 /*==============================================================================*/

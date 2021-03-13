@@ -139,7 +139,6 @@ class ProductOverview extends React.Component {
       }
     }
   }
-    //console.log(skuValue[query.target.className].size)
 
     if(query.target.value === 'Select Size') {
       this.setState({ selectedSize: query.target.value, isDisabled: true, selectedQuantity: '--', inStock: true })
@@ -182,7 +181,6 @@ class ProductOverview extends React.Component {
       //create some sort of error message
     } else {
       //make an axios post call to store in the data
-      console.log(this.state.currentProductStyle.product_id)
       let bodyInfo = {
         "sku_id": this.state.currentSku
       }
@@ -286,7 +284,6 @@ class ProductOverview extends React.Component {
 
 
   handleImageModal () {
-    console.log('Booyah')
     this.setState({ showExpandedImage: true, isClicked: true, currentZoomImage: this.state.currentImage})
   }
 
@@ -475,7 +472,6 @@ class ProductOverview extends React.Component {
         <br></br>
         <div className='bottomMiddle'>
         <div className='dropdownContainer'>
-          {console.log(this.state.currentSizeQuantityList)}
         <SizeDrop
           selectedSize = {this.state.selectedSize}
           handleSizeChange = {this.handleSizeChange.bind(this)}
@@ -495,7 +491,6 @@ class ProductOverview extends React.Component {
           handleAddCart = {this.handleAddCart.bind(this)}
           inStock = {this.state.inStock}
           isCartMade = {this.state.isCartMade}
-          currentSku = {this.state.currentSku}
         />
         <CartStorage
           cartModal = {this.cartModal.bind(this)}

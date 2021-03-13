@@ -10,24 +10,21 @@ var ImageCarousel = ({ showExpandedImage, currentImage, currentProductStyle, onC
 
     backgroundRepeat: 'no-repeat',
     backgroundSize: 'cover',
-    width: '720px',
+    width: imageZoomed ? '1800px' : '720px',
     marginLeft: '0px',
     marginRight: '0px',
-    height: '576px',
-    maxHeight: '576px',
-    maxWidth: '720px',
+    height: imageZoomed ? '1440px' : '576px',
     backgroundSize: 'cover',
     overflow: 'hidden',
-
+//imageZoomed ? '1440px' : '576px'
     transition: 'transform .1s ease-out'
   })
 
 
   const imgStyles = {
-    height: '480px', //450 //480
-    width: '720px', //690
-    float: 'left',
-    marginLeft: '10px',
+    height: imageZoomed ? '760px' : 'fit-content', //450 //480
+    width: imageZoomed ? '760px' : 'fit-content', //690
+    backgroundSize: 'cover',
     overflow: 'hidden',
     borderStyle: 'solid',
     cursor: imageZoomed ? 'zoom-out' : 'zoom-in',
@@ -50,7 +47,6 @@ var ImageCarousel = ({ showExpandedImage, currentImage, currentProductStyle, onC
     <div className='modal-wrapper'>
     <div className='carouselContainer'>
     <div className='carouselLeft'>
-      {console.log(activeIndex)}
       {activeIndex === 0 ? null: <button className='dumbButton' onClick={handlePrevSlide}> <i className='fas overview-fas overview-fa-chevron-left fa-chevron-left'></i> </button>}
     </div>
 

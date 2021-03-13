@@ -67,7 +67,7 @@ class Question extends React.Component{
           <b><div className="qanda-content-container">
             <div className="qanda-symbol">Q:</div>
             <Highlighter
-              highlightClassName="YourHighlightClass"
+              highlightClassName="highlighted-word"
               searchWords={this.props.searchQuery.length >= 3? this.props.searchQuery.split(' ') : []}
               autoEscape={true}
               textToHighlight={question.question_body}
@@ -77,9 +77,9 @@ class Question extends React.Component{
           <div className="question-actions">&nbsp;&nbsp;Helpful?&nbsp;&nbsp;
             {this.state.helpClicked?
               <span className="yes-help-clicked">Yes</span> :
-              <a onClick={this.handleQuestionHelpfulClick.bind(this)} href="#">Yes</a>}
+              <a className="answer-helpful-button" onClick={this.handleQuestionHelpfulClick.bind(this)} href="#">Yes</a>}
             ({this.state.helpfulness})&nbsp;&nbsp;|&nbsp;&nbsp;
-            <a href="#" questionbody={question.question_body} questionid={this.props.question.question_id} onClick={this.props.handleAddAnswerClick}>Add Answer</a>
+            <a className="add-answer-button" href="#" questionbody={question.question_body} questionid={this.props.question.question_id} onClick={this.props.handleAddAnswerClick}>Add Answer</a>
           </div>
         </div>
 

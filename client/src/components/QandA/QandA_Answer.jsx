@@ -57,7 +57,7 @@ class Answer extends React.Component {
       <div className="section-answer">
         <div className="answer-body">
         <Highlighter
-          highlightClassName="YourHighlightClass"
+          highlightClassName="highlighted-word"
           searchWords={this.props.searchQuery.length >= 3? this.props.searchQuery.split(' ') : []}
           autoEscape={true}
           textToHighlight={answer.body}
@@ -66,7 +66,7 @@ class Answer extends React.Component {
       <PhotoGallery photos={answer.photos} deletable={false} handleImageClick={this.props.handleImageClick}/>
       <div className="answer-user-information">
         <span style={{ fontWeight: isSeller ? "bold" : 200 }}><i className="fas fa-user-check qanda-fa-user-check"></i> {answer.answerer_name},&nbsp;&nbsp;</span>
-        <span>{(new Date(answer.date).toDateString().slice(4))}</span>&nbsp;&nbsp;|&nbsp;&nbsp;
+        <span className="qanda-date">{(new Date(answer.date).toDateString().slice(4))}</span>&nbsp;&nbsp;|&nbsp;&nbsp;
         <span>&nbsp;Helpful?&nbsp;&nbsp;
           {this.state.helpClicked?
             <span className="yes-help-clicked">Yes&nbsp;&nbsp;</span> :

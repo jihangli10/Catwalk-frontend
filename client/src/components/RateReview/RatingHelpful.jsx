@@ -21,7 +21,6 @@ class RatingHelpful extends React.Component {
     e.preventDefault();
     return axios.put(`/reviews/${this.props.reviewID}/helpful`, { params: { review_id: this.props.reviewID } })
       .then(() => {
-        console.log('reviewID', this.props.reviewID)
         this.setState({
           helpfulness: this.state.helpfulness + 1,
           helpClicked: true

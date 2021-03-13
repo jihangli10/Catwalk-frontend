@@ -46,7 +46,6 @@ class RateReviewData extends React.Component {
   }
   // FILTER DATA ========================================================================== //
   onToggle(num) {
-    console.log('clicked')
     var tempArray = this.state.filter;
     if (this.state.filter.includes(num)) {
       tempArray.splice(this.state.filter.indexOf(num), 1);
@@ -59,11 +58,9 @@ class RateReviewData extends React.Component {
       var tempReview = this.state.reviews.filter(item => tempArray.includes(item.rating));
     }
     this.setState({ filter: tempArray, displayReviews: tempReview.slice(0, this.state.numberDisplayed) }, () => {
-      console.log('FILTER ON TOGGLE =', this.state.filter, ' | SORT AT FILTER =', this.state.sort, ' | DISPLAY REVIEWS ON TOGGLE =', this.state.displayReviews)
-    })
+      })
   }
   onClearAll() {
-    console.log('clicked')
     this.setState({ filter: [], displayReviews: this.state.reviews.slice(0, this.state.numberDisplayed) })
   }
   // SORT DATA ========================================================================== //
@@ -115,7 +112,6 @@ class RateReviewData extends React.Component {
         })
   }
   onAddReviewClick() {
-    console.log('Clicked')
     this.setState({ isOpen: !this.state.isOpen });
   };
 // SORT DATA ========================================================================== //

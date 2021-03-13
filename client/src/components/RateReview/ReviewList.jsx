@@ -21,7 +21,7 @@ class ReviewList extends React.Component {
     return (
       <div>
 
-        <form><strong>{this.props.reviews.length} reviews sorted by:</strong>
+        <form className="reviewSort"><strong>{this.props.reviews.length} reviews sorted by:</strong>
           <select name='sort' defaultValue={this.props.sort} onChange={this.props.onChange}>
             <option defaultValue>Relevant</option>
             <option>Helpful</option>
@@ -35,7 +35,6 @@ class ReviewList extends React.Component {
           <br></br>
           <div id="reviewListTiles">
             <ul className="no-bullets">
-              {console.log('DISPLAY REVIEWS AT REVIEW LIST ITEMS', this.props.displayReviews)}
               {this.props.displayReviews.map(review => (
                 <li key={review.review_id} className="listrow">
                   <ReviewListItem reviewListItem={review} />
